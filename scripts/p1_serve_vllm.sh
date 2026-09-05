@@ -82,6 +82,24 @@ export HF_HOME="${HF_HOME:-$cache_root/huggingface}"
 export TORCH_HOME="${TORCH_HOME:-$cache_root/torch}"
 
 vllm_bin="${P1_VLLM_BIN:-vllm}"
+resolved_vllm_bin="$(command -v -- "$vllm_bin" 2>/dev/null || true)"
+if [[ -z "$resolved_vllm_bin" || ! -x "$resolved_vllm_bin" ]]; then
+  echo "P1_VLLM_BIN is not executable: $vllm_bin" >&2
+  exit 1
+fi
+vllm_bin="$resolved_vllm_bin"
+vllm_bin_dir="$(cd -- "$(dirname -- "$vllm_bin")" && pwd)"
+
+# FlashInfer invokes `ninja` by name from a vLLM worker subprocess.  Several
+# DAAI compute nodes do not install it system-wide, but it is pinned inside the
+# archived Qwen environment alongside vLLM.  Scope this PATH change to the
+# serving process so it cannot change which interpreter runs the SVC pipeline.
+if [[ ! -x "$vllm_bin_dir/ninja" ]]; then
+  echo "Pinned vLLM environment is missing ninja: $vllm_bin_dir/ninja" >&2
+  exit 1
+fi
+export PATH="$vllm_bin_dir:$PATH"
+
 expected_vllm_version="0.28.0"
 actual_vllm_version="$("$vllm_bin" --version)"
 if [[ "$actual_vllm_version" != *"$expected_vllm_version"* ]]; then
