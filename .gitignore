@@ -197,4 +197,4 @@ cython_debug/
 
 *.pyc
 data/
-results/
+# Curated experiment artifacts under results/ are version-controlled.

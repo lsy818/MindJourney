@@ -1,0 +1,4 @@
+run_id=mj-svc-qwen35-sat-syn500-20260903T185438Z
+merge_job_id=64588
+dependency=afterany:64587
+submitted_utc=2026-09-03T18:54:46Z

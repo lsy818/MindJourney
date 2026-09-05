@@ -1,0 +1,180 @@
+{
+  "experiment": "MindJourney(SVC) on the fixed user-rand42 SAT-Syn500 subset with Qwen3.5-27B no-thinking",
+  "protocol": "SAT-Syn-user-rand42-500-paper-aligned",
+  "sources": {
+    "paper": "https://arxiv.org/pdf/2507.12508",
+    "paper_version": "v2 (2025-11-01)",
+    "paper_pdf_sha256": "9c15b85f9035b9094cc3f50076ff58c76b2e0c4148ba97de9a595c2a04c5a0ba",
+    "official_code": "https://github.com/UMass-Embodied-AGI/MindJourney",
+    "official_code_commit": "aeed003e76e8a96fbb20990405128913f8f49486",
+    "sat_dataset": "https://huggingface.co/datasets/array/SAT"
+  },
+  "dataset": {
+    "dataset_id": "SAT-Syn500-rand42",
+    "revision": null,
+    "raw_directory": "/home/datasets/shiyang/eval_subsets_rand42",
+    "source_jsonl_path": "/home/datasets/shiyang/eval_subsets_rand42/sat_syn500.jsonl",
+    "source_jsonl_sha256": "90398b8051369f1a71f8c83900701121f54dec51684a57662ebe6ab08080955f",
+    "companion_jsonl_path": "/home/datasets/shiyang/eval_subsets_rand42/sat_val_subset500_rand42.json",
+    "companion_jsonl_sha256": "d0d4456138215e0a5e1399b6e5ea2bc13ce15709cc273c79cbae3d92bbbd1c28",
+    "image_directory": "/home/datasets/shiyang/eval_subsets_rand42/sat_syn500_images",
+    "image_tree_sha256": "cc7d868d83d2503dbff8ef566e5260893d83f7da333535ca12ddafc09d01d718",
+    "image_count": 700,
+    "image_total_bytes": 31940723,
+    "processed_directory": "/home/comp/tyjiang/mindjourney_runtime/data/SAT_syn500_rand42",
+    "processed_json_path": "/home/comp/tyjiang/mindjourney_runtime/data/SAT_syn500_rand42/val.json",
+    "processed_provenance_path": "/home/comp/tyjiang/mindjourney_runtime/data/SAT_syn500_rand42/provenance.json",
+    "selection": "fixed user-provided random seed 42 subset containing 500 SAT-Synthesized validation questions",
+    "paper_table_2_subset_equivalence": "not guaranteed",
+    "note": "The paper reports a random 500-question SAT-Synthesized subset but does not publish enough information to prove that this user-rand42 subset is the exact Table 2 subset. Results from this run must therefore be labeled user-rand42 and must not be presented as a literal Table 2 reproduction."
+  },
+  "paper_specified": {
+    "split": "val",
+    "underlying_questions": 500,
+    "search_depth": 3,
+    "beam_size": 2,
+    "exploration_score_threshold": 8,
+    "helpful_score_threshold": 8,
+    "maximum_trajectory_length": 8,
+    "primitive_repetitions_per_expansion": 3,
+    "forward_primitive_meters": 0.25,
+    "rotation_primitive_degrees": 9
+  },
+  "paper_evaluation": {
+    "evaluated_queries": 500,
+    "choice_rotations_per_question": 1,
+    "aggregation": "top1_accuracy_over_questions",
+    "question_selection": "the fixed user-rand42 subset; random.sample(all_500, k=500, seed=10) in the released pipeline changes only execution order"
+  },
+  "paper_aligned_svc_mapping": {
+    "sampling_interval_angle": 9,
+    "sampling_interval_meter": 0.25,
+    "fixed_rotation_magnitudes": 27,
+    "fixed_forward_magnitudes": 0.75,
+    "num_frames": 9,
+    "frame_interval": 3,
+    "num_targets": 8
+  },
+  "released_code_svc_generation_choices": {
+    "paper_sat_synthesized_values": null,
+    "task": "img2trajvid_s-prob",
+    "cfg": 4.0,
+    "guider": 1,
+    "L_short": 576,
+    "use_traj_prior": true,
+    "chunk_strategy": "interp",
+    "chunk_strategy_first_pass": "gt-nearest",
+    "second_pass_enabled": false,
+    "max_inference_batch_size": 1,
+    "note": "The paper does not disclose SAT-specific SVC diffusion-generation settings; these are pinned released-code choices, matching the audited SAT-Real formal configuration."
+  },
+  "paper_underspecified_released_code_choices": {
+    "num_top_candidates": {
+      "chosen": 18,
+      "paper_value": null,
+      "released_code_value": 18
+    },
+    "max_tries_gpt": {
+      "chosen": 5,
+      "paper_value": null,
+      "released_code_value": 5
+    },
+    "motion_budget": {
+      "paper_value": null,
+      "released_code_max_rotation_degrees": 60,
+      "released_code_max_forward_meters": 1.5,
+      "released_code_semantics": "The implementation compares a new action only with the immediately preceding same-type segment; the trajectory itself remains capped at eight primitive actions."
+    }
+  },
+  "paper_prompt_alignment": {
+    "figures": [12, 13, 14],
+    "system_prompts_restored_from_paper": true,
+    "restored_details": [
+      "Task: prefix",
+      "separate helpfulness Hint paragraph",
+      "if you take wording",
+      "minimal reasoning rule",
+      "final content sentence period"
+    ],
+    "figure_13_trailing_punctuation_artifact_copied": false
+  },
+  "reproduction_claim": {
+    "paper_disclosed_settings": "fully aligned",
+    "paper_undisclosed_settings": "pinned to the named released-code revision and the audited SAT-Real formal configuration",
+    "intentional_user_substitutions": [
+      "Qwen/Qwen3.5-27B instead of the paper's evaluated VLMs",
+      "Qwen chat-template thinking disabled",
+      "A100 instead of the paper's H100 hardware for SVC",
+      "the fixed user-rand42 SAT-Syn500 subset, whose identity with the unpublished Table 2 subset is not guaranteed"
+    ],
+    "note": "This is a paper-aligned MindJourney(SVC) run on a fixed, auditable user subset, not a claim of literal Table 2 subset reproduction."
+  },
+  "qwen": {
+    "model": "Qwen/Qwen3.5-27B",
+    "local_path": "/home/datasets/chentao/models/Qwen3.5-27B",
+    "revision": "fc05daec18b0a78c049392ed2e771dde82bdf654",
+    "enable_thinking": false,
+    "dtype": "bfloat16",
+    "tensor_parallel_size": 1,
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 44,
+    "context_limit": 65536,
+    "max_output_tokens": 1024,
+    "vllm_version": "0.28.0",
+    "vllm_limit_images_per_prompt": 48,
+    "vllm_reasoning_parser": "qwen3",
+    "revision_tree_path": "/home/datasets/chentao/models/Qwen3.5-27B/.cache/huggingface/trees/fc05daec18b0a78c049392ed2e771dde82bdf654.json",
+    "model_tree_sha256": "0dc5ca5bf2a3d58c9b57c0d68790796d92656bfb228d76eaeae73342e7fcbe6c",
+    "snapshot_hash_policy": "Pin the verified Hugging Face revision-tree manifest hash. Every worker and the merger recheck its hash, required file set, file sizes, safetensors index, and official LFS SHA256 metadata without rereading 55 GB of weights solely for hashing."
+  },
+  "svc_weights": {
+    "model": "stabilityai/stable-virtual-camera",
+    "config_filename": "config.yaml",
+    "filename": "model.safetensors",
+    "revision": "e538e251c1009e9a41cf8b7fee5f21332a1960de",
+    "model_safetensors_sha256": "10e69ea003c313e6bdfc7ee40376d1c19ea6036c20bd384e94b483dec8350396",
+    "code_basis": "Stability-AI/stable-virtual-camera@8a640b7316adcb6cdcf5d7126a452fbaabf8554e with MindJourney first-pass modifications",
+    "svc_version": "v1.0",
+    "internal_frames": 17,
+    "diffusion_steps": 20,
+    "internal_seed": 23,
+    "initial_camera_pitch_degrees": -20.0,
+    "default_fov_degrees": 54.0,
+    "camera_scale": 2.0,
+    "cfg_min": 1.2,
+    "beta_linear_start": 0.000005,
+    "log_snr_shift": 2.4,
+    "encoding_chunk_size": 1,
+    "decoding_chunk_size": 1,
+    "first_pass_note": "interp selects the 16 trajectory-prior frames; rendering uses gt-nearest first-pass chunks, saves that pass, and the bundled second-pass block is disabled."
+  },
+  "vae_weights": {
+    "original_repo": "stabilityai/stable-diffusion-2-1-base",
+    "runtime_mirror": "sd2-community/stable-diffusion-2-1-base",
+    "runtime_mirror_revision": "4e63672c03103b6c636b8fb4119ba982469b2955",
+    "subfolder": "vae",
+    "model_safetensors_sha256": "a1d993488569e928462932c8c38a0760b874d166399b14414135bd9c42df5815"
+  },
+  "openclip_weights": {
+    "model": "ViT-H-14",
+    "pretrained_tag": "laion2b_s32b_b79k",
+    "repo": "laion/CLIP-ViT-H-14-laion2B-s32B-b79K",
+    "revision": "1c2b8495b28150b8a4922ee1c8edee224c284c0c",
+    "filename": "open_clip_pytorch_model.bin",
+    "sha256": "9a78ef8e8c73fd0df621682e7a8e8eb36c6916cb3c16b291a082ecd52ab79cc4"
+  },
+  "hardware": {
+    "paper_svc_gpu": "NVIDIA H100 80GB",
+    "requested_cluster_gpu": "NVIDIA A100 80GB",
+    "gpus_per_chunk": 2,
+    "reproduction_note": "Hardware substitution only; BF16 inference and algorithmic settings are unchanged."
+  },
+  "full_run": {
+    "circular_eval": false,
+    "evaluated_queries": 500,
+    "question_chunks": 5,
+    "questions_per_chunk": 100,
+    "chunk_indices": [0, 1, 2, 3, 4]
+  }
+}

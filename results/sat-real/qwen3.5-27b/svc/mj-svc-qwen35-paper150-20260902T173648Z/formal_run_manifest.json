@@ -1,0 +1,14 @@
+{
+  "run_id": "mj-svc-qwen35-paper150-20260902T173648Z",
+  "protocol": "SAT-Real-paper-exact-150",
+  "method": "SVC",
+  "model": "Qwen/Qwen3.5-27B",
+  "enable_thinking": false,
+  "requested_gpu_type": "a100",
+  "env_id": "qwen0280-svc-v1",
+  "env_archive_sha256": "5ca91ac177e928c26fc2ec8d7b8da7bed7afc9ea8b2652c36a1bf8b2fbc2087a",
+  "formal_bundle_sha256": "d009a101bcab8a425cc77b08a1a5556dbb3151443d86f766f1de94285c09cc54",
+  "python_source_sha256": "1cdcbd0c330095fad98c7db63b1f890e29c7fc26c52e77407101772f192500a0",
+  "merged_result_sha256": "256b38dba9f2219cd055999ddc7cb0807de520a41f6ff2cf979e46224483ee0a",
+  "merge_job_id": "64072"
+}

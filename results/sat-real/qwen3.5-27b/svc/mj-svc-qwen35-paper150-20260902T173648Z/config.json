@@ -1,0 +1,168 @@
+{
+  "experiment": "MindJourney(SVC) on SAT-Real with Qwen3.5-27B no-thinking",
+  "sources": {
+    "paper": "https://arxiv.org/pdf/2507.12508",
+    "paper_version": "v2 (2025-11-01)",
+    "paper_pdf_sha256": "9c15b85f9035b9094cc3f50076ff58c76b2e0c4148ba97de9a595c2a04c5a0ba",
+    "official_code": "https://github.com/UMass-Embodied-AGI/MindJourney",
+    "official_code_commit": "aeed003e76e8a96fbb20990405128913f8f49486",
+    "sat_dataset": "https://huggingface.co/datasets/array/SAT",
+    "optional_sat_circular_eval_implementation": "https://github.com/arijitray1993/lmms-eval/tree/main/lmms_eval/tasks/sat_real"
+  },
+  "paper_specified": {
+    "split": "test",
+    "underlying_questions": 150,
+    "search_depth": 3,
+    "beam_size": 2,
+    "exploration_score_threshold": 8,
+    "helpful_score_threshold": 8,
+    "maximum_trajectory_length": 8,
+    "primitive_repetitions_per_expansion": 3,
+    "forward_primitive_meters": 0.25,
+    "rotation_primitive_degrees": 9
+  },
+  "paper_evaluation": {
+    "dataset_revision": "40183db60785e28deeaeedd9eb0e3d801f9b680a",
+    "source_test_parquet_sha256": "eea844ab8c45da93254a676d0f79d2d4e5d310489fa55cf992aaa73e7f567be2",
+    "choice_rotations_per_question": 1,
+    "evaluated_queries": 150,
+    "aggregation": "top1_accuracy_over_questions",
+    "question_selection": "random.sample(all_150, k=150, seed=10) as in the released launcher"
+  },
+  "optional_choice_order_robustness_evaluation": {
+    "enabled_in_primary_run": false,
+    "choice_rotations_per_question": 2,
+    "evaluated_variants": 300,
+    "aggregation": "mean_accuracy_over_all_choice_rotations",
+    "execution_order": "all_rotation_0_then_all_rotation_1",
+    "note": "Later lmms-eval robustness protocol; not the 150-query protocol reported in the MindJourney paper."
+  },
+  "paper_aligned_svc_mapping": {
+    "sampling_interval_angle": 9,
+    "sampling_interval_meter": 0.25,
+    "fixed_rotation_magnitudes": 27,
+    "fixed_forward_magnitudes": 0.75,
+    "num_frames": 9,
+    "frame_interval": 3,
+    "num_targets": 8
+  },
+  "released_code_svc_generation_choices": {
+    "paper_sat_real_values": null,
+    "task": "img2trajvid_s-prob",
+    "cfg": 4.0,
+    "guider": 1,
+    "L_short": 576,
+    "use_traj_prior": true,
+    "chunk_strategy": "interp",
+    "chunk_strategy_first_pass": "gt-nearest",
+    "second_pass_enabled": false,
+    "max_inference_batch_size": 1,
+    "note": "The paper's 50-step statement is for the AI2-THOR world-model quality comparison, not the SAT-Real Table 1 run. These values are pinned released-code choices."
+  },
+  "paper_underspecified_released_code_choices": {
+    "num_top_candidates": {
+      "chosen": 18,
+      "paper_value": null,
+      "initial_test_launcher_2025_07_15": 6,
+      "alternative_driver_initial_2025_10_20": 6,
+      "latest_alternative_driver": 18
+    },
+    "max_tries_gpt": {
+      "chosen": 5,
+      "paper_value": null,
+      "initial_test_launcher_2025_07_15": 4,
+      "alternative_driver_initial_2025_10_20": 2,
+      "latest_alternative_driver": 5
+    },
+    "motion_budget": {
+      "paper_value": null,
+      "released_code_max_rotation_degrees": 60,
+      "released_code_max_forward_meters": 1.5,
+      "released_code_semantics": "The implementation compares a new action only with the immediately preceding same-type segment; it does not accumulate the full trajectory budget."
+    }
+  },
+  "paper_prompt_alignment": {
+    "figures": [12, 13, 14],
+    "system_prompts_restored_from_paper": true,
+    "restored_details": [
+      "Task: prefix",
+      "separate helpfulness Hint paragraph",
+      "if you take wording",
+      "minimal reasoning rule",
+      "final content sentence period"
+    ],
+    "figure_13_trailing_punctuation_artifact_copied": false
+  },
+  "reproduction_claim": {
+    "paper_disclosed_settings": "fully aligned",
+    "paper_undisclosed_settings": "pinned to the named released-code revisions above",
+    "intentional_user_substitutions": [
+      "Qwen/Qwen3.5-27B instead of the paper's evaluated VLMs",
+      "Qwen chat-template thinking disabled",
+      "A100/H20 instead of the paper's H100 hardware"
+    ],
+    "note": "This reproduces the MindJourney(SVC) method under the requested model and hardware; it is not a literal reproduction of a Table 1 model row."
+  },
+  "qwen": {
+    "model": "Qwen/Qwen3.5-27B",
+    "revision": "fc05daec18b0a78c049392ed2e771dde82bdf654",
+    "enable_thinking": false,
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 44,
+    "max_output_tokens": 1024,
+    "vllm_version": "0.28.0",
+    "vllm_limit_images_per_prompt": 48,
+    "vllm_reasoning_parser": "qwen3"
+  },
+  "svc_weights": {
+    "model": "stabilityai/stable-virtual-camera",
+    "config_filename": "config.yaml",
+    "filename": "model.safetensors",
+    "revision": "e538e251c1009e9a41cf8b7fee5f21332a1960de",
+    "model_safetensors_sha256": "10e69ea003c313e6bdfc7ee40376d1c19ea6036c20bd384e94b483dec8350396",
+    "code_basis": "Stability-AI/stable-virtual-camera@8a640b7316adcb6cdcf5d7126a452fbaabf8554e with MindJourney first-pass modifications",
+    "svc_version": "v1.0",
+    "internal_frames": 17,
+    "diffusion_steps": 20,
+    "internal_seed": 23,
+    "initial_camera_pitch_degrees": -20.0,
+    "default_fov_degrees": 54.0,
+    "camera_scale": 2.0,
+    "cfg_min": 1.2,
+    "beta_linear_start": 0.000005,
+    "log_snr_shift": 2.4,
+    "encoding_chunk_size": 1,
+    "decoding_chunk_size": 1,
+    "first_pass_note": "interp selects the 16 trajectory-prior frames; rendering uses gt-nearest first-pass chunks, saves that pass, and the bundled second-pass block is disabled."
+  },
+  "vae_weights": {
+    "original_repo": "stabilityai/stable-diffusion-2-1-base",
+    "original_repo_status": "removed from Hugging Face after the paper release",
+    "runtime_mirror": "sd2-community/stable-diffusion-2-1-base",
+    "runtime_mirror_revision": "4e63672c03103b6c636b8fb4119ba982469b2955",
+    "subfolder": "vae",
+    "config_etag": "9421ac5a7caf02657fa559cffe7c73a47572cd64",
+    "model_safetensors_sha256": "a1d993488569e928462932c8c38a0760b874d166399b14414135bd9c42df5815",
+    "equivalence_note": "Pinned mirror preserves the removed SD2.1-base VAE config and the identical historical weight blob; runtime verifies the weight SHA256 before loading."
+  },
+  "openclip_weights": {
+    "model": "ViT-H-14",
+    "pretrained_tag": "laion2b_s32b_b79k",
+    "repo": "laion/CLIP-ViT-H-14-laion2B-s32B-b79K",
+    "revision": "1c2b8495b28150b8a4922ee1c8edee224c284c0c",
+    "filename": "open_clip_pytorch_model.bin",
+    "sha256": "9a78ef8e8c73fd0df621682e7a8e8eb36c6916cb3c16b291a082ecd52ab79cc4"
+  },
+  "hardware": {
+    "paper_svc_gpu": "NVIDIA H100 80GB",
+    "requested_cluster_gpu": "NVIDIA H20 96GB or A100 80GB",
+    "reproduction_note": "GPU substitution; keep BF16 inference and all algorithmic settings unchanged"
+  },
+  "full_run": {
+    "circular_eval": false,
+    "evaluated_queries": 150,
+    "question_chunks": 5,
+    "chunk_indices": [0, 1, 2, 3, 4]
+  }
+}

@@ -200,6 +200,8 @@ Outputs under `--output_dir`:
 - `results.json`: overall accuracy, per-type accuracy, skipped indices, parsing stats
 - `/<qid>/`: starting image(s) and `gpt.json`, `timing.json`logs per question
 
+Curated reproduced results, integrity metadata, and the experiment priority matrix are tracked in [`results/EXPERIMENTS.md`](results/EXPERIMENTS.md).
+
 ---
 
 ## Citation

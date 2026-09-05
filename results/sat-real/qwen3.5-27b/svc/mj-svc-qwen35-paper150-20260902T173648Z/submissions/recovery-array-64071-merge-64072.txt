@@ -1,0 +1,13 @@
+run_id=mj-svc-qwen35-paper150-20260902T173648Z
+repair_array_job_id=64071
+repair_array_spec=1,3%2
+repair_merge_job_id=64072
+dependency=afterany:64071
+failed_original_tasks=64028_1,64028_3
+resume_completed_chunk_1=22/30
+resume_completed_chunk_3=1/30
+encoding_fix=PYTHONIOENCODING=utf-8:backslashreplace
+env_archive_sha256=5ca91ac177e928c26fc2ec8d7b8da7bed7afc9ea8b2652c36a1bf8b2fbc2087a
+formal_bundle_sha256=d009a101bcab8a425cc77b08a1a5556dbb3151443d86f766f1de94285c09cc54
+python_source_sha256=1cdcbd0c330095fad98c7db63b1f890e29c7fc26c52e77407101772f192500a0
+recorded_utc=2026-09-03T02:16:50Z
