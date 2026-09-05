@@ -156,6 +156,7 @@ printf '%s\n' \
   "dtype=bfloat16" \
   "max_model_len=65536" \
   "tensor_parallel_size=$P1_SPEC_TP" \
+  "cpus_per_task=${SLURM_CPUS_PER_TASK:-unknown}" \
   "vlm_devices=$vlm_devices" \
   "svc_device=$svc_device" \
   "host=$(hostname)" \

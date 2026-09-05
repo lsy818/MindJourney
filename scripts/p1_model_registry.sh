@@ -57,10 +57,12 @@ p1_load_resource_plan() {
         P1_SPEC_TP=2
         P1_SPEC_TOTAL_GPUS=3
         P1_SPEC_DEFAULT_CONCURRENCY=2
+        P1_SPEC_CPUS_PER_TASK=16
       else
         P1_SPEC_TP=1
         P1_SPEC_TOTAL_GPUS=2
         P1_SPEC_DEFAULT_CONCURRENCY=4
+        P1_SPEC_CPUS_PER_TASK=8
       fi
       ;;
     a100)
@@ -72,10 +74,12 @@ p1_load_resource_plan() {
         P1_SPEC_TP=4
         P1_SPEC_TOTAL_GPUS=5
         P1_SPEC_DEFAULT_CONCURRENCY=1
+        P1_SPEC_CPUS_PER_TASK=16
       else
         P1_SPEC_TP=1
         P1_SPEC_TOTAL_GPUS=2
         P1_SPEC_DEFAULT_CONCURRENCY=4
+        P1_SPEC_CPUS_PER_TASK=8
       fi
       ;;
     *)
@@ -113,6 +117,7 @@ p1_print_model_spec() {
     "tensor_parallel_size=$P1_SPEC_TP" \
     "svc_gpus=1" \
     "total_gpus=$P1_SPEC_TOTAL_GPUS" \
+    "cpus_per_task=$P1_SPEC_CPUS_PER_TASK" \
     "gres=$P1_SPEC_GRES" \
     "exclude=${P1_SPEC_EXCLUDE:-none}" \
     "default_concurrency=$P1_SPEC_DEFAULT_CONCURRENCY"

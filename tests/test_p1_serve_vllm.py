@@ -78,6 +78,35 @@ printf '%s\n' "$@" >"$P1_TEST_ARGS_CAPTURE"
         self.assertEqual(completed.returncode, 1)
         self.assertIn("Pinned vLLM environment is missing ninja", completed.stderr)
         self.assertFalse(self.path_capture.exists())
+class P1ResourcePlanTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.registry = (
+            Path(__file__).resolve().parents[1] / "scripts" / "p1_model_registry.sh"
+        )
+
+    def _spec(self, model: str, accelerator: str) -> dict[str, str]:
+        completed = subprocess.run(
+            ["bash", str(self.registry), model, accelerator],
+            text=True,
+            capture_output=True,
+            check=True,
+        )
+        return dict(line.split("=", 1) for line in completed.stdout.splitlines())
+
+    def test_standard_models_request_eight_cpus(self) -> None:
+        for accelerator in ("h20", "a100"):
+            with self.subTest(accelerator=accelerator):
+                spec = self._spec("qwen35-9b", accelerator)
+                self.assertEqual(spec["cpus_per_task"], "8")
+                self.assertEqual(spec["total_gpus"], "2")
+
+    def test_72b_model_keeps_sixteen_cpus(self) -> None:
+        for accelerator, expected_gpus in (("h20", "3"), ("a100", "5")):
+            with self.subTest(accelerator=accelerator):
+                spec = self._spec("qwen25vl-72b", accelerator)
+                self.assertEqual(spec["cpus_per_task"], "16")
+                self.assertEqual(spec["total_gpus"], expected_gpus)
 
 
 if __name__ == "__main__":

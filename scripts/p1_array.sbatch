@@ -12,6 +12,8 @@
 set -euo pipefail
 umask 077
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-16}"
+export MKL_NUM_THREADS="${SLURM_CPUS_PER_TASK:-16}"
 
 repo_dir="${P1_REPO_DIR:?P1_REPO_DIR is required}"
 if [[ "$repo_dir" != /* || ! -d "$repo_dir" ]]; then
