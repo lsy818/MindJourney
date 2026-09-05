@@ -1,6 +1,6 @@
 # MindJourney 实验结果与计划
 
-最后更新：2026-09-05（Asia/Shanghai）
+最后更新：2026-09-06（Asia/Shanghai）
 
 本文件同时记录实验优先级和已验证的实验产物。优先级数字越小，优先级越高；`P0` 表示用户指定为已经运行的项目，但只有带有正式 `COMPLETE`、可复核结果文件和哈希的项目才记为“已验证完成”。
 
@@ -27,15 +27,16 @@
 
 | 数据集 / 模型 | 数据 | 权重 | Smoke | 全量分片 | 结果文件 |
 |---|---|---|---|---|---|
-| MindCube / `Qwen/Qwen3.5-27B` | 官方快照已核验，正在迁移 DAAI | 已有，revision 已核验 | 待跑 | 待跑 | — |
-| MindCube / `Qwen/Qwen2.5-VL-72B-Instruct` | 官方快照已核验，正在迁移 DAAI | 待下载 | 待跑 | 待跑 | — |
-| MMSI-Bench / `Qwen/Qwen3.5-9B` | 官方对齐快照已核验，正在迁移 DAAI | 已有，revision 已核验 | 待跑 | 待跑 | — |
-| MMSI-Bench / `Qwen/Qwen3.8-27B` | 官方对齐快照已核验，正在迁移 DAAI | 待下载 | 待跑 | 待跑 | — |
+| MindCube / `Qwen/Qwen3.5-27B` | 1050 题评测输入已就绪并严格验证；完整原始树仍在同步 | 已就绪；revision marker 已验证 | 已提交，排队中；Job `65458`；Run `mj-p1-mindcube-qwen35-27b-smoke-20260905T160025Z`；请求 A100-80G | 等待 smoke 通过 | DAAI: `/home/comp/tyjiang/mindjourney_runtime/p1_runs/mj-p1-mindcube-qwen35-27b-smoke-20260905T160025Z` |
+| MindCube / `Qwen/Qwen2.5-VL-72B-Instruct` | 1050 题评测输入已就绪并严格验证；完整原始树仍在同步 | 固定 revision 下载中；Job `65446` | 等待权重完整性 marker | 等待 smoke 通过 | — |
+| MMSI-Bench / `Qwen/Qwen3.5-9B` | 1000 题 / 2550 图已就绪并严格验证 | 已就绪；revision marker 已验证 | 已提交，排队中；Job `65452`；Run `mj-p1-mmsi-qwen35-9b-smoke-20260905T155306Z`；请求 A100-80G | 等待 smoke 通过 | DAAI: `/home/comp/tyjiang/mindjourney_runtime/p1_runs/mj-p1-mmsi-qwen35-9b-smoke-20260905T155306Z` |
+| MMSI-Bench / `Qwen/Qwen3.8-27B` | 1000 题 / 2550 图已就绪并严格验证 | 固定 revision 下载中；Job `65447` | 等待权重完整性 marker | 等待 smoke 通过 | — |
 
 - 推理统一使用 BF16 和 no-thinking；Qwen2.5-VL 不发送其不支持的 Qwen3 thinking 参数。
 - 正式计算只在 DAAI 运行。H20 96GB 空闲时优先；否则使用 A100 80GB，并排除 40GB DGX。硬件切换不得改变 SVC/搜索参数。
 - 每个组合必须先完成一题端到端 smoke，再提交正式数组；“已提交/排队”不等于“已完成”。
 - 统一配置：[p1_svc_multiimage.json](../configs/p1_svc_multiimage.json)。
+- 本次提交前 H20 节点的 8 张卡均已占用，故两个已提交 smoke 按资源约定回退到 A100-80G；每次后续提交前仍会重新检查 H20，而不会把本次回退固化为实验设置。
 
 ## 已验证运行
 
@@ -93,6 +94,7 @@
 - 官方代码 commit：`b8b7062adf6d3e49d588a7d014a0a787553d09ec`。
 - 官方 Hugging Face revision：`9c941b46a6bd65b6914669ef7a579948fc9c8467`。
 - `MindCube_tinybench.jsonl`：1050 题，SHA256 `0289eb82d81ff9aa0201ae75f86da7fd1924cf23dc202856d0579a0effd22ac8`；`among/around/rotation = 600/250/200`，2/3/4 图题分别为 274/345/431，共 3307 次图片引用、428 张唯一图片、0 缺图。
+- DAAI 正式输入：`/home/datasets/shiyang/MindCube_9c941b46/processed/test.json`，SHA256 `03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083`；provenance SHA256 `55af7c4dd6e125b5323a798ba871d3297c6c89098f5911b6d84561af26effac6`；官方有序图片序列摘要 `0b092454a3ceb25f513f3f1428f1b9fad06cf4e297a7d754980521f0cce2abdb`。
 - 第三方参考脚本（A100-2）：`/data/chentao/WorldLoop/examples/spatial_reasoning/prepare_data.py`
 - 以官方 `images` 数组作为 `Image 1..N` 的唯一语义顺序；转换工具：[prepare_mindcube.py](../utils/prepare_mindcube.py)。
 
@@ -101,6 +103,7 @@
 - 官方仓库：<https://github.com/InternRobotics/MMSI-Bench>
 - 官方代码 commit：`13e58a2b8b30d880d7e8a1e4a6aa1c0feda94cac`；官方 Hugging Face revision：`ec7c92bfaf7728fcca1d61e3e224e190af309436`。
 - 已核验的 A100-2 快照：1000 题、2550 张图、2–10 图；JSONL SHA256 `9448f3ffc9c2364d396ab29bfc5a66ecab26fcc076ce1b6b364bdcad7c721601`，逐题元数据与官方 revision 全量一致。
+- DAAI 正式输入：`/home/datasets/shiyang/MMSI_Bench_ec7c92bf/processed/test.json`，SHA256 `5de75a94eebb2ad31b44ab0f33d7225c56157165292d8112e287c410f56180c9`；provenance SHA256 `a86a9aa8ce007f06af5667848b5f47c2b6999c68fa36d1964e08b4e7d9fd8da2`；图片树摘要 `1915bcb705e661d46bab44dd8fe9513153466bca458bef26d030235d9e9c07d9`。
 - 第三方参考脚本（A100-2）：`/data/chentao/WorldLoop/smoke/build_mmsi_full.py`
 - 转换工具：[prepare_mmsi_bench.py](../utils/prepare_mmsi_bench.py)；保留官方图片顺序与 A–D 标签，严格按答案字母计分。
 
