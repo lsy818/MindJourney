@@ -27,9 +27,9 @@
 
 | 数据集 / 模型 | 数据 | 权重 | Smoke | 全量分片 | 结果文件 |
 |---|---|---|---|---|---|
-| MindCube / `Qwen/Qwen3.5-27B` | 1050 题评测输入已就绪并严格验证；完整原始树仍在同步 | 已就绪；revision marker 已验证 | 已提交，排队中；Job `65458`；Run `mj-p1-mindcube-qwen35-27b-smoke-20260905T160025Z`；请求 A100-80G | 等待 smoke 通过 | DAAI: `/home/comp/tyjiang/mindjourney_runtime/p1_runs/mj-p1-mindcube-qwen35-27b-smoke-20260905T160025Z` |
-| MindCube / `Qwen/Qwen2.5-VL-72B-Instruct` | 1050 题评测输入已就绪并严格验证；完整原始树仍在同步 | 固定 revision 下载中；Job `65446` | 等待权重完整性 marker | 等待 smoke 通过 | — |
-| MMSI-Bench / `Qwen/Qwen3.5-9B` | 1000 题 / 2550 图已就绪并严格验证 | 已就绪；revision marker 已验证 | 已提交，排队中；Job `65452`；Run `mj-p1-mmsi-qwen35-9b-smoke-20260905T155306Z`；请求 A100-80G | 等待 smoke 通过 | DAAI: `/home/comp/tyjiang/mindjourney_runtime/p1_runs/mj-p1-mmsi-qwen35-9b-smoke-20260905T155306Z` |
+| MindCube / `Qwen/Qwen3.5-27B` | 1050 题及完整原始图片树已就绪并严格验证 | 已就绪；revision marker 已验证 | 首次 Job `65458` 因节点缺少系统 `ninja` 在 vLLM 启动阶段失败；修复后以同一 Run ID 续跑，Job `65469` 排队中；请求 A100-80G | 等待 smoke 通过 | DAAI: `/home/comp/tyjiang/mindjourney_runtime/p1_runs/mj-p1-mindcube-qwen35-27b-smoke-20260905T160025Z` |
+| MindCube / `Qwen/Qwen2.5-VL-72B-Instruct` | 1050 题及完整原始图片树已就绪并严格验证 | 固定 revision 下载中；Job `65446` | 等待权重完整性 marker | 等待 smoke 通过 | — |
+| MMSI-Bench / `Qwen/Qwen3.5-9B` | 1000 题 / 2550 图已就绪并严格验证 | 已就绪；revision marker 已验证 | 首次 Job `65452` 因节点缺少系统 `ninja` 在 vLLM 启动阶段失败；修复后以同一 Run ID 续跑，Job `65468` 排队中；请求 A100-80G | 等待 smoke 通过 | DAAI: `/home/comp/tyjiang/mindjourney_runtime/p1_runs/mj-p1-mmsi-qwen35-9b-smoke-20260905T155306Z` |
 | MMSI-Bench / `Qwen/Qwen3.8-27B` | 1000 题 / 2550 图已就绪并严格验证 | 固定 revision 下载中；Job `65447` | 等待权重完整性 marker | 等待 smoke 通过 | — |
 
 - 推理统一使用 BF16 和 no-thinking；Qwen2.5-VL 不发送其不支持的 Qwen3 thinking 参数。
@@ -37,6 +37,7 @@
 - 每个组合必须先完成一题端到端 smoke，再提交正式数组；“已提交/排队”不等于“已完成”。
 - 统一配置：[p1_svc_multiimage.json](../configs/p1_svc_multiimage.json)。
 - 本次提交前 H20 节点的 8 张卡均已占用，故两个已提交 smoke 按资源约定回退到 A100-80G；每次后续提交前仍会重新检查 H20，而不会把本次回退固化为实验设置。
+- 首轮 smoke 的模型权重均已成功载入 GPU，但 FlashInfer 首次编译采样内核时在 A100 节点找不到裸命令 `ninja`。固定 Qwen 运行环境实际包含 `ninja 1.13.2`；提交代码已在 vLLM 子进程范围内补回该固定环境的 `bin`，未改变模型、精度、thinking 模式或 SVC 参数。修复 commit：`087be7a`。
 
 ## 已验证运行
 
