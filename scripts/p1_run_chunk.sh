@@ -53,7 +53,14 @@ done
 svc_device="${allocated_devices[$P1_SPEC_TP]}"
 
 output_base="$run_root/results"
-chunk_dir="${output_base}_spatial_beam_search_qc${num_chunks}/question_chunk_${chunk_index}"
+if (( num_chunks > 1 )); then
+  chunk_dir="${output_base}_spatial_beam_search_qc${num_chunks}/question_chunk_${chunk_index}"
+else
+  # PipelineBase only adds the _qcN/question_chunk_N suffix when N > 1.
+  # Smoke runs are intentionally a single logical chunk, so their result is
+  # written directly below the scaling-strategy output directory.
+  chunk_dir="${output_base}_spatial_beam_search"
+fi
 results_file="$chunk_dir/results.json"
 completion_file="$chunk_dir/COMPLETE"
 attempt_id="${SLURM_JOB_ID:-manual}-$(date -u +%Y%m%dT%H%M%SZ)"
