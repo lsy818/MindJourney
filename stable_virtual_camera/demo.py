@@ -82,9 +82,9 @@ class Model:
         self.denoiser = DiscreteDenoiser(discretization=DISCRETIZATION, num_idx=1000, device=device)
 
         if COMPILE:
-            self.model = torch.compile(MODEL, dynamic=False)
-            self.conditioner = torch.compile(CONDITIONER, dynamic=False)
-            self.ae = torch.compile(AE, dynamic=False)
+            self.model = torch.compile(self.model, dynamic=False)
+            self.conditioner = torch.compile(self.conditioner, dynamic=False)
+            self.ae = torch.compile(self.ae, dynamic=False)
 
 
 def parse_task(

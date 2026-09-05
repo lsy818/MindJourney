@@ -1,5 +1,5 @@
 # A VLM wrapper for adapting both close-source (i.e. API) and open-source (i.e. local) models.
-from utils.api import ChatAPI, AzureConfig
+from utils.api import ChatAPI, AzureConfig, OpenAICompatibleConfig, P1_MODEL_NAMES
 from utils.InternVL3 import *
 from utils.prompt_formatting import *
 
@@ -31,6 +31,13 @@ class VLMWrapper:
             if qa_model_name not in (None, "None") and qa_model_name != model_name:
                 qa_config = AzureConfig(qa_model_name, api_info[qa_model_name]["api_version"], api_info[qa_model_name]["api_price"])
                 self.qa_model = ChatAPI(qa_config)
+            self.prompt_style = 'gpt'
+        elif model_name in P1_MODEL_NAMES:
+            assert qa_model_name in (None, "None") or qa_model_name == model_name, (
+                "Priority-one local VLM runs use the same model for search and Q&A."
+            )
+            self.model = ChatAPI(OpenAICompatibleConfig(model_name))
+            self.qa_model = None
             self.prompt_style = 'gpt'
         elif model_name in ['OpenGVLab/InternVL3-8B', 'OpenGVLab/InternVL3-14B']:
             assert qa_model_name in (None, "None") or qa_model_name == model_name, "Separate Score/QA model is not supported for InternVL3."

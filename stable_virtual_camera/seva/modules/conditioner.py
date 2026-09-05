@@ -1,6 +1,10 @@
+import hashlib
+import os
+
 import kornia
 import open_clip
 import torch
+from huggingface_hub import hf_hub_download
 from torch import nn
 
 
@@ -10,8 +14,36 @@ class CLIPConditioner(nn.Module):
 
     def __init__(self):
         super().__init__()
+        clip_repo = os.environ.get(
+            "SVC_OPENCLIP_REPO", "laion/CLIP-ViT-H-14-laion2B-s32B-b79K"
+        )
+        clip_revision = os.environ.get(
+            "SVC_OPENCLIP_REVISION", "1c2b8495b28150b8a4922ee1c8edee224c284c0c"
+        )
+        clip_filename = os.environ.get(
+            "SVC_OPENCLIP_FILENAME", "open_clip_pytorch_model.bin"
+        )
+        clip_path = hf_hub_download(
+            repo_id=clip_repo,
+            filename=clip_filename,
+            revision=clip_revision,
+        )
+        expected_sha256 = os.environ.get(
+            "SVC_OPENCLIP_SHA256",
+            "9a78ef8e8c73fd0df621682e7a8e8eb36c6916cb3c16b291a082ecd52ab79cc4",
+        )
+        digest = hashlib.sha256()
+        with open(clip_path, "rb") as handle:
+            for block in iter(lambda: handle.read(1024 * 1024), b""):
+                digest.update(block)
+        actual_sha256 = digest.hexdigest()
+        if actual_sha256 != expected_sha256:
+            raise RuntimeError(
+                "OpenCLIP checkpoint SHA256 mismatch: "
+                f"expected {expected_sha256}, found {actual_sha256}."
+            )
         self.module = open_clip.create_model_and_transforms(
-            "ViT-H-14", pretrained="laion2b_s32b_b79k"
+            "ViT-H-14", pretrained=clip_path
         )[0]
         self.module.eval().requires_grad_(False)  # type: ignore
         self.register_buffer(

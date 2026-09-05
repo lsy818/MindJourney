@@ -1,0 +1,109 @@
+{
+  "experiment": "Priority-1 MindJourney SVC multi-image benchmark suite",
+  "protocol": "paper-aligned SVC multi-image adaptation",
+  "sources": {
+    "mindjourney_paper": "https://arxiv.org/pdf/2507.12508",
+    "mindjourney_code_commit": "aeed003e76e8a96fbb20990405128913f8f49486",
+    "mindcube_code_commit": "b8b7062adf6d3e49d588a7d014a0a787553d09ec",
+    "mindcube_hf_revision": "9c941b46a6bd65b6914669ef7a579948fc9c8467",
+    "mmsi_code_commit": "13e58a2b8b30d880d7e8a1e4a6aa1c0feda94cac",
+    "mmsi_hf_revision": "ec7c92bfaf7728fcca1d61e3e224e190af309436"
+  },
+  "paper_specified": {
+    "search_depth": 3,
+    "beam_size": 2,
+    "exploration_score_threshold": 8,
+    "helpful_score_threshold": 8,
+    "maximum_trajectory_length": 8,
+    "primitive_repetitions_per_expansion": 3,
+    "forward_primitive_meters": 0.25,
+    "rotation_primitive_degrees": 9
+  },
+  "paper_aligned_svc_mapping": {
+    "sampling_interval_angle": 9,
+    "sampling_interval_meter": 0.25,
+    "fixed_rotation_magnitudes": 27,
+    "fixed_forward_magnitudes": 0.75,
+    "num_frames": 9,
+    "frame_interval": 3,
+    "num_targets": 8
+  },
+  "released_code_choices": {
+    "task": "img2trajvid_s-prob",
+    "cfg": 4.0,
+    "guider": 1,
+    "L_short": 576,
+    "use_traj_prior": true,
+    "chunk_strategy": "interp",
+    "max_inference_batch_size": 1,
+    "num_top_candidates": 18,
+    "max_tries_gpt": 5,
+    "max_rotation_degrees": 60,
+    "max_forward_meters": 1.5
+  },
+  "multi_image_adaptation": {
+    "source_order": "preserve each official images array exactly; never enumerate or sort the image directory",
+    "svc_conditioning": "Image 1 only",
+    "vlm_context": "all source images in official order, followed by imagined views",
+    "mindcube_max_images": 4,
+    "mmsi_max_images": 10,
+    "answer_scoring": "official choice labels with strict final-answer extraction",
+    "claim_boundary": "MindCube and MMSI-Bench were not evaluated in the MindJourney paper; these runs preserve the disclosed SVC search settings but are not paper-exact benchmark rows"
+  },
+  "models": {
+    "Qwen/Qwen3.5-27B": {
+      "revision": "fc05daec18b0a78c049392ed2e771dde82bdf654",
+      "enable_thinking": false,
+      "dtype": "bfloat16",
+      "tensor_parallel_h20": 1,
+      "tensor_parallel_a100_80gb": 1
+    },
+    "Qwen/Qwen2.5-VL-72B-Instruct": {
+      "revision": "89c86200743eec961a297729e7990e8f2ddbc4c5",
+      "enable_thinking": false,
+      "dtype": "bfloat16",
+      "tensor_parallel_h20": 2,
+      "tensor_parallel_a100_80gb": 4
+    },
+    "Qwen/Qwen3.5-9B": {
+      "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+      "enable_thinking": false,
+      "dtype": "bfloat16",
+      "tensor_parallel_h20": 1,
+      "tensor_parallel_a100_80gb": 1
+    },
+    "Qwen/Qwen3.8-27B": {
+      "revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+      "enable_thinking": false,
+      "dtype": "bfloat16",
+      "tensor_parallel_h20": 1,
+      "tensor_parallel_a100_80gb": 1
+    }
+  },
+  "generation": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 44,
+    "context_limit": 65536,
+    "max_output_tokens": 1024,
+    "vllm_version": "0.28.0"
+  },
+  "svc_weights": {
+    "repo": "stabilityai/stable-virtual-camera",
+    "revision": "e538e251c1009e9a41cf8b7fee5f21332a1960de",
+    "model_safetensors_sha256": "10e69ea003c313e6bdfc7ee40376d1c19ea6036c20bd384e94b483dec8350396"
+  },
+  "hardware_policy": {
+    "execution_cluster": "DAAI only",
+    "preferred": "H20 96GB when idle",
+    "fallback": "A100 80GB",
+    "excluded": "A100 40GB DGX",
+    "note": "hardware substitution only; BF16 and algorithmic settings remain fixed"
+  },
+  "priority_1": [
+    "MindCube 1050 / Qwen3.5-27B",
+    "MindCube 1050 / Qwen2.5-VL-72B-Instruct",
+    "MMSI-Bench 1000 / Qwen3.5-9B",
+    "MMSI-Bench 1000 / Qwen3.8-27B"
+  ]
+}

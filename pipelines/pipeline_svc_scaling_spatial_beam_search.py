@@ -1,5 +1,6 @@
 from utils.api import ChatAPI, AzureConfig
 from utils.prompt_formatting import *
+from utils.answer_parsing import score_multiple_choice_response
 from tqdm import tqdm
 import argparse
 import json
@@ -150,10 +151,27 @@ class SpatialVQAPipelineSVC(PipelineBase):
     # ---------------------------------------------------------------------
     def __init__(
         self,
-   ):
+    ):
         super().__init__()
+        saved_random_state = self.results.get("runtime_state", {}).get(
+            "python_random_state"
+        )
         model_args = self.model_args
         self.global_model = Model()
+        if saved_random_state is not None:
+            random.setstate(self._nested_tuple(saved_random_state))
+
+    @staticmethod
+    def _nested_tuple(value):
+        if isinstance(value, list):
+            return tuple(SpatialVQAPipelineSVC._nested_tuple(item) for item in value)
+        return value
+
+    def save_results(self):
+        self.results.setdefault("runtime_state", {})[
+            "python_random_state"
+        ] = random.getstate()
+        super().save_results()
 
     # ------------------------------------------------------------------
     #  PUBLIC ENTRY-POINT
@@ -161,28 +179,28 @@ class SpatialVQAPipelineSVC(PipelineBase):
     def run(self) -> None:
         """Main evaluation loop (mirrors the logic of the original script)."""
         for question in self.questions:
+            qid = question["eval_id"] if "eval_id" in question else question["database_idx"]
             # ------------------------------------------------------------------
             #  Quick filters & deduplication
             # ------------------------------------------------------------------
             if question["question_type"] in ["other"]:
                 print(f"[SpatialVQA] Skipping question {question['database_idx']} - not a spatial VQA task.")
-                self.results["skip_indices"].append(question["database_idx"])
+                self.results["skip_indices"].append(qid)
                 self.save_results()
                 continue
 
             if self.model_args.question_type != "None" and question["question_type"] != self.model_args.question_type:
                 print(f"[SpatialVQA] Skipping question {question['database_idx']} - not a {self.model_args.question_type} task.")
-                self.results["skip_indices"].append(question["database_idx"])
+                self.results["skip_indices"].append(qid)
                 self.save_results()
                 continue
                 
             if len(question["img_paths"]) > self.model_args.max_images:
                 print(f"[SpatialVQA] Skipping question {question['database_idx']} - only one image supported.")
-                self.results["skip_indices"].append(question["database_idx"])
+                self.results["skip_indices"].append(qid)
                 self.save_results()
                 continue
 
-            qid = question["database_idx"]
             if (
                 qid in self.results["skip_indices"]
                 or any(qid in result["correct"] for result in self.results["progress"].values())
@@ -200,26 +218,8 @@ class SpatialVQAPipelineSVC(PipelineBase):
 
             os.makedirs(os.path.join(save_dir, f"step_0"), exist_ok=True)
 
-            # --- primary image ----------------------------------------------------------
-            primary_img_path = os.path.join(save_dir, "step_0", "img_0.png")
-            img = cv2.imread(question["img_paths"][0])
-            if self.model_args.vlm_model_name == "OpenGVLab/InternVL3-14B":
-                # resize to 512x512
-                img = cv2.resize(img, (512, 512), interpolation=cv2.INTER_LINEAR)
-            else:
-                img = resize_to_short_side(img, target_short=512)
-            cv2.imwrite(primary_img_path, img)
-
-            # --- optional helper image --------------------------------------------------
-            helper_img_path = None
-            if len(question["img_paths"]) > 1:
-                helper_img_path = os.path.join(save_dir, "step_0", "helper_img.png")
-                helper = cv2.imread(question["img_paths"][1])
-                if self.model_args.vlm_model_name == "OpenGVLab/InternVL3-14B":
-                    helper = cv2.resize(helper, (512, 512), interpolation=cv2.INTER_LINEAR)
-                else:
-                    helper = resize_to_short_side(helper, target_short=512)
-                cv2.imwrite(helper_img_path, helper)
+            source_image_paths = self._stage_source_images(question, save_dir)
+            primary_img_path = source_image_paths[0]
 
             # ------------------------------------------------------------------
             #  Dialogue loop (LLM <-> environment)
@@ -230,15 +230,16 @@ class SpatialVQAPipelineSVC(PipelineBase):
             helpful_action_consequences = {}
             system_prompts_for_double_search = [
                 (
-                    "You are an AI assistant designed to help with spatial reasoning in a 3D indoor scene. "
+                    "Task: You are an AI assistant designed to help with spatial reasoning in a 3D indoor scene. "
                     "You must analyze any provided images and score imagined images based on how suitable they are for exploring these action consequences in order to answer the question from the choices.\n\n"
                     "Rules:\n"
                     "1. You'll be provided with images (including imagined images), a question, and a set of answer choices. You should score all imagined images.\n"
                     "2. You should output a list of scores from 0 to 9, separated by ','. For example: Output: 3,5,2,9,0,1\n"
                 ),
                 (
-                    "You are an AI assistant designed to help with spatial reasoning in a 3D indoor scene. "
-                    "You must analyze any provided images and score imagined images based on how helpful they are for answering the questions. Hint: They may not be correct for answering the questions, but they will be helpful for excluding the wrong answers. The scores should also consider the image quality. If the image quality is very bad, it should receive a low score. Otherwise, the score should be augmented.\n\n"
+                    "Task: You are an AI assistant designed to help with spatial reasoning in a 3D indoor scene. "
+                    "You must analyze any provided images and score imagined images based on how helpful they are for answering the questions.\n\n"
+                    "Hint: They may not be correct for answering the questions, but they will be helpful for excluding the wrong answers. The scores should also consider the image quality. If the image quality is very bad, it should receive a low score. Otherwise, the score should be augmented.\n\n"
                     "Rules:\n"
                     "1. You'll be provided with images (including imagined images), a question, and a set of answer choices. You should score all imagined images.\n"
                     "2. You should output a list of scores from 0 to 9, separated by ','. For example: Output: 3,5,2,9,0,1\n"
@@ -280,13 +281,19 @@ class SpatialVQAPipelineSVC(PipelineBase):
                         sys_prompt, content = self.vlm.format_prompt(prompt_type="prompt_scores",
                             question=question["question"],
                             answer_choices=question["answer_choices"],
-                            images=[primary_img_path, helper_img_path] if len(question['img_paths']) > 1 else [primary_img_path],
+                            images=source_image_paths,
                             action_consequences=temp_actions_store,
                             sys_prompt=system_prompts_for_double_search[rank_i],
                         )
                         response = self.vlm.run_prompt("prompt_scores", sys_prompt, content)
                         print("[LLM RESPONSE in choose n]", response)
                         scores = self._process_list(response)
+                        if scores != "out of control" and len(scores) != len(temp_actions_store):
+                            print(
+                                "[WARN] Score count mismatch: "
+                                f"expected {len(temp_actions_store)}, got {len(scores)}."
+                            )
+                            scores = "out of control"
                         # print("[RESULT after process]", scores)
                         if scores != "out of control":
                             break
@@ -379,7 +386,7 @@ class SpatialVQAPipelineSVC(PipelineBase):
                 sys_prompt, content = self.vlm.format_prompt(prompt_type="answer_scaling",
                     question=question["question"],
                     answer_choices=question["answer_choices"],
-                    images=[primary_img_path, helper_img_path] if len(question['img_paths']) > 1 else [primary_img_path],
+                    images=source_image_paths,
                     action_consequences=helpful_action_consequences,
                 )
                 response = self.vlm.run_prompt("answer_scaling", sys_prompt, content)
@@ -426,10 +433,8 @@ class SpatialVQAPipelineSVC(PipelineBase):
     # ------------------------------------------------------------------
     def _process_answer(self, response: str, question: dict, fwd=0.075, turn=3):
         """Parse LLM response and map to (result, actions, magnitude)."""
-        response_l = response.lower()
         try:
-            if any(c.lower() in response_l for c in question["answer_choices"]):
-                return "correct" if question["correct_answer"].lower() in response_l.split("\n")[-1] else "wrong"
+            return score_multiple_choice_response(response, question)
         except Exception:
             pass
         return "out of control"
@@ -445,9 +450,15 @@ class SpatialVQAPipelineSVC(PipelineBase):
     def _process_list(self, response: str):
         """Parse LLM response to a list."""
         try:
+            response = response.strip()
             if "Output:" in response:
-                response = response.split("Output:")[1]
+                response = response.rsplit("Output:", 1)[1]
+            elif "output:" in response:
+                response = response.rsplit("output:", 1)[1]
+            response = response.strip().strip("[]")
             list_ = [int(i.strip()) for i in response.split(",")]
+            if any(score < 0 or score > 9 for score in list_):
+                return "out of control"
             return list_
         except Exception:
             pass
@@ -523,8 +534,13 @@ class SpatialVQAPipelineSVC(PipelineBase):
         if num_workers is None:
             num_workers = min(len(tasks), os.cpu_count() or 1)
 
+        if num_workers == 1:
+            for task in tasks:
+                _run_one_candidate(*task)
+            return
+
         with multiprocessing.get_context("spawn").Pool(num_workers) as pool:
-            results = pool.starmap(_run_one_candidate, tasks)
+            pool.starmap(_run_one_candidate, tasks)
 
         # all_trajectories, all_trajectories_json = zip(*results)
         # return all_trajectories, all_trajectories_json

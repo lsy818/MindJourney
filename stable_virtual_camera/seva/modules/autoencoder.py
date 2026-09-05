@@ -1,5 +1,9 @@
+import hashlib
+import os
+
 import torch
 from diffusers.models import AutoencoderKL  # type: ignore
+from huggingface_hub import hf_hub_download
 from torch import nn
 
 
@@ -9,9 +13,38 @@ class AutoEncoder(nn.Module):
 
     def __init__(self, chunk_size: int | None = None):
         super().__init__()
+        repo_id = os.environ.get(
+            "SVC_VAE_REPO", "stabilityai/stable-diffusion-2-1-base"
+        )
+        revision = os.environ.get("SVC_VAE_REVISION")
+        subfolder = os.environ.get("SVC_VAE_SUBFOLDER", "vae") or None
+        expected_sha256 = os.environ.get("SVC_VAE_SHA256")
+
+        if expected_sha256:
+            filename = "diffusion_pytorch_model.safetensors"
+            if subfolder:
+                filename = f"{subfolder}/{filename}"
+            weight_path = hf_hub_download(
+                repo_id=repo_id,
+                filename=filename,
+                revision=revision,
+            )
+            digest = hashlib.sha256()
+            with open(weight_path, "rb") as handle:
+                for block in iter(lambda: handle.read(1024 * 1024), b""):
+                    digest.update(block)
+            actual_sha256 = digest.hexdigest()
+            if actual_sha256 != expected_sha256:
+                raise RuntimeError(
+                    "VAE weight SHA256 mismatch: "
+                    f"expected {expected_sha256}, found {actual_sha256}."
+                )
+
         self.module = AutoencoderKL.from_pretrained(
-            "stabilityai/stable-diffusion-2-1-base",
-            subfolder="vae",
+            repo_id,
+            revision=revision,
+            subfolder=subfolder,
+            use_safetensors=True,
             force_download=False,
             low_cpu_mem_usage=False,
         )

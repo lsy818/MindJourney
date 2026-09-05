@@ -1,5 +1,7 @@
 import base64
 import copy
+import mimetypes
+import os
 from PIL import Image
 from utils.InternVL3 import *
 
@@ -26,6 +28,23 @@ def encode_image(image_path):
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode('utf-8')
 
+
+def image_data_url(image_path):
+    mime_type, _ = mimetypes.guess_type(image_path)
+    if mime_type not in {"image/jpeg", "image/png", "image/webp", "image/gif"}:
+        mime_type = "image/png"
+    return f"data:{mime_type};base64,{encode_image(image_path)}"
+
+
+def source_image_note():
+    if os.environ.get("MINDJOURNEY_MULTIIMAGE_ADAPTATION", "0") == "1":
+        return (
+            "\nThe source images above are in the benchmark's official order. "
+            "Image 1 is the reference view used to generate imagined views; "
+            "the remaining source images are additional question context.\n"
+        )
+    return "\nImage 1 is your current egocentric view\n"
+
 def format_gpt_content(contents):
     formatted_content = []
     for c in contents:
@@ -35,7 +54,7 @@ def format_gpt_content(contents):
                 {
                     "type": "image_url",
                     "image_url": {
-                        "url": f"data:image/jpeg;base64,{encode_image(c[1])}",
+                        "url": image_data_url(c[1]),
                         "detail": "high",
                     },
                 }
@@ -86,7 +105,7 @@ def format_spatial_vqa_prompt_answer_baseline(
     
     # 1) System prompt describing the assistant’s overall role & rules
     sys_prompt = (
-        "You are an AI assistant designed to help with spatial reasoning in a 3D indoor scene. "
+        "Task: You are an AI assistant designed to help with spatial reasoning in a 3D indoor scene. "
         "You must analyze any provided images or observations and answer the question.\n\n"
     )
     
@@ -100,7 +119,7 @@ def format_spatial_vqa_prompt_answer_baseline(
     if images:
         for idx, img_path in enumerate(images):
             content.append((f"Image {idx + 1}:", img_path))
-        content.append((f"\nImage 1 is your current egocentric view\n",))
+        content.append((source_image_note(),))
     else:
         content.append(("No image provided.\n\n",))
     
@@ -164,8 +183,8 @@ def format_spatial_vqa_prompt_answer_scaling(
         "You must analyze any provided images or observations and answer the question.\n\n"
         "Rules:\n"
         "1. You should output the exact answer from the choices.\n"
-        "2. You will be provided with multiple imagined views if you taking corresponding actions to help you answer the questions.\n"
-        "3. Your final line must only include the exact answer choice.\n"
+        "2. You will be provided with multiple imagined views if you take corresponding actions to help you answer the questions.\n"
+        "3. You can include minimal reasoning, but your final line must only include the exact answer choice.\n"
     )
     
     # Prepare the content list: text or (text, base64_image)
@@ -178,7 +197,7 @@ def format_spatial_vqa_prompt_answer_scaling(
     if images:
         for idx, img_path in enumerate(images):
             content.append((f"Image {idx + 1}:", img_path))
-        content.append(("\nImage 1 is your current egocentric view\n",))
+        content.append((source_image_note(),))
     else:
         content.append(("No image provided.\n\n",))
     
@@ -197,7 +216,7 @@ def format_spatial_vqa_prompt_answer_scaling(
     actions_intro = (
         "Below are the imagined views you would obtain if you took the corresponding actions. "
         "These are provided to help you answer the question.\n"
-        "You can include them in your reasoning, but you should still only output the exact answer at the last line\n"
+        "You can include them in your reasoning, but you should still only output the exact answer at the last line.\n"
     )
     content.append((actions_intro,))
     
@@ -241,7 +260,7 @@ def format_spatial_vqa_prompt_scores(
     if images:
         for idx, img_path in enumerate(images):
             content.append((f"Image {idx + 1}:", img_path))
-        content.append(("\nImage 1 is your current egocentric view\n",))
+        content.append((source_image_note(),))
     else:
         content.append(("No image provided.\n\n",))
     
@@ -364,7 +383,7 @@ def format_spatial_vqa_prompt_scores_fill_in_blank(
     if images:
         for idx, img_path in enumerate(images):
             content.append((f"Image {idx + 1}:", img_path))
-        content.append(("\nImage 1 is your current egocentric view\n",))
+        content.append((source_image_note(),))
     else:
         content.append(("No image provided.\n\n",))
     
@@ -432,7 +451,7 @@ def format_spatial_vqa_prompt_rank(
         for idx, img_path in enumerate(images):
             encoded_img = encode_image(img_path)
             content.append((f"Image {idx + 1}:", encoded_img))
-        content.append(("\nImage 1 is your current egocentric view\n",))
+        content.append((source_image_note(),))
     else:
         content.append(("No image provided.\n\n",))
     
@@ -529,7 +548,7 @@ def format_spatial_vqa_prompt_answer_scaling_fill_in_blank(
     if images:
         for idx, img_path in enumerate(images):
             content.append((f"Image {idx + 1}:", img_path))
-        content.append(("\nImage 1 is your current egocentric view\n",))
+        content.append((source_image_note(),))
     else:
         content.append(("No image provided.\n\n",))
     

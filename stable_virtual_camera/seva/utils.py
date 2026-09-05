@@ -1,3 +1,4 @@
+import hashlib
 import os
 
 import safetensors.torch
@@ -32,15 +33,35 @@ def load_model(
     device: str | torch.device = "cuda",
     verbose: bool = False,
 ) -> Seva:
+    revision = os.environ.get("SVC_REVISION")
     if os.path.isdir(pretrained_model_name_or_path):
         weight_path = os.path.join(pretrained_model_name_or_path, weight_name)
     else:
+        config_path = hf_hub_download(
+            repo_id=pretrained_model_name_or_path,
+            filename="config.yaml",
+            revision=revision,
+        )
         weight_path = hf_hub_download(
-            repo_id=pretrained_model_name_or_path, filename=weight_name
+            repo_id=pretrained_model_name_or_path,
+            filename=weight_name,
+            revision=revision,
         )
-        _ = hf_hub_download(
-            repo_id=pretrained_model_name_or_path, filename="config.yaml"
-        )
+        if verbose:
+            print(f"Using pinned SVC config: {config_path}")
+
+    expected_sha256 = os.environ.get("SVC_WEIGHT_SHA256")
+    if expected_sha256:
+        digest = hashlib.sha256()
+        with open(weight_path, "rb") as handle:
+            for block in iter(lambda: handle.read(1024 * 1024), b""):
+                digest.update(block)
+        actual_sha256 = digest.hexdigest()
+        if actual_sha256 != expected_sha256:
+            raise RuntimeError(
+                f"SVC checkpoint SHA256 mismatch: expected {expected_sha256}, "
+                f"found {actual_sha256}."
+            )
 
     state_dict = safetensors.torch.load_file(
         weight_path,
@@ -53,4 +74,9 @@ def load_model(
     missing, unexpected = model.load_state_dict(state_dict, strict=False, assign=True)
     if verbose:
         print_load_warning(missing, unexpected)
+    if os.environ.get("SVC_STRICT_LOAD", "0") == "1" and (missing or unexpected):
+        raise RuntimeError(
+            "SVC checkpoint is incompatible with the released architecture: "
+            f"{len(missing)} missing and {len(unexpected)} unexpected keys."
+        )
     return model

@@ -1,7 +1,9 @@
 from utils.vlm_wrapper import VLMWrapper
 from utils.prompt_formatting import SYS, BASELINE_PROMPT
+from utils.answer_parsing import score_multiple_choice_response
 from tqdm import tqdm
 import argparse
+import hashlib
 import json
 import random
 import os
@@ -32,6 +34,138 @@ class ActionSpace:
 
 class PipelineBase:
 
+    @staticmethod
+    def _sha256_file(path):
+        digest = hashlib.sha256()
+        with open(path, "rb") as handle:
+            for block in iter(lambda: handle.read(1024 * 1024), b""):
+                digest.update(block)
+        return digest.hexdigest()
+
+    def _stage_source_images(self, question, save_dir):
+        """Stage every source image without changing its benchmark order.
+
+        Image 1 remains the sole conditioning image for SVC.  The returned
+        ordered list is passed in full to the VLM, so auxiliary benchmark views
+        are never silently dropped.
+        """
+
+        source_paths = list(question.get("img_paths") or [])
+        if not source_paths:
+            raise ValueError(
+                f"Question {question.get('database_idx')} has no source images."
+            )
+
+        step_dir = os.path.join(save_dir, "step_0")
+        os.makedirs(step_dir, exist_ok=True)
+        staged_paths = []
+        order_manifest = []
+        for index, source_path in enumerate(source_paths):
+            image = cv2.imread(source_path)
+            if image is None:
+                raise FileNotFoundError(
+                    f"Could not decode source image {index + 1}: {source_path}"
+                )
+            if self.model_args.vlm_model_name == "OpenGVLab/InternVL3-14B":
+                image = cv2.resize(image, (512, 512), interpolation=cv2.INTER_LINEAR)
+            else:
+                image = resize_to_short_side(image, target_short=512)
+            filename = "img_0.png" if index == 0 else f"helper_img_{index:03d}.png"
+            staged_path = os.path.join(step_dir, filename)
+            if not cv2.imwrite(staged_path, image):
+                raise OSError(f"Could not write staged image: {staged_path}")
+            staged_paths.append(staged_path)
+            order_manifest.append(
+                {
+                    "image_number": index + 1,
+                    "source_path": source_path,
+                    "source_sha256": self._sha256_file(source_path),
+                    "staged_path": staged_path,
+                }
+            )
+
+        with open(os.path.join(step_dir, "source_image_order.json"), "w") as handle:
+            json.dump(order_manifest, handle, indent=2)
+        return staged_paths
+
+    def _build_experiment_record(self, input_file):
+        """Fingerprint the exact code, data, model, and launch configuration."""
+
+        repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        source_digest = hashlib.sha256()
+        for source_root in ("pipelines", "utils", "stable_virtual_camera"):
+            absolute_root = os.path.join(repo_root, source_root)
+            for directory, dirnames, filenames in os.walk(absolute_root):
+                dirnames.sort()
+                for filename in sorted(filenames):
+                    if not filename.endswith(".py"):
+                        continue
+                    path = os.path.join(directory, filename)
+                    source_digest.update(os.path.relpath(path, repo_root).encode())
+                    with open(path, "rb") as handle:
+                        source_digest.update(handle.read())
+
+        source_sha256 = source_digest.hexdigest()
+        expected_source = os.environ.get("MINDJOURNEY_EXPECTED_SOURCE_SHA256")
+        if expected_source and source_sha256 != expected_source:
+            raise RuntimeError(
+                "Python source differs from the hash pinned at formal submission."
+            )
+
+        arguments = dict(vars(self.model_args))
+        common_arguments = {
+            key: value
+            for key, value in arguments.items()
+            if key not in {"output_dir", "question_chunk_idx"}
+        }
+        manifest_path = os.environ.get("MINDJOURNEY_EXPERIMENT_MANIFEST")
+        provenance_path = os.environ.get("MINDJOURNEY_DATASET_PROVENANCE")
+        common = {
+            "arguments": common_arguments,
+            "dataset_json_sha256": self._sha256_file(input_file),
+            "dataset_provenance_sha256": (
+                self._sha256_file(provenance_path)
+                if provenance_path and os.path.isfile(provenance_path)
+                else None
+            ),
+            "manifest_sha256": (
+                self._sha256_file(manifest_path)
+                if manifest_path and os.path.isfile(manifest_path)
+                else None
+            ),
+            "source_sha256": source_sha256,
+            "submitted_source_sha256": expected_source,
+            "model_revision": os.environ.get("QWEN_REVISION"),
+            "model_tree_sha256": os.environ.get("MINDJOURNEY_MODEL_TREE_SHA256"),
+            "model_dtype": os.environ.get("MINDJOURNEY_MODEL_DTYPE", "bfloat16"),
+            "qwen_enable_thinking": os.environ.get(
+                "MINDJOURNEY_ENABLE_THINKING", "false"
+            ).lower()
+            == "true",
+            "qwen_context_limit": os.environ.get("QWEN_CONTEXT_LIMIT"),
+            "qwen_max_tokens": os.environ.get("QWEN_MAX_TOKENS"),
+            "vllm_version": os.environ.get("QWEN_VLLM_VERSION"),
+            "svc_revision": os.environ.get("SVC_REVISION"),
+            "svc_weight_sha256": os.environ.get("SVC_WEIGHT_SHA256"),
+            "svc_strict_load": os.environ.get("SVC_STRICT_LOAD"),
+            "runtime_environment": os.environ.get("MINDJOURNEY_ENV_ID"),
+            "hardware": os.environ.get("MINDJOURNEY_HARDWARE"),
+            "protocol": "paper-aligned SVC multi-image adaptation",
+        }
+        common_json = json.dumps(common, sort_keys=True, separators=(",", ":"))
+        run_group_fingerprint = hashlib.sha256(common_json.encode()).hexdigest()
+        configuration = {
+            "run_group": common,
+            "output_dir": arguments["output_dir"],
+            "question_chunk_idx": arguments["question_chunk_idx"],
+        }
+        chunk_json = json.dumps(configuration, sort_keys=True, separators=(",", ":"))
+        return {
+            "fingerprint": hashlib.sha256(chunk_json.encode()).hexdigest(),
+            "run_group_fingerprint": run_group_fingerprint,
+            "configuration": configuration,
+        }
+
     def __init__(
         self,
     ):  
@@ -57,6 +191,7 @@ class PipelineBase:
             os.makedirs(self.model_args.output_dir, exist_ok=True)
 
         self.questions = self.select_questions(input_file, seed=10, num_questions=num_questions)
+        self.num_underlying_questions = len(self.questions)
         if self.model_args.num_question_chunks > 1:
             idx = self.model_args.question_chunk_idx
             total = self.model_args.num_question_chunks
@@ -72,13 +207,25 @@ class PipelineBase:
             self.questions = self.questions[start:end]
         self.question_type_list = self.get_question_type_list()
         self.vlm = VLMWrapper(model_name=self.model_args.vlm_model_name, qa_model_name=self.model_args.vlm_qa_model_name)
+        experiment_record = self._build_experiment_record(input_file)
 
         # ================== NEW OR MODIFIED BEGIN ==================
         if os.path.exists(os.path.join(self.model_args.output_dir, f"results.json")):
             with open(os.path.join(self.model_args.output_dir, f"results.json"), 'r') as f:
                 self.results = json.load(f)
+            if self.results.get("experiment", {}).get("fingerprint") != experiment_record["fingerprint"]:
+                raise RuntimeError(
+                    "Existing results.json belongs to a different experiment. "
+                    "Use a new output directory."
+                )
         else:
             self.results = {
+                "experiment": experiment_record,
+                "evaluation": {
+                    "underlying_questions": self.num_underlying_questions,
+                    "evaluated_in_chunk": len(self.questions),
+                    "aggregation": "top1_accuracy_over_questions",
+                },
                 "current": None,
                 "parsing_err_stats":{
                     "scores": 0,
@@ -129,27 +276,32 @@ class PipelineBase:
         return "out of control"
     def save_results(self):
         """Save results to JSON file."""
-        with open(os.path.join(self.model_args.output_dir, f"results.json"), 'w') as f:
+        result_path = os.path.join(self.model_args.output_dir, "results.json")
+        temp_path = result_path + ".tmp"
+        with open(temp_path, "w") as f:
             json.dump(self.results, f, indent=4)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(temp_path, result_path)
         # ================== NEW OR MODIFIED END ==================
 
     def run(self):
 
         for question in tqdm(self.questions):
+            qid = question["eval_id"] if "eval_id" in question else question["database_idx"]
             # ------------------------------------------------------------------
             #  Quick filters & deduplication
             # ------------------------------------------------------------------
             if question["question_type"] in ["other"]:
-                self.results["skip_indices"].append(question["database_idx"])
+                self.results["skip_indices"].append(qid)
                 continue
 
             if len(question["img_paths"]) > self.model_args.max_images:
                 print(f"[SpatialVQA] Skipping question {question['database_idx']} - only one image supported.")
-                self.results["skip_indices"].append(question["database_idx"])
+                self.results["skip_indices"].append(qid)
                 self.save_results()
                 continue
 
-            qid = question["database_idx"]
             if (
                 qid in self.results["skip_indices"]
                 or any(qid in result["correct"] for result in self.results["progress"].values())
@@ -167,26 +319,8 @@ class PipelineBase:
 
             os.makedirs(os.path.join(save_dir, f"step_0"), exist_ok=True)
 
-            # --- primary image ----------------------------------------------------------
-            primary_img_path = os.path.join(save_dir, "step_0", "img_0.png")
-            img = cv2.imread(question["img_paths"][0])
-            if self.model_args.vlm_model_name == "OpenGVLab/InternVL3-14B":
-                # resize to 512x512
-                img = cv2.resize(img, (512, 512), interpolation=cv2.INTER_LINEAR)
-            else:
-                img = resize_to_short_side(img, target_short=512)
-            cv2.imwrite(primary_img_path, img)
-
-            # --- optional helper image --------------------------------------------------
-            helper_img_path = None
-            if len(question["img_paths"]) > 1:
-                helper_img_path = os.path.join(save_dir, "step_0", "helper_img.png")
-                helper = cv2.imread(question["img_paths"][1])
-                if self.model_args.vlm_model_name == "OpenGVLab/InternVL3-14B":
-                    helper = cv2.resize(helper, (512, 512), interpolation=cv2.INTER_LINEAR)
-                else:
-                    helper = resize_to_short_side(helper, target_short=512)
-                cv2.imwrite(helper_img_path, helper)
+            source_image_paths = self._stage_source_images(question, save_dir)
+            primary_img_path = source_image_paths[0]
 
             # ------------------------------------------------------------------
             #  Dialogue loop (LLM <-> environment)
@@ -199,7 +333,7 @@ class PipelineBase:
                     sys_prompt, content = self.vlm.format_prompt(prompt_type="answer_baseline",
                         question=question["question"],
                         answer_choices=question["answer_choices"],
-                        images=[primary_img_path, helper_img_path] if len(question['img_paths']) > 1 else [primary_img_path],
+                        images=source_image_paths,
                     )
                     response = self.vlm.run_prompt("answer_baseline", sys_prompt, content)
                     print("[LLM]", response)
@@ -310,11 +444,8 @@ class PipelineBase:
 
     def _process_answer(self, response: str, question: dict, fwd=0.075, turn=3):
         """Parse LLM response and map to (result, actions, magnitude)."""
-        response_l = response.lower()
         try:
-
-            if any(c.lower() in response_l for c in question["answer_choices"]):
-                return "correct" if question["correct_answer"].lower() in response_l.split("\n")[-1] else "wrong"
+            return score_multiple_choice_response(response, question)
         except Exception:
             pass
         return "out of control"

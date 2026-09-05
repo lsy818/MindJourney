@@ -1,5 +1,22 @@
 import argparse
 
+
+P1_VLM_MODELS = [
+    "Qwen/Qwen3.5-27B",
+    "Qwen/Qwen2.5-VL-72B-Instruct",
+    "Qwen/Qwen3.5-9B",
+    "Qwen/Qwen3.8-27B",
+]
+VLM_MODEL_CHOICES = [
+    "gpt-4o",
+    "gpt-4.1",
+    "o4-mini",
+    "o1",
+    *P1_VLM_MODELS,
+    "OpenGVLab/InternVL3-8B",
+    "OpenGVLab/InternVL3-14B",
+]
+
 def _get_pipeline_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "--output_dir",
@@ -132,14 +149,14 @@ def _get_pipeline_args(parser: argparse.ArgumentParser) -> None:
         "--vlm_model_name",
         type=str,
         default="gpt-4o",
-        choices=["gpt-4o", "gpt-4.1", "o4-mini", "o1", "OpenGVLab/InternVL3-8B", "OpenGVLab/InternVL3-14B"],
+        choices=VLM_MODEL_CHOICES,
     )
 
     parser.add_argument(
         "--vlm_qa_model_name",
         type=str,
         default=None,
-        choices=[None, "None", "gpt-4o", "gpt-4.1", "o4-mini", "o1", "OpenGVLab/InternVL3-8B", "OpenGVLab/InternVL3-14B"],
+        choices=[None, "None", *VLM_MODEL_CHOICES],
     )
 
     parser.add_argument(

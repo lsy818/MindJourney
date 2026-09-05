@@ -16,14 +16,26 @@
 
 | 数据集 | Qwen3.5-27B | Qwen2.5-VL-72B-Instruct | Qwen3.5-9B | Qwen3.8-27B |
 |---|---|---|---|---|
-| MindCube 1050 † | P1 · 待跑 | P1 · 待跑 | P3 · 待跑 | P3 · 待跑 |
-| MMSI-Bench † | P0 · 用户称此前已跑，产物待定位/验证 | P0 · 用户称此前已跑，产物待定位/验证 | P1 · 待跑 | P1 · 待跑 |
+| MindCube 1050 | P1 · 准备中 | P1 · 准备中 | P3 · 待跑 | P3 · 待跑 |
+| MMSI-Bench 1000 | P0 · 用户称此前已跑，产物待定位/验证 | P0 · 用户称此前已跑，产物待定位/验证 | P1 · 准备中 | P1 · 准备中 |
 | SAT Real | P0 · **已验证完成** | P0 · 用户称此前已跑，产物待定位/验证 | P2 · 待跑 | P2 · 待跑 |
 | SAT Syn (`rand42-500`) | P0 · **已验证完成** | P4 · 待跑 | P4 · 待跑 | P4 · 待跑 |
 
-† 用户给出的四行优先级没有显式写出数据集名。这里按上下文暂将第 1 行映射为 MindCube 1050、第 2 行映射为 MMSI-Bench；该映射必须在启动这两类任务前由用户确认。SAT Real 与 SAT Syn 对应第 3、4 行的置信度较高。`Qwen3.8-27B` 暂保留用户提供的名称，其规范模型 ID 和 revision 也须在下载/运行前确认。
+用户后续指令已确认第 1、2 行分别对应 MindCube 1050 与 MMSI-Bench 1000。`Qwen3.8-27B` 的规范模型 ID 已确认为 `Qwen/Qwen3.8-27B`。当前先完成四项 P1：MindCube 1050 的 Qwen3.5-27B、Qwen2.5-VL-72B-Instruct，以及 MMSI-Bench 1000 的 Qwen3.5-9B、Qwen3.8-27B；高优先级分片完成并验证后再进入 P2/P3/P4。
 
-按当前暂定映射，需要先完成 P1：MindCube 1050 的 Qwen3.5-27B、Qwen2.5-VL-72B-Instruct，以及 MMSI-Bench 的 Qwen3.5-9B、Qwen3.8-27B；高优先级分片完成并验证后再进入 P2/P3/P4。
+## P1 准备与运行状态
+
+| 数据集 / 模型 | 数据 | 权重 | Smoke | 全量分片 | 结果文件 |
+|---|---|---|---|---|---|
+| MindCube / `Qwen/Qwen3.5-27B` | 官方快照已核验，正在迁移 DAAI | 已有，revision 已核验 | 待跑 | 待跑 | — |
+| MindCube / `Qwen/Qwen2.5-VL-72B-Instruct` | 官方快照已核验，正在迁移 DAAI | 待下载 | 待跑 | 待跑 | — |
+| MMSI-Bench / `Qwen/Qwen3.5-9B` | 官方对齐快照已核验，正在迁移 DAAI | 已有，revision 已核验 | 待跑 | 待跑 | — |
+| MMSI-Bench / `Qwen/Qwen3.8-27B` | 官方对齐快照已核验，正在迁移 DAAI | 待下载 | 待跑 | 待跑 | — |
+
+- 推理统一使用 BF16 和 no-thinking；Qwen2.5-VL 不发送其不支持的 Qwen3 thinking 参数。
+- 正式计算只在 DAAI 运行。H20 96GB 空闲时优先；否则使用 A100 80GB，并排除 40GB DGX。硬件切换不得改变 SVC/搜索参数。
+- 每个组合必须先完成一题端到端 smoke，再提交正式数组；“已提交/排队”不等于“已完成”。
+- 统一配置：[p1_svc_multiimage.json](../configs/p1_svc_multiimage.json)。
 
 ## 已验证运行
 
@@ -78,14 +90,25 @@
 ### MindCube 1050
 
 - 官方仓库：<https://github.com/mll-lab-nu/MindCube>
+- 官方代码 commit：`b8b7062adf6d3e49d588a7d014a0a787553d09ec`。
+- 官方 Hugging Face revision：`9c941b46a6bd65b6914669ef7a579948fc9c8467`。
+- `MindCube_tinybench.jsonl`：1050 题，SHA256 `0289eb82d81ff9aa0201ae75f86da7fd1924cf23dc202856d0579a0effd22ac8`；`among/around/rotation = 600/250/200`，2/3/4 图题分别为 274/345/431，共 3307 次图片引用、428 张唯一图片、0 缺图。
 - 第三方参考脚本（A100-2）：`/data/chentao/WorldLoop/examples/spatial_reasoning/prepare_data.py`
-- 以官方数据定义和官方推理前的图片顺序为首要依据，再与 MindJourney 的 `img_paths` 读取、prompt 构造及实际送入模型的顺序逐项比对。
+- 以官方 `images` 数组作为 `Image 1..N` 的唯一语义顺序；转换工具：[prepare_mindcube.py](../utils/prepare_mindcube.py)。
 
 ### MMSI-Bench
 
 - 官方仓库：<https://github.com/InternRobotics/MMSI-Bench>
+- 官方代码 commit：`13e58a2b8b30d880d7e8a1e4a6aa1c0feda94cac`；官方 Hugging Face revision：`ec7c92bfaf7728fcca1d61e3e224e190af309436`。
+- 已核验的 A100-2 快照：1000 题、2550 张图、2–10 图；JSONL SHA256 `9448f3ffc9c2364d396ab29bfc5a66ecab26fcc076ce1b6b364bdcad7c721601`，逐题元数据与官方 revision 全量一致。
 - 第三方参考脚本（A100-2）：`/data/chentao/WorldLoop/smoke/build_mmsi_full.py`
-- 同样先核对官方预处理和官方模型输入顺序，再验证 MindJourney 是否保持完全一致。
+- 转换工具：[prepare_mmsi_bench.py](../utils/prepare_mmsi_bench.py)；保留官方图片顺序与 A–D 标签，严格按答案字母计分。
+
+### 多图 SVC 适配边界
+
+- MindJourney 论文和公开实现原生针对 SAT；MindCube/MMSI 的运行记为 **paper-aligned SVC multi-image adaptation**，不得写成论文中的原生 benchmark row。
+- 所有原始图片按 benchmark 官方列表顺序进入每次 VLM scoring 和最终回答 prompt；SVC 仍只以 `Image 1` 作为参考图生成想象视图，其余原始图片只作为题目上下文。
+- `max_images` 固定为 MindCube 4、MMSI 10。输入验证会拒绝缺图、乱序、超限或题数不匹配，不能静默跳题。
 
 ### 正式运行前检查项
 
@@ -99,5 +122,4 @@
 
 - 用户提到的 Qwen2.5-VL-72B-Instruct 既有结果尚未在当前正式运行目录和 fork 仓库中定位到；定位后再补充原始产物和验证状态，不能只录入口头准确率。
 - 用户提到的 MMSI-Bench Qwen3.5-27B 既有结果同样需要定位并核验。
-- MindCube/MMSI 与优先级矩阵第 1、2 行的对应关系需要用户确认。
 - 每次新增结果时保留旧 run，不覆盖当前两个已验证目录。
