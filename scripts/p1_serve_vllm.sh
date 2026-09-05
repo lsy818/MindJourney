@@ -109,7 +109,10 @@ serve_args=(
   --max-model-len 65536
   --gpu-memory-utilization "$gpu_memory_utilization"
   --max-num-seqs 1
-  --limit-mm-per-prompt '{"image":48}'
+  # Three SVC search steps can retain up to 45 helpful imagined views.  MMSI
+  # contributes as many as 10 ordered source images, so the final prompt can
+  # contain 55 image items without changing the paper-aligned search policy.
+  --limit-mm-per-prompt '{"image":64}'
   --generation-config vllm
 )
 
