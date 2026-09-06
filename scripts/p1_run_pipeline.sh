@@ -26,6 +26,9 @@ run_mode="${P1_RUN_MODE:-array}"
 experiment_manifest="${P1_MANIFEST:?P1_MANIFEST is required}"
 dataset_provenance="${P1_DATASET_PROVENANCE:?P1_DATASET_PROVENANCE is required}"
 expected_source_sha256="${P1_EXPECTED_SOURCE_SHA256:?P1_EXPECTED_SOURCE_SHA256 is required}"
+expected_input_sha256="${P1_EXPECTED_INPUT_SHA256:?P1_EXPECTED_INPUT_SHA256 is required}"
+expected_provenance_sha256="${P1_EXPECTED_PROVENANCE_SHA256:?P1_EXPECTED_PROVENANCE_SHA256 is required}"
+expected_manifest_sha256="${P1_EXPECTED_MANIFEST_SHA256:?P1_EXPECTED_MANIFEST_SHA256 is required}"
 
 for value_name in num_questions num_chunks max_images; do
   value="${!value_name}"
@@ -54,6 +57,13 @@ if [[ ! "$expected_source_sha256" =~ ^[0-9a-f]{64}$ ]]; then
   echo "P1_EXPECTED_SOURCE_SHA256 must be a lowercase SHA256." >&2
   exit 2
 fi
+for expected_name in expected_input_sha256 expected_provenance_sha256 \
+    expected_manifest_sha256; do
+  if [[ ! "${!expected_name}" =~ ^[0-9a-f]{64}$ ]]; then
+    printf '%s must be a lowercase SHA256.\n' "$expected_name" >&2
+    exit 2
+  fi
+done
 
 preflight_args=(
   --input-dir "$input_dir"
@@ -80,6 +90,18 @@ export P1_VLM_MAX_TOKENS=1024
 export MINDJOURNEY_EXPERIMENT_MANIFEST="$experiment_manifest"
 export MINDJOURNEY_DATASET_PROVENANCE="$dataset_provenance"
 export MINDJOURNEY_EXPECTED_SOURCE_SHA256="$expected_source_sha256"
+export MINDJOURNEY_EXPECTED_INPUT_SHA256="$expected_input_sha256"
+export MINDJOURNEY_EXPECTED_PROVENANCE_SHA256="$expected_provenance_sha256"
+export MINDJOURNEY_EXPECTED_MANIFEST_SHA256="$expected_manifest_sha256"
+if [[ -n "${P1_MODEL_TREE_SHA256:-}" ]]; then
+  if [[ ! "$P1_MODEL_TREE_SHA256" =~ ^[0-9a-f]{64}$ ]]; then
+    echo "P1_MODEL_TREE_SHA256 must be a lowercase SHA256." >&2
+    exit 2
+  fi
+  export MINDJOURNEY_MODEL_TREE_SHA256="$P1_MODEL_TREE_SHA256"
+else
+  unset MINDJOURNEY_MODEL_TREE_SHA256
+fi
 export MINDJOURNEY_MODEL_DTYPE="bfloat16"
 export MINDJOURNEY_ENABLE_THINKING="false"
 if [[ "${P1_EXECUTION_SCOPE:-formal}" == "diagnostic_smoke" ]]; then

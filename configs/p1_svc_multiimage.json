@@ -95,7 +95,8 @@
   "svc_weights": {
     "repo": "stabilityai/stable-virtual-camera",
     "revision": "e538e251c1009e9a41cf8b7fee5f21332a1960de",
-    "model_safetensors_sha256": "10e69ea003c313e6bdfc7ee40376d1c19ea6036c20bd384e94b483dec8350396"
+    "model_safetensors_sha256": "10e69ea003c313e6bdfc7ee40376d1c19ea6036c20bd384e94b483dec8350396",
+    "internal_seed": 23
   },
   "hardware_policy": {
     "formal_execution_cluster": "DAAI only",

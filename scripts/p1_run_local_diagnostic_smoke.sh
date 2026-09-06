@@ -290,29 +290,20 @@ with open(sys.argv[1], "rb") as handle:
 print(digest.hexdigest())
 PY
 }
-source_sha256="$($svc_python - "$repo_dir" <<'PY'
-import hashlib
-import os
-import sys
-
-repo_root = os.path.abspath(sys.argv[1])
-digest = hashlib.sha256()
-for source_root in ("pipelines", "utils", "stable_virtual_camera"):
-    absolute_root = os.path.join(repo_root, source_root)
-    for directory, dirnames, filenames in os.walk(absolute_root):
-        dirnames.sort()
-        for filename in sorted(filenames):
-            if filename.endswith(".py"):
-                path = os.path.join(directory, filename)
-                digest.update(os.path.relpath(path, repo_root).encode())
-                with open(path, "rb") as handle:
-                    digest.update(handle.read())
-print(digest.hexdigest())
-PY
+source_sha256="$(
+  "$svc_python" "$repo_dir/utils/p1_fingerprints.py" source \
+    --repo-root "$repo_dir"
 )"
 input_sha256="$(file_sha256 "$input_file")"
 provenance_sha256="$(file_sha256 "$dataset_provenance")"
 manifest_sha256="$(file_sha256 "$experiment_manifest")"
+model_tree_manifest=""
+model_tree_sha256=""
+model_tree_candidate="$model_path/.cache/huggingface/trees/$P1_SPEC_REVISION.json"
+if [[ -r "$model_tree_candidate" ]]; then
+  model_tree_manifest="$model_tree_candidate"
+  model_tree_sha256="$(file_sha256 "$model_tree_manifest")"
+fi
 cache_root="${cache_root:-$runtime_root/cache}"
 actual_hostname="$(hostname -f 2>/dev/null || hostname)"
 hardware="${host_label}:A100-40GB:TP${P1_SPEC_TP}+SVC1:diagnostic-smoke"
@@ -326,6 +317,8 @@ printf '%s\n' \
   "dataset=$dataset" \
   "input_file=$input_file" \
   "input_sha256=$input_sha256" \
+  "model_tree_manifest=${model_tree_manifest:-unavailable}" \
+  "model_tree_sha256=${model_tree_sha256:-unavailable}" \
   "gpu_mapping=$gpu_csv" \
   "gpu_idle_observations=$gpu_idle_observations" \
   "run_root=$run_root"
@@ -337,6 +330,12 @@ fi
 mkdir "$run_root"
 launch_manifest="$run_root/launch_manifest.txt"
 launch_manifest_tmp="$launch_manifest.tmp.$$"
+model_tree_manifest_line=""
+model_tree_sha256_line=""
+if [[ -n "$model_tree_sha256" ]]; then
+  model_tree_manifest_line="model_tree_manifest=$model_tree_manifest"
+  model_tree_sha256_line="model_tree_sha256=$model_tree_sha256"
+fi
 printf '%s\n' \
   "run_id=$run_id" \
   "dataset=$dataset" \
@@ -364,6 +363,8 @@ printf '%s\n' \
   "dataset_provenance_sha256=$provenance_sha256" \
   "experiment_manifest=$experiment_manifest" \
   "experiment_manifest_sha256=$manifest_sha256" \
+  "$model_tree_manifest_line" \
+  "$model_tree_sha256_line" \
   "source_sha256=$source_sha256" \
   "split=test" \
   "num_questions=1" \
@@ -393,7 +394,14 @@ export P1_REQUIRE_REVISION_MARKER=1
 export P1_CACHE_ROOT="$cache_root"
 export P1_MANIFEST="$experiment_manifest"
 export P1_DATASET_PROVENANCE="$dataset_provenance"
+export P1_EXPECTED_INPUT_SHA256="$input_sha256"
+export P1_EXPECTED_PROVENANCE_SHA256="$provenance_sha256"
+export P1_EXPECTED_MANIFEST_SHA256="$manifest_sha256"
 export P1_EXPECTED_SOURCE_SHA256="$source_sha256"
+if [[ -n "$model_tree_sha256" ]]; then
+  export P1_MODEL_TREE_MANIFEST="$model_tree_manifest"
+  export P1_MODEL_TREE_SHA256="$model_tree_sha256"
+fi
 export P1_SVC_PYTHON="$svc_python"
 export P1_VLLM_BIN="$vllm_bin"
 export P1_ALLOW_NETWORK=0

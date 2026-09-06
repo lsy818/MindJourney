@@ -17,6 +17,7 @@ from scipy.spatial.transform import Rotation as R
 import pickle
 from diffusers.utils import export_to_video
 import copy
+from utils.p1_fingerprints import source_sha256 as calculate_source_sha256
 
 def resize_to_short_side(img, target_short=512):
     h, w = img.shape[:2]
@@ -92,24 +93,11 @@ class PipelineBase:
         """Fingerprint the exact code, data, model, and launch configuration."""
 
         repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        source_digest = hashlib.sha256()
-        for source_root in ("pipelines", "utils", "stable_virtual_camera"):
-            absolute_root = os.path.join(repo_root, source_root)
-            for directory, dirnames, filenames in os.walk(absolute_root):
-                dirnames.sort()
-                for filename in sorted(filenames):
-                    if not filename.endswith(".py"):
-                        continue
-                    path = os.path.join(directory, filename)
-                    source_digest.update(os.path.relpath(path, repo_root).encode())
-                    with open(path, "rb") as handle:
-                        source_digest.update(handle.read())
-
-        source_sha256 = source_digest.hexdigest()
+        source_sha256 = calculate_source_sha256(repo_root)
         expected_source = os.environ.get("MINDJOURNEY_EXPECTED_SOURCE_SHA256")
         if expected_source and source_sha256 != expected_source:
             raise RuntimeError(
-                "Python source differs from the hash pinned at formal submission."
+                "Execution source differs from the hash pinned at formal submission."
             )
 
         arguments = dict(vars(self.model_args))
@@ -120,19 +108,44 @@ class PipelineBase:
         }
         manifest_path = os.environ.get("MINDJOURNEY_EXPERIMENT_MANIFEST")
         provenance_path = os.environ.get("MINDJOURNEY_DATASET_PROVENANCE")
+        dataset_json_sha256 = self._sha256_file(input_file)
+        dataset_provenance_sha256 = (
+            self._sha256_file(provenance_path)
+            if provenance_path and os.path.isfile(provenance_path)
+            else None
+        )
+        manifest_sha256 = (
+            self._sha256_file(manifest_path)
+            if manifest_path and os.path.isfile(manifest_path)
+            else None
+        )
+        for label, actual, environment_name in (
+            (
+                "dataset JSON",
+                dataset_json_sha256,
+                "MINDJOURNEY_EXPECTED_INPUT_SHA256",
+            ),
+            (
+                "dataset provenance",
+                dataset_provenance_sha256,
+                "MINDJOURNEY_EXPECTED_PROVENANCE_SHA256",
+            ),
+            (
+                "experiment manifest",
+                manifest_sha256,
+                "MINDJOURNEY_EXPECTED_MANIFEST_SHA256",
+            ),
+        ):
+            expected = os.environ.get(environment_name)
+            if expected and actual != expected:
+                raise RuntimeError(
+                    f"{label} differs from the hash pinned at formal submission."
+                )
         common = {
             "arguments": common_arguments,
-            "dataset_json_sha256": self._sha256_file(input_file),
-            "dataset_provenance_sha256": (
-                self._sha256_file(provenance_path)
-                if provenance_path and os.path.isfile(provenance_path)
-                else None
-            ),
-            "manifest_sha256": (
-                self._sha256_file(manifest_path)
-                if manifest_path and os.path.isfile(manifest_path)
-                else None
-            ),
+            "dataset_json_sha256": dataset_json_sha256,
+            "dataset_provenance_sha256": dataset_provenance_sha256,
+            "manifest_sha256": manifest_sha256,
             "source_sha256": source_sha256,
             "submitted_source_sha256": expected_source,
             "model_revision": os.environ.get("QWEN_REVISION"),

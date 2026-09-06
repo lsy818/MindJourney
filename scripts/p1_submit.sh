@@ -193,26 +193,8 @@ cache_root="${P1_CACHE_ROOT:-/home/datasets/shiyang/model_cache}"
 validation_root="${P1_MODEL_VALIDATION_ROOT:-/home/datasets/shiyang/model_validation}"
 experiment_manifest="$repo_dir/configs/p1_svc_multiimage.json"
 
-source_sha256="$(python3 - "$repo_dir" <<'PY'
-import hashlib
-import os
-import sys
-
-repo_root = os.path.abspath(sys.argv[1])
-digest = hashlib.sha256()
-for source_root in ("pipelines", "utils", "stable_virtual_camera"):
-    absolute_root = os.path.join(repo_root, source_root)
-    for directory, dirnames, filenames in os.walk(absolute_root):
-        dirnames.sort()
-        for filename in sorted(filenames):
-            if not filename.endswith(".py"):
-                continue
-            path = os.path.join(directory, filename)
-            digest.update(os.path.relpath(path, repo_root).encode())
-            with open(path, "rb") as handle:
-                digest.update(handle.read())
-print(digest.hexdigest())
-PY
+source_sha256="$(
+  python3 "$repo_dir/utils/p1_fingerprints.py" source --repo-root "$repo_dir"
 )"
 file_sha256() {
   python3 - "$1" <<'PY'
@@ -229,6 +211,8 @@ PY
 input_sha256="unavailable"
 provenance_sha256="unavailable"
 manifest_sha256="unavailable"
+model_tree_manifest="unavailable"
+model_tree_sha256="unavailable"
 if [[ -r "$input_file" ]]; then
   input_sha256="$(file_sha256 "$input_file")"
 fi
@@ -238,10 +222,20 @@ fi
 if [[ -r "$experiment_manifest" ]]; then
   manifest_sha256="$(file_sha256 "$experiment_manifest")"
 fi
+model_tree_candidate="${P1_MODEL_TREE_MANIFEST:-$model_path/.cache/huggingface/trees/$P1_SPEC_REVISION.json}"
+if [[ -n "${P1_MODEL_TREE_MANIFEST:-}" && ! -r "$model_tree_candidate" ]]; then
+  echo "P1_MODEL_TREE_MANIFEST is not readable: $model_tree_candidate" >&2
+  exit 1
+fi
+if [[ -r "$model_tree_candidate" ]]; then
+  model_tree_manifest="$model_tree_candidate"
+  model_tree_sha256="$(file_sha256 "$model_tree_manifest")"
+fi
 
 for export_value in "$repo_dir" "$input_dir" "$run_root" "$model_path" \
     "$cache_root" "$validation_root" "$dataset_provenance" \
-    "$experiment_manifest" "$svc_python" "$vllm_bin" "$job_prolog"; do
+    "$experiment_manifest" "$svc_python" "$vllm_bin" "$job_prolog" \
+    "$model_tree_manifest"; do
   if [[ "$export_value" == *","* || "$export_value" == *$'\n'* ]]; then
     echo "Paths and commands passed through Slurm cannot contain commas or newlines." >&2
     exit 2
@@ -259,7 +253,10 @@ else
 fi
 job_name="mj-p1-${dataset}-${P1_SPEC_ALIAS}-${mode}"
 array_request="${array_spec}%${max_concurrent}"
-export_spec="P1_REPO_DIR=$repo_dir,P1_MODEL_KEY=$P1_SPEC_ALIAS,P1_DATASET=$dataset,P1_ACCELERATOR=$accelerator,P1_RUN_MODE=$mode,P1_RUN_ID=$run_id,P1_RUN_ROOT=$run_root,P1_INPUT_DIR=$input_dir,P1_SPLIT=$split,P1_NUM_QUESTIONS=$effective_questions,P1_NUM_CHUNKS=$effective_chunks,P1_MAX_IMAGES=$max_images,P1_MODEL_PATH=$model_path,P1_CACHE_ROOT=$cache_root,P1_MODEL_VALIDATION_ROOT=$validation_root,P1_REQUIRE_REVISION_MARKER=1,P1_MANIFEST=$experiment_manifest,P1_DATASET_PROVENANCE=$dataset_provenance,P1_EXPECTED_SOURCE_SHA256=$source_sha256,P1_SVC_PYTHON=$svc_python,P1_VLLM_BIN=$vllm_bin,P1_ALLOW_NETWORK=0"
+export_spec="P1_REPO_DIR=$repo_dir,P1_MODEL_KEY=$P1_SPEC_ALIAS,P1_DATASET=$dataset,P1_ACCELERATOR=$accelerator,P1_RUN_MODE=$mode,P1_RUN_ID=$run_id,P1_RUN_ROOT=$run_root,P1_INPUT_DIR=$input_dir,P1_SPLIT=$split,P1_NUM_QUESTIONS=$effective_questions,P1_NUM_CHUNKS=$effective_chunks,P1_MAX_IMAGES=$max_images,P1_MODEL_PATH=$model_path,P1_CACHE_ROOT=$cache_root,P1_MODEL_VALIDATION_ROOT=$validation_root,P1_REQUIRE_REVISION_MARKER=1,P1_MANIFEST=$experiment_manifest,P1_DATASET_PROVENANCE=$dataset_provenance,P1_EXPECTED_INPUT_SHA256=$input_sha256,P1_EXPECTED_PROVENANCE_SHA256=$provenance_sha256,P1_EXPECTED_MANIFEST_SHA256=$manifest_sha256,P1_EXPECTED_SOURCE_SHA256=$source_sha256,P1_SVC_PYTHON=$svc_python,P1_VLLM_BIN=$vllm_bin,P1_ALLOW_NETWORK=0"
+if [[ "$model_tree_sha256" != "unavailable" ]]; then
+  export_spec+=",P1_MODEL_TREE_MANIFEST=$model_tree_manifest,P1_MODEL_TREE_SHA256=$model_tree_sha256"
+fi
 if [[ -n "$job_prolog" ]]; then
   export_spec+=",P1_JOB_PROLOG=$job_prolog"
 fi
@@ -296,6 +293,8 @@ printf '%s\n' \
   "dataset_provenance_sha256=$provenance_sha256" \
   "experiment_manifest=$experiment_manifest" \
   "experiment_manifest_sha256=$manifest_sha256" \
+  "model_tree_manifest=$model_tree_manifest" \
+  "model_tree_sha256=$model_tree_sha256" \
   "source_sha256=$source_sha256" \
   "source_questions=$source_questions" \
   "run_questions=$effective_questions" \
@@ -329,6 +328,19 @@ if [[ "$mode" == "smoke" ]]; then
   validation_args+=(--allow-subset)
 fi
 python3 "$script_dir/p1_validate_input.py" "${validation_args[@]}"
+asset_validator_python="$svc_python"
+if [[ -n "$persistent_env_root" \
+      && -x "$persistent_env_root/svc/bin/python" ]]; then
+  asset_validator_python="$persistent_env_root/svc/bin/python"
+fi
+resolved_asset_validator_python="$(command -v -- "$asset_validator_python" 2>/dev/null || true)"
+if [[ -z "$resolved_asset_validator_python" \
+      || ! -x "$resolved_asset_validator_python" ]]; then
+  echo "SVC cache validator Python is not executable: $asset_validator_python" >&2
+  exit 1
+fi
+"$resolved_asset_validator_python" "$script_dir/p1_svc_assets.py" validate \
+  --cache-root "$cache_root" --quiet
 if [[ ! -d "$model_path" || ! -r "$model_path/config.json" ]]; then
   printf 'Pinned local model is unavailable at %s (expected revision %s).\n' \
     "$model_path" "$P1_SPEC_REVISION" >&2
@@ -357,18 +369,27 @@ if [[ -e "$run_root" ]]; then
     echo "Existing run has no launch_manifest.txt; refusing ambiguous resume." >&2
     exit 1
   fi
-  for expected_line in \
-      "run_id=$run_id" \
-      "dataset=$dataset" \
-      "model=$P1_SPEC_MODEL_ID" \
-      "revision=$P1_SPEC_REVISION" \
-      "accelerator=$accelerator" \
-      "source_sha256=$source_sha256" \
-      "dataset_provenance_sha256=$provenance_sha256" \
-      "experiment_manifest_sha256=$manifest_sha256" \
-      "num_questions=$effective_questions" \
-      "num_chunks=$effective_chunks" \
-      "persistent_environment_root=${persistent_env_root:-none}"; do
+  expected_resume_lines=(
+    "run_id=$run_id"
+    "dataset=$dataset"
+    "model=$P1_SPEC_MODEL_ID"
+    "revision=$P1_SPEC_REVISION"
+    "accelerator=$accelerator"
+    "input_sha256=$input_sha256"
+    "source_sha256=$source_sha256"
+    "dataset_provenance_sha256=$provenance_sha256"
+    "experiment_manifest_sha256=$manifest_sha256"
+    "num_questions=$effective_questions"
+    "num_chunks=$effective_chunks"
+    "persistent_environment_root=${persistent_env_root:-none}"
+  )
+  if [[ "$model_tree_sha256" != "unavailable" ]]; then
+    expected_resume_lines+=("model_tree_sha256=$model_tree_sha256")
+  elif grep -q '^model_tree_sha256=' "$manifest"; then
+    echo "Resume model-tree manifest is no longer available; refusing ambiguous resume." >&2
+    exit 1
+  fi
+  for expected_line in "${expected_resume_lines[@]}"; do
     if ! grep -Fqx -- "$expected_line" "$manifest"; then
       printf 'Resume manifest mismatch: expected line %s\n' "$expected_line" >&2
       exit 1
@@ -377,6 +398,12 @@ if [[ -e "$run_root" ]]; then
 else
   mkdir -p "$run_root/logs" "$run_root/submissions"
   manifest_tmp="$manifest.tmp.$$"
+  model_tree_manifest_line=""
+  model_tree_sha256_line=""
+  if [[ "$model_tree_sha256" != "unavailable" ]]; then
+    model_tree_manifest_line="model_tree_manifest=$model_tree_manifest"
+    model_tree_sha256_line="model_tree_sha256=$model_tree_sha256"
+  fi
   printf '%s\n' \
     "run_id=$run_id" \
     "dataset=$dataset" \
@@ -396,6 +423,8 @@ else
     "dataset_provenance_sha256=$provenance_sha256" \
     "experiment_manifest=$experiment_manifest" \
     "experiment_manifest_sha256=$manifest_sha256" \
+    "$model_tree_manifest_line" \
+    "$model_tree_sha256_line" \
     "source_sha256=$source_sha256" \
     "split=$split" \
     "num_questions=$effective_questions" \

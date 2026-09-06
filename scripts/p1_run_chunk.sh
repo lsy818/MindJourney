@@ -25,6 +25,11 @@ run_root="${P1_RUN_ROOT:?P1_RUN_ROOT is required}"
 num_chunks="${P1_NUM_CHUNKS:?P1_NUM_CHUNKS is required}"
 run_mode="${P1_RUN_MODE:-array}"
 execution_scope="${P1_EXECUTION_SCOPE:-formal}"
+input_file="${P1_INPUT_DIR:?P1_INPUT_DIR is required}/${P1_SPLIT:?P1_SPLIT is required}.json"
+expected_input_sha256="${P1_EXPECTED_INPUT_SHA256:?P1_EXPECTED_INPUT_SHA256 is required}"
+expected_provenance_sha256="${P1_EXPECTED_PROVENANCE_SHA256:?P1_EXPECTED_PROVENANCE_SHA256 is required}"
+expected_manifest_sha256="${P1_EXPECTED_MANIFEST_SHA256:?P1_EXPECTED_MANIFEST_SHA256 is required}"
+expected_source_sha256="${P1_EXPECTED_SOURCE_SHA256:?P1_EXPECTED_SOURCE_SHA256 is required}"
 
 if [[ "$P1_SPEC_DIAGNOSTIC_ONLY" == "1" ]]; then
   if [[ "$run_mode" != "smoke" || "$execution_scope" != "diagnostic_smoke" ]]; then
@@ -50,6 +55,33 @@ if [[ -z "${CUDA_VISIBLE_DEVICES:-}" ]]; then
   echo "CUDA_VISIBLE_DEVICES is empty; this runner requires an explicit GPU allocation/mapping." >&2
   exit 1
 fi
+
+# Recheck every small, immutable launch artifact on the allocated node before
+# starting either vLLM or SVC.  The optional model-tree input is Hugging Face's
+# revision manifest, not the multi-gigabyte weights themselves.
+fingerprint_args=(
+  verify-runtime
+  --repo-root "$repo_dir"
+  --expected-source-sha256 "$expected_source_sha256"
+  --input-file "$input_file"
+  --expected-input-sha256 "$expected_input_sha256"
+  --provenance-file "${P1_DATASET_PROVENANCE:?P1_DATASET_PROVENANCE is required}"
+  --expected-provenance-sha256 "$expected_provenance_sha256"
+  --experiment-manifest "${P1_MANIFEST:?P1_MANIFEST is required}"
+  --expected-manifest-sha256 "$expected_manifest_sha256"
+)
+if [[ -n "${P1_MODEL_TREE_MANIFEST:-}" || -n "${P1_MODEL_TREE_SHA256:-}" ]]; then
+  if [[ -z "${P1_MODEL_TREE_MANIFEST:-}" || -z "${P1_MODEL_TREE_SHA256:-}" ]]; then
+    echo "P1_MODEL_TREE_MANIFEST and P1_MODEL_TREE_SHA256 must be supplied together." >&2
+    exit 2
+  fi
+  fingerprint_args+=(
+    --model-tree-manifest "$P1_MODEL_TREE_MANIFEST"
+    --expected-model-tree-sha256 "$P1_MODEL_TREE_SHA256"
+  )
+fi
+"${P1_SVC_PYTHON:?P1_SVC_PYTHON is required}" \
+  "$repo_dir/utils/p1_fingerprints.py" "${fingerprint_args[@]}"
 IFS=',' read -r -a allocated_devices <<<"$CUDA_VISIBLE_DEVICES"
 if (( ${#allocated_devices[@]} != P1_SPEC_TOTAL_GPUS )); then
   printf 'Expected %s allocated GPUs for %s on %s, got %s (%s).\n' \
@@ -90,14 +122,14 @@ if [[ -f "$completion_file" && -f "$results_file" ]]; then
   if [[ "$run_mode" == "array" ]]; then
     "$P1_SVC_PYTHON" -m utils.p1_results \
       --run-root "$run_root" \
-      --input-file "${P1_INPUT_DIR}/${P1_SPLIT}.json" \
+      --input-file "$input_file" \
       --dataset "$dataset" \
       --chunk-index "$chunk_index" \
       --results-file "$results_file"
   elif [[ "$execution_scope" == "diagnostic_smoke" ]]; then
     "$P1_SVC_PYTHON" -m utils.p1_smoke_results \
       --run-root "$run_root" \
-      --input-file "${P1_INPUT_DIR}/${P1_SPLIT}.json" \
+      --input-file "$input_file" \
       --dataset "$dataset" \
       --results-file "$results_file" \
       --complete-file "$completion_file"
@@ -235,14 +267,14 @@ fi
 if [[ "$run_mode" == "array" ]]; then
   "$P1_SVC_PYTHON" -m utils.p1_results \
     --run-root "$run_root" \
-    --input-file "${P1_INPUT_DIR}/${P1_SPLIT}.json" \
+    --input-file "$input_file" \
     --dataset "$dataset" \
     --chunk-index "$chunk_index" \
     --results-file "$results_file"
 elif [[ "$execution_scope" == "diagnostic_smoke" ]]; then
   "$P1_SVC_PYTHON" -m utils.p1_smoke_results \
     --run-root "$run_root" \
-    --input-file "${P1_INPUT_DIR}/${P1_SPLIT}.json" \
+    --input-file "$input_file" \
     --dataset "$dataset" \
     --results-file "$results_file"
 fi

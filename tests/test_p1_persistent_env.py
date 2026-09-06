@@ -208,6 +208,10 @@ class PersistentEnvironmentPrologTests(unittest.TestCase):
         self.assertEqual(completed.returncode, 0, completed.stderr)
         self.assertIn(f"P1_PERSISTENT_ENV_ROOT={self.env_root}", completed.stdout)
         self.assertIn(f"P1_JOB_PROLOG={PROLOG}", completed.stdout)
+        self.assertIn("P1_EXPECTED_INPUT_SHA256=unavailable", completed.stdout)
+        self.assertIn("P1_EXPECTED_PROVENANCE_SHA256=unavailable", completed.stdout)
+        self.assertIn("P1_EXPECTED_MANIFEST_SHA256=", completed.stdout)
+        self.assertIn("P1_EXPECTED_SOURCE_SHA256=", completed.stdout)
         self.assertIn("Dry run only", completed.stdout)
 
 

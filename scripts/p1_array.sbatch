@@ -28,6 +28,21 @@ if [[ -n "${P1_JOB_PROLOG:-}" ]]; then
   source "$P1_JOB_PROLOG"
 fi
 
+# SVC dependencies must already be in the exact shared cache before a GPU is
+# used.  Revalidate on the compute node, then prevent every downstream Hugging
+# Face/Transformers call from contacting the network.
+if [[ "${P1_ALLOW_NETWORK:-0}" != "0" ]]; then
+  echo "Formal P1 array jobs require P1_ALLOW_NETWORK=0." >&2
+  exit 2
+fi
+svc_python="${P1_SVC_PYTHON:-python}"
+cache_root="${P1_CACHE_ROOT:-/home/datasets/shiyang/model_cache}"
+"$svc_python" "$repo_dir/scripts/p1_svc_assets.py" validate \
+  --cache-root "$cache_root" --quiet
+export HF_HUB_OFFLINE=1
+export TRANSFORMERS_OFFLINE=1
+export HF_DATASETS_OFFLINE=1
+
 chunk_index="${SLURM_ARRAY_TASK_ID:-0}"
 exec "$repo_dir/scripts/p1_run_chunk.sh" \
   "${P1_MODEL_KEY:?P1_MODEL_KEY is required}" "$chunk_index"
