@@ -199,9 +199,9 @@ export UV_NO_PROGRESS=1
 # when cargo is absent. Setting both XDG_CACHE_HOME and CARGO_HOME keeps every
 # Rust registry/toolchain file off the quota-limited login-home filesystem.
 export XDG_CACHE_HOME="$build_cache_root/xdg-cache"
-export CARGO_HOME="$build_cache_root/cargo-home"
+export CARGO_HOME="$XDG_CACHE_HOME/puccinialin/cargo"
 export CARGO_TARGET_DIR="$build_cache_root/cargo-target"
-export RUSTUP_HOME="$build_cache_root/rustup-home"
+export RUSTUP_HOME="$XDG_CACHE_HOME/puccinialin/rustup"
 export TMPDIR="$build_cache_root/tmp"
 export PIP_CACHE_DIR="$build_cache_root/pip-cache"
 mkdir -p -- \

@@ -121,7 +121,7 @@ class PersistentEnvironmentBuilderTests(unittest.TestCase):
         self.assertNotIn('dirname -- "${BASH_SOURCE[0]}"', source)
         self.assertNotIn('/home/comp/tyjiang', source)
         self.assertIn('export XDG_CACHE_HOME="$build_cache_root/xdg-cache"', source)
-        self.assertIn('export CARGO_HOME="$build_cache_root/cargo-home"', source)
+        self.assertIn('export CARGO_HOME="$XDG_CACHE_HOME/puccinialin/cargo"', source)
         self.assertIn('export CARGO_TARGET_DIR="$build_cache_root/cargo-target"', source)
         self.assertIn('export TMPDIR="$build_cache_root/tmp"', source)
         self.assertIn('ensure_venv "$qwen_env"', source)
