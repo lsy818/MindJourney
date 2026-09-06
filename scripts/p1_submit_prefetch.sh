@@ -25,6 +25,10 @@ validation_root="${P1_MODEL_VALIDATION_ROOT:-/home/datasets/shiyang/model_valida
 hf_python="${P1_HF_PYTHON:-python}"
 token_path="${HF_TOKEN_PATH:-}"
 job_prolog="${P1_JOB_PROLOG:-$repo_dir/scripts/p1_env_prolog.sh}"
+persistent_env_root="${P1_PERSISTENT_ENV_ROOT:-}"
+if [[ -n "$persistent_env_root" && -z "${P1_JOB_PROLOG:-}" ]]; then
+  job_prolog="$repo_dir/scripts/p1_persistent_env_prolog.sh"
+fi
 trust_existing="${P1_TRUST_EXISTING_MODEL:-0}"
 log_root="${P1_PREFETCH_LOG_ROOT:-/home/datasets/shiyang/model_download_logs}"
 if [[ "$trust_existing" != "0" && "$trust_existing" != "1" ]]; then
@@ -32,12 +36,17 @@ if [[ "$trust_existing" != "0" && "$trust_existing" != "1" ]]; then
   exit 2
 fi
 for value in "$repo_dir" "$model_root" "$cache_root" "$validation_root" \
-    "$hf_python" "$token_path" "$job_prolog" "$log_root"; do
+    "$hf_python" "$token_path" "$job_prolog" "$log_root" \
+    "$persistent_env_root"; do
   if [[ "$value" == *","* || "$value" == *$'\n'* ]]; then
     echo "Slurm export values cannot contain commas or newlines." >&2
     exit 2
   fi
 done
+if [[ -n "$persistent_env_root" && "$persistent_env_root" != /* ]]; then
+  echo "P1_PERSISTENT_ENV_ROOT must be an absolute path." >&2
+  exit 2
+fi
 
 export_spec="P1_REPO_DIR=$repo_dir,P1_MODEL_KEY=$P1_SPEC_ALIAS,P1_MODEL_ROOT=$model_root,P1_CACHE_ROOT=$cache_root,P1_MODEL_VALIDATION_ROOT=$validation_root,P1_HF_PYTHON=$hf_python,P1_TRUST_EXISTING_MODEL=$trust_existing"
 if [[ -n "$token_path" ]]; then
@@ -45,6 +54,9 @@ if [[ -n "$token_path" ]]; then
 fi
 if [[ -n "$job_prolog" ]]; then
   export_spec+=",P1_JOB_PROLOG=$job_prolog"
+fi
+if [[ -n "$persistent_env_root" ]]; then
+  export_spec+=",P1_PERSISTENT_ENV_ROOT=$persistent_env_root"
 fi
 command=(
   sbatch --parsable

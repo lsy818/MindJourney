@@ -15,6 +15,7 @@ Usage:
     [--num-questions N] [--num-chunks N] \
     [--max-concurrent N] [--array SPEC] [--model-path DIR] \
     [--svc-python PATH] [--vllm-bin PATH] [--job-prolog PATH] \
+    [--persistent-env-root DIR] \
     [--run-id ID] [--resume] [--submit]
 
 The default is a read-only dry run.  H20 is the default accelerator; use
@@ -39,6 +40,11 @@ model_path=""
 svc_python="${P1_SVC_PYTHON:-python}"
 vllm_bin="${P1_VLLM_BIN:-vllm}"
 job_prolog="${P1_JOB_PROLOG:-$repo_dir/scripts/p1_env_prolog.sh}"
+job_prolog_explicit=0
+if [[ -n "${P1_JOB_PROLOG:-}" ]]; then
+  job_prolog_explicit=1
+fi
+persistent_env_root="${P1_PERSISTENT_ENV_ROOT:-}"
 run_id=""
 resume=0
 do_submit=0
@@ -61,7 +67,8 @@ while (( $# > 0 )); do
     --model-path) model_path="${2:?missing value for --model-path}"; shift 2 ;;
     --svc-python) svc_python="${2:?missing value for --svc-python}"; shift 2 ;;
     --vllm-bin) vllm_bin="${2:?missing value for --vllm-bin}"; shift 2 ;;
-    --job-prolog) job_prolog="${2:?missing value for --job-prolog}"; shift 2 ;;
+    --job-prolog) job_prolog="${2:?missing value for --job-prolog}"; job_prolog_explicit=1; shift 2 ;;
+    --persistent-env-root) persistent_env_root="${2:?missing value for --persistent-env-root}"; shift 2 ;;
     --run-id) run_id="${2:?missing value for --run-id}"; shift 2 ;;
     --resume) resume=1; shift ;;
     --submit) do_submit=1; shift ;;
@@ -69,6 +76,9 @@ while (( $# > 0 )); do
     *) printf 'Unknown argument: %s\n' "$1" >&2; usage; exit 2 ;;
   esac
 done
+if [[ -n "$persistent_env_root" && "$job_prolog_explicit" == "0" ]]; then
+  job_prolog="$repo_dir/scripts/p1_persistent_env_prolog.sh"
+fi
 
 if [[ -z "$model_key" || -z "$dataset" || -z "$input_dir" || -z "$runtime_root" ]]; then
   usage
@@ -92,6 +102,10 @@ if [[ "$split" != "train" && "$split" != "val" && "$split" != "test" ]]; then
 fi
 if [[ "$input_dir" != /* || "$runtime_root" != /* ]]; then
   echo "--input-dir and --runtime-root must be absolute paths." >&2
+  exit 2
+fi
+if [[ -n "$persistent_env_root" && "$persistent_env_root" != /* ]]; then
+  echo "--persistent-env-root must be an absolute path." >&2
   exit 2
 fi
 
@@ -233,6 +247,10 @@ for export_value in "$repo_dir" "$input_dir" "$run_root" "$model_path" \
     exit 2
   fi
 done
+if [[ "$persistent_env_root" == *","* || "$persistent_env_root" == *$'\n'* ]]; then
+  echo "Paths passed through Slurm cannot contain commas or newlines." >&2
+  exit 2
+fi
 
 if [[ "$P1_SPEC_SIZE_CLASS" == "72b" ]]; then
   memory="240G"
@@ -244,6 +262,9 @@ array_request="${array_spec}%${max_concurrent}"
 export_spec="P1_REPO_DIR=$repo_dir,P1_MODEL_KEY=$P1_SPEC_ALIAS,P1_DATASET=$dataset,P1_ACCELERATOR=$accelerator,P1_RUN_MODE=$mode,P1_RUN_ID=$run_id,P1_RUN_ROOT=$run_root,P1_INPUT_DIR=$input_dir,P1_SPLIT=$split,P1_NUM_QUESTIONS=$effective_questions,P1_NUM_CHUNKS=$effective_chunks,P1_MAX_IMAGES=$max_images,P1_MODEL_PATH=$model_path,P1_CACHE_ROOT=$cache_root,P1_MODEL_VALIDATION_ROOT=$validation_root,P1_REQUIRE_REVISION_MARKER=1,P1_MANIFEST=$experiment_manifest,P1_DATASET_PROVENANCE=$dataset_provenance,P1_EXPECTED_SOURCE_SHA256=$source_sha256,P1_SVC_PYTHON=$svc_python,P1_VLLM_BIN=$vllm_bin,P1_ALLOW_NETWORK=0"
 if [[ -n "$job_prolog" ]]; then
   export_spec+=",P1_JOB_PROLOG=$job_prolog"
+fi
+if [[ -n "$persistent_env_root" ]]; then
+  export_spec+=",P1_PERSISTENT_ENV_ROOT=$persistent_env_root"
 fi
 
 sbatch_cmd=(
@@ -346,7 +367,8 @@ if [[ -e "$run_root" ]]; then
       "dataset_provenance_sha256=$provenance_sha256" \
       "experiment_manifest_sha256=$manifest_sha256" \
       "num_questions=$effective_questions" \
-      "num_chunks=$effective_chunks"; do
+      "num_chunks=$effective_chunks" \
+      "persistent_environment_root=${persistent_env_root:-none}"; do
     if ! grep -Fqx -- "$expected_line" "$manifest"; then
       printf 'Resume manifest mismatch: expected line %s\n' "$expected_line" >&2
       exit 1
@@ -379,6 +401,7 @@ else
     "num_questions=$effective_questions" \
     "num_chunks=$effective_chunks" \
     "max_images=$max_images" \
+    "persistent_environment_root=${persistent_env_root:-none}" \
     "created_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
     >"$manifest_tmp"
   mv -- "$manifest_tmp" "$manifest"
