@@ -19,6 +19,23 @@ def _sha(path: Path) -> str:
 
 
 class PersistentEnvironmentBuilderTests(unittest.TestCase):
+    @staticmethod
+    def _slurm_environment(root: Path) -> dict[str, str]:
+        bin_dir = root / "test-bin"
+        bin_dir.mkdir()
+        flock = bin_dir / "flock"
+        flock.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
+        flock.chmod(0o755)
+        environment = dict(os.environ)
+        environment.update(
+            {
+                "SLURM_JOB_ID": "123",
+                "SLURM_JOB_NODELIST": "node1",
+                "PATH": f"{bin_dir}:{environment['PATH']}",
+            }
+        )
+        return environment
+
     def test_scripts_have_valid_bash_syntax(self) -> None:
         for script in (BUILDER, PROLOG):
             with self.subTest(script=script.name):
@@ -47,8 +64,7 @@ class PersistentEnvironmentBuilderTests(unittest.TestCase):
             target.mkdir()
             marker = target / "owned-by-user.txt"
             marker.write_text("preserve\n", encoding="utf-8")
-            environment = dict(os.environ)
-            environment.update({"SLURM_JOB_ID": "123", "SLURM_JOB_NODELIST": "node1"})
+            environment = self._slurm_environment(Path(temporary))
             completed = subprocess.run(
                 ["bash", str(BUILDER), str(target)],
                 env=environment,
@@ -60,6 +76,43 @@ class PersistentEnvironmentBuilderTests(unittest.TestCase):
             self.assertIn("Refusing to overwrite", completed.stderr)
             self.assertEqual(marker.read_text(encoding="utf-8"), "preserve\n")
 
+    def test_resume_rejects_unknown_partial_content(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary) / "persistent"
+            (target / ".BUILDING").mkdir(parents=True)
+            marker = target / "not-builder-owned.txt"
+            marker.write_text("preserve\n", encoding="utf-8")
+            environment = self._slurm_environment(Path(temporary))
+            completed = subprocess.run(
+                ["bash", str(BUILDER), "--resume", str(target)],
+                env=environment,
+                text=True,
+                capture_output=True,
+                check=False,
+            )
+            self.assertEqual(completed.returncode, 1)
+            self.assertIn("Refusing unknown entry", completed.stderr)
+            self.assertEqual(marker.read_text(encoding="utf-8"), "preserve\n")
+
+    def test_resume_accepts_strict_legacy_layout_before_repo_preflight(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            target = Path(temporary) / "persistent"
+            for directory in (".BUILDING", "qwen", "svc", "uv-cache"):
+                (target / directory).mkdir(parents=True, exist_ok=True)
+            environment = self._slurm_environment(Path(temporary))
+            environment.pop("P1_REPO_DIR", None)
+            environment.pop("SLURM_SUBMIT_DIR", None)
+            completed = subprocess.run(
+                ["bash", str(BUILDER), "--resume", str(target)],
+                env=environment,
+                text=True,
+                capture_output=True,
+                check=False,
+            )
+            self.assertEqual(completed.returncode, 1)
+            self.assertIn("P1_REPO_DIR", completed.stderr)
+            self.assertNotIn("Refusing unknown entry", completed.stderr)
+
     def test_builder_is_bound_to_daai_account_uv_and_module(self) -> None:
         source = BUILDER.read_text(encoding="utf-8")
         self.assertIn('/home/comp/24482277/.local/bin/uv', source)
@@ -67,6 +120,12 @@ class PersistentEnvironmentBuilderTests(unittest.TestCase):
         self.assertIn('SLURM_SUBMIT_DIR', source)
         self.assertNotIn('dirname -- "${BASH_SOURCE[0]}"', source)
         self.assertNotIn('/home/comp/tyjiang', source)
+        self.assertIn('export XDG_CACHE_HOME="$build_cache_root/xdg-cache"', source)
+        self.assertIn('export CARGO_HOME="$build_cache_root/cargo-home"', source)
+        self.assertIn('export CARGO_TARGET_DIR="$build_cache_root/cargo-target"', source)
+        self.assertIn('export TMPDIR="$build_cache_root/tmp"', source)
+        self.assertIn('ensure_venv "$qwen_env"', source)
+        self.assertIn('format=mindjourney-p1-persistent-build-v2', source)
 
 
 class PersistentEnvironmentPrologTests(unittest.TestCase):
