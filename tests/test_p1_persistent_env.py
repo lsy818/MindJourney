@@ -64,6 +64,8 @@ class PersistentEnvironmentBuilderTests(unittest.TestCase):
         source = BUILDER.read_text(encoding="utf-8")
         self.assertIn('/home/comp/24482277/.local/bin/uv', source)
         self.assertIn('miniconda/py312_24.7.1-0', source)
+        self.assertIn('SLURM_SUBMIT_DIR', source)
+        self.assertNotIn('dirname -- "${BASH_SOURCE[0]}"', source)
         self.assertNotIn('/home/comp/tyjiang', source)
 
 

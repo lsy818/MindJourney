@@ -61,8 +61,12 @@ if ! mkdir -- "$target_root/.BUILDING"; then
   exit 1
 fi
 
-script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-repo_dir="$(cd -- "$script_dir/.." && pwd)"
+repo_dir="${P1_REPO_DIR:-${SLURM_SUBMIT_DIR:-}}"
+if [[ "$repo_dir" != /* || ! -d "$repo_dir" ]]; then
+  echo "P1_REPO_DIR (or SLURM_SUBMIT_DIR) must identify an absolute repository directory." >&2
+  exit 1
+fi
+repo_dir="$(cd -P -- "$repo_dir" && pwd)"
 requirements_file="$repo_dir/requirements_svc.txt"
 svc_project="$repo_dir/stable_virtual_camera"
 uv_bin="/home/comp/24482277/.local/bin/uv"
