@@ -27,9 +27,9 @@
 
 | 数据集 / 模型 | 数据 | 权重 | Smoke | 全量分片 | 结果文件 |
 |---|---|---|---|---|---|
-| MindCube / `Qwen/Qwen3.5-27B` | 1050 题及完整原始图片树已就绪并严格验证；A100-2 诊断副本已就绪 | DAAI 目录含 `config`、11 个 safetensors 和已验证 revision marker；A100-2 完整权重树已核验 | DAAI Job `65458` 因节点缺少系统 `ninja` 失败；修复后的 Job `65469` 在 `hkbugpusrv15` 运行 24:08 后仍失败（`1:0`）。A100-2 诊断 smoke 因无安全空闲 GPU 尚未启动 | 正式首批数组 Job `65516`：分片 `0-2`（共 11 片中的前 3 片，并发 3），依赖环境 Job `65510`；其余分片按 QOS 容量续提 | Run ID：`mj-p1-mindcube-qwen35-27b-h20-20260906`；DAAI：`/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen35-27b-h20-20260906` |
+| MindCube / `Qwen/Qwen3.5-27B` | 1050 题及完整原始图片树已就绪并严格验证；A100-2 诊断副本已就绪 | DAAI 目录含 `config`、11 个 safetensors 和已验证 revision marker；A100-2 完整权重树已核验 | DAAI Job `65458` 因节点缺少系统 `ninja` 失败；修复后的 Job `65469` 在 `hkbugpusrv15` 运行 24:08 后仍失败（`1:0`）。A100-2 诊断 smoke 因无安全空闲 GPU 尚未启动 | H20 数组 Job `65516` 在运行前取消；A100 80GB 提交器 Job `65523` 已排队，计划分片 `0-2`（共 11 片中的前 3 片），依赖环境 Job `65510`；其余分片按 QOS 容量续提 | 计划 Run ID：`mj-p1-mindcube-qwen35-27b-a100-20260906`；DAAI：`/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen35-27b-a100-20260906` |
 | MindCube / `Qwen/Qwen2.5-VL-72B-Instruct` | 1050 题及完整原始图片树已就绪并严格验证；A100-2 诊断副本已就绪 | DAAI 目录含 `config` 和 7 个 safetensors；Job `65446` 已不在队列，但未发现 revision marker，仍须严格验证 revision/完整性 | 等待权重严格验证；72B 不在 40GB A100 上启用诊断 smoke | 等待 smoke 通过；无正式 P1 全量提交 | — |
-| MMSI-Bench / `Qwen/Qwen3.5-9B` | 原始 1000 题 / 2550 图可读；旧正式预处理文件归属 `tyjiang` 且 `24482277` 无读取权限，Job `65519` 正在重建 `processed_daai` | DAAI 目录含 `config`、4 个 safetensors 和已验证 revision marker；A100-2 固定 revision 的完整权重树已核验 | DAAI Job `65452` 因节点缺少系统 `ninja` 失败；修复后的 Job `65468` 在 `hkbugpusrv15` 运行 35:05 后仍失败（`1:0`）。A100-2 基础及 10 图定向诊断 smoke 因无安全空闲 GPU 尚未启动 | Job `65520` 已作为正式分片 `0` 提交器排队，依赖环境 Job `65510` 与数据 Job `65519`；通过后再按 QOS 容量续提 | Run ID：`mj-p1-mmsi-qwen35-9b-h20-20260906`；DAAI：`/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mmsi-qwen35-9b-h20-20260906` |
+| MMSI-Bench / `Qwen/Qwen3.5-9B` | 原始 1000 题 / 2550 图可读；旧正式预处理文件归属 `tyjiang` 且 `24482277` 无读取权限，Job `65519` 正在重建 `processed_daai` | DAAI 目录含 `config`、4 个 safetensors 和已验证 revision marker；A100-2 固定 revision 的完整权重树已核验 | DAAI Job `65452` 因节点缺少系统 `ninja` 失败；修复后的 Job `65468` 在 `hkbugpusrv15` 运行 35:05 后仍失败（`1:0`）。A100-2 基础及 10 图定向诊断 smoke 因无安全空闲 GPU 尚未启动 | H20 提交器 Job `65520` 在运行前取消；A100 80GB 提交器 Job `65524` 已排队，计划正式分片 `0`，依赖环境 Job `65510` 与数据 Job `65519`；通过后再按 QOS 容量续提 | 计划 Run ID：`mj-p1-mmsi-qwen35-9b-a100-20260906`；DAAI：`/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mmsi-qwen35-9b-a100-20260906` |
 | MMSI-Bench / `Qwen/Qwen3.8-27B` | 1000 题 / 2550 图已就绪并严格验证；A100-2 诊断副本已就绪 | DAAI 目录含 `config` 和 9 个 safetensors；Job `65447` 最后观测仍为 `RUNNING`，未发现 revision marker，不能视为完整 | 等待权重严格验证；A100-2 诊断 smoke 尚未启动 | 等待 smoke 通过；无正式 P1 全量提交 | — |
 
 - 推理统一使用 BF16 和 no-thinking；Qwen2.5-VL 不发送其不支持的 Qwen3 thinking 参数。
@@ -38,7 +38,7 @@
 - 每个组合必须先完成一题端到端 smoke，再提交正式数组；“已提交/排队”不等于“已完成”。
 - 统一配置：[p1_svc_multiimage.json](../configs/p1_svc_multiimage.json)。
 - A100-1 与 A100-2 均为 8 × A100 PCIe 40GB；最后观测时两台机器的 8 张卡均有常驻进程，没有可安全独占的空闲卡，因此尚未启动任何 A100 诊断 smoke。A100-2 的工作副本位于 `/data/shiyang/MindJourney`。
-- 本次提交前 H20 节点的 8 张卡均已占用，故两个已提交 smoke 按资源约定回退到 A100-80G；每次后续提交前仍会重新检查 H20，而不会把本次回退固化为实验设置。
+- H20 节点的 8 张卡当前均由 Job `65509` 占用，最长可能持续 5 天；两个历史 smoke 已按资源约定回退到 A100 80GB，本轮正式首批也改用 A100 80GB。所有 A100 回退都显式排除 40GB DGX；每次后续提交前仍会重新检查 H20，而不会把本次回退固化为实验设置。
 - 首轮 smoke 的模型权重均已成功载入 GPU，但 FlashInfer 首次编译采样内核时在 A100 节点找不到裸命令 `ninja`。固定 Qwen 运行环境实际包含 `ninja 1.13.2`；提交代码已在 vLLM 子进程范围内补回该固定环境的 `bin`，未改变模型、精度、thinking 模式或 SVC 参数。修复 commit：`087be7a`。
 - 标准 9B/27B 任务统一申请 8 CPU，72B 保持 16 CPU；续跑 Job `65468`、`65469` 的资源均已同步更新为 8 CPU。该调整只改变 Slurm 资源配额与线程上限，不改变 GPU 数、TP、BF16、提示、数据顺序或 SVC 算法设置。资源计划 commit：`8d8bd12`。
 - Slurm accounting 已确认 Job `65468`、`65469` 均失败且没有可验证的 `COMPLETE`；因此没有触发任何后续全量提交，当前四项 P1 均无正式完成结果。
@@ -59,10 +59,10 @@
 - Qwen2.5-VL-72B 首次下载 Job `65502` 因计算节点缺少 `huggingface_hub` 失败；HTTP 续传 Job `65504` 当前为 `RUNNING`，进度为 14/50。旧重复 Job `65499` 已取消。
 - Qwen3.8-27B 原下载 Job `65447` 当前为 `RUNNING`；严格校验 Job `65500` 正在依赖等待，尚未产生可验证的 revision/完整性结论。
 - 旧的四个正式提交器 Job `65511`–`65514` 已取消。这些提交器试图一次创建四个完整数组，而集群 `QOSMaxSubmitJobPerUserLimit` 会把数组中的每个 task 计入约 10 个可提交槽位，继续保留会阻塞真正的计算分片。取消提交器不删除任何已有结果或日志。
-- MindCube / Qwen3.5-27B 的正式首批数组 Job `65516` 已创建，数组范围 `0-2%3`，使用 2 张 H20/任务（TP=1、SVC=1）、8 CPU/任务、BF16、no-thinking。其依赖已显式修正为 `afterok:65510`，环境完成前不会误启动。Run ID 为 `mj-p1-mindcube-qwen35-27b-h20-20260906`；剩余 `3-10` 分片将在槽位释放后以同一 Run ID 和 `--resume` 分批提交。
+- MindCube / Qwen3.5-27B 的 H20 首批数组 Job `65516` 原计划运行 `0-2%3`，依赖也已修正为 `afterok:65510`；但因 H20 节点被 Job `65509` 全部占用且最长可能持续 5 天，`65516` 已在任何 task 启动前取消，旧 H20 Run ID 只保留作审计，不能记为已运行。替代的 A100 80GB 提交器 Job `65523` 已创建，依赖 `afterok:65510`，计划以 Run ID `mj-p1-mindcube-qwen35-27b-a100-20260906` 提交分片 `0-2`。每个实际 task 仍使用 2 张 GPU（TP=1、SVC=1）、8 CPU、BF16、no-thinking，并排除 40GB DGX；截至本快照，提交器及其计算分片均未开始运行。
 - `24482277` 对旧 MMSI 正式预处理文件无读取权限，但可读取原始 `mmsi_full.jsonl` 和 2550 张图片。交互式预处理 Job `65518` 被外部取消且未产生正式输入；持久批处理 Job `65519` 已改用官方严格转换程序重建 `/home/datasets/shiyang/MMSI_Bench_ec7c92bf/processed_daai/{test.json,test_provenance.json}`，原始文件和失败记录均保留。
-- MMSI / Qwen3.5-9B 的 Job `65520` 已作为首个正式分片提交器排队，依赖 `afterok:65510` 与 `afterok:65519`。两个前置任务都成功后，它才会为 Run ID `mj-p1-mmsi-qwen35-9b-h20-20260906` 创建分片 `0`；该分片通过严格完成检查后，再以同一 Run ID 和 `--resume` 分批续提。
-- 当前 QOS 策略是只让可用槽位承载实际计算 task：先跑 MindCube `0-2` 和 MMSI `0`，完成并释放槽位后依次续提 MindCube `3-5`、`6-8`、`9-10` 及 MMSI 后续分片。排队、提交器成功或单个分片结束都不等于实验完成；只有完整覆盖、零静默跳题、正式 `COMPLETE`、合并结果与哈希全部通过后才更新为“已验证完成”。
+- MMSI / Qwen3.5-9B 的 H20 提交器 Job `65520` 同样已在运行前取消，旧 H20 Run ID 只保留作审计。替代的 A100 80GB 提交器 Job `65524` 已创建，依赖 `afterok:65510` 与 `afterok:65519`；两个前置任务都成功后，它才会为 Run ID `mj-p1-mmsi-qwen35-9b-a100-20260906` 创建分片 `0`。A100 任务显式排除 40GB DGX；截至本快照，提交器及其计算分片均未开始运行。
+- 当前 QOS 策略是只让可用槽位承载实际计算 task：先以 A100 80GB 跑 MindCube `0-2` 和 MMSI `0`，完成并释放槽位后依次续提 MindCube `3-5`、`6-8`、`9-10` 及 MMSI 后续分片。后续续跑使用各自的 A100 Run ID 和 `--resume`。排队、提交器成功或单个分片结束都不等于实验完成；只有完整覆盖、零静默跳题、正式 `COMPLETE`、合并结果与哈希全部通过后才更新为“已验证完成”。
 
 ## 已验证运行
 
