@@ -444,7 +444,9 @@ def prefetch_cache(
     lock_path = state / ".lock"
     lock_path.touch(mode=0o660, exist_ok=True)
     active_api = api or _hub_api()
-    with lock_path.open("rb") as lock_handle:
+    # Linux/NFS requires a write-capable descriptor for LOCK_EX; a read-only
+    # descriptor can raise EBADF even though macOS accepts it.
+    with lock_path.open("r+b") as lock_handle:
         fcntl.flock(lock_handle, fcntl.LOCK_EX)
         try:
             return _validate_unlocked(

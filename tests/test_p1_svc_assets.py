@@ -8,6 +8,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -126,6 +127,29 @@ def _test_assets():
 
 
 class SvcAssetCacheTests(unittest.TestCase):
+    def test_prefetch_takes_exclusive_lock_on_write_capable_descriptor(self):
+        specs, contents = _test_assets()
+        fake = FakeHub(specs, contents)
+        original_flock = p1_svc_assets.fcntl.flock
+        exclusive_access_modes = []
+
+        def inspect_flock(handle, operation):
+            if operation == p1_svc_assets.fcntl.LOCK_EX:
+                flags = p1_svc_assets.fcntl.fcntl(
+                    handle.fileno(), p1_svc_assets.fcntl.F_GETFL
+                )
+                exclusive_access_modes.append(flags & os.O_ACCMODE)
+            return original_flock(handle, operation)
+
+        with tempfile.TemporaryDirectory() as temporary, mock.patch.object(
+            p1_svc_assets.fcntl, "flock", side_effect=inspect_flock
+        ):
+            p1_svc_assets.prefetch_cache(
+                Path(temporary).resolve() / "cache", specs=specs, api=fake
+            )
+
+        self.assertEqual(exclusive_access_modes, [os.O_RDWR])
+
     def test_prefetch_downloads_public_repositories_before_gated_svc(self):
         specs, contents = _test_assets()
         fake = FakeHub(specs, contents, gate_svc=True)
