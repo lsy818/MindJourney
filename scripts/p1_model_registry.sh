@@ -49,6 +49,7 @@ p1_load_model_spec() {
 
 p1_load_resource_plan() {
   local accelerator="${1:?accelerator is required}"
+  P1_SPEC_DIAGNOSTIC_ONLY=0
   case "$accelerator" in
     h20)
       P1_SPEC_ACCELERATOR="h20"
@@ -82,13 +83,41 @@ p1_load_resource_plan() {
         P1_SPEC_CPUS_PER_TASK=8
       fi
       ;;
+    a10040)
+      # A100-1/A100-2 are explicitly authorised for diagnostic smoke runs only.
+      # Their 40 GB cards need TP=2 for either 27B model; the 9B model remains
+      # TP=1.  The 72B configuration is intentionally not enabled here.
+      P1_SPEC_ACCELERATOR="a10040"
+      P1_SPEC_EXCLUDE=""
+      P1_SPEC_DIAGNOSTIC_ONLY=1
+      case "$P1_SPEC_ALIAS" in
+        qwen35-9b)
+          P1_SPEC_TP=1
+          P1_SPEC_TOTAL_GPUS=2
+          ;;
+        qwen35-27b|qwen38-27b)
+          P1_SPEC_TP=2
+          P1_SPEC_TOTAL_GPUS=3
+          ;;
+        qwen25vl-72b)
+          echo "Qwen2.5-VL-72B is not enabled for the A100 40 GB diagnostic profile." >&2
+          return 2
+          ;;
+      esac
+      P1_SPEC_DEFAULT_CONCURRENCY=1
+      P1_SPEC_CPUS_PER_TASK=8
+      ;;
     *)
-      printf 'Unsupported accelerator %q. Use h20 (preferred) or a100 (80 GB fallback).\n' \
+      printf 'Unsupported accelerator %q. Use h20, a100 (80 GB), or a10040 (diagnostic smoke only).\n' \
         "$accelerator" >&2
       return 2
       ;;
   esac
-  P1_SPEC_GRES="gpu:${P1_SPEC_ACCELERATOR}:${P1_SPEC_TOTAL_GPUS}"
+  if [[ "$P1_SPEC_DIAGNOSTIC_ONLY" == "1" ]]; then
+    P1_SPEC_GRES="not-applicable-nonslurm"
+  else
+    P1_SPEC_GRES="gpu:${P1_SPEC_ACCELERATOR}:${P1_SPEC_TOTAL_GPUS}"
+  fi
 }
 
 p1_assert_priority_one_combo() {
@@ -121,6 +150,11 @@ p1_print_model_spec() {
     "gres=$P1_SPEC_GRES" \
     "exclude=${P1_SPEC_EXCLUDE:-none}" \
     "default_concurrency=$P1_SPEC_DEFAULT_CONCURRENCY"
+  if [[ "$P1_SPEC_DIAGNOSTIC_ONLY" == "1" ]]; then
+    echo "diagnostic_only=true"
+  else
+    echo "diagnostic_only=false"
+  fi
 }
 
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
@@ -128,7 +162,7 @@ if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
     echo "Usage: $0 MODEL_ALIAS ACCELERATOR" >&2
     exit 2
   fi
-  p1_load_model_spec "$1"
-  p1_load_resource_plan "$2"
+  p1_load_model_spec "$1" || exit $?
+  p1_load_resource_plan "$2" || exit $?
   p1_print_model_spec
 fi

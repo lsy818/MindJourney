@@ -23,6 +23,18 @@ chunk_index="$2"
 run_id="${P1_RUN_ID:?P1_RUN_ID is required}"
 run_root="${P1_RUN_ROOT:?P1_RUN_ROOT is required}"
 num_chunks="${P1_NUM_CHUNKS:?P1_NUM_CHUNKS is required}"
+run_mode="${P1_RUN_MODE:-array}"
+execution_scope="${P1_EXECUTION_SCOPE:-formal}"
+
+if [[ "$P1_SPEC_DIAGNOSTIC_ONLY" == "1" ]]; then
+  if [[ "$run_mode" != "smoke" || "$execution_scope" != "diagnostic_smoke" ]]; then
+    echo "The A100 40 GB profile is restricted to diagnostic smoke runs." >&2
+    exit 2
+  fi
+elif [[ "$execution_scope" == "diagnostic_smoke" ]]; then
+  echo "diagnostic_smoke requires the a10040 resource profile." >&2
+  exit 2
+fi
 
 if [[ ! "$run_id" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,79}$ ]]; then
   echo "P1_RUN_ID must contain 1-80 safe filename characters." >&2
@@ -35,7 +47,7 @@ if [[ ! "$chunk_index" =~ ^[0-9]+$ \
   exit 2
 fi
 if [[ -z "${CUDA_VISIBLE_DEVICES:-}" ]]; then
-  echo "CUDA_VISIBLE_DEVICES is empty; this runner requires a Slurm GPU allocation." >&2
+  echo "CUDA_VISIBLE_DEVICES is empty; this runner requires an explicit GPU allocation/mapping." >&2
   exit 1
 fi
 IFS=',' read -r -a allocated_devices <<<"$CUDA_VISIBLE_DEVICES"
@@ -75,13 +87,20 @@ if command -v flock >/dev/null 2>&1; then
   fi
 fi
 if [[ -f "$completion_file" && -f "$results_file" ]]; then
-  if [[ "${P1_RUN_MODE:-array}" == "array" ]]; then
+  if [[ "$run_mode" == "array" ]]; then
     "$P1_SVC_PYTHON" -m utils.p1_results \
       --run-root "$run_root" \
       --input-file "${P1_INPUT_DIR}/${P1_SPLIT}.json" \
       --dataset "$dataset" \
       --chunk-index "$chunk_index" \
       --results-file "$results_file"
+  elif [[ "$execution_scope" == "diagnostic_smoke" ]]; then
+    "$P1_SVC_PYTHON" -m utils.p1_smoke_results \
+      --run-root "$run_root" \
+      --input-file "${P1_INPUT_DIR}/${P1_SPLIT}.json" \
+      --dataset "$dataset" \
+      --results-file "$results_file" \
+      --complete-file "$completion_file"
   fi
   echo "Chunk $chunk_index already has valid results.json and COMPLETE; leaving it unchanged."
   exit 0
@@ -157,6 +176,8 @@ printf '%s\n' \
   "max_model_len=65536" \
   "tensor_parallel_size=$P1_SPEC_TP" \
   "cpus_per_task=${SLURM_CPUS_PER_TASK:-unknown}" \
+  "execution_scope=$execution_scope" \
+  "diagnostic_host=${P1_DIAGNOSTIC_HOST:-none}" \
   "vlm_devices=$vlm_devices" \
   "svc_device=$svc_device" \
   "host=$(hostname)" \
@@ -211,12 +232,18 @@ if [[ ! -s "$results_file" ]]; then
   exit 1
 fi
 
-if [[ "${P1_RUN_MODE:-array}" == "array" ]]; then
+if [[ "$run_mode" == "array" ]]; then
   "$P1_SVC_PYTHON" -m utils.p1_results \
     --run-root "$run_root" \
     --input-file "${P1_INPUT_DIR}/${P1_SPLIT}.json" \
     --dataset "$dataset" \
     --chunk-index "$chunk_index" \
+    --results-file "$results_file"
+elif [[ "$execution_scope" == "diagnostic_smoke" ]]; then
+  "$P1_SVC_PYTHON" -m utils.p1_smoke_results \
+    --run-root "$run_root" \
+    --input-file "${P1_INPUT_DIR}/${P1_SPLIT}.json" \
+    --dataset "$dataset" \
     --results-file "$results_file"
 fi
 
@@ -227,6 +254,8 @@ printf '%s\n' \
   "dataset=$dataset" \
   "model=$P1_SPEC_MODEL_ID" \
   "revision=$P1_SPEC_REVISION" \
+  "execution_scope=$execution_scope" \
+  "diagnostic_host=${P1_DIAGNOSTIC_HOST:-none}" \
   "chunk_index=$chunk_index" \
   "results_sha256=$results_sha256" \
   "completed_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \

@@ -82,7 +82,17 @@ export MINDJOURNEY_DATASET_PROVENANCE="$dataset_provenance"
 export MINDJOURNEY_EXPECTED_SOURCE_SHA256="$expected_source_sha256"
 export MINDJOURNEY_MODEL_DTYPE="bfloat16"
 export MINDJOURNEY_ENABLE_THINKING="false"
-export MINDJOURNEY_HARDWARE="DAAI:${P1_SPEC_ACCELERATOR}:TP${P1_SPEC_TP}+SVC1"
+if [[ "${P1_EXECUTION_SCOPE:-formal}" == "diagnostic_smoke" ]]; then
+  diagnostic_host="${P1_DIAGNOSTIC_HOST:?P1_DIAGNOSTIC_HOST is required for diagnostic smoke}"
+  if [[ "$P1_SPEC_DIAGNOSTIC_ONLY" != "1" \
+        || ( "$diagnostic_host" != "A100-1" && "$diagnostic_host" != "A100-2" ) ]]; then
+    echo "Diagnostic smoke requires the a10040 profile and host A100-1 or A100-2." >&2
+    exit 2
+  fi
+  export MINDJOURNEY_HARDWARE="${diagnostic_host}:A100-40GB:TP${P1_SPEC_TP}+SVC1:diagnostic-smoke"
+else
+  export MINDJOURNEY_HARDWARE="DAAI:${P1_SPEC_ACCELERATOR}:TP${P1_SPEC_TP}+SVC1"
+fi
 export MINDJOURNEY_ENV_ID="${P1_ENV_ID:-qwen0280-svc-v1}"
 export QWEN_REVISION="$P1_SPEC_REVISION"
 export QWEN_CONTEXT_LIMIT=65536

@@ -77,6 +77,10 @@ fi
 p1_load_model_spec "$model_key"
 p1_load_resource_plan "$accelerator"
 p1_assert_priority_one_combo "$dataset"
+if [[ "$P1_SPEC_DIAGNOSTIC_ONLY" == "1" ]]; then
+  echo "The A100 40 GB profile is non-Slurm diagnostic-smoke only; use p1_run_local_diagnostic_smoke.sh." >&2
+  exit 2
+fi
 
 if [[ "$mode" != "smoke" && "$mode" != "array" ]]; then
   echo "--mode must be smoke or array." >&2

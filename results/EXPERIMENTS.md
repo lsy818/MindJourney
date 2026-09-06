@@ -27,19 +27,22 @@
 
 | 数据集 / 模型 | 数据 | 权重 | Smoke | 全量分片 | 结果文件 |
 |---|---|---|---|---|---|
-| MindCube / `Qwen/Qwen3.5-27B` | 1050 题及完整原始图片树已就绪并严格验证 | 已就绪；revision marker 已验证 | 首次 Job `65458` 因节点缺少系统 `ninja` 失败；修复后的 Job `65469` 在 `hkbugpusrv15` 运行 24:08 后失败，退出码 `1:0`，日志根因待恢复 DAAI 连接后核验 | 未通过；不得提交全量 | DAAI: `/home/comp/tyjiang/mindjourney_runtime/p1_runs/mj-p1-mindcube-qwen35-27b-smoke-20260905T160025Z` |
-| MindCube / `Qwen/Qwen2.5-VL-72B-Instruct` | 1050 题及完整原始图片树已就绪并严格验证 | 固定 revision 下载中；Job `65446` | 等待权重完整性 marker | 等待 smoke 通过 | — |
-| MMSI-Bench / `Qwen/Qwen3.5-9B` | 1000 题 / 2550 图已就绪并严格验证 | 已就绪；revision marker 已验证 | 首次 Job `65452` 因节点缺少系统 `ninja` 失败；修复后的 Job `65468` 在 `hkbugpusrv15` 运行 35:05 后失败，退出码 `1:0`，日志根因待恢复 DAAI 连接后核验 | 未通过；不得提交定向 smoke 或全量 | DAAI: `/home/comp/tyjiang/mindjourney_runtime/p1_runs/mj-p1-mmsi-qwen35-9b-smoke-20260905T155306Z` |
-| MMSI-Bench / `Qwen/Qwen3.8-27B` | 1000 题 / 2550 图已就绪并严格验证 | 固定 revision 下载中；Job `65447` | 等待权重完整性 marker | 等待 smoke 通过 | — |
+| MindCube / `Qwen/Qwen3.5-27B` | 1050 题及完整原始图片树已就绪并严格验证；A100-2 诊断副本已就绪 | DAAI 目录含 `config`、11 个 safetensors 和已验证 revision marker；A100-2 现有权重仍待固定 revision 核验 | DAAI Job `65458` 因节点缺少系统 `ninja` 失败；修复后的 Job `65469` 在 `hkbugpusrv15` 运行 24:08 后仍失败（`1:0`）。A100-2 诊断 smoke 因无安全空闲 GPU 尚未启动 | 未通过；无正式 P1 全量提交 | DAAI: `/home/comp/tyjiang/mindjourney_runtime/p1_runs/mj-p1-mindcube-qwen35-27b-smoke-20260905T160025Z` |
+| MindCube / `Qwen/Qwen2.5-VL-72B-Instruct` | 1050 题及完整原始图片树已就绪并严格验证；A100-2 诊断副本已就绪 | DAAI 目录含 `config` 和 7 个 safetensors；Job `65446` 已不在队列，但未发现 revision marker，仍须严格验证 revision/完整性 | 等待权重严格验证；72B 不在 40GB A100 上启用诊断 smoke | 等待 smoke 通过；无正式 P1 全量提交 | — |
+| MMSI-Bench / `Qwen/Qwen3.5-9B` | 1000 题 / 2550 图已就绪并严格验证；A100-2 诊断副本已就绪 | DAAI 目录含 `config`、4 个 safetensors 和已验证 revision marker；A100-2 权重待准备 | DAAI Job `65452` 因节点缺少系统 `ninja` 失败；修复后的 Job `65468` 在 `hkbugpusrv15` 运行 35:05 后仍失败（`1:0`）。A100-2 基础及 10 图定向诊断 smoke 因无安全空闲 GPU 尚未启动 | 未通过；无正式 P1 全量提交 | DAAI: `/home/comp/tyjiang/mindjourney_runtime/p1_runs/mj-p1-mmsi-qwen35-9b-smoke-20260905T155306Z` |
+| MMSI-Bench / `Qwen/Qwen3.8-27B` | 1000 题 / 2550 图已就绪并严格验证；A100-2 诊断副本已就绪 | DAAI 目录含 `config` 和 9 个 safetensors；Job `65447` 最后观测仍为 `RUNNING`，未发现 revision marker，不能视为完整 | 等待权重严格验证；A100-2 诊断 smoke 尚未启动 | 等待 smoke 通过；无正式 P1 全量提交 | — |
 
 - 推理统一使用 BF16 和 no-thinking；Qwen2.5-VL 不发送其不支持的 Qwen3 thinking 参数。
-- 正式计算只在 DAAI 运行。H20 96GB 空闲时优先；否则使用 A100 80GB，并排除 40GB DGX。硬件切换不得改变 SVC/搜索参数。
+- 诊断 smoke/debug 允许且优先在 A100-1 或 A100-2 直接运行，避免为调试占用 DAAI 的 Slurm 队列；仅在有足够、可安全独占的空闲 GPU 时启动，不抢占、不超卖，也不终止其他用户进程。
+- 正式全量计算只在 DAAI 运行。H20 96GB 空闲时优先；否则使用 A100 80GB，并排除 40GB DGX。硬件切换不得改变 BF16、no-thinking、图片顺序或 SVC/搜索参数。
 - 每个组合必须先完成一题端到端 smoke，再提交正式数组；“已提交/排队”不等于“已完成”。
 - 统一配置：[p1_svc_multiimage.json](../configs/p1_svc_multiimage.json)。
+- A100-1 与 A100-2 均为 8 × A100 PCIe 40GB；最后观测时两台机器的 8 张卡均有常驻进程，没有可安全独占的空闲卡，因此尚未启动任何 A100 诊断 smoke。A100-2 的工作副本位于 `/data/shiyang/MindJourney`。
 - 本次提交前 H20 节点的 8 张卡均已占用，故两个已提交 smoke 按资源约定回退到 A100-80G；每次后续提交前仍会重新检查 H20，而不会把本次回退固化为实验设置。
 - 首轮 smoke 的模型权重均已成功载入 GPU，但 FlashInfer 首次编译采样内核时在 A100 节点找不到裸命令 `ninja`。固定 Qwen 运行环境实际包含 `ninja 1.13.2`；提交代码已在 vLLM 子进程范围内补回该固定环境的 `bin`，未改变模型、精度、thinking 模式或 SVC 参数。修复 commit：`087be7a`。
 - 标准 9B/27B 任务统一申请 8 CPU，72B 保持 16 CPU；续跑 Job `65468`、`65469` 的资源均已同步更新为 8 CPU。该调整只改变 Slurm 资源配额与线程上限，不改变 GPU 数、TP、BF16、提示、数据顺序或 SVC 算法设置。资源计划 commit：`8d8bd12`。
-- Slurm accounting 已确认 Job `65468`、`65469` 均失败且没有可验证的 `COMPLETE`；因此没有触发任何后续全量提交。当前 Jumpmachine 可登录，但 DAAI 管理节点在目标认证后主动断开，须取得 attempt 日志后才能归因和安全续跑，不能仅凭退出码猜测。
+- Slurm accounting 已确认 Job `65468`、`65469` 均失败且没有可验证的 `COMPLETE`；因此没有触发任何后续全量提交，当前四项 P1 均无正式完成结果。
+- 已使用用户再次确认的凭据重试 `daai_tangyu` 登录，但目标仍返回认证失败；本地同时缺少该主机配置引用的 `~/.ssh/id_ed25519_daai_tangyu`，因此不能读取 `tyjiang` 私有日志或以该账号重提任务。`daai`（24482277）账号已确认可成功登录，后续正式实验将改用该账号提交；既有 `tyjiang` 失败运行路径继续保留作审计。本文不记录密码或令牌，也不根据不可见日志的退出码臆测失败根因。
 
 ## 已验证运行
 
@@ -98,6 +101,8 @@
 - 官方 Hugging Face revision：`9c941b46a6bd65b6914669ef7a579948fc9c8467`。
 - `MindCube_tinybench.jsonl`：1050 题，SHA256 `0289eb82d81ff9aa0201ae75f86da7fd1924cf23dc202856d0579a0effd22ac8`；`among/around/rotation = 600/250/200`，2/3/4 图题分别为 274/345/431，共 3307 次图片引用、428 张唯一图片、0 缺图。
 - DAAI 正式输入：`/home/datasets/shiyang/MindCube_9c941b46/processed/test.json`，SHA256 `03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083`；provenance SHA256 `55af7c4dd6e125b5323a798ba871d3297c6c89098f5911b6d84561af26effac6`；官方有序图片序列摘要 `0b092454a3ceb25f513f3f1428f1b9fad06cf4e297a7d754980521f0cce2abdb`。
+- A100-2 诊断输入：`/data/shiyang/datasets/MindCube_9c941b46/processed/test.json`，1050 题，SHA256 `5748bdb2b4933d41d50f190d35b5a494cba633ce1258e066beddf9d17560a08c`；`test_provenance.json` SHA256 `3bf65a9d752c958accdb147f7cec746e0ad3c9d34555994db76ef6d675b8a2f5`；3307 次图片引用、428 张唯一图片、0 缺图，官方有序图片序列摘要同为 `0b092454a3ceb25f513f3f1428f1b9fad06cf4e297a7d754980521f0cce2abdb`。其文件哈希与 DAAI 副本不同是因为绝对图片路径不同，不代表图片语义顺序变化。
+- A100-2 单题诊断子集：`/data/shiyang/datasets/MindCube_9c941b46/smoke_index66`，1 题（ID `among_group525_q0_2_2`，4 图），`test.json` SHA256 `20badbdd83963470f9138191af8ed104ec94971802296bf2a690a1d8203eddef`。
 - 第三方参考脚本（A100-2）：`/data/chentao/WorldLoop/examples/spatial_reasoning/prepare_data.py`
 - 以官方 `images` 数组作为 `Image 1..N` 的唯一语义顺序；转换工具：[prepare_mindcube.py](../utils/prepare_mindcube.py)。
 
@@ -107,6 +112,9 @@
 - 官方代码 commit：`13e58a2b8b30d880d7e8a1e4a6aa1c0feda94cac`；官方 Hugging Face revision：`ec7c92bfaf7728fcca1d61e3e224e190af309436`。
 - 已核验的 A100-2 快照：1000 题、2550 张图、2–10 图；JSONL SHA256 `9448f3ffc9c2364d396ab29bfc5a66ecab26fcc076ce1b6b364bdcad7c721601`，逐题元数据与官方 revision 全量一致。
 - DAAI 正式输入：`/home/datasets/shiyang/MMSI_Bench_ec7c92bf/processed/test.json`，SHA256 `5de75a94eebb2ad31b44ab0f33d7225c56157165292d8112e287c410f56180c9`；provenance SHA256 `a86a9aa8ce007f06af5667848b5f47c2b6999c68fa36d1964e08b4e7d9fd8da2`；图片树摘要 `1915bcb705e661d46bab44dd8fe9513153466bca458bef26d030235d9e9c07d9`。
+- A100-2 诊断输入：`/data/shiyang/datasets/MMSI_Bench_ec7c92bf/processed/test.json`，1000 题 / 2550 图，SHA256 `8f5be1f6b09991ceb1ddb1761df70a0ff730aba1ac38a4081881ebfa6edbff94`；`test_provenance.json` SHA256 `c3afa4b86d7088fc162c2d0fb9f80053f692edee5c00032215ae20380acda2be`。
+- A100-2 基础单题诊断子集：`/data/shiyang/datasets/MMSI_Bench_ec7c92bf/smoke_index585`，1 题（2 图），`test.json` SHA256 `4a3b6ab94c0cfe8b439e2687423f28710e1ba0a3058e5850db451e2dd496b831`。
+- A100-2 多图边界定向子集：`/data/shiyang/datasets/MMSI_Bench_ec7c92bf/smoke10_index140`，1 题（10 图），`test.json` SHA256 `6acf0d4a8345ca172694fe0d212cde802942abea64470c583691cadefaa21beb`。MMSI 在正式提交前必须同时通过基础 smoke 和该 10 图 smoke。
 - 第三方参考脚本（A100-2）：`/data/chentao/WorldLoop/smoke/build_mmsi_full.py`
 - 转换工具：[prepare_mmsi_bench.py](../utils/prepare_mmsi_bench.py)；保留官方图片顺序与 A–D 标签，严格按答案字母计分。
 
