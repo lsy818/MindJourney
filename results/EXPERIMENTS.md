@@ -27,9 +27,9 @@
 
 | 数据集 / 模型 | 数据 | 权重 | Smoke | 全量分片 | 结果文件 |
 |---|---|---|---|---|---|
-| MindCube / `Qwen/Qwen3.5-27B` | 1050 题及完整原始图片树已就绪并严格验证 | 已就绪；revision marker 已验证 | 首次 Job `65458` 因节点缺少系统 `ninja` 在 vLLM 启动阶段失败；修复后以同一 Run ID 续跑，Job `65469` 排队中；请求 A100-80G | 等待 smoke 通过 | DAAI: `/home/comp/tyjiang/mindjourney_runtime/p1_runs/mj-p1-mindcube-qwen35-27b-smoke-20260905T160025Z` |
+| MindCube / `Qwen/Qwen3.5-27B` | 1050 题及完整原始图片树已就绪并严格验证 | 已就绪；revision marker 已验证 | 首次 Job `65458` 因节点缺少系统 `ninja` 失败；修复后的 Job `65469` 在 `hkbugpusrv15` 运行 24:08 后失败，退出码 `1:0`，日志根因待恢复 DAAI 连接后核验 | 未通过；不得提交全量 | DAAI: `/home/comp/tyjiang/mindjourney_runtime/p1_runs/mj-p1-mindcube-qwen35-27b-smoke-20260905T160025Z` |
 | MindCube / `Qwen/Qwen2.5-VL-72B-Instruct` | 1050 题及完整原始图片树已就绪并严格验证 | 固定 revision 下载中；Job `65446` | 等待权重完整性 marker | 等待 smoke 通过 | — |
-| MMSI-Bench / `Qwen/Qwen3.5-9B` | 1000 题 / 2550 图已就绪并严格验证 | 已就绪；revision marker 已验证 | 首次 Job `65452` 因节点缺少系统 `ninja` 在 vLLM 启动阶段失败；修复后以同一 Run ID 续跑，Job `65468` 已于 2026-09-06 02:07:08 在 `hkbugpusrv15` 启动；A100-80G | 等待 smoke 结果验证 | DAAI: `/home/comp/tyjiang/mindjourney_runtime/p1_runs/mj-p1-mmsi-qwen35-9b-smoke-20260905T155306Z` |
+| MMSI-Bench / `Qwen/Qwen3.5-9B` | 1000 题 / 2550 图已就绪并严格验证 | 已就绪；revision marker 已验证 | 首次 Job `65452` 因节点缺少系统 `ninja` 失败；修复后的 Job `65468` 在 `hkbugpusrv15` 运行 35:05 后失败，退出码 `1:0`，日志根因待恢复 DAAI 连接后核验 | 未通过；不得提交定向 smoke 或全量 | DAAI: `/home/comp/tyjiang/mindjourney_runtime/p1_runs/mj-p1-mmsi-qwen35-9b-smoke-20260905T155306Z` |
 | MMSI-Bench / `Qwen/Qwen3.8-27B` | 1000 题 / 2550 图已就绪并严格验证 | 固定 revision 下载中；Job `65447` | 等待权重完整性 marker | 等待 smoke 通过 | — |
 
 - 推理统一使用 BF16 和 no-thinking；Qwen2.5-VL 不发送其不支持的 Qwen3 thinking 参数。
@@ -39,6 +39,7 @@
 - 本次提交前 H20 节点的 8 张卡均已占用，故两个已提交 smoke 按资源约定回退到 A100-80G；每次后续提交前仍会重新检查 H20，而不会把本次回退固化为实验设置。
 - 首轮 smoke 的模型权重均已成功载入 GPU，但 FlashInfer 首次编译采样内核时在 A100 节点找不到裸命令 `ninja`。固定 Qwen 运行环境实际包含 `ninja 1.13.2`；提交代码已在 vLLM 子进程范围内补回该固定环境的 `bin`，未改变模型、精度、thinking 模式或 SVC 参数。修复 commit：`087be7a`。
 - 标准 9B/27B 任务统一申请 8 CPU，72B 保持 16 CPU；续跑 Job `65468`、`65469` 的资源均已同步更新为 8 CPU。该调整只改变 Slurm 资源配额与线程上限，不改变 GPU 数、TP、BF16、提示、数据顺序或 SVC 算法设置。资源计划 commit：`8d8bd12`。
+- Slurm accounting 已确认 Job `65468`、`65469` 均失败且没有可验证的 `COMPLETE`；因此没有触发任何后续全量提交。当前 Jumpmachine 可登录，但 DAAI 管理节点在目标认证后主动断开，须取得 attempt 日志后才能归因和安全续跑，不能仅凭退出码猜测。
 
 ## 已验证运行
 
