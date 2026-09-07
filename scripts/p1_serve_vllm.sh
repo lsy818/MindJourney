@@ -100,14 +100,6 @@ if [[ ! -x "$vllm_bin_dir/ninja" ]]; then
 fi
 export PATH="$vllm_bin_dir:$PATH"
 
-expected_vllm_version="0.28.0"
-actual_vllm_version="$("$vllm_bin" --version)"
-if [[ "$actual_vllm_version" != *"$expected_vllm_version"* ]]; then
-  printf 'Expected vLLM %s, found: %s\n' \
-    "$expected_vllm_version" "$actual_vllm_version" >&2
-  exit 1
-fi
-
 host="${P1_VLM_HOST:-127.0.0.1}"
 port="${P1_VLM_PORT:-8000}"
 gpu_memory_utilization="${P1_GPU_MEMORY_UTILIZATION:-0.90}"

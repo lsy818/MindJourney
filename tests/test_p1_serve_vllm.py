@@ -21,8 +21,8 @@ class P1ServeVllmTests(unittest.TestCase):
             """#!/usr/bin/env bash
 set -euo pipefail
 if [[ "${1:-}" == "--version" ]]; then
-  echo "vLLM 0.28.0"
-  exit 0
+  echo "runtime must trust the validated environment manifest" >&2
+  exit 99
 fi
 printf '%s\n' "$PATH" >"$P1_TEST_PATH_CAPTURE"
 printf '%s\n' "$@" >"$P1_TEST_ARGS_CAPTURE"
@@ -71,6 +71,7 @@ printf '%s\n' "$@" >"$P1_TEST_ARGS_CAPTURE"
         self.assertIn("bfloat16", arguments)
         self.assertIn('{"enable_thinking":false}', arguments)
         self.assertIn('{"image":64}', arguments)
+        self.assertNotIn("--version", self.script.read_text(encoding="utf-8"))
 
     def test_fails_before_loading_model_when_pinned_ninja_is_missing(self) -> None:
         completed = self._run()
