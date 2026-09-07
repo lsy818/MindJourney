@@ -86,13 +86,13 @@ if validate_snapshot "$target" 2>/dev/null; then
       exit 0
     fi
     if [[ "${P1_TRUST_EXISTING_MODEL:-0}" != "1" ]]; then
-      printf 'A complete but unpinned directory already exists at %s. Verify it manually, then rerun with P1_TRUST_EXISTING_MODEL=1 to write an external revision marker.\n' \
+      printf 'A structurally complete but unpinned directory exists at %s; verifying it against the pinned Hub revision before writing a marker.\n' \
         "$target" >&2
-      exit 1
+    else
+      write_external_marker
+      echo "Recorded the verified existing revision in $external_marker."
+      exit 0
     fi
-    write_external_marker
-    echo "Recorded the verified existing revision in $external_marker."
-    exit 0
 fi
 
 if [[ ! -w "$target" ]]; then
@@ -111,8 +111,7 @@ if validate_snapshot "$target" 2>/dev/null; then
     echo "Recorded the verified existing revision in $external_marker."
     exit 0
   fi
-  echo "Snapshot became complete but has no trusted revision marker." >&2
-  exit 1
+  echo "Snapshot became structurally complete but remains unpinned; verifying the full pinned Hub snapshot." >&2
 fi
 
 export P1_DOWNLOAD_REPO_ID="$P1_SPEC_MODEL_ID"
