@@ -119,17 +119,42 @@ export P1_DOWNLOAD_REPO_ID="$P1_SPEC_MODEL_ID"
 export P1_DOWNLOAD_REVISION="$P1_SPEC_REVISION"
 export P1_DOWNLOAD_TARGET="$target"
 export P1_DOWNLOAD_WORKERS="${P1_DOWNLOAD_WORKERS:-4}"
+export P1_DOWNLOAD_ATTEMPTS="${P1_DOWNLOAD_ATTEMPTS:-1}"
+export P1_DOWNLOAD_RETRY_DELAY_SECONDS="${P1_DOWNLOAD_RETRY_DELAY_SECONDS:-60}"
 "$hf_python" - <<'PY'
 import os
+import sys
+import time
+
 from huggingface_hub import snapshot_download
 
-snapshot_download(
-    repo_id=os.environ["P1_DOWNLOAD_REPO_ID"],
-    revision=os.environ["P1_DOWNLOAD_REVISION"],
-    local_dir=os.environ["P1_DOWNLOAD_TARGET"],
-    max_workers=int(os.environ["P1_DOWNLOAD_WORKERS"]),
-    token=os.environ.get("HF_TOKEN") or None,
-)
+attempts = int(os.environ["P1_DOWNLOAD_ATTEMPTS"])
+base_delay = int(os.environ["P1_DOWNLOAD_RETRY_DELAY_SECONDS"])
+if attempts < 1 or base_delay < 0:
+    raise SystemExit("P1_DOWNLOAD_ATTEMPTS must be >= 1 and retry delay must be >= 0")
+
+for attempt in range(1, attempts + 1):
+    try:
+        snapshot_download(
+            repo_id=os.environ["P1_DOWNLOAD_REPO_ID"],
+            revision=os.environ["P1_DOWNLOAD_REVISION"],
+            local_dir=os.environ["P1_DOWNLOAD_TARGET"],
+            max_workers=int(os.environ["P1_DOWNLOAD_WORKERS"]),
+            token=os.environ.get("HF_TOKEN") or None,
+        )
+        break
+    except Exception as exc:
+        if attempt == attempts:
+            raise
+        delay = min(base_delay * attempt, 300)
+        print(
+            f"Snapshot attempt {attempt}/{attempts} failed with "
+            f"{type(exc).__name__}; retrying the preserved partial download "
+            f"in {delay}s.",
+            file=sys.stderr,
+            flush=True,
+        )
+        time.sleep(delay)
 PY
 
 validate_snapshot "$target"

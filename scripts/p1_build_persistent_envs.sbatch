@@ -191,13 +191,34 @@ else
   mv -- "$contract_tmp" "$build_contract_file"
 fi
 
-build_cache_root="$target_root/.build-cache"
 export UV_CACHE_DIR="$target_root/uv-cache"
 export UV_PYTHON_DOWNLOADS=never
 export UV_NO_PROGRESS=1
+# Cargo's sqlite-backed global cache is not reliable on the shared NFS volume:
+# interrupted builds have produced disk-I/O errors followed by missing crates.
+# Keep the large, resumable uv download cache in the persistent environment,
+# but build Rust extensions in a fresh compute-node-local directory.  The
+# optional override is useful on clusters that expose a dedicated local
+# scratch mount instead of SLURM_TMPDIR or /tmp.
+scratch_parent="${P1_BUILD_SCRATCH_PARENT:-${SLURM_TMPDIR:-/tmp}}"
+if [[ "$scratch_parent" != /* || ! -d "$scratch_parent" || ! -w "$scratch_parent" ]]; then
+  echo "P1_BUILD_SCRATCH_PARENT must be a writable absolute directory: $scratch_parent" >&2
+  exit 1
+fi
+scratch_parent="$(cd -P -- "$scratch_parent" && pwd)"
+build_cache_root="$(mktemp -d "$scratch_parent/mindjourney-p1-build-${SLURM_JOB_ID}.XXXXXX")"
+cleanup_build_scratch() {
+  local candidate="${build_cache_root:-}"
+  if [[ -n "$candidate" && ! -L "$candidate" && -d "$candidate" \
+        && "$candidate" == "$scratch_parent"/mindjourney-p1-build-"$SLURM_JOB_ID".* ]]; then
+    rm -rf --one-file-system -- "$candidate"
+  fi
+}
+trap cleanup_build_scratch EXIT
+
 # puccinialin selects its Rust installation through the XDG cache location
 # when cargo is absent. Setting both XDG_CACHE_HOME and CARGO_HOME keeps every
-# Rust registry/toolchain file off the quota-limited login-home filesystem.
+# Rust registry/toolchain/target file on compute-node-local storage.
 export XDG_CACHE_HOME="$build_cache_root/xdg-cache"
 export CARGO_HOME="$XDG_CACHE_HOME/puccinialin/cargo"
 export CARGO_TARGET_DIR="$build_cache_root/cargo-target"
