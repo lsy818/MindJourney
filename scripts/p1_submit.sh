@@ -213,6 +213,7 @@ provenance_sha256="unavailable"
 manifest_sha256="unavailable"
 model_tree_manifest="unavailable"
 model_tree_sha256="unavailable"
+persistent_env_complete_sha256="none"
 if [[ -r "$input_file" ]]; then
   input_sha256="$(file_sha256 "$input_file")"
 fi
@@ -221,6 +222,13 @@ if [[ -r "$dataset_provenance" ]]; then
 fi
 if [[ -r "$experiment_manifest" ]]; then
   manifest_sha256="$(file_sha256 "$experiment_manifest")"
+fi
+if [[ -n "$persistent_env_root" ]]; then
+  if [[ ! -r "$persistent_env_root/COMPLETE" ]]; then
+    echo "Persistent environment is missing its readable COMPLETE manifest: $persistent_env_root" >&2
+    exit 1
+  fi
+  persistent_env_complete_sha256="$(file_sha256 "$persistent_env_root/COMPLETE")"
 fi
 model_tree_candidate="${P1_MODEL_TREE_MANIFEST:-$model_path/.cache/huggingface/trees/$P1_SPEC_REVISION.json}"
 if [[ -n "${P1_MODEL_TREE_MANIFEST:-}" && ! -r "$model_tree_candidate" ]]; then
@@ -261,7 +269,7 @@ if [[ -n "$job_prolog" ]]; then
   export_spec+=",P1_JOB_PROLOG=$job_prolog"
 fi
 if [[ -n "$persistent_env_root" ]]; then
-  export_spec+=",P1_PERSISTENT_ENV_ROOT=$persistent_env_root"
+  export_spec+=",P1_PERSISTENT_ENV_ROOT=$persistent_env_root,P1_EXPECTED_ENV_COMPLETE_SHA256=$persistent_env_complete_sha256"
 fi
 
 sbatch_cmd=(
@@ -295,6 +303,7 @@ printf '%s\n' \
   "experiment_manifest_sha256=$manifest_sha256" \
   "model_tree_manifest=$model_tree_manifest" \
   "model_tree_sha256=$model_tree_sha256" \
+  "persistent_environment_complete_sha256=$persistent_env_complete_sha256" \
   "source_sha256=$source_sha256" \
   "source_questions=$source_questions" \
   "run_questions=$effective_questions" \
@@ -382,6 +391,7 @@ if [[ -e "$run_root" ]]; then
     "num_questions=$effective_questions"
     "num_chunks=$effective_chunks"
     "persistent_environment_root=${persistent_env_root:-none}"
+    "persistent_environment_complete_sha256=$persistent_env_complete_sha256"
   )
   if [[ "$model_tree_sha256" != "unavailable" ]]; then
     expected_resume_lines+=("model_tree_sha256=$model_tree_sha256")
@@ -431,6 +441,7 @@ else
     "num_chunks=$effective_chunks" \
     "max_images=$max_images" \
     "persistent_environment_root=${persistent_env_root:-none}" \
+    "persistent_environment_complete_sha256=$persistent_env_complete_sha256" \
     "created_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
     >"$manifest_tmp"
   mv -- "$manifest_tmp" "$manifest"

@@ -12,6 +12,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 BUILDER = REPO_ROOT / "scripts" / "p1_build_persistent_envs.sbatch"
 PROLOG = REPO_ROOT / "scripts" / "p1_persistent_env_prolog.sh"
 SUBMIT = REPO_ROOT / "scripts" / "p1_submit.sh"
+RUN_PIPELINE = REPO_ROOT / "scripts" / "p1_run_pipeline.sh"
 
 
 def _sha(path: Path) -> str:
@@ -152,6 +153,12 @@ class PersistentEnvironmentPrologTests(unittest.TestCase):
             "#!/usr/bin/env bash\necho '1.13.0'\n",
         )
         self.versions = self.env_root / "VERSIONS.txt"
+        self.repo_commit = subprocess.run(
+            ["git", "-C", str(REPO_ROOT), "rev-parse", "--verify", "HEAD^{commit}"],
+            check=True,
+            text=True,
+            capture_output=True,
+        ).stdout.strip()
         self.versions.write_text(
             "\n".join(
                 [
@@ -168,6 +175,7 @@ class PersistentEnvironmentPrologTests(unittest.TestCase):
                     "svc.numpy=1.26.0",
                     "svc.numpy-quaternion=2024.0.3",
                     "svc.pipeline_import=ok",
+                    f"repo.commit={self.repo_commit}",
                 ]
             )
             + "\n",
@@ -213,7 +221,8 @@ class PersistentEnvironmentPrologTests(unittest.TestCase):
         )
         command = (
             f"source {PROLOG!s} || exit $?; "
-            "printf '%s\\n' \"$P1_VLLM_BIN\" \"$P1_SVC_PYTHON\" \"$PYTHONPATH\" \"$SVC_REVISION\""
+            "printf '%s\\n' \"$P1_VLLM_BIN\" \"$P1_SVC_PYTHON\" \"$PYTHONPATH\" "
+            "\"$SVC_REVISION\" \"$P1_ENV_COMPLETE_SHA256\" \"$P1_ENV_ID\""
         )
         return subprocess.run(
             ["bash", "-c", command],
@@ -232,12 +241,42 @@ class PersistentEnvironmentPrologTests(unittest.TestCase):
         self.assertEqual(output[1], str(canonical_root / "svc" / "bin" / "python"))
         self.assertTrue(output[2].startswith(f"{REPO_ROOT}:{REPO_ROOT}/pipelines:"))
         self.assertEqual(output[3], "e538e251c1009e9a41cf8b7fee5f21332a1960de")
+        complete_sha = _sha(self.complete)
+        self.assertEqual(output[4], complete_sha)
+        self.assertEqual(output[5], f"mindjourney-p1-persistent-v1-{complete_sha}")
 
     def test_checksum_tampering_is_rejected(self) -> None:
         self._write_complete(versions_sha="0" * 64)
         completed = self._source()
         self.assertNotEqual(completed.returncode, 0)
         self.assertIn("checksum mismatch", completed.stderr)
+
+    def test_duplicate_pipeline_validation_record_is_rejected(self) -> None:
+        with self.versions.open("a", encoding="utf-8") as handle:
+            handle.write("svc.pipeline_import=ok\n")
+        self._write_complete()
+        completed = self._source()
+        self.assertNotEqual(completed.returncode, 0)
+        self.assertIn("Expected exactly one svc.pipeline_import entry", completed.stderr)
+
+    def test_prolog_uses_recorded_pipeline_validation_without_reimporting(self) -> None:
+        prolog_source = PROLOG.read_text(encoding="utf-8")
+        worker_source = RUN_PIPELINE.read_text(encoding="utf-8")
+        self.assertIn(
+            'p1_manifest_value "$p1_versions_file" svc.pipeline_import',
+            prolog_source,
+        )
+        self.assertNotIn(
+            "import pipelines.pipeline_svc_scaling_spatial_beam_search",
+            prolog_source,
+        )
+        self.assertIn(
+            'exec "$svc_python" pipelines/pipeline_svc_scaling_spatial_beam_search.py',
+            worker_source,
+        )
+        self.assertNotIn('$p1_qwen_vllm --version', prolog_source)
+        self.assertNotIn('"$p1_qwen_python" -', prolog_source)
+        self.assertNotIn('"$p1_svc_python" -', prolog_source)
 
     def test_prolog_has_no_other_account_dependency(self) -> None:
         self.assertNotIn("tyjiang", PROLOG.read_text(encoding="utf-8"))
@@ -271,12 +310,34 @@ class PersistentEnvironmentPrologTests(unittest.TestCase):
         )
         self.assertEqual(completed.returncode, 0, completed.stderr)
         self.assertIn(f"P1_PERSISTENT_ENV_ROOT={self.env_root}", completed.stdout)
+        self.assertIn(
+            f"P1_EXPECTED_ENV_COMPLETE_SHA256={_sha(self.complete)}",
+            completed.stdout,
+        )
+        self.assertIn(
+            f"persistent_environment_complete_sha256={_sha(self.complete)}",
+            completed.stdout,
+        )
         self.assertIn(f"P1_JOB_PROLOG={PROLOG}", completed.stdout)
         self.assertIn("P1_EXPECTED_INPUT_SHA256=unavailable", completed.stdout)
         self.assertIn("P1_EXPECTED_PROVENANCE_SHA256=unavailable", completed.stdout)
         self.assertIn("P1_EXPECTED_MANIFEST_SHA256=", completed.stdout)
         self.assertIn("P1_EXPECTED_SOURCE_SHA256=", completed.stdout)
         self.assertIn("Dry run only", completed.stdout)
+
+    def test_a100_plan_excludes_legacy_driver_nodes(self) -> None:
+        registry = REPO_ROOT / "scripts" / "p1_model_registry.sh"
+        completed = subprocess.run(
+            ["bash", str(registry), "qwen35-27b", "a100"],
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        self.assertEqual(completed.returncode, 0, completed.stderr)
+        self.assertIn(
+            "exclude=hkbugpudgx01,hkbugpusrv07,hkbugpusrv08",
+            completed.stdout,
+        )
 
 
 if __name__ == "__main__":

@@ -69,8 +69,9 @@ p1_load_resource_plan() {
     a100)
       P1_SPEC_ACCELERATOR="a100"
       # hkbugpudgx01 contains 40 GB A100s; all P1 fallback plans require the
-      # 80 GB A100 nodes.
-      P1_SPEC_EXCLUDE="hkbugpudgx01"
+      # 80 GB A100 nodes. srv07/srv08 use R555 drivers, which cannot load the
+      # CUDA 13 build pinned by vLLM 0.28.0; the validated nodes use R580.
+      P1_SPEC_EXCLUDE="hkbugpudgx01,hkbugpusrv07,hkbugpusrv08"
       if [[ "$P1_SPEC_SIZE_CLASS" == "72b" ]]; then
         P1_SPEC_TP=4
         P1_SPEC_TOTAL_GPUS=5
