@@ -125,6 +125,8 @@ class PersistentEnvironmentBuilderTests(unittest.TestCase):
         self.assertIn('export XDG_CACHE_HOME="$build_cache_root/xdg-cache"', source)
         self.assertIn('export CARGO_HOME="$XDG_CACHE_HOME/puccinialin/cargo"', source)
         self.assertIn('export CARGO_TARGET_DIR="$build_cache_root/cargo-target"', source)
+        self.assertIn('persistent_puccinialin_root=', source)
+        self.assertIn('export PATH="$persistent_cargo_bin:$PATH"', source)
         self.assertIn('export TMPDIR="$build_cache_root/tmp"', source)
         self.assertNotIn('build_cache_root="$target_root/.build-cache"', source)
         self.assertIn('ensure_venv "$qwen_env"', source)

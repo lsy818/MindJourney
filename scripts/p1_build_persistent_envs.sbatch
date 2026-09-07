@@ -222,7 +222,21 @@ trap cleanup_build_scratch EXIT
 export XDG_CACHE_HOME="$build_cache_root/xdg-cache"
 export CARGO_HOME="$XDG_CACHE_HOME/puccinialin/cargo"
 export CARGO_TARGET_DIR="$build_cache_root/cargo-target"
-export RUSTUP_HOME="$XDG_CACHE_HOME/puccinialin/rustup"
+# Reuse a previously installed Rust toolchain when one exists. The compiler
+# itself is immutable/read-mostly and is safe to load from shared storage;
+# Cargo's mutable registry, sqlite cache, and target directory remain local.
+# This also avoids making a fresh rustup download a prerequisite on every
+# resumed build when the cluster proxy or DNS is intermittent.
+persistent_puccinialin_root="$target_root/.build-cache/xdg-cache/puccinialin"
+persistent_cargo_bin="$persistent_puccinialin_root/cargo/bin"
+if [[ -x "$persistent_cargo_bin/cargo" && -x "$persistent_cargo_bin/rustc" \
+      && -d "$persistent_puccinialin_root/rustup/toolchains" ]]; then
+  export RUSTUP_HOME="$persistent_puccinialin_root/rustup"
+  export PATH="$persistent_cargo_bin:$PATH"
+  echo "Reusing the persistent Rust toolchain; Cargo caches and targets remain local."
+else
+  export RUSTUP_HOME="$XDG_CACHE_HOME/puccinialin/rustup"
+fi
 export TMPDIR="$build_cache_root/tmp"
 export PIP_CACHE_DIR="$build_cache_root/pip-cache"
 mkdir -p -- \
