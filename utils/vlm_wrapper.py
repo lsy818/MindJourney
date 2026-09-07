@@ -1,7 +1,16 @@
 # A VLM wrapper for adapting both close-source (i.e. API) and open-source (i.e. local) models.
 from utils.api import ChatAPI, AzureConfig, OpenAICompatibleConfig, P1_MODEL_NAMES
-from utils.InternVL3 import *
-from utils.prompt_formatting import *
+from utils.prompt_formatting import (
+    format_gpt_content,
+    format_internvl3_content,
+    format_spatial_vqa_prompt_answer_baseline,
+    format_spatial_vqa_prompt_answer_baseline_fill_in_blank,
+    format_spatial_vqa_prompt_answer_scaling,
+    format_spatial_vqa_prompt_answer_scaling_fill_in_blank,
+    format_spatial_vqa_prompt_bbox,
+    format_spatial_vqa_prompt_scores,
+    format_spatial_vqa_prompt_scores_fill_in_blank,
+)
 
 class VLMWrapper:
     def __init__(self, model_name, qa_model_name=None):
@@ -40,6 +49,11 @@ class VLMWrapper:
             self.qa_model = None
             self.prompt_style = 'gpt'
         elif model_name in ['OpenGVLab/InternVL3-8B', 'OpenGVLab/InternVL3-14B']:
+            import torch
+            from transformers import AutoModel, AutoTokenizer
+
+            from utils.InternVL3 import split_model
+
             assert qa_model_name in (None, "None") or qa_model_name == model_name, "Separate Score/QA model is not supported for InternVL3."
             # device_map = split_model(model_name)
             device_map = "cuda:1"

@@ -4,11 +4,12 @@ import math
 import os
 import re
 import threading
-from typing import List, Literal, Optional, Tuple, Union
+from typing import TYPE_CHECKING, List, Literal, Optional, Tuple, Union
 
-import gradio as gr
 from colorama import Fore, Style, init
 
+if TYPE_CHECKING:
+    import gradio as gr
 init(autoreset=True)
 
 import imageio.v3 as iio
@@ -1066,7 +1067,7 @@ class GradioTrackedSampler(EulerEDMSampler):
         uc: dict | None = None,
         num_steps: int | None = None,
         verbose: bool = True,
-        global_pbar: gr.Progress | None = None,
+        global_pbar: "gr.Progress | None" = None,
         **guider_kwargs,
     ) -> torch.Tensor | None:
         uc = cond if uc is None else uc

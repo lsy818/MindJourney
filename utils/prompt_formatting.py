@@ -1,9 +1,7 @@
 import base64
-import copy
 import mimetypes
 import os
 from PIL import Image
-from utils.InternVL3 import *
 
 SYS = """
 You are an AI assistant designed to help us understand spatial relationship in 3D indoor scene and finish visual question answering.
@@ -62,6 +60,10 @@ def format_gpt_content(contents):
     return formatted_content
 
 def format_internvl3_content(contents, model_device=None):
+    import torch
+
+    from utils.InternVL3 import load_image
+
     formatted_content = {
         "question": "",
         "num_patches_list": [],

@@ -1,13 +1,8 @@
-from utils.api import ChatAPI, AzureConfig
-from utils.prompt_formatting import *
 from utils.answer_parsing import score_multiple_choice_response
-from tqdm import tqdm
-import argparse
 import json
 import random
 import os
 import cv2
-import sys
 from typing import Dict, List, Optional
 from stable_virtual_camera.demo import svc_main, Model
 import math
@@ -17,10 +12,8 @@ import pickle
 import copy
 os.environ["PYTORCH_SDP_FORCE_FALLBACK"] = "1"
 from diffusers.utils import export_to_video
-import quaternion
+import quaternion  # noqa: F401  # Registers ``np.quaternion`` at import time.
 from pipeline_baseline import PipelineBase
-import torch
-from numpy import quaternion
 import multiprocessing
 
 def resize_to_short_side(img, target_short=512):

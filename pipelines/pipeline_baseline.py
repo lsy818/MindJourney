@@ -2,20 +2,13 @@ from utils.vlm_wrapper import VLMWrapper
 from utils.prompt_formatting import SYS, BASELINE_PROMPT
 from utils.answer_parsing import score_multiple_choice_response
 from tqdm import tqdm
-import argparse
 import hashlib
 import json
 import random
 import os
 import cv2
-import sys
 from utils.args import get_svc_args
-from decord import VideoReader, cpu
 import math
-import numpy as np
-from scipy.spatial.transform import Rotation as R
-import pickle
-from diffusers.utils import export_to_video
 import copy
 from utils.p1_fingerprints import source_sha256 as calculate_source_sha256
 
