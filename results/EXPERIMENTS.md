@@ -1,6 +1,6 @@
 # MindJourney 实验结果与计划
 
-最后更新：2026-09-07（Asia/Shanghai）
+最后更新：2026-09-08（Asia/Shanghai）
 
 本文件同时记录实验优先级和已验证的实验产物。优先级数字越小，优先级越高；`P0` 表示用户指定为已经运行的项目，但只有带有正式 `COMPLETE`、可复核结果文件和哈希的项目才记为“已验证完成”。
 
@@ -16,8 +16,8 @@
 
 | 数据集 | Qwen3.5-27B | Qwen2.5-VL-72B-Instruct | Qwen3.5-9B | Qwen3.8-27B |
 |---|---|---|---|---|
-| MindCube 1050 | P1 · 准备中 | P1 · 准备中 | P3 · 待跑 | P3 · 待跑 |
-| MMSI-Bench 1000 | P0 · 用户称此前已跑，产物待定位/验证 | P0 · 用户称此前已跑，产物待定位/验证 | P1 · 准备中 | P1 · 准备中 |
+| MindCube 1050 | P1 · 首片运行中 | P1 · 等待权重续传 | P3 · 待跑 | P3 · 待跑 |
+| MMSI-Bench 1000 | P0 · 用户称此前已跑，产物待定位/验证 | P0 · 用户称此前已跑，产物待定位/验证 | P1 · 首片运行中 | P1 · 首片排队中 |
 | SAT Real | P0 · **已验证完成** | P0 · 用户称此前已跑，产物待定位/验证 | P2 · 待跑 | P2 · 待跑 |
 | SAT Syn (`rand42-500`) | P0 · **已验证完成** | P4 · 待跑 | P4 · 待跑 | P4 · 待跑 |
 
@@ -27,15 +27,15 @@
 
 | 数据集 / 模型 | 数据 | 权重 | Smoke | 全量分片 | 结果文件 |
 |---|---|---|---|---|---|
-| MindCube / `Qwen/Qwen3.5-27B` | 1050 题及完整原始图片树已就绪并严格验证；A100-2 诊断副本已就绪 | DAAI 目录含 `config`、11 个 safetensors；精确 revision marker 已验证且组可读；A100-2 完整权重树已核验 | SVC 精确缓存 Job `65533` 与持久环境 Job `66420` 均已严格验证完成 | A100 80GB 提交器 `66421` 已完成并创建正式数组 `66493`；首批分片 `0-2`（共 11 片），其中 `66493_0` 已开始运行，`1-2` 排队 | Run ID：`mj-p1-mindcube-qwen35-27b-a100-20260906`；DAAI：`/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen35-27b-a100-20260906` |
-| MindCube / `Qwen/Qwen2.5-VL-72B-Instruct` | 1050 题及完整原始图片树已就绪并严格验证；A100-2 诊断副本已就绪 | DAAI 下载仍未完成且尚无 revision marker；续传 Job `65957` 当前运行，31/38 个权重分片已完整，partial 保留 | SVC 精确缓存与持久环境均已完成；等待 72B 固定 revision 权重严格验证，72B 不在 40GB A100 上运行 | A100 80GB 提交器 `66491` 为 `PENDING`，同时依赖环境 `66420`（已完成）与下载 `65957`，计划分片 `0` | 计划 Run ID：`mj-p1-mindcube-qwen25vl-72b-a100-20260907`；DAAI：`/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen25vl-72b-a100-20260907` |
-| MMSI-Bench / `Qwen/Qwen3.5-9B` | Job `65519` 已在 00:33:20 完成：1000 题 / 2550 图，严格官方预处理与独立校验通过；新的 `processed_daai` 输入对 `24482277` 可读，旧 `processed/test.json` 仅保留审计 | DAAI 目录含 `config`、4 个 safetensors；精确 revision marker 已验证且组可读；A100-2 固定 revision 的完整权重树已核验 | SVC 精确缓存 Job `65533` 与持久环境 Job `66420` 均已严格验证完成 | A100 80GB 提交器 `66424` 已完成并创建正式数组 `66494`；首批分片 `0` 正在等待调度 | Run ID：`mj-p1-mmsi-qwen35-9b-a100-20260906`；DAAI：`/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mmsi-qwen35-9b-a100-20260906` |
-| MMSI-Bench / `Qwen/Qwen3.8-27B` | 1000 题 / 2550 图已就绪并严格验证；A100-2 诊断副本已就绪 | 下载 Job `65447` 与严格验证 Job `65500` 均已完成；固定 revision 目录完整，外部 marker 为 `1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0` | SVC 精确缓存 Job `65533` 与持久环境 Job `66420` 均已严格验证完成 | 修复提交节点默认 Python 后，提交器 `66490` 已完成并创建正式数组 `66492`；首批分片 `66492_0` 已开始运行 | Run ID：`mj-p1-mmsi-qwen38-27b-a100-20260907`；DAAI：`/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mmsi-qwen38-27b-a100-20260907` |
+| MindCube / `Qwen/Qwen3.5-27B` | 1050 题及完整原始图片树已就绪并严格验证；A100-2 诊断副本已就绪 | DAAI 目录含 `config`、11 个 safetensors；精确 revision marker 已验证且组可读；A100-2 完整权重树已核验 | SVC 精确缓存 Job `65533` 与持久环境 Job `66420` 均已严格验证完成 | r3 提交器 `66595` 已完成；正式首片 `66599_0` 正在 `hkbugpusrv11` 使用 2 × A100 80GB 运行，其余分片待按同一 Run ID 逐片续提 | Run ID：`mj-p1-mindcube-qwen35-27b-a100-r3-20260908`；DAAI：`/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen35-27b-a100-r3-20260908` |
+| MindCube / `Qwen/Qwen2.5-VL-72B-Instruct` | 1050 题及完整原始图片树已就绪并严格验证；A100-2 诊断副本已就绪 | DAAI 固定 revision 权重续传 Job `65957` 仍在运行；partial 和下载日志全部保留 | SVC 精确缓存与持久环境均已完成；仅等待 72B 权重树和 marker 严格验证，72B 不在 40GB A100 上运行 | r3 提交器 `66598` 等待 `65957` 的依赖；下载成功后仅创建正式分片 `0` | 计划 Run ID：`mj-p1-mindcube-qwen25vl-72b-a100-r3-20260908`；DAAI：`/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen25vl-72b-a100-r3-20260908` |
+| MMSI-Bench / `Qwen/Qwen3.5-9B` | Job `65519` 已在 00:33:20 完成：1000 题 / 2550 图，严格官方预处理与独立校验通过；新的 `processed_daai` 输入对 `24482277` 可读，旧 `processed/test.json` 仅保留审计 | DAAI 目录含 `config`、4 个 safetensors；精确 revision marker 已验证且组可读；A100-2 固定 revision 的完整权重树已核验 | SVC 精确缓存 Job `65533` 与持久环境 Job `66420` 均已严格验证完成 | r3 提交器 `66596` 已完成；正式首片 `66600_0` 正在 `hkbugpusrv11` 使用 2 × A100 80GB 运行，其余分片待按同一 Run ID 逐片续提 | Run ID：`mj-p1-mmsi-qwen35-9b-a100-r3-20260908`；DAAI：`/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mmsi-qwen35-9b-a100-r3-20260908` |
+| MMSI-Bench / `Qwen/Qwen3.8-27B` | 1000 题 / 2550 图已就绪并严格验证；A100-2 诊断副本已就绪 | 下载 Job `65447` 与严格验证 Job `65500` 均已完成；固定 revision 目录完整，外部 marker 为 `1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0` | SVC 精确缓存 Job `65533` 与持久环境 Job `66420` 均已严格验证完成 | r3 提交器 `66597` 已完成；正式首片 `66601_0` 等待 A100 80GB 调度，其余分片待按同一 Run ID 逐片续提 | Run ID：`mj-p1-mmsi-qwen38-27b-a100-r3-20260908`；DAAI：`/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mmsi-qwen38-27b-a100-r3-20260908` |
 
 - 推理统一使用 BF16 和 no-thinking；Qwen2.5-VL 不发送其不支持的 Qwen3 thinking 参数。
 - 诊断 smoke/debug 允许且优先在 A100-1 或 A100-2 直接运行，避免为调试占用 DAAI 的 Slurm 队列；仅在有足够、可安全独占的空闲 GPU 时启动，不抢占、不超卖，也不终止其他用户进程。
 - 正式全量计算只在 DAAI 运行。H20 96GB 空闲时优先；否则使用 A100 80GB，并排除 40GB DGX。硬件切换不得改变 BF16、no-thinking、图片顺序或 SVC/搜索参数。
-- 每个组合必须先完成一题端到端 smoke，再提交正式数组；“已提交/排队”不等于“已完成”。
+- 数据、模型、SVC 缓存和持久环境已经在准备阶段一次性完成严格检查；正式 worker 启动时只核对不可变 `COMPLETE` / freeze / source 哈希，不再重复导入 vLLM、SVC pipeline 或执行版本探测。“已提交/排队”仍不等于“已完成”。
 - 统一配置：[p1_svc_multiimage.json](../configs/p1_svc_multiimage.json)。
 - A100-1 与 A100-2 均为 8 × A100 PCIe 40GB；最后观测时两台机器的 8 张卡均有常驻进程，没有可安全独占的空闲卡，因此尚未启动任何 A100 诊断 smoke。A100-2 的工作副本位于 `/data/shiyang/MindJourney`。
 - H20 节点 `hkbugpusrv16` 本轮提交前 8 张卡中已有 7 张被占用，仅剩 1 张，不足任何一项 P1 所需的最少 2 张，因此当前正式首批回退到 A100 80GB。所有 A100 回退都显式排除 40GB DGX；后续提交前仍会重新检查 H20，而不会把本次回退固化为实验设置。
@@ -53,7 +53,7 @@
 
 ### DAAI 队列快照
 
-快照时间：北京时间 2026-09-07（本轮 P1 前置任务重试与四个提交器创建后；具体状态以 Slurm accounting 为准）。
+快照时间：北京时间 2026-09-08（驱动兼容恢复后的 r3 首片；具体状态以 Slurm accounting 为准）。
 
 - 环境首试 Job `65505` 因 Slurm 脚本错误定位仓库而立即失败；定位逻辑已在 commit `01ef26c` 修复。后续环境 Job `65510` 运行 00:59:38 后因 Cargo home 缓存的 disk I/O / `proc_macro2` 错误失败；Job `65532` 又在 00:00:07 因 Linux/NFS 上 `flock` 返回 `EBADF` 失败。SVC 锁兼容修复 commit `9eaea12` 已通过 62/62 测试，环境安全续传与隔离缓存修复 commit `c63e58e` 已通过全量 64/64 测试；为确保 `puccinialin` / Cargo 子进程实际缓存路径与记录一致，最终修复 commit `a2d77b6` 又通过了定向 10/10 测试，此前的全量 64/64 结论仍适用。
 - SVC exact-revision 预取 Job `65533` 已在 `hkbugpusrv07` 以状态 `COMPLETED 0:0` 完成，Elapsed 12:46:04。完成标记为 `/home/datasets/shiyang/daai_runtime/model_cache/mindjourney/svc-assets-v1/COMPLETE`，manifest SHA256 为 `aa311c4796b36c8c995344d1eae0a5f7ca38d8c7a89cc9966f1edfbf0ff09381`；manifest 中的固定 revision 与预期三项权重 SHA 均一致。另使用 `hf0350` Python 离线执行 `scripts/p1_svc_assets.py validate`，结果为 `5 files valid`，因此该依赖已独立验证完成。
@@ -65,15 +65,19 @@
 - 单 worker 续传 Job `65785` 在运行 02:55:32 后再次因 `ChunkedEncodingError` 以 `FAILED 1:0` 结束；当时分片 19 为 3,565,158,400 / 3,995,183,968 bytes，完整文件 26/50、完整权重分片 19/38，缓存、partial 和日志全部保留。修复 commit `53687b2` 为同一作业加入最多 20 次断点重试；commit `bd85282` 修复“权重结构已完整但尚无 marker”时仍须按固定 Hub revision 补全并验证的路径。重试 Job `65957` 当前仍为 `RUNNING`，约 29/50 个文件完整且暂无新错误；它使用单 worker、最多 20 次尝试和 60–300 秒退避，并通过 `24482277` 账号的 `HF_TOKEN_PATH` 读取凭据。本文和 Git 中不记录令牌内容；只有完整索引、全部权重分片、固定 revision marker 与严格校验均通过后，72B 才会记为下载完成。
 - Qwen3.8-27B 下载 Job `65447` 已以 `COMPLETED 0:0` 结束，Elapsed 1-04:36:58；严格验证 Job `65500` 也已以 `COMPLETED 0:0` 结束，Elapsed 00:00:18。外部 marker 为 `1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0`，日志确认固定 revision 目录完整，因此该模型权重前置项已严格验证完成。
 - 旧的四个正式提交器 Job `65511`–`65514` 已取消。这些提交器试图一次创建四个完整数组，而集群 `QOSMaxSubmitJobPerUserLimit` 会把数组中的每个 task 计入约 10 个可提交槽位，继续保留会阻塞真正的计算分片。取消提交器不删除任何已有结果或日志。
-- MindCube / Qwen3.5-27B 的历史 H20 数组与失效提交器均在运行前取消并保留审计。环境重提时确认计划 Run root 不存在，旧 A100 提交器 `66001` 取消且从未运行；新提交器 `66421` 已在 00:03:22 内完成并创建正式数组 `66493`。首批分片 `0-2` 中，`66493_0` 已在 `hkbugpusrv11` 获得 2 张 A100 80GB 并开始运行，`1-2` 等待调度。每个 task 使用 TP=1、SVC=1、8 CPU、BF16、no-thinking，并排除 40GB DGX。
+- 首轮 A100 数组暴露出节点驱动差异：`66493_1`、`66493_2` 和 `66494_0` 在 `hkbugpusrv08` 上失败，vLLM 日志显示该节点 CUDA driver 为 `555.42.02`（API 12.5），不能运行 Qwen 服务环境的 PyTorch 2.13 + CUDA 13.0 / vLLM 0.28.0；同为 R555 的 `hkbugpusrv07` 也已排除。`hkbugpusrv11`、`hkbugpusrv12`、`hkbugpusrv15` 已观测到 R580 驱动，其中 r3 运行使用 `hkbugpusrv11`。A100 资源计划现同时排除 `hkbugpusrv07`、`hkbugpusrv08` 与 40GB DGX。
+- 持久环境同时包含职责不同的两个环境，不能用单一 Torch 版本概括：Qwen/vLLM 服务侧是 PyTorch 2.13 + CUDA 13.0，SVC pipeline 侧是已冻结的 PyTorch 2.9 环境。环境完成标记 SHA256 为 `4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50`；提交清单会绑定该 SHA 以及既有 freeze 哈希，防止在不同环境上静默运行。
+- 驱动兼容与启动优化 commit `a2dd3e2` 将已知旧驱动节点加入排除列表，并让正式 prolog 信任已验证的不可变环境清单；后续 commit `774f754` 删除 `scripts/p1_serve_vllm.sh` 中最后一次 `vllm --version` 重型导入。两次修改均未改变数据、prompt、图片顺序、BF16、no-thinking、SVC 或搜索参数，最新全量测试为 67/67 通过。环境、模型、数据在准备阶段已检查，正式 task 启动仅核对标记与哈希，不再重复 vLLM/SVC 导入或版本探测。
+- 驱动失败后的原数组 `66493`、`66494` 及当时仍在运行的 `66492_0` 均停止继续使用；它们没有可验证的正式结果。首次恢复 r2 的 `66587_0`、`66588_0` 等 task 也在发现残余 `vllm --version` 后取消，尚未进入逐题推理。所有旧 run root、partial、失败日志和取消记录均原样保留，不删除、不合并到 r3。
+- 当前正式 r3：MindCube / Qwen3.5-27B 提交器 `66595` 已完成，`66599_0` 正在 `hkbugpusrv11` 的 2 × A100 80GB 上运行；MMSI / Qwen3.5-9B 提交器 `66596` 已完成，`66600_0` 正在同节点的 2 × A100 80GB 上运行；MMSI / Qwen3.8-27B 提交器 `66597` 已完成，`66601_0` 因 Priority 等待调度；72B 续传 Job `65957` 继续运行，其依赖提交器 `66598` 等待下载成功。
+- r3 Run ID 分别为 `mj-p1-mindcube-qwen35-27b-a100-r3-20260908`、`mj-p1-mmsi-qwen35-9b-a100-r3-20260908`、`mj-p1-mmsi-qwen38-27b-a100-r3-20260908`，以及计划中的 `mj-p1-mindcube-qwen25vl-72b-a100-r3-20260908`。r1/r2 及更早运行目录继续保留作审计；任何 r3 结果只写入自己的新目录。
 - `24482277` 对旧 MMSI `processed/test.json` 无读取权限，但可读取原始 `mmsi_full.jsonl` 和 2550 张图片。交互式预处理 Job `65518` 被外部取消且未产生正式输入；持久批处理 Job `65519` 已在 00:33:20 完成，使用官方严格转换程序生成 `/home/datasets/shiyang/MMSI_Bench_ec7c92bf/processed_daai/test.json`（SHA256 `5de75a94eebb2ad31b44ab0f33d7225c56157165292d8112e287c410f56180c9`）与 `/home/datasets/shiyang/MMSI_Bench_ec7c92bf/processed_daai/test_provenance.json`（SHA256 `fa5f4ee9223cf72fd4dcbc941b8fbd66788b37d854844532bde581cd2aebdf9f`）；1000 题 / 2550 图及官方图片顺序已通过独立严格校验，原始文件和失败记录均保留。
-- MMSI / Qwen3.5-9B 的历史 H20 数组与失效提交器均在运行前取消并保留审计。旧 A100 提交器 `66078` 取消且从未运行；新提交器 `66424` 已在 00:03:22 内完成并创建正式数组 `66494`，首批分片 `0` 等待 A100 80GB 调度。
-- MMSI / Qwen3.8-27B 的旧提交器均从未创建正式结果。首次新提交器 `66425` 在 `hkbugpusrv07` 因节点默认 `python3` 过旧、无法解析 `from __future__ import annotations` 而于 00:00:02 失败，且当时 Run root 仍不存在；使用固定 Python 3.12 控制面路径重提的 `66490` 已在 00:01:11 内完成并创建正式数组 `66492`，`66492_0` 已在 `hkbugpusrv11` 获得 2 张 A100 80GB 并开始运行。该修复只影响提交器的解释器选择，不改变 worker 环境或实验设置。
-- MindCube / Qwen2.5-VL-72B-Instruct 的旧提交器均已取消且从未运行。新提交器 `66491` 同时依赖已完成环境 Job `66420` 与仍在续传的 72B 权重 Job `65957`；当前 31/38 个权重分片完整，下载 partial 与重试日志均保留，只有固定 revision 文件树及 marker 严格验证成功后才会创建正式分片 `0`。
-- 新提交器均沿用显式的 `P1_CACHE_ROOT=/home/datasets/shiyang/daai_runtime/model_cache` 和 `P1_MODEL_VALIDATION_ROOT=/home/datasets/shiyang/mindjourney_storage/model_validation`，不依赖错误默认值。Qwen3.5-27B、Qwen3.5-9B 与 Qwen3.8-27B 的精确 revision 标记均已验证；实际数组为 `66493`、`66494`、`66492`，72B 提交器为 `66491`。所有 A100 任务显式排除 40GB DGX。
+- MindCube / Qwen3.5-27B 和 MMSI / Qwen3.5-9B 的历史 H20 数组、失效提交器及 r1/r2 A100 尝试均保留审计；MMSI / Qwen3.8-27B 的早期提交器 `66425` 曾因提交节点默认 Python 过旧失败，后来已使用固定 Python 3.12 控制面路径修复。上述控制面修复均不改变 worker 环境或实验设置。
+- MindCube / Qwen2.5-VL-72B-Instruct 的旧提交器 `66491` 已取消并保留；r3 提交器 `66598` 仅依赖仍在续传的 72B 权重 Job `65957`。下载 partial 与重试日志全部保留，只有固定 revision 文件树及 marker 严格验证成功后才会创建正式分片 `0`。
+- r3 提交器继续显式使用 `P1_CACHE_ROOT=/home/datasets/shiyang/daai_runtime/model_cache` 和 `P1_MODEL_VALIDATION_ROOT=/home/datasets/shiyang/mindjourney_storage/model_validation`。Qwen3.5-27B、Qwen3.5-9B 与 Qwen3.8-27B 的精确 revision 标记均已验证；所有 A100 task 都排除 40GB DGX 及已知 R555 节点。
 - Hugging Face read token 仅安装在 `24482277` 账号的凭据存储中，并已验证能够读取 gated Stable Virtual Camera 仓库；Git 记录、结果文档和日志中均不保存 token 值或其他 secret。
-- 当前 QOS 策略是让可用槽位优先承载四项 P1 的实际计算 task：首批为 MindCube / Qwen3.5-27B 的 `0-2`，以及另外三个组合各自的分片 `0`；完成并释放槽位后，再以各自 Run ID 和 `--resume` 分批续提。排队、提交器成功或单个分片结束都不等于实验完成；只有完整覆盖、零静默跳题、正式 `COMPLETE`、合并结果与哈希全部通过后才更新为“已验证完成”。
-- DAAI 服务器源码当前固定为 commit `503f0f0`，正式 Run manifest 的 source SHA256 为 `85890952202d5518abdd72585f695822e76e3618b12f152fb090eb4174ad556d`。在这些数组完成前，后续仅推送记录文档且不拉取服务器源码，以免改变运行时指纹。Git tracked 文件保持干净；运行脚本仍持有少量临时 `.nfs*` 文件句柄，这些文件不能手工删除，相关作业结束并释放句柄后会由 NFS 自动消失。
+- 当前 QOS 策略是让每个 array 一次只创建一个 task（r3 首轮均为 `--array 0`），因为 `QOSMaxSubmitJobPerUserLimit` 会将 array 的每个 task 计入约 10 个可提交槽位。当前 task 完成并释放槽位后，再用同一 Run ID、`--resume --array <下一片>` 逐片续提；不得创建新 Run ID，也不得覆盖已有片。排队、提交器成功或单片结束都不等于实验完成；只有完整覆盖、零静默跳题、正式 `COMPLETE`、合并结果与哈希全部通过后才更新为“已验证完成”。
+- DAAI r3 worker 源码固定为 commit `774f75435b43f7cadc35ced50341fbc65d5e90ed`，正式 source SHA256 为 `1d441a15d0f7d28e365d897598fc16307632eb62f1b734a58c5d138dcf9c2d3d`。本次仅在远端追加结果记录文档，不在 r3 运行期间拉取该文档 commit，以免改变运行目录中的 tracked 状态；后续分片继续使用相同 worker commit、source SHA 与环境 `COMPLETE` SHA。
 
 ## 已验证运行
 
