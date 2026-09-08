@@ -1,4 +1,4 @@
-import hashlib
+from scripts.p1_svc_assets import validated_asset_digest
 import os
 
 import safetensors.torch
@@ -52,11 +52,7 @@ def load_model(
 
     expected_sha256 = os.environ.get("SVC_WEIGHT_SHA256")
     if expected_sha256:
-        digest = hashlib.sha256()
-        with open(weight_path, "rb") as handle:
-            for block in iter(lambda: handle.read(1024 * 1024), b""):
-                digest.update(block)
-        actual_sha256 = digest.hexdigest()
+        actual_sha256 = validated_asset_digest(weight_path, expected_sha256)
         if actual_sha256 != expected_sha256:
             raise RuntimeError(
                 f"SVC checkpoint SHA256 mismatch: expected {expected_sha256}, "

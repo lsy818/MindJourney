@@ -1,4 +1,4 @@
-import hashlib
+from scripts.p1_svc_assets import validated_asset_digest
 import os
 
 import kornia
@@ -32,11 +32,7 @@ class CLIPConditioner(nn.Module):
             "SVC_OPENCLIP_SHA256",
             "9a78ef8e8c73fd0df621682e7a8e8eb36c6916cb3c16b291a082ecd52ab79cc4",
         )
-        digest = hashlib.sha256()
-        with open(clip_path, "rb") as handle:
-            for block in iter(lambda: handle.read(1024 * 1024), b""):
-                digest.update(block)
-        actual_sha256 = digest.hexdigest()
+        actual_sha256 = validated_asset_digest(clip_path, expected_sha256)
         if actual_sha256 != expected_sha256:
             raise RuntimeError(
                 "OpenCLIP checkpoint SHA256 mismatch: "

@@ -127,6 +127,18 @@ def _test_assets():
 
 
 class SvcAssetCacheTests(unittest.TestCase):
+    def test_model_loaders_reuse_matching_receipt_and_reject_wrong_digest(self):
+        specs, contents = _test_assets()
+        fake = FakeHub(specs, contents)
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary).resolve()
+            payload = p1_svc_assets.prefetch_cache(root, specs=specs, api=fake)
+            record = payload["assets"][1]
+            with mock.patch.dict(os.environ, {"P1_CACHE_ROOT": str(root)}), mock.patch.object(p1_svc_assets, "startup_cache", return_value=payload), mock.patch.object(p1_svc_assets, "_sha256_file", side_effect=AssertionError("weight must not be hashed again")):
+                self.assertEqual(p1_svc_assets.validated_asset_digest(root / record["cache_path"], record["sha256"]), record["sha256"])
+                with self.assertRaises(p1_svc_assets.AssetValidationError):
+                    p1_svc_assets.validated_asset_digest(root / record["cache_path"], "0" * 64)
+
     def test_startup_reuses_receipt_without_opening_weights_or_importing_hub(self):
         specs, contents = _test_assets()
         fake = FakeHub(specs, contents)

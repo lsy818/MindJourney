@@ -478,6 +478,22 @@ def startup_cache(cache_root, *, specs=ASSETS, api=None):
         return payload
 
 
+def validated_asset_digest(path, expected_sha256):
+    """Let SVC loaders reuse the same receipt instead of hashing weights again."""
+    path = pathlib.Path(path).resolve(strict=True)
+    cache_root = os.environ.get("P1_CACHE_ROOT")
+    if cache_root:
+        root = _canonical_root(cache_root)
+        payload = startup_cache(root)
+        for record in payload["assets"]:
+            if (root / record["cache_path"]).resolve(strict=True) == path:
+                if record["sha256"] != expected_sha256:
+                    raise AssetValidationError("loader expected digest differs from validated SVC record")
+                return record["sha256"]
+    # Standalone/non-P1 loaders and unrecorded paths retain strict validation.
+    return _sha256_file(path)
+
+
 def _download_groups(specs: Iterable[AssetSpec]) -> dict[tuple[str, str], list[str]]:
     groups: dict[tuple[str, str], list[str]] = {}
     for spec in specs:
