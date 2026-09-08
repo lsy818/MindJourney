@@ -6,6 +6,9 @@
 
 ## 最新进展：2026-09-08 依赖本地化（覆盖下文历史队列快照）
 
+- 14:33 HKT 故障推进：`66827_0`（72B，3×A100）在模型权重成功加载后，于多模态编码器显存 profiling 阶段 OOM，Elapsed 00:10:16。每个模型卡权重占 68.59 GiB；OOM 时仅余约 1002 MiB，却需再分配 1.25 GiB。未擅自降低 BF16、65536 上下文或图像上限；改以现有 3×H20 资源方案（TP2 + SVC1）提交 `66853`，Run `mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908`，同 r8 source SHA。实际 H20 可运行性待真实启动确认，不宣称已解决显存问题。
+- `66834_0`（MindCube/27B）和 `66835_0`（MMSI/3.8-27B）已完成 vLLM 服务启动，但 SVC 初始化因找不到本地固定资源失败，分别用时 00:10:04 / 00:06:54，无题目结果。定位到账号继承的 `HF_HOME=/home/comp/24482277/chentao/models` 与已校验的 `P1_CACHE_ROOT` 不一致。其 `hub` 目录此前仅有 `version.txt`；已新增三个同名仓库目录符号链接，分别指向 `/home/datasets/shiyang/daai_runtime/model_cache/huggingface/hub/` 下的 `models--stabilityai--stable-virtual-camera`、`models--sd2-community--stable-diffusion-2-1-base`、`models--laion--CLIP-ViT-H-14-laion2B-s32B-b79K`。不覆盖原文件、不复制权重，不改活动作业源码或环境。
+- 该缓存路径修复也对仍运行的 `66836_0`（MMSI/9B，srv15）直接生效，无需重启其已加载模型。两项已失败作业用原 r8 Run ID 和原源码 `--resume` 续提，提交器 `66851`（MindCube/27B）、`66852`（MMSI/3.8-27B）；未重新复制本地环境。所有失败 attempts 保留，新任务不会覆盖旧结果。`66851`–`66853` 当前等待 CPU 提交器调度，后续 GPU ID 以对应提交日志为准。
 - 打包作业 `66825` 已 `COMPLETED 0:0`，耗时 00:01:12；压缩包大小 7,407,950,231 bytes，SHA256 `721f10aa766dcdbe7ba6d4c5acf2db8645dc55d157b350fccd9d49bd7ff728d8`，旁置 `.tar.zst.json` 绑定源环境 COMPLETE 和四个元数据文件哈希。此处是打包耗时，不冒充新节点解压/启动耗时。72B 快速提交器 `66826` 耗时 18 秒。
 - 其余失败组合已使用 r8 提交：`66831`（MindCube/27B）、`66832`（MMSI/9B）、`66833`（MMSI/3.8-27B）。Run ID 分别为 `mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908`、`mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908`、`mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908`，位于原 `/home/datasets/shiyang/daai_runtime/p1_runs/`。与 72B/r7 分开保持各自源码指纹，避免修改已加载中的作业。
 - `63b4039` 进一步让 SVC 主权重、VAE、OpenCLIP 加载器复用同一已验证记录，避免入口检查后再次重复扫描权重；记录不匹配或非 P1 的未登记文件仍保留完整内容校验。78/78 本地代码测试通过。其余失败任务使用独立目录 `/home/comp/24482277/shiyang/MindJourney-p1-startup-r8-20260908`，source SHA256 `e6d08e5a782bbf8f2521d25637cb197f52b7d8dfc1edf7cd29d403b6ac123e64`。已开始加载的 72B 保留 r7，不为了该进一步优化改动其源目录或重启它。
