@@ -6,6 +6,9 @@
 
 ## 最新进展：2026-09-08 依赖本地化（覆盖下文历史队列快照）
 
+- 13:42 HKT：四项 r6 已全部分配 GPU 节点，但仍处于本地依赖准备而非题目推理。`66748_0`（MindCube/27B）在 srv12；`66750_0`（MMSI/3.8-27B）及 `66747_0`（MindCube/72B）在 srv15；`66751_0`（MMSI/9B）在 srv11。同节点只允许一个复制者持锁，其余作业等待并复用副本，避免重复复制。
+- srv11 的交互式预复制 step `66705.18`、`66705.21` 分别在 13:08、13:26 被 SIGKILL；与 SSH 断开同时发生，`nohup` 未能保护后一项。Slurm 记录为 CANCELLED，并非 OOM。现已改为独立 CPU 批处理 `66813`，固定 srv11，4 CPU / 64 GiB / 无 GPU，确认 RUNNING；日志 `/home/datasets/shiyang/daai_runtime/p1_runs/local-stage-batch-66813.err`（标准输出同前缀 `.out`）。该作业断点复用原副本，不重新安装或检查导入。
+- 独立复制启动后，已恢复旧 vLLM 的 CONT 并取消旧 `66705_0`，释放其 2×A100；MMSI/9B 的既有 `66751_0` 随即在 srv11 启动，无重复提交正式分片。旧日志和本地断点均保留。不要再将旧交互复制日志或 `66705_0` 当作当前运行状态。
 - 用户要求将已安装依赖复制到计算节点本地。`66705_0` 在 srv11 的旧 vLLM 进程停留于 NFS Python 导入，尚未提供模型服务或产生题目结果；短时系统调用跟踪观察到 torch 的单个 `.pyc` 打开耗时约 0.2–0.25 秒。这不是重新配环境或权重下载。
 - 修复 commit `fdc7270`：复用已验证的共享 `qwen`/`svc` 环境，以受限并发复制到每个节点的私有 `/dev/shm/mj-p1-1194/env-4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50`。完成后原子发布 `LOCAL_READY.json`，同节点后续作业复用副本；修正启动脚本中的绝对环境路径，包二进制不变。编译及临时缓存也使用节点本地目录，模型权重和结果仍保留共享目录。启动不增加重型导入或版本检查；SVC 原有完整资产校验保留。
 - 安装来源仍为 `/home/datasets/shiyang/daai_runtime/envs/p1-01ef26c-v1`，`COMPLETE` SHA256 `4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50`。新 worker source SHA256 `6bb1eed4483e9c8dac5f203e49ce57b16e1396d1864c4b042116303ef387ebd2`；实验清单 SHA256 `1b13b98fc39873515eb3794a4c417197ae222f844b6ae41402442103aa93f77f`。四项均使用固定执行目录 `/home/comp/24482277/shiyang/MindJourney-p1-72b-tp2-20260908`，不得在活动作业期间更新源码。
