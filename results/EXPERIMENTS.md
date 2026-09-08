@@ -4,7 +4,16 @@
 
 本文件同时记录实验优先级和已验证的实验产物。优先级数字越小，优先级越高；`P0` 表示用户指定为已经运行的项目，但只有带有正式 `COMPLETE`、可复核结果文件和哈希的项目才记为“已验证完成”。
 
-## 最新进展：2026-09-08 20:59 并行调度（覆盖旧串行续提策略）
+## 最新进展：2026-09-08 23:12 完成归档与共享存储异常
+
+- 存储检查 `67219` 已于 23:11 COMPLETED 0:0，用时 2 秒；srv12 三个确切报错文件读取、1 MiB 写入/fsync/回读均成功。仅在通过后恢复提交，23:12 队列确认 MindCube/27B `67220_[0,1,2]` 在 srv15 RUNNING，MindCube/72B `67221_[1,2]` 在 srv16 RUNNING；共 6×A100 + 6×H20、5 个运行名额。MMSI/3.8 `67222_[1,2]` 与 MMSI/9B `67223_1` 已排队等待 QOSMaxJobsPerUserLimit。这是作业启动/恢复，不宣称新题已成功。旧失败 attempts 及题目进度全部保留，同 Run ID/r8/原配置续跑，无主动中断活动作业。提交审计见[存储恢复记录](./scheduling/20260908T151123Z-storage-recovery.json)。若此轮再次出现 EIO/ENOSPC，不持续盲重试，应报告共享存储需管理员处理。
+- MindCube/Qwen2.5-VL-72B 首片 `66975_0` 已 COMPLETED 0:0（Elapsed 05:47:11，23:01:17 结束）。严格校验通过：95/95 题、38 对 / 57 错、0 skip，首片准确率 40.00%，不是全量成绩。原始[结果](./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/chunks/question_chunk_0/results.json)、COMPLETE、运行清单和校验摘要均已归档，结果 SHA256 `dd1582fb4166d15a7a18d7d25fa3f3058156d36412b14fd22e114cfd0acd5fad`。
+- MMSI/Qwen3.8-27B 首片 `66857_0` 已 COMPLETED 0:0（Elapsed 07:56:29，22:31:28 结束）。严格校验通过：100/100 题、19 对 / 81 错、0 skip，首片准确率 19.00%，不是全量成绩。原始[结果](./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/chunks/question_chunk_0/results.json)、COMPLETE、运行清单和校验摘要均已归档，结果 SHA256 `5759bc5859fe540f015e1bdfbf0aaed0a15c88c3138133eb6bc35a400140bee9`。
+- 22:54 起多个节点出现共享 `/home/datasets` 存储错误：MindCube/27B `66856_0` 读取生成图像报 EIO，保留 52 题进度；`67122_2` 写 gpt.json 报 ENOSPC，随后 `67122_1` 也 FAILED（02:08:45）。MMSI/9B `67076_1`（03:28:20）和 MMSI/3.8 `67124_1`（00:09:50）读生成图像报 EIO；72B `67123_1`（00:00:44）读取模型 preprocessor_config.json / tokenizer_config.json 报 EIO，非此前 KV cache 显存错误。所有日志、已完成结果和未完成进度保留，没有主动重启活动任务。
+- 登录节点容量显示 `/home/datasets` 使用 98%、仍余约 3.9 TB / 6400 万 inode；`/home` 余约 89 TB。quota RPC 查询被拒绝，尚不能确认是否另有配额或存储后端故障。五个确切出错文件的定向读取及 1 KiB 写入随后成功，说明登录节点已恢复，但不据此宣称集群故障彻底解决。
+- 暂停盲目重试并提交不占 GPU 的短检查作业 `67219`（srv12、1 CPU、2 GiB、10 分钟上限）：仅读取三个此前错误的小文件并执行 1 MiB 临时文件写入/回读，临时文件自动清理；成功后才调用既有外部调度器补交，失败即退出不占用 GPU。日志位于 `/home/comp/24482277/shiyang/p1-storage-recovery-67219.out` 与 `.err`，避免检查日志依赖故障中的 datasets 盘。此项是存储诊断，不重新导入/检查模型环境。故障期间原完成时间估计暂不作为可靠 ETA。
+
+## 历史进展：2026-09-08 20:59 并行调度（覆盖旧串行续提策略）
 
 用户已授权首题/首片成功后直接并行提交未完成片，不再要求上一片完成才提交下一片。初始跨数组合计上限：MindCube/27B 3、MindCube/72B 2、MMSI/9B 1、MMSI/3.8-27B 2；排队、运行及收尾中的任务均计入，排队片不会被重复提交。
 

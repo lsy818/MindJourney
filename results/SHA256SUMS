@@ -1,4 +1,13 @@
-60336f31bdb63c262c4d310eb077c8ab3f3bc26ddfadf1498f90ecccf3fec06c  ./EXPERIMENTS.md
+46f6ef81cc5e223222fafeb46948151b9193b746d7c6f2764be27e783c8e7878  ./EXPERIMENTS.md
+8602380b607961c7f2ed822d86c622faf97659ccdec1c9706521be391a822d1e  ./scheduling/20260908T151123Z-storage-recovery.json
+ffb7f2b888466e47180f1a9172af74caab445c9f1f589c25c8f08ecd8642a3e0  ./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/launch_manifest.txt
+bba004f72658e366a2c28dfb7f2b04d39e2398af04ff2ba7cf2b1d53b2c017e2  ./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/chunks/question_chunk_0/validation_summary.json
+fb19a272676255d4d8cd0335a0c50e7f706d4258b62bfc1f4e671b4b2f98c149  ./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/chunks/question_chunk_0/COMPLETE
+dd1582fb4166d15a7a18d7d25fa3f3058156d36412b14fd22e114cfd0acd5fad  ./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/chunks/question_chunk_0/results.json
+c53a30aef5e7ff23457b4caf9c6fa78e58d230333d1c9455c257362b9b1ff9b8  ./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/launch_manifest.txt
+1847a6ff110321d679ef0a28914e2fbdbd884e4008f2dfc3b0c5f49d5d2a0293  ./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/chunks/question_chunk_0/validation_summary.json
+7257a1ba9584216a05086cf9916d475b9c3ccd9228cf58ed99a3af946ed7fc9a  ./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/chunks/question_chunk_0/COMPLETE
+5759bc5859fe540f015e1bdfbf0aaed0a15c88c3138133eb6bc35a400140bee9  ./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/chunks/question_chunk_0/results.json
 d2eb5cc619ff435e0d989ff8e7bd12100a1a5e8544a52e7c4cdbcd0ffef63633  ./scheduling/20260908T125634Z-parallel-dispatch.json
 b1f78bcb25479febe2f49f01906831ac82e84a385300de5880c1a1b52a595686  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/launch_manifest.txt
 4841a8ea0aa4ad623648c411e6cd37c0ea9c8b8ead1f3e5285134578bc15b631  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_0/COMPLETE
