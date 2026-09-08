@@ -64,7 +64,7 @@
       "enable_thinking": false,
       "dtype": "bfloat16",
       "tensor_parallel_h20": 2,
-      "tensor_parallel_a100_80gb": 4,
+      "tensor_parallel_a100_80gb": 2,
       "diagnostic_a100_40gb": "disabled"
     },
     "Qwen/Qwen3.5-9B": {

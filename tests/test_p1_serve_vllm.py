@@ -103,7 +103,7 @@ class P1ResourcePlanTests(unittest.TestCase):
                 self.assertEqual(spec["total_gpus"], "2")
 
     def test_72b_model_keeps_sixteen_cpus(self) -> None:
-        for accelerator, expected_gpus in (("h20", "3"), ("a100", "5")):
+        for accelerator, expected_gpus in (("h20", "3"), ("a100", "3")):
             with self.subTest(accelerator=accelerator):
                 spec = self._spec("qwen25vl-72b", accelerator)
                 self.assertEqual(spec["cpus_per_task"], "16")

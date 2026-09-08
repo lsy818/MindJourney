@@ -73,8 +73,10 @@ p1_load_resource_plan() {
       # CUDA 13 build pinned by vLLM 0.28.0; the validated nodes use R580.
       P1_SPEC_EXCLUDE="hkbugpudgx01,hkbugpusrv07,hkbugpusrv08"
       if [[ "$P1_SPEC_SIZE_CLASS" == "72b" ]]; then
-        P1_SPEC_TP=4
-        P1_SPEC_TOTAL_GPUS=5
+        # User-requested TP=2 trial to reduce the same-node GPU request.
+        # Preserve BF16, context length and SVC's dedicated GPU.
+        P1_SPEC_TP=2
+        P1_SPEC_TOTAL_GPUS=3
         P1_SPEC_DEFAULT_CONCURRENCY=1
         P1_SPEC_CPUS_PER_TASK=16
       else

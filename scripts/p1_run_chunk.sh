@@ -222,7 +222,7 @@ CUDA_VISIBLE_DEVICES="$vlm_devices" \
   >"$qwen_log" 2>&1 &
 qwen_pid=$!
 
-ready_timeout="${P1_READY_TIMEOUT_SECONDS:-7200}"
+ready_timeout="${P1_READY_TIMEOUT_SECONDS:-21600}"
 if [[ ! "$ready_timeout" =~ ^[1-9][0-9]*$ ]]; then
   echo "P1_READY_TIMEOUT_SECONDS must be a positive integer." >&2
   exit 2
