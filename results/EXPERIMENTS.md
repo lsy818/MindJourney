@@ -6,6 +6,10 @@
 
 ## 最新进展：2026-09-08 依赖本地化（覆盖下文历史队列快照）
 
+- 17:13 HKT 实际推理快照：`66856_0`（MindCube/Qwen3.5-27B，srv11）完成 16 题（5 对 / 11 错）；`66836_0`（MMSI/Qwen3.5-9B，srv15）完成 59 题（16 对 / 43 错）；`66857_0`（MMSI/Qwen3.8-27B，srv12）完成 32 题（6 对 / 26 错）。均为正在运行的 chunk 0，`skip_indices` 均为空；日志已出现真实 SVC Sampling 和模型回答，不能将这些部分结果记为全量准确率或分片完成。三个任务持续运行，未为启动优化重启。
+- 上述进度来自各自 r8 Run root 下的 `results_spatial_beam_search_qc11/question_chunk_0/results.json`（MindCube）或 `results_spatial_beam_search_qc10/question_chunk_0/results.json`（MMSI），按 `progress` 中 correct/wrong 列表计数。原始逐题产物和失败 attempts 全部保留，正式归档仍等待完整覆盖与 COMPLETE。
+- 72B 的 H20 首试 `66855_0` 已 FAILED（Elapsed 00:11:01）：权重已加载，65536 上下文需要 10.0 GiB KV cache，但默认 90% 显存预算只提供 8.42 GiB。17:14 HKT 已将唯一运行时改动 `P1_GPU_MEMORY_UTILIZATION=0.93` 显式加入原 sbatch 的 `--export`，同一 H20 r8 Run、同源码、同 chunk 0 续提成功为 `66975`（数组任务 `66975_0`），尚不宣称已推理成功。仍为 TP2 + SVC1 共 3×H20，BF16、no-thinking、65536 上下文、图片与 SVC 设置均不变。后续 72B 续提必须保留此显式 export；仅设置提交 shell 的父环境变量会被提交器显式 export 过滤。
+- H20 srv16 已实际完成压缩包复制、解压和路径适配，耗时 156.42 秒（约 2.6 分钟）。这是新节点分发实测值，不是模型加载耗时。srv11/12/15/16 的现成 LOCAL_READY 环境优先复用，不重新逐文件复制、不重新安装，也不重复导入检查。
 - 14:33 HKT 故障推进：`66827_0`（72B，3×A100）在模型权重成功加载后，于多模态编码器显存 profiling 阶段 OOM，Elapsed 00:10:16。每个模型卡权重占 68.59 GiB；OOM 时仅余约 1002 MiB，却需再分配 1.25 GiB。未擅自降低 BF16、65536 上下文或图像上限；改以现有 3×H20 资源方案（TP2 + SVC1）提交 `66853`，Run `mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908`，同 r8 source SHA。实际 H20 可运行性待真实启动确认，不宣称已解决显存问题。
 - `66834_0`（MindCube/27B）和 `66835_0`（MMSI/3.8-27B）已完成 vLLM 服务启动，但 SVC 初始化因找不到本地固定资源失败，分别用时 00:10:04 / 00:06:54，无题目结果。定位到账号继承的 `HF_HOME=/home/comp/24482277/chentao/models` 与已校验的 `P1_CACHE_ROOT` 不一致。其 `hub` 目录此前仅有 `version.txt`；已新增三个同名仓库目录符号链接，分别指向 `/home/datasets/shiyang/daai_runtime/model_cache/huggingface/hub/` 下的 `models--stabilityai--stable-virtual-camera`、`models--sd2-community--stable-diffusion-2-1-base`、`models--laion--CLIP-ViT-H-14-laion2B-s32B-b79K`。不覆盖原文件、不复制权重，不改活动作业源码或环境。
 - 该缓存路径修复也对仍运行的 `66836_0`（MMSI/9B，srv15）直接生效，无需重启其已加载模型。两项已失败作业用原 r8 Run ID 和原源码 `--resume` 续提，提交器 `66851`（MindCube/27B）、`66852`（MMSI/3.8-27B）；未重新复制本地环境。所有失败 attempts 保留，新任务不会覆盖旧结果。`66851`–`66853` 当前等待 CPU 提交器调度，后续 GPU ID 以对应提交日志为准。
