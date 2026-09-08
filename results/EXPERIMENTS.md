@@ -6,6 +6,15 @@
 
 ## 最新进展：2026-09-08 依赖本地化（覆盖下文历史队列快照）
 
+- 打包作业 `66825` 已 `COMPLETED 0:0`，耗时 00:01:12；压缩包大小 7,407,950,231 bytes，SHA256 `721f10aa766dcdbe7ba6d4c5acf2db8645dc55d157b350fccd9d49bd7ff728d8`，旁置 `.tar.zst.json` 绑定源环境 COMPLETE 和四个元数据文件哈希。此处是打包耗时，不冒充新节点解压/启动耗时。72B 快速提交器 `66826` 耗时 18 秒。
+- 其余失败组合已使用 r8 提交：`66831`（MindCube/27B）、`66832`（MMSI/9B）、`66833`（MMSI/3.8-27B）。Run ID 分别为 `mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908`、`mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908`、`mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908`，位于原 `/home/datasets/shiyang/daai_runtime/p1_runs/`。与 72B/r7 分开保持各自源码指纹，避免修改已加载中的作业。
+- `63b4039` 进一步让 SVC 主权重、VAE、OpenCLIP 加载器复用同一已验证记录，避免入口检查后再次重复扫描权重；记录不匹配或非 P1 的未登记文件仍保留完整内容校验。78/78 本地代码测试通过。其余失败任务使用独立目录 `/home/comp/24482277/shiyang/MindJourney-p1-startup-r8-20260908`，source SHA256 `e6d08e5a782bbf8f2521d25637cb197f52b7d8dfc1edf7cd29d403b6ac123e64`。已开始加载的 72B 保留 r7，不为了该进一步优化改动其源目录或重启它。
+- 72B 新首片 `66827_0`（提交器 `66826`）使用 3×A100，在 srv11 复用现成环境，14:09:18 已进入模型加载，读取 38 个权重分片。Run ID `mj-p1-mindcube-qwen25vl-72b-a100-fast-r7-20260908`；attempt `66827-20260908T060807Z`。日志已确认短 IPC 路径生效，TP=2、BF16、65536 上下文保持原值；显存可运行性及正式推理仍待后续结果确认。
+- 压缩包构建 CPU 作业 `66825` 已打印 `Environment archive ready`，从 srv12 的完整本地环境生成单个共享压缩包，不重新扫描共享环境中的大量小文件。它不占 GPU，也未重新复制现成环境。9B 旧 `66751_0` 随后自行以相同 IPC 长路径错误失败（00:23:24），本次未主动中断；srv11 原复制作业 `66813` 已成功完成（00:21:49）。
+- 用户随后明确授权：已完整校验且未变化的 SVC 资源在启动时只检查已有校验记录和必需文件；资源缺失、版本或文件元数据变化时才完整校验。commit `f345c50` 在提交器和计算节点加入 `validate --startup`：核对小清单哈希、固定身份、文件存在/大小/修改时间，不读取权重内容，也不导入 Hub；异常才进行离线完整校验并刷新记录。显式 `validate` 和预下载流程仍提供完整校验。
+- 同一修复采用已验证 SAT 的 `tar.zst` 分发模式：从现成节点环境一次性打包，在其他节点顺序复制单个压缩包、校验传输并本地解压。完整的 `LOCAL_READY.json` 优先复用，甚至不要求访问压缩包，不重新复制 srv11/12/15 已准备的环境；已有部分副本和旧日志不删除。压缩包默认 `/home/datasets/shiyang/daai_runtime/envs/archives/4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50.tar.zst`。
+- `66748_0`、`66747_0`、`66750_0` 已先于本次修改 FAILED：旧 TMPDIR 包含完整环境哈希，vLLM 的 Unix socket 路径超过 107 字节，尚未进入模型推理。现改为短路径 `/dev/shm/mj-p1-1194/t.XXXXXX` 并显式设置 `VLLM_RPC_BASE_PATH`；旧作业不是被本次优化重启。9B/`66751_0` 在本次修改时刚启动旧版 vLLM，未主动中断；待真实状态决定是否只重提失败片。
+- 本地代码测试 77/77 通过，覆盖快速路径不读取权重/不导入 Hub、缺失/内容/版本变化回退、压缩包往返、损坏包拒绝、完整本地环境不重复制，以及 IPC 短路径。新执行源码 SHA256 `1b5eb199f6726e1f6f9de0844d78c36cdab89f7d6b0530d5137d6ef0ee67bef8`，新固定执行目录 `/home/comp/24482277/shiyang/MindJourney-p1-startup-r7-20260908`。旧 r6 目录保持不动，BF16/no-thinking/上下文/图片顺序及 SVC 论文设置未修改。
 - 13:45 HKT：srv12、srv15 已完成 `qwen` + `svc` 的本地依赖复制并发布完成标记，耗时分别 3790.96 秒、3694.05 秒（约 63.2 / 61.6 分钟，包含首次 NFS 复制成本）。72B 的 `66747_0` 日志已明确 `Reusing local dependencies`，复用 srv15 副本而非重新复制。此时还未出现正式题目 attempt/结果，不将依赖完成误记为推理完成。
 - 13:42 HKT：四项 r6 已全部分配 GPU 节点，但仍处于本地依赖准备而非题目推理。`66748_0`（MindCube/27B）在 srv12；`66750_0`（MMSI/3.8-27B）及 `66747_0`（MindCube/72B）在 srv15；`66751_0`（MMSI/9B）在 srv11。同节点只允许一个复制者持锁，其余作业等待并复用副本，避免重复复制。
 - srv11 的交互式预复制 step `66705.18`、`66705.21` 分别在 13:08、13:26 被 SIGKILL；与 SSH 断开同时发生，`nohup` 未能保护后一项。Slurm 记录为 CANCELLED，并非 OOM。现已改为独立 CPU 批处理 `66813`，固定 srv11，4 CPU / 64 GiB / 无 GPU，确认 RUNNING；日志 `/home/datasets/shiyang/daai_runtime/p1_runs/local-stage-batch-66813.err`（标准输出同前缀 `.out`）。该作业断点复用原副本，不重新安装或检查导入。
