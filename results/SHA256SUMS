@@ -1,4 +1,9 @@
-b75fca6ee9f1aa29fcffda3b2d5c468ac2d9ec155c7738c6608a955525cd9376  ./EXPERIMENTS.md
+e6d764f08e60a6505dfd0caa23386f6af0e4d58e6be0a5a561856cb9685a9cba  ./EXPERIMENTS.md
+b1f78bcb25479febe2f49f01906831ac82e84a385300de5880c1a1b52a595686  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/launch_manifest.txt
+4841a8ea0aa4ad623648c411e6cd37c0ea9c8b8ead1f3e5285134578bc15b631  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_0/COMPLETE
+9520280d07945f7445326be17b365cc73eed523e51cc9dd025af372690e4082e  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_0/results.json
+81062338e4a4824dfbd1116c88959b983fbb4dccc44c0046bbe6a9f5ff970027  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_0/validation_summary.json
+cebc110ff8016bbee4bc51fb5f248104eaa02542a08b9d029cbb74ea16c3521c  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/submissions/20260908T1136Z-67076.txt
 1d2781133937b40f41ebd4f7e94ed07bba6149a8c04d8eb04be1e9770883dd3c  ./sat-real/qwen3.5-27b/svc/mj-svc-qwen35-paper150-20260902T173648Z/chunks/question_chunk_0/COMPLETE
 b039cd19ea2b2e60f63a2c4912ecf3db740388f1ba9f607cdb1087158f2ce30d  ./sat-real/qwen3.5-27b/svc/mj-svc-qwen35-paper150-20260902T173648Z/chunks/question_chunk_0/ENVIRONMENT
 b59ea3adb1c457a4cf12c08b22156c49659cbf70f7dc43d3823921d3f3425937  ./sat-real/qwen3.5-27b/svc/mj-svc-qwen35-paper150-20260902T173648Z/chunks/question_chunk_0/results.json
