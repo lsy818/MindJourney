@@ -4,7 +4,14 @@
 
 本文件同时记录实验优先级和已验证的实验产物。优先级数字越小，优先级越高；`P0` 表示用户指定为已经运行的项目，但只有带有正式 `COMPLETE`、可复核结果文件和哈希的项目才记为“已验证完成”。
 
-## 最新进展：2026-09-08 23:12 完成归档与共享存储异常
+## 最新进展：2026-09-09 00:02 共享存储故障复发，停止自动重试
+
+- 存储定向读写恢复后的一轮重试仍失败：`67220_0`（00:39:58）读取生成图片 EIO；`67220_2`（00:39:58）及 `67221_2`（00:40:13）写 pred.mp4 报 ENOSPC 并触发 BrokenPipe；`67222_1` / `67222_2`（均 00:00:11）读取 `/home/datasets/chentao/models/Qwen3.8-27B/config.json` 报 EIO。说明不是仅输出目录或某个模型问题，也不能用短暂探测成功判断已恢复。
+- 已停止新的自动补交和失败片重试，不重建环境、不修改论文设置、不删除结果。00:02 队列中 `67220_1`（MindCube/27B，srv15）、`67221_1`（MindCube/72B，srv16）、`67223_1`（MMSI/9B，srv15）仍 RUNNING，保持原状不主动中断。其余失败片保留已有进度，待存储管理员确认故障处理及稳定恢复证据后再继续。
+- 最近结果快照：MindCube/27B chunk0=55题、chunk1=19题、chunk2=4题；72B chunk0已归档95题、chunk1=14题、chunk2=10题；MMSI/9B chunk0已归档100题、chunk1=62题；MMSI/3.8 chunk0已归档100题。均未发现 skip，部分片仍未完成，不能据此发布全量准确率。没有新增正式 COMPLETE。
+- 需要集群管理员检查 `/home/datasets` 的 NFS 服务、后端存储与配额。23:05 的容量快照仍显示约 3.9 TB 可用，但 quota RPC 返回 Connection refused；未知是配额、单个后端容量还是其他存储异常，不能仅根据聚合 df 排除问题。完整失败日志留在各 Run 的 `attempts/question_chunk_N/`；后续自动监控继续保留结果、跟踪存活任务与故障状态，重复不变状态不打扰用户。原 ETA 暂不可用。
+
+## 历史进展：2026-09-08 23:12 完成归档与共享存储异常
 
 - 存储检查 `67219` 已于 23:11 COMPLETED 0:0，用时 2 秒；srv12 三个确切报错文件读取、1 MiB 写入/fsync/回读均成功。仅在通过后恢复提交，23:12 队列确认 MindCube/27B `67220_[0,1,2]` 在 srv15 RUNNING，MindCube/72B `67221_[1,2]` 在 srv16 RUNNING；共 6×A100 + 6×H20、5 个运行名额。MMSI/3.8 `67222_[1,2]` 与 MMSI/9B `67223_1` 已排队等待 QOSMaxJobsPerUserLimit。这是作业启动/恢复，不宣称新题已成功。旧失败 attempts 及题目进度全部保留，同 Run ID/r8/原配置续跑，无主动中断活动作业。提交审计见[存储恢复记录](./scheduling/20260908T151123Z-storage-recovery.json)。若此轮再次出现 EIO/ENOSPC，不持续盲重试，应报告共享存储需管理员处理。
 - MindCube/Qwen2.5-VL-72B 首片 `66975_0` 已 COMPLETED 0:0（Elapsed 05:47:11，23:01:17 结束）。严格校验通过：95/95 题、38 对 / 57 错、0 skip，首片准确率 40.00%，不是全量成绩。原始[结果](./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/chunks/question_chunk_0/results.json)、COMPLETE、运行清单和校验摘要均已归档，结果 SHA256 `dd1582fb4166d15a7a18d7d25fa3f3058156d36412b14fd22e114cfd0acd5fad`。
