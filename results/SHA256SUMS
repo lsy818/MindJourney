@@ -1,4 +1,4 @@
-87f50253800ec96dd2e84e56530d1f0fdc674b3ee59a9ed14f95d38eb36bcd46  ./EXPERIMENTS.md
+462db371de6683dd6b67dc9b85d4e4bbd0c3a2a71bee1ad72c7d7062ccc14302  ./EXPERIMENTS.md
 1d2781133937b40f41ebd4f7e94ed07bba6149a8c04d8eb04be1e9770883dd3c  ./sat-real/qwen3.5-27b/svc/mj-svc-qwen35-paper150-20260902T173648Z/chunks/question_chunk_0/COMPLETE
 b039cd19ea2b2e60f63a2c4912ecf3db740388f1ba9f607cdb1087158f2ce30d  ./sat-real/qwen3.5-27b/svc/mj-svc-qwen35-paper150-20260902T173648Z/chunks/question_chunk_0/ENVIRONMENT
 b59ea3adb1c457a4cf12c08b22156c49659cbf70f7dc43d3823921d3f3425937  ./sat-real/qwen3.5-27b/svc/mj-svc-qwen35-paper150-20260902T173648Z/chunks/question_chunk_0/results.json
