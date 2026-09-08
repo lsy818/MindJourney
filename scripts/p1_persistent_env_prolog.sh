@@ -119,6 +119,21 @@ if [[ "$p1_repo_dir" != /* || ! -d "$p1_repo_dir/pipelines" \
   return 1
 fi
 p1_repo_dir="$(cd -P -- "$p1_repo_dir" && pwd)"
+if [[ -n "${SLURM_JOB_ID:-}" ]]; then
+  # The base interpreter is node-local; -S avoids importing any shared site packages.
+  p1_base_python="$(readlink -f "$p1_qwen_python")"
+  p1_local_root="$("$p1_base_python" -S "$p1_repo_dir/scripts/p1_stage_local_env.py" \
+    --source "$p1_persistent_env_root" --expected-sha256 "$p1_complete_sha256")" || return 1
+  p1_qwen_python="$p1_local_root/qwen/bin/python"
+  p1_qwen_vllm="$p1_local_root/qwen/bin/vllm"
+  p1_svc_python="$p1_local_root/svc/bin/python"
+  export P1_LOCAL_ENV_ROOT="$p1_local_root"
+  export XDG_CACHE_HOME="$p1_local_root/runtime-cache/xdg"
+  export TRITON_CACHE_DIR="$p1_local_root/runtime-cache/triton"
+  export TORCHINDUCTOR_CACHE_DIR="$p1_local_root/runtime-cache/inductor"
+  export TMPDIR="$p1_local_root/runtime-cache/tmp-${SLURM_JOB_ID}"
+  mkdir -p "$XDG_CACHE_HOME" "$TRITON_CACHE_DIR" "$TORCHINDUCTOR_CACHE_DIR" "$TMPDIR"
+fi
 export PYTHONPATH="$p1_repo_dir:$p1_repo_dir/pipelines:$p1_repo_dir/stable_virtual_camera${PYTHONPATH:+:$PYTHONPATH}"
 
 export P1_SVC_PYTHON="$p1_svc_python"

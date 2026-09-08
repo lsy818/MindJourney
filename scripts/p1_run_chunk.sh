@@ -209,6 +209,7 @@ printf '%s\n' \
   "tensor_parallel_size=$P1_SPEC_TP" \
   "cpus_per_task=${SLURM_CPUS_PER_TASK:-unknown}" \
   "execution_scope=$execution_scope" \
+  "local_environment_root=${P1_LOCAL_ENV_ROOT:-none}" \
   "diagnostic_host=${P1_DIAGNOSTIC_HOST:-none}" \
   "vlm_devices=$vlm_devices" \
   "svc_device=$svc_device" \

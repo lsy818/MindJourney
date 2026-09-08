@@ -26,6 +26,7 @@ SOURCE_FILES = (
     "scripts/p1_env_prolog.sh",
     "scripts/p1_model_registry.sh",
     "scripts/p1_persistent_env_prolog.sh",
+    "scripts/p1_stage_local_env.py",
     "scripts/p1_run_chunk.sh",
     "scripts/p1_run_local_diagnostic_smoke.sh",
     "scripts/p1_run_pipeline.sh",
