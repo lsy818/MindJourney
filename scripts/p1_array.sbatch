@@ -29,7 +29,7 @@ if [[ -n "${P1_JOB_PROLOG:-}" ]]; then
 fi
 
 # SVC dependencies must already be in the exact shared cache before a GPU is
-# used.  Revalidate on the compute node, then prevent every downstream Hugging
+# used. Reuse the full-validation receipt when unchanged, then prevent Hugging
 # Face/Transformers call from contacting the network.
 if [[ "${P1_ALLOW_NETWORK:-0}" != "0" ]]; then
   echo "Formal P1 array jobs require P1_ALLOW_NETWORK=0." >&2
@@ -38,7 +38,7 @@ fi
 svc_python="${P1_SVC_PYTHON:-python}"
 cache_root="${P1_CACHE_ROOT:-/home/datasets/shiyang/model_cache}"
 "$svc_python" "$repo_dir/scripts/p1_svc_assets.py" validate \
-  --cache-root "$cache_root" --quiet
+  --cache-root "$cache_root" --startup --quiet
 export HF_HUB_OFFLINE=1
 export TRANSFORMERS_OFFLINE=1
 export HF_DATASETS_OFFLINE=1

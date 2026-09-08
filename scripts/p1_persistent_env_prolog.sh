@@ -131,7 +131,11 @@ if [[ -n "${SLURM_JOB_ID:-}" ]]; then
   export XDG_CACHE_HOME="$p1_local_root/runtime-cache/xdg"
   export TRITON_CACHE_DIR="$p1_local_root/runtime-cache/triton"
   export TORCHINDUCTOR_CACHE_DIR="$p1_local_root/runtime-cache/inductor"
-  export TMPDIR="$p1_local_root/runtime-cache/tmp-${SLURM_JOB_ID}"
+  # Unix domain socket paths are limited to 107 bytes, including vLLM's UUID.
+  # Keep this outside the long content-addressed environment path.
+  p1_tmp_parent="/dev/shm/mj-p1-${UID}"
+  export TMPDIR="$(mktemp -d "$p1_tmp_parent/t.XXXXXX")"
+  export VLLM_RPC_BASE_PATH="$TMPDIR"
   mkdir -p "$XDG_CACHE_HOME" "$TRITON_CACHE_DIR" "$TORCHINDUCTOR_CACHE_DIR" "$TMPDIR"
 fi
 export PYTHONPATH="$p1_repo_dir:$p1_repo_dir/pipelines:$p1_repo_dir/stable_virtual_camera${PYTHONPATH:+:$PYTHONPATH}"

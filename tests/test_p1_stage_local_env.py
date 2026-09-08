@@ -4,6 +4,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 SPEC = importlib.util.spec_from_file_location("stage_local", Path(__file__).resolve().parents[1] / "scripts/p1_stage_local_env.py")
 stage_local = importlib.util.module_from_spec(SPEC)
@@ -56,6 +57,36 @@ class LocalDependencyTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             self.stage()
         self.assertFalse((self.base / "cache").exists())
+
+    def test_archive_roundtrip_and_ready_reuse_without_archive_access(self):
+        root = self.stage()
+        archive = self.base / "published.tar.zst"
+        stage_local.build_archive(root, self.source, archive, self.expected)
+        target = stage_local.stage(self.source, self.base / "another-node", self.expected, min_free_gib=0, archive=archive)
+        for env in ("qwen", "svc"):
+            output = subprocess.check_output([str(target / env / "bin/runner")], text=True).strip()
+            self.assertEqual(output, str(target / env))
+            self.assertEqual((target / env / "binary.so").read_bytes(), (self.source / env / "binary.so").read_bytes())
+        with mock.patch.object(stage_local, "restore_archive", side_effect=AssertionError("must reuse")):
+            self.assertEqual(stage_local.stage(self.source, self.base / "another-node", self.expected, archive=self.base / "absent"), target)
+
+    def test_archive_checksum_failure_does_not_publish_ready(self):
+        root = self.stage()
+        archive = self.base / "published.tar.zst"
+        stage_local.build_archive(root, self.source, archive, self.expected)
+        data = bytearray(archive.read_bytes())
+        data[-1] ^= 1
+        archive.write_bytes(data)
+        with self.assertRaisesRegex(RuntimeError, "checksum mismatch"):
+            stage_local.stage(self.source, self.base / "bad-node", self.expected, min_free_gib=0, archive=archive)
+        self.assertFalse((self.base / "bad-node" / ("env-" + self.expected) / "LOCAL_READY.json").exists())
+
+    def test_rpc_temp_path_is_short_and_outside_hashed_env(self):
+        text = (Path(__file__).resolve().parents[1] / "scripts/p1_persistent_env_prolog.sh").read_text()
+        self.assertIn('export VLLM_RPC_BASE_PATH="$TMPDIR"', text)
+        self.assertNotIn('export TMPDIR="$p1_local_root/', text)
+        sample = "/dev/shm/mj-p1-1194/t.abcdef/" + "0" * 36
+        self.assertLess(len(sample.encode()), 107)
 
 
 if __name__ == "__main__":

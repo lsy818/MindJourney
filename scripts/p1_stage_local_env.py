@@ -16,10 +16,91 @@ import os
 from pathlib import Path
 import shutil
 import stat
+import subprocess
 import sys
+import tempfile
 import time
 
 METADATA = ("COMPLETE", "VERSIONS.txt", "qwen.freeze.txt", "svc.freeze.txt")
+
+
+def build_archive(local_root, source, archive, expected):
+    """Publish once from an ALREADY complete local copy, as in the SAT runs."""
+    local_root, source, archive = Path(local_root), Path(source).resolve(), Path(archive)
+    record = json.loads((local_root / "LOCAL_READY.json").read_text())
+    if record["source_complete_sha256"] != expected or record["source_root"] != str(source):
+        raise RuntimeError("archive source is not the validated local installation")
+    metadata = {name: digest(local_root / name) for name in METADATA}
+    if metadata["COMPLETE"] != expected or metadata != {name: digest(source / name) for name in METADATA}:
+        raise RuntimeError("archive source metadata mismatch")
+    archive.parent.mkdir(parents=True, exist_ok=True)
+    receipt = archive.with_name(archive.name + ".json")
+    with archive.with_name(archive.name + ".lock").open("a+b") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        if receipt.is_file() and archive.is_file():
+            prior = json.loads(receipt.read_text())
+            if prior["source_complete_sha256"] != expected or prior["metadata"] != metadata or prior["size_bytes"] != archive.stat().st_size:
+                raise RuntimeError("existing archive has a different identity; do not overwrite")
+            return archive
+        temporary = archive.with_name(archive.name + f".partial.{os.getpid()}")
+        print(f"Packing complete local dependencies: {local_root} -> {archive}", file=sys.stderr, flush=True)
+        hasher = hashlib.sha256()
+        with temporary.open("xb") as output:
+            pack = subprocess.Popen(["tar", "-C", str(local_root), "-cf", "-", "qwen", "svc", *METADATA], stdout=subprocess.PIPE)
+            compress = subprocess.Popen(["zstd", "-T4", "-3", "-c"], stdin=pack.stdout, stdout=subprocess.PIPE)
+            pack.stdout.close()
+            for block in iter(lambda: compress.stdout.read(4 * 1024**2), b""):
+                output.write(block)
+                hasher.update(block)
+            compress.stdout.close()
+            compressed_status, packed_status = compress.wait(), pack.wait()
+        if compressed_status or packed_status:
+            raise RuntimeError("environment archive creation failed; partial preserved")
+        payload = {"source_root": str(source), "source_complete_sha256": expected,
+                   "packed_root": str(local_root), "metadata": metadata,
+                   "sha256": hasher.hexdigest(), "size_bytes": temporary.stat().st_size}
+        temporary.replace(archive)
+        pending = receipt.with_name(receipt.name + ".tmp")
+        pending.write_text(json.dumps(payload, indent=2) + "\n")
+        pending.replace(receipt)
+        print(f"Environment archive ready: {archive}", file=sys.stderr, flush=True)
+        return archive
+
+
+def restore_archive(archive, root, source, expected):
+    archive, root = Path(archive), Path(root)
+    receipt = json.loads(archive.with_name(archive.name + ".json").read_text())
+    if receipt["source_complete_sha256"] != expected or receipt["source_root"] != str(source):
+        raise RuntimeError("archive environment identity mismatch")
+    if receipt["metadata"] != {name: digest(source / name) for name in METADATA}:
+        raise RuntimeError("archive metadata differs from installed environment")
+    if archive.stat().st_size != receipt["size_bytes"]:
+        raise RuntimeError("incomplete environment archive")
+    local_archive = root.parent / (root.name + ".tar.zst.partial")
+    print(f"Copying single environment archive to node: {archive}", file=sys.stderr, flush=True)
+    hasher = hashlib.sha256()
+    with archive.open("rb") as src, local_archive.open("wb") as dst:
+        for block in iter(lambda: src.read(4 * 1024**2), b""):
+            dst.write(block)
+            hasher.update(block)
+    if hasher.hexdigest() != receipt["sha256"]:
+        raise RuntimeError("copied archive checksum mismatch; partial preserved")
+    extracted = Path(tempfile.mkdtemp(prefix=root.name + ".extract.", dir=root.parent))
+    unpack = subprocess.Popen(["zstd", "-dc", str(local_archive)], stdout=subprocess.PIPE)
+    extract = subprocess.run(["tar", "-C", str(extracted), "-xf", "-"], stdin=unpack.stdout)
+    unpack.stdout.close()
+    if unpack.wait() or extract.returncode:
+        raise RuntimeError("archive extraction failed; partial preserved")
+    for name in METADATA:
+        if digest(extracted / name) != receipt["metadata"][name]:
+            raise RuntimeError("extracted environment metadata mismatch")
+    # Keep old interrupted loose-file copies, but never overwrite a ready env.
+    if root.exists():
+        root.rename(root.with_name(root.name + f".partial-preserved.{time.time_ns()}"))
+    extracted.rename(root)
+    relocate(root, receipt["packed_root"])
+    local_archive.unlink()  # Only the verified temporary transport copy.
+    return receipt["sha256"]
 
 
 def digest(path):
@@ -107,7 +188,7 @@ def copy_tree(source, target, workers=8):
             result.result()
 
 
-def stage(source, parent, expected, workers=8, seed=None, min_free_gib=60):
+def stage(source, parent, expected, workers=8, seed=None, min_free_gib=60, archive=None):
     source = Path(source).resolve(strict=True)
     if digest(source / "COMPLETE") != expected:
         raise RuntimeError("source COMPLETE differs from the submitted installation")
@@ -140,16 +221,22 @@ def stage(source, parent, expected, workers=8, seed=None, min_free_gib=60):
             # Seed is a previously interrupted copy made for this task.
             seed.rename(root)
         root.mkdir(mode=0o700, exist_ok=True)
-        print(f"Copying installed dependencies to {root}", file=sys.stderr, flush=True)
+        print(f"Preparing installed dependencies at {root}", file=sys.stderr, flush=True)
         start = time.monotonic()
-        for env in ("qwen", "svc"):
-            copy_tree(source / env, root / env, workers)
-        for name in METADATA:
-            shutil.copyfile(source / name, root / name)
+        archive_sha256 = None
+        if archive is not None:
+            archive_sha256 = restore_archive(archive, root, source, expected)
+        else:
+            # Legacy API for already-running copies; new CLI uses an archive.
+            for env in ("qwen", "svc"):
+                copy_tree(source / env, root / env, workers)
+            for name in METADATA:
+                shutil.copyfile(source / name, root / name)
         changes = relocate(root, source)
         record = {"source_root": str(source), "source_complete_sha256": expected,
                   "local_root": str(root), "host": os.uname().nodename,
                   "relocated_launchers": changes, "copy_seconds": round(time.monotonic() - start, 2)}
+        record["archive_sha256"] = archive_sha256
         temporary = root / "LOCAL_READY.json.tmp"
         temporary.write_text(json.dumps(record, indent=2) + "\n")
         temporary.replace(marker)
@@ -164,9 +251,15 @@ def main():
     parser.add_argument("--parent", default=f"/dev/shm/mj-p1-{os.getuid()}")
     parser.add_argument("--workers", type=int, default=8)
     parser.add_argument("--seed")
+    parser.add_argument("--archive", help="published SAT-style tar.zst transport archive")
+    parser.add_argument("--build-archive-from", help="publish from this already-ready node-local environment")
     args = parser.parse_args()
     if not os.environ.get("SLURM_JOB_ID"):
         raise SystemExit("dependency copies must run in a Slurm allocation")
+    archive = args.archive or str(Path(args.source).parent / "archives" / (args.expected_sha256 + ".tar.zst"))
+    if args.build_archive_from:
+        print(build_archive(args.build_archive_from, args.source, archive, args.expected_sha256))
+        return
     if not 1 <= args.workers <= 16:
         raise SystemExit("workers must be between 1 and 16")
     # Reject NFS and noexec destinations before copying anything.
@@ -175,7 +268,7 @@ def main():
     fs_type, options = mount.split(maxsplit=1)
     if fs_type not in ("tmpfs", "xfs", "ext4", "btrfs") or "noexec" in options.strip().split(","):
         raise SystemExit("dependency cache requires executable node-local storage")
-    print(stage(args.source, args.parent, args.expected_sha256, args.workers, args.seed))
+    print(stage(args.source, args.parent, args.expected_sha256, args.workers, args.seed, archive=archive))
 
 
 if __name__ == "__main__":

@@ -349,7 +349,7 @@ if [[ -z "$resolved_asset_validator_python" \
   exit 1
 fi
 "$resolved_asset_validator_python" "$script_dir/p1_svc_assets.py" validate \
-  --cache-root "$cache_root" --quiet
+  --cache-root "$cache_root" --startup --quiet
 if [[ ! -d "$model_path" || ! -r "$model_path/config.json" ]]; then
   printf 'Pinned local model is unavailable at %s (expected revision %s).\n' \
     "$model_path" "$P1_SPEC_REVISION" >&2

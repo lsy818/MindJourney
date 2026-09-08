@@ -127,6 +127,58 @@ def _test_assets():
 
 
 class SvcAssetCacheTests(unittest.TestCase):
+    def test_startup_reuses_receipt_without_opening_weights_or_importing_hub(self):
+        specs, contents = _test_assets()
+        fake = FakeHub(specs, contents)
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            p1_svc_assets.prefetch_cache(root, specs=specs, api=fake)
+            original = p1_svc_assets._sha256_file
+            def metadata_only(path):
+                self.assertEqual(path.name, "manifest.json")
+                return original(path)
+            with mock.patch.object(p1_svc_assets, "_sha256_file", side_effect=metadata_only), mock.patch.object(p1_svc_assets, "_hub_api", side_effect=AssertionError("unexpected import")):
+                p1_svc_assets.startup_cache(root, specs=specs)
+
+    def test_startup_missing_file_falls_back_offline_and_fails(self):
+        specs, contents = _test_assets()
+        fake = FakeHub(specs, contents)
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            payload = p1_svc_assets.prefetch_cache(root, specs=specs, api=fake)
+            (root / payload["assets"][1]["cache_path"]).unlink()
+            downloads = len(fake.snapshot_calls)
+            with self.assertRaises(p1_svc_assets.AssetValidationError):
+                p1_svc_assets.startup_cache(root, specs=specs, api=fake)
+            self.assertEqual(len(fake.snapshot_calls), downloads)
+
+    def test_startup_changed_file_requires_full_hash(self):
+        specs, contents = _test_assets()
+        fake = FakeHub(specs, contents)
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            payload = p1_svc_assets.prefetch_cache(root, specs=specs, api=fake)
+            path = root / payload["assets"][1]["cache_path"]
+            path.write_bytes(b"different contents")
+            with self.assertRaisesRegex(p1_svc_assets.AssetValidationError, "SHA256 mismatch"):
+                p1_svc_assets.startup_cache(root, specs=specs, api=fake)
+
+    def test_startup_changed_revision_requires_full_hash_and_renews_record(self):
+        specs, contents = _test_assets()
+        fake = FakeHub(specs, contents)
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            p1_svc_assets.prefetch_cache(root, specs=specs, api=fake)
+            changed = (*specs[:-1], p1_svc_assets.dataclasses.replace(specs[-1], revision="d" * 40))
+            new = FakeHub(changed, contents)
+            new.snapshot_download(repo_id=changed[-1].repo_id, revision="d" * 40, cache_dir=str(root / "huggingface/hub"), allow_patterns=[changed[-1].filename])
+            with mock.patch.object(p1_svc_assets, "_resolve_records", wraps=p1_svc_assets._resolve_records) as full:
+                payload = p1_svc_assets.startup_cache(root, specs=changed, api=new)
+                self.assertEqual(full.call_count, 1)
+                self.assertEqual(payload["assets"][-1]["revision"], "d" * 40)
+                p1_svc_assets.startup_cache(root, specs=changed, api=new)
+                self.assertEqual(full.call_count, 1)
+
     def test_prefetch_takes_exclusive_lock_on_write_capable_descriptor(self):
         specs, contents = _test_assets()
         fake = FakeHub(specs, contents)

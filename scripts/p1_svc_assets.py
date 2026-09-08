@@ -409,6 +409,75 @@ def validate_cache(
         )
 
 
+def _startup_record(root, hub_cache, manifest_path, complete_path, specs):
+    """Read the existing full-validation receipt and stat only required files.
+
+    This is deliberately not a content-integrity scan. The user authorizes
+    trusting unchanged, previously validated assets during routine startup.
+    Changes to identity, size or timestamps fall back to a full offline scan.
+    """
+    complete = _parse_complete(complete_path)
+    if manifest_path.is_symlink() or not manifest_path.is_file():
+        raise AssetValidationError("missing regular SVC asset manifest")
+    if _sha256_file(manifest_path) != complete["manifest_sha256"]:
+        raise AssetValidationError("manifest differs from full-validation receipt")
+    payload = json.loads(manifest_path.read_text())
+    records = _validate_payload(payload, specs, hub_cache)
+    validated_at = dt.datetime.fromisoformat(payload["generated_utc"].replace("Z", "+00:00")).timestamp()
+    # Legacy receipts have second precision; allow that rounding only.
+    for record in records:
+        relative = pathlib.PurePosixPath(record["cache_path"])
+        if relative.is_absolute() or ".." in relative.parts:
+            raise AssetValidationError("unsafe recorded asset path")
+        path = root / relative
+        try:
+            path.resolve(strict=True).relative_to(root)
+            info = path.stat()
+        except (OSError, ValueError) as error:
+            raise AssetValidationError("required SVC asset missing or outside cache") from error
+        if not path.is_file() or info.st_size != record["size_bytes"]:
+            raise AssetValidationError("required SVC asset missing or changed size")
+        if max(info.st_mtime, info.st_ctime) >= validated_at + 1:
+            raise AssetValidationError("SVC asset changed since full validation")
+    _check_environment(specs)
+    return payload
+
+
+def startup_cache(cache_root, *, specs=ASSETS, api=None):
+    """Fast unchanged-cache path; on a miss fully validate offline and renew."""
+    _validate_specs(specs)
+    _check_environment(specs)
+    root, hub_cache, state, manifest_path, complete_path = _paths(cache_root)
+    state.mkdir(parents=True, exist_ok=True)
+    lock_path = state / ".lock"
+    lock_path.touch(mode=0o660, exist_ok=True)
+    with lock_path.open("rb") as lock:
+        fcntl.flock(lock, fcntl.LOCK_SH)
+        try:
+            return _startup_record(root, hub_cache, manifest_path, complete_path, specs)
+        except (AssetValidationError, OSError, ValueError, TypeError):
+            pass
+    with lock_path.open("r+b") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        try:
+            return _startup_record(root, hub_cache, manifest_path, complete_path, specs)
+        except (AssetValidationError, OSError, ValueError, TypeError):
+            pass
+        print("SVC receipt missing or assets changed; full offline validation required.", file=sys.stderr)
+        active_api = api or _hub_api()
+        records = _resolve_records(root, hub_cache, specs, active_api)
+        payload = {
+            "format": FORMAT,
+            "generated_utc": dt.datetime.now(dt.timezone.utc).isoformat().replace("+00:00", "Z"),
+            "huggingface_hub_version": str(active_api.__version__),
+            "hub_cache_dir": str(hub_cache), "assets": records,
+        }
+        content = (json.dumps(payload, indent=2, sort_keys=True) + "\n").encode()
+        _atomic_write(manifest_path, content)
+        _atomic_write(complete_path, (f"format={FORMAT}\nmanifest_sha256={hashlib.sha256(content).hexdigest()}\n").encode())
+        return payload
+
+
 def _download_groups(specs: Iterable[AssetSpec]) -> dict[tuple[str, str], list[str]]:
     groups: dict[tuple[str, str], list[str]] = {}
     for spec in specs:
@@ -516,6 +585,7 @@ def _parser() -> argparse.ArgumentParser:
     validate = subparsers.add_parser("validate", help="strictly validate offline cache")
     validate.add_argument("--cache-root", required=True)
     validate.add_argument("--quiet", action="store_true")
+    validate.add_argument("--startup", action="store_true", help="reuse unchanged full-validation receipt; scan only on change")
     return parser
 
 
@@ -533,7 +603,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 f"{_canonical_root(args.cache_root)}"
             )
         else:
-            payload = validate_cache(args.cache_root)
+            payload = (startup_cache if args.startup else validate_cache)(args.cache_root)
             if not args.quiet:
                 print(
                     f"SVC asset cache is valid: {len(payload['assets'])} files at "
