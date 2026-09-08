@@ -51,7 +51,24 @@ def copy_tree(source, target, workers=8):
     copied = 0
     last_report = time.monotonic()
 
+    def copy_link(src, dst):
+        link = os.readlink(src)
+        prefix = str(source) + "/"
+        if link.startswith(prefix):
+            link = str(target) + link[len(str(source)):]
+        if not dst.is_symlink() or os.readlink(dst) != link:
+            if dst.exists() and not dst.is_symlink():
+                raise RuntimeError(f"refusing to replace non-link {dst}")
+            if dst.is_symlink():
+                dst.unlink()
+            dst.symlink_to(link)
+
     def copy_one(src, dst):
+        # File metadata must be fetched by workers too: a serial lstat per
+        # file otherwise recreates the NFS import bottleneck during copying.
+        if src.is_symlink():
+            copy_link(src, dst)
+            return
         info = src.stat()
         if dst.is_file() and not dst.is_symlink():
             current = dst.stat()
@@ -71,31 +88,21 @@ def copy_tree(source, target, workers=8):
             src_dir = Path(folder)
             dst_dir = target / src_dir.relative_to(source)
             dst_dir.mkdir(parents=True, exist_ok=True)
-            for name in list(dirs) + files:
+            for name in list(dirs):
                 src, dst = src_dir / name, dst_dir / name
                 if src.is_symlink():
-                    link = os.readlink(src)
-                    prefix = str(source) + "/"
-                    if link.startswith(prefix):
-                        link = str(target) + link[len(str(source)):]
-                    if not dst.is_symlink() or os.readlink(dst) != link:
-                        if dst.exists() and not dst.is_symlink():
-                            raise RuntimeError(f"refusing to replace non-link {dst}")
-                        if dst.is_symlink():
-                            dst.unlink()
-                        dst.symlink_to(link)
-                    if name in dirs:
-                        dirs.remove(name)
-                elif name in files:
-                    pending.add(pool.submit(copy_one, src, dst))
-                    if len(pending) >= workers * 4:
-                        done, pending = cf.wait(pending, return_when=cf.FIRST_COMPLETED)
-                        for result in done:
-                            result.result()
-                        copied += len(done)
-                        if time.monotonic() - last_report >= 30:
-                            print(f"Local copy {source.name}: {copied} files processed", file=sys.stderr, flush=True)
-                            last_report = time.monotonic()
+                    copy_link(src, dst)
+                    dirs.remove(name)
+            for name in files:
+                pending.add(pool.submit(copy_one, src_dir / name, dst_dir / name))
+                if len(pending) >= workers * 4:
+                    done, pending = cf.wait(pending, return_when=cf.FIRST_COMPLETED)
+                    for result in done:
+                        result.result()
+                    copied += len(done)
+                    if time.monotonic() - last_report >= 30:
+                        print(f"Local copy {source.name}: {copied} files processed", file=sys.stderr, flush=True)
+                        last_report = time.monotonic()
         for result in cf.as_completed(pending):
             result.result()
 
@@ -166,7 +173,7 @@ def main():
     import subprocess
     mount = subprocess.check_output(["findmnt", "-n", "-T", str(Path(args.parent).parent), "-o", "FSTYPE,OPTIONS"], text=True)
     fs_type, options = mount.split(maxsplit=1)
-    if fs_type not in ("tmpfs", "xfs", "ext4", "btrfs") or "noexec" in options.split(","):
+    if fs_type not in ("tmpfs", "xfs", "ext4", "btrfs") or "noexec" in options.strip().split(","):
         raise SystemExit("dependency cache requires executable node-local storage")
     print(stage(args.source, args.parent, args.expected_sha256, args.workers, args.seed))
 
