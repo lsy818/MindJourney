@@ -4,7 +4,13 @@
 
 本文件同时记录实验优先级和已验证的实验产物。优先级数字越小，优先级越高；`P0` 表示用户指定为已经运行的项目，但只有带有正式 `COMPLETE`、可复核结果文件和哈希的项目才记为“已验证完成”。
 
-## 最新进展：2026-09-09 00:40 MMSI/3.8 新片存储失败，保留四个推理作业
+## 最新进展：2026-09-09 02:32 MMSI/9B 第二片完成并续提
+
+- MMSI/Qwen3.5-9B chunk1 作业 `67293_1` 已 COMPLETED 0:0，本次续跑用时 01:08:27，完成标记时间 01:30:33 HKT（包含此前失败尝试保存的进度，不是该片总累计 GPU 用时）。严格验证通过：100/100 题，29 对 / 71 错，0 skip，单片准确率 29.00%；run-group 与已归档 chunk0 一致。原始[结果](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_1/results.json)、COMPLETE 与校验摘要已归档，结果 SHA256 `17d5dd7965bbc5d55e7bc5451c992f5d7ff1df8b92707c4dda4da73dbf57488d`。9B 已正式完成 2/10 片，共 200 题、54 对 / 146 错，27.00% 仅为已完成两片，不是全量成绩。P1 累计归档 4 个完成片。
+- 02:32 刷新 GPU 与账号限制后，确认9B仅 chunk2 `67300_2` 活动，按跨数组上限2补交未完成且未活动的 chunk3，作业 `67377_3`；即时队列 PENDING，不能记为已开始推理。实际 sbatch 审计见[续提记录](./scheduling/20260908T183211Z-mmsi9b-next-shard.json)。同 Run ID/r8/2×A10080GB，所有设置不变，不重复环境检查、不重启其他任务。
+- 同期仍 RUNNING：MindCube/27B `67220_1`、MMSI/3.8 `67292_2`、MMSI/9B `67300_2`。共享存储故障没有稳定恢复证据，MindCube及MMSI/3.8新增片继续暂缓；健康9B保持两片活动上限，后续每片完成即归档并续提。
+
+## 历史进展：2026-09-09 00:40 MMSI/3.8 新片存储失败，保留四个推理作业
 
 - `67292_1`（MMSI/3.8 chunk1，srv15）于约 00:33:40 FAILED 1:0，Elapsed 00:11:38；已保存 3 题（2 对 / 1 错，0 skip）。正式推理生成第 170 题视频时，`question_chunk_1/170/step_1/turn-left_18_degrees_turn-left_27.00_degrees/pred.mp4` 报 No space left on device，继发 BrokenPipe。原完整日志保留于 `attempts/question_chunk_1/67296-20260908T162204Z/pipeline.log`。不是环境导入或显存问题；按重试保护规则暂停 MMSI/3.8 新增/失败片重提，存活 chunk2 不动。
 - 00:40 队列剩 4 个 RUNNING、8×A10080GB：MindCube/27B `67220_1`、MMSI/3.8 `67292_2`、MMSI/9B `67293_1` / `67300_2`。四片都有实际 SVC Sampling / 模型回答记录；9B 两片已分别推进到 75 / 7 题，不再只是加载模型。9B 当前跨数组上限 2 已满，MindCube 和 MMSI/3.8 新增提交均受存储故障保护，本轮没有盲重试以填空槽。
