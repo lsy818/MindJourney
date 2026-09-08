@@ -1,4 +1,6 @@
-a9edbfe3b7f30d9e612de7dd39588b88e52fc7f3cfd6189e95df93d5bc864cab  ./EXPERIMENTS.md
+894b0cab58766ab56709073d6c3b14d2ad71da57b718629304e9dc0eae760fb9  ./EXPERIMENTS.md
+fa743ad95ef99228e17346c2e4b22aaebde25baadb8ce59d2bc495cf6a954f0d  ./scheduling/20260908T162112Z-user-authorized-retry.json
+0781ce7ec0ed6499832010c969878b1a2d55f4749e40bc2d609d8dd70915255f  ./scheduling/20260908T162534Z-capacity-refill.json
 8602380b607961c7f2ed822d86c622faf97659ccdec1c9706521be391a822d1e  ./scheduling/20260908T151123Z-storage-recovery.json
 ffb7f2b888466e47180f1a9172af74caab445c9f1f589c25c8f08ecd8642a3e0  ./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/launch_manifest.txt
 bba004f72658e366a2c28dfb7f2b04d39e2398af04ff2ba7cf2b1d53b2c017e2  ./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/chunks/question_chunk_0/validation_summary.json
