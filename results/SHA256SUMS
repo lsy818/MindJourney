@@ -1,4 +1,5 @@
-e6d764f08e60a6505dfd0caa23386f6af0e4d58e6be0a5a561856cb9685a9cba  ./EXPERIMENTS.md
+60336f31bdb63c262c4d310eb077c8ab3f3bc26ddfadf1498f90ecccf3fec06c  ./EXPERIMENTS.md
+d2eb5cc619ff435e0d989ff8e7bd12100a1a5e8544a52e7c4cdbcd0ffef63633  ./scheduling/20260908T125634Z-parallel-dispatch.json
 b1f78bcb25479febe2f49f01906831ac82e84a385300de5880c1a1b52a595686  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/launch_manifest.txt
 4841a8ea0aa4ad623648c411e6cd37c0ea9c8b8ead1f3e5285134578bc15b631  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_0/COMPLETE
 9520280d07945f7445326be17b365cc73eed523e51cc9dd025af372690e4082e  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_0/results.json
