@@ -6,6 +6,7 @@
 
 ## 最新进展：2026-09-08 依赖本地化（覆盖下文历史队列快照）
 
+- 17:31 HKT：四项 P1 均已进入真实推理。72B `66975_0` 在 srv16 使用 3×H20，17:22:56 模型服务就绪，17:28 起出现成功的 chat completions；结果已完成首题（1 对 / 0 错 / 0 skip），pipeline 持续 SVC Sampling。显存预算 0.93 已解决此前启动 KV cache 不足，当前只证明首题成功，不代表全部题型均已验证。其余三个活动作业保持不动：MindCube/27B 已完成 17 题（6 对 / 11 错），MMSI/9B 65 题（17 对 / 48 错），MMSI/3.8-27B 37 题（9 对 / 28 错），均 0 skip。当前各 chunk 0 尚无 COMPLETE，不发布全量指标，不重复提交活动片。
 - 17:13 HKT 实际推理快照：`66856_0`（MindCube/Qwen3.5-27B，srv11）完成 16 题（5 对 / 11 错）；`66836_0`（MMSI/Qwen3.5-9B，srv15）完成 59 题（16 对 / 43 错）；`66857_0`（MMSI/Qwen3.8-27B，srv12）完成 32 题（6 对 / 26 错）。均为正在运行的 chunk 0，`skip_indices` 均为空；日志已出现真实 SVC Sampling 和模型回答，不能将这些部分结果记为全量准确率或分片完成。三个任务持续运行，未为启动优化重启。
 - 上述进度来自各自 r8 Run root 下的 `results_spatial_beam_search_qc11/question_chunk_0/results.json`（MindCube）或 `results_spatial_beam_search_qc10/question_chunk_0/results.json`（MMSI），按 `progress` 中 correct/wrong 列表计数。原始逐题产物和失败 attempts 全部保留，正式归档仍等待完整覆盖与 COMPLETE。
 - 72B 的 H20 首试 `66855_0` 已 FAILED（Elapsed 00:11:01）：权重已加载，65536 上下文需要 10.0 GiB KV cache，但默认 90% 显存预算只提供 8.42 GiB。17:14 HKT 已将唯一运行时改动 `P1_GPU_MEMORY_UTILIZATION=0.93` 显式加入原 sbatch 的 `--export`，同一 H20 r8 Run、同源码、同 chunk 0 续提成功为 `66975`（数组任务 `66975_0`），尚不宣称已推理成功。仍为 TP2 + SVC1 共 3×H20，BF16、no-thinking、65536 上下文、图片与 SVC 设置均不变。后续 72B 续提必须保留此显式 export；仅设置提交 shell 的父环境变量会被提交器显式 export 过滤。
