@@ -4,7 +4,13 @@
 
 本文件同时记录实验优先级和已验证的实验产物。优先级数字越小，优先级越高；`P0` 表示用户指定为已经运行的项目，但只有带有正式 `COMPLETE`、可复核结果文件和哈希的项目才记为“已验证完成”。
 
-## 最新进展：2026-09-09 21:00 MMSI/9B 全量完成并严格合并
+## 最新进展：2026-09-09 21:02 转入MindCube两组集中队列
+
+- MMSI/9B全量288/1000（28.80%）及全部原始分片已严格验证、归档并push（`e185b52`）；不再提交该已完成Run。现在主攻MindCube/27B，72B为第二setting候补，其他setting暂不新增。
+- 21:02刷新GPU/配额和全部活动数组后，27B chunk2–6共5片仍RUNNING、10×A100，5/5运行额度已满；27B跨数组活动cap5已满，不重复提交。为利用候补提交额度，实际提交72B chunk1/2/3/4为 `68005_[1,2,3,4]`，各3×H20（TP2+独占SVC1），全部PENDING QOSMaxJobsPerUserLimit。实际sbatch的export显式保留 `P1_GPU_MEMORY_UTILIZATION=0.93`，原Run/r8及所有论文设置不变，旧chunk1/2断点和日志保留。
+- 两setting共9个P1活动片，加无关55278为10/10提交额度满；未取消/重启任何已启动作业。实际命令和前后队列见[第二setting提交审计](./scheduling/20260909T130226Z-mindcube72-next-setting.json)。当前H20仅1卡未分配，不能将候补误报为已开始推理；继续逐片核验归档与动态补位，共享存储未声明根治。
+
+## 历史进展：2026-09-09 21:00 MMSI/9B 全量完成并严格合并
 
 - MMSI-Bench / Qwen3.5-9B / SVC 正式全量1000题：**288对 / 712错，准确率28.80%**，10/10片完成，0skip。最后chunk9 `67600_9` 已COMPLETED 0:0，用时03:30:10，37/100正确。原始[最后一片](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_9/results.json)、COMPLETE和validation_summary已归档，结果SHA `29f343f8e55324bc4c5651728649a2c55f13d482b8ccb4329f863dc6ae6ffa60`。
 - 用冻结r8的严格合并器核对全部10片的精确题ID、无遗漏/重复、0skip、正式配置、run-group指纹、完成标记及原始结果哈希，均通过。正式[合并结果](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/results_merged.json)及[全量摘要](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/formal_run_summary.json)已保存，合并SHA `3c32217b6e7ce23274c47de105e8f6f860b250a6b330513dd860e324580fbc81`。服务器合并文件位于原Run的results_merged.json，不覆盖已有分片结果。P1累计15个完成片。

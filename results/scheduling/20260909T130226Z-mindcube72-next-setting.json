@@ -1,0 +1,201 @@
+{
+  "utc": "2026-09-09T13:02:26.125847+00:00",
+  "policy": "MMSI9B complete archived; MindCube27B primary, MindCube72B secondary",
+  "resource_checks": [
+    {
+      "command": [
+        "date"
+      ],
+      "exit": 0,
+      "output": "Wed Sep  9 21:02:25 HKT 2026\n",
+      "error": ""
+    },
+    {
+      "command": [
+        "sacctmgr",
+        "-nP",
+        "show",
+        "qos",
+        "daai_qos",
+        "format=Name,MaxJobsPU,MaxSubmitJobsPU,MaxTRESPU"
+      ],
+      "exit": 0,
+      "output": "daai_qos|5|10|\n",
+      "error": ""
+    },
+    {
+      "command": [
+        "scontrol",
+        "show",
+        "node",
+        "hkbugpusrv11,hkbugpusrv12,hkbugpusrv15,hkbugpusrv16"
+      ],
+      "exit": 0,
+      "output": "NodeName=hkbugpusrv11 Arch=x86_64 CoresPerSocket=36 \n   CPUAlloc=104 CPUEfctv=144 CPUTot=144 CPULoad=18.39\n   AvailableFeatures=cpu_xeon,a100,A100\n   ActiveFeatures=cpu_xeon,a100,A100\n   Gres=gpu:a100:8,gpu_mem:80K\n   NodeAddr=hkbugpusrv11 NodeHostName=hkbugpusrv11 Version=25.05.5\n   OS=Linux 5.15.0-101.103.2.1.el8uek.x86_64 #2 SMP Mon May 1 20:11:30 PDT 2023 \n   RealMemory=2063906 AllocMem=0 FreeMem=445957 Sockets=2 Boards=1\n   State=MIXED ThreadsPerCore=2 TmpDisk=140000 Weight=500 Owner=N/A MCS_label=N/A\n   Partitions=short \n   BootTime=2026-03-16T14:33:20 SlurmdStartTime=2026-06-12T14:15:09\n   LastBusyTime=2026-09-07T23:36:16 ResumeAfterTime=None\n   CfgTRES=cpu=144,mem=2063906M,billing=144,gres/gpu=8,gres/gpu:a100=8\n   AllocTRES=cpu=104,gres/gpu=8,gres/gpu:a100=8\n   CurrentWatts=0 AveWatts=0\n\nNodeName=hkbugpusrv12 Arch=x86_64 CoresPerSocket=36 \n   CPUAlloc=48 CPUEfctv=144 CPUTot=144 CPULoad=4.96\n   AvailableFeatures=cpu_xeon,a100,A100\n   ActiveFeatures=cpu_xeon,a100,A100\n   Gres=gpu:a100:8,gpu_mem:80K\n   NodeAddr=hkbugpusrv12 NodeHostName=hkbugpusrv12 Version=25.05.5\n   OS=Linux 5.15.0-101.103.2.1.el8uek.x86_64 #2 SMP Mon May 1 20:11:30 PDT 2023 \n   RealMemory=2063906 AllocMem=0 FreeMem=1105881 Sockets=2 Boards=1\n   State=MIXED ThreadsPerCore=2 TmpDisk=140000 Weight=500 Owner=N/A MCS_label=N/A\n   Partitions=short \n   BootTime=2026-08-26T11:24:57 SlurmdStartTime=2026-08-26T11:25:37\n   LastBusyTime=2026-09-08T23:51:21 ResumeAfterTime=None\n   CfgTRES=cpu=144,mem=2063906M,billing=144,gres/gpu=8,gres/gpu:a100=8\n   AllocTRES=cpu=48,gres/gpu=8,gres/gpu:a100=8\n   CurrentWatts=0 AveWatts=0\n\nNodeName=hkbugpusrv15 Arch=x86_64 CoresPerSocket=36 \n   CPUAlloc=88 CPUEfctv=144 CPUTot=144 CPULoad=6.73\n   AvailableFeatures=cpu_xeon,a100,A100\n   ActiveFeatures=cpu_xeon,a100,A100\n   Gres=gpu:a100:8,gpu_mem:80K\n   NodeAddr=hkbugpusrv15 NodeHostName=hkbugpusrv15 Version=25.05.5\n   OS=Linux 5.15.0-101.103.2.1.el8uek.x86_64 #2 SMP Mon May 1 20:11:30 PDT 2023 \n   RealMemory=2063906 AllocMem=0 FreeMem=1232476 Sockets=2 Boards=1\n   State=MIXED ThreadsPerCore=2 TmpDisk=140000 Weight=500 Owner=N/A MCS_label=N/A\n   Partitions=short \n   BootTime=2026-06-03T14:01:33 SlurmdStartTime=2026-06-12T14:15:09\n   LastBusyTime=2026-08-19T05:30:26 ResumeAfterTime=None\n   CfgTRES=cpu=144,mem=2063906M,billing=144,gres/gpu=8,gres/gpu:a100=8\n   AllocTRES=cpu=88,gres/gpu=7,gres/gpu:a100=7\n   CurrentWatts=0 AveWatts=0\n\nNodeName=hkbugpusrv16 Arch=x86_64 CoresPerSocket=36 \n   CPUAlloc=50 CPUEfctv=144 CPUTot=144 CPULoad=6.08\n   AvailableFeatures=cpu_xeon,h20,H20\n   ActiveFeatures=cpu_xeon,h20,H20\n   Gres=gpu:h20:8,gpu_mem:97871\n   NodeAddr=hkbugpusrv16 NodeHostName=hkbugpusrv16 Version=25.05.5\n   OS=Linux 5.15.0-101.103.2.1.el8uek.x86_64 #2 SMP Mon May 1 20:11:30 PDT 2023 \n   RealMemory=2063906 AllocMem=0 FreeMem=13599 Sockets=2 Boards=1\n   State=MIXED ThreadsPerCore=2 TmpDisk=140000 Weight=500 Owner=N/A MCS_label=N/A\n   Partitions=short \n   BootTime=2026-02-09T08:58:24 SlurmdStartTime=2026-06-12T14:15:09\n   LastBusyTime=2026-09-09T16:30:39 ResumeAfterTime=None\n   CfgTRES=cpu=144,mem=2063906M,billing=144,gres/gpu=8,gres/gpu:h20=8\n   AllocTRES=cpu=50,gres/gpu=7,gres/gpu:h20=7\n   CurrentWatts=0 AveWatts=0\n\n",
+      "error": ""
+    }
+  ],
+  "before": [
+    {
+      "id": "55278",
+      "name": "kb-qwen36",
+      "state": "PENDING",
+      "reason": "(DependencyNeverSatisfied)"
+    },
+    {
+      "id": "67605_5",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv12"
+    },
+    {
+      "id": "67605_4",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv11"
+    },
+    {
+      "id": "67605_3",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv15"
+    },
+    {
+      "id": "67579_2",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv12"
+    },
+    {
+      "id": "67823_6",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv15"
+    }
+  ],
+  "dispatch": [
+    {
+      "run_id": "mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908",
+      "cap": 5,
+      "completed": [
+        0,
+        1
+      ],
+      "active": [
+        {
+          "id": "67605_5",
+          "name": "mj-p1-mindcube-qwen35-27b-array",
+          "state": "RUNNING",
+          "reason": "hkbugpusrv12"
+        },
+        {
+          "id": "67605_4",
+          "name": "mj-p1-mindcube-qwen35-27b-array",
+          "state": "RUNNING",
+          "reason": "hkbugpusrv11"
+        },
+        {
+          "id": "67605_3",
+          "name": "mj-p1-mindcube-qwen35-27b-array",
+          "state": "RUNNING",
+          "reason": "hkbugpusrv15"
+        },
+        {
+          "id": "67579_2",
+          "name": "mj-p1-mindcube-qwen35-27b-array",
+          "state": "RUNNING",
+          "reason": "hkbugpusrv12"
+        },
+        {
+          "id": "67823_6",
+          "name": "mj-p1-mindcube-qwen35-27b-array",
+          "state": "RUNNING",
+          "reason": "hkbugpusrv15"
+        }
+      ],
+      "new_indices": [],
+      "account_active": 6,
+      "utc": "2026-09-09T13:02:25.819271+00:00"
+    },
+    {
+      "run_id": "mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908",
+      "cap": 5,
+      "completed": [
+        0
+      ],
+      "active": [],
+      "new_indices": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "account_active": 6,
+      "command": "sbatch --parsable --account=daai --partition=short --job-name=mj-p1-mindcube-qwen25vl-72b-array --array=1,2,3,4%4 --gres=gpu:h20:3 --cpus-per-task=16 --mem=240G --time=5-00:00:00 --output=/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/logs/%x-%A_%a.out --error=/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/logs/%x-%A_%a.err --export=P1_REPO_DIR=/home/comp/24482277/shiyang/MindJourney-p1-startup-r8-20260908,P1_MODEL_KEY=qwen25vl-72b,P1_DATASET=mindcube,P1_ACCELERATOR=h20,P1_RUN_MODE=array,P1_RUN_ID=mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908,P1_RUN_ROOT=/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908,P1_INPUT_DIR=/home/datasets/shiyang/MindCube_9c941b46/processed,P1_SPLIT=test,P1_NUM_QUESTIONS=1050,P1_NUM_CHUNKS=11,P1_MAX_IMAGES=4,P1_MODEL_PATH=/home/datasets/chentao/models/Qwen2.5-VL-72B-Instruct,P1_CACHE_ROOT=/home/datasets/shiyang/daai_runtime/model_cache,P1_MODEL_VALIDATION_ROOT=/home/datasets/shiyang/mindjourney_storage/model_validation,P1_REQUIRE_REVISION_MARKER=1,P1_MANIFEST=/home/comp/24482277/shiyang/MindJourney-p1-startup-r8-20260908/configs/p1_svc_multiimage.json,P1_DATASET_PROVENANCE=/home/datasets/shiyang/MindCube_9c941b46/processed/test_provenance.json,P1_EXPECTED_INPUT_SHA256=03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083,P1_EXPECTED_PROVENANCE_SHA256=55af7c4dd6e125b5323a798ba871d3297c6c89098f5911b6d84561af26effac6,P1_EXPECTED_MANIFEST_SHA256=1b13b98fc39873515eb3794a4c417197ae222f844b6ae41402442103aa93f77f,P1_EXPECTED_SOURCE_SHA256=e6d08e5a782bbf8f2521d25637cb197f52b7d8dfc1edf7cd29d403b6ac123e64,P1_SVC_PYTHON=python,P1_VLLM_BIN=vllm,P1_ALLOW_NETWORK=0,P1_JOB_PROLOG=/home/comp/24482277/shiyang/MindJourney-p1-startup-r8-20260908/scripts/p1_persistent_env_prolog.sh,P1_PERSISTENT_ENV_ROOT=/home/datasets/shiyang/daai_runtime/envs/p1-01ef26c-v1,P1_EXPECTED_ENV_COMPLETE_SHA256=4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50,P1_GPU_MEMORY_UTILIZATION=0.93 /home/comp/24482277/shiyang/MindJourney-p1-startup-r8-20260908/scripts/p1_array.sbatch",
+      "utc": "2026-09-09T13:02:26.052199+00:00",
+      "submitted_job_id": "68005"
+    }
+  ],
+  "after": [
+    {
+      "id": "55278",
+      "name": "kb-qwen36",
+      "state": "PENDING",
+      "reason": "(DependencyNeverSatisfied)"
+    },
+    {
+      "id": "68005_1",
+      "name": "mj-p1-mindcube-qwen25vl-72b-array",
+      "state": "PENDING",
+      "reason": "(QOSMaxJobsPerUserLimit)"
+    },
+    {
+      "id": "68005_2",
+      "name": "mj-p1-mindcube-qwen25vl-72b-array",
+      "state": "PENDING",
+      "reason": "(QOSMaxJobsPerUserLimit)"
+    },
+    {
+      "id": "68005_3",
+      "name": "mj-p1-mindcube-qwen25vl-72b-array",
+      "state": "PENDING",
+      "reason": "(QOSMaxJobsPerUserLimit)"
+    },
+    {
+      "id": "68005_4",
+      "name": "mj-p1-mindcube-qwen25vl-72b-array",
+      "state": "PENDING",
+      "reason": "(QOSMaxJobsPerUserLimit)"
+    },
+    {
+      "id": "67605_5",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv12"
+    },
+    {
+      "id": "67605_4",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv11"
+    },
+    {
+      "id": "67605_3",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv15"
+    },
+    {
+      "id": "67579_2",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv12"
+    },
+    {
+      "id": "67823_6",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv15"
+    }
+  ]
+}

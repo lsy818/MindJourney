@@ -19,7 +19,8 @@ aaf4e81c76221ee5540bb8d3d1663f2f12cdc49b9dde1d7d97cb60489ec79870  ./mmsi/qwen3.5
 840908316df8f3c12481a265cec354bd48a141b129b9b2eeb11e77e043f565ff  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_5/COMPLETE
 3490d8b1e566301e2da06619225aa5055452ebd07d4fda4bf0dc0f70a2d6dcb7  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_5/validation_summary.json
 20416dcd1a687a74e5f60a4857239294d61b1e0c396479384cd424efc26bb66f  ./scheduling/20260909T024911Z-mmsi9b-next-shard.json
-309dba88fd1937c9a49e2d9e0b2ec043abc745e9026570fcf2643c6b7c540c8d  ./EXPERIMENTS.md
+1713dcb5b8d9dcddb1a56b608d20a71e04cca515883adf5aeea38a1def71a368  ./EXPERIMENTS.md
+eebba05b356a7742e28d26eda5750c465a5398c4733ff129f11f380343192f92  ./scheduling/20260909T130226Z-mindcube72-next-setting.json
 29f343f8e55324bc4c5651728649a2c55f13d482b8ccb4329f863dc6ae6ffa60  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_9/results.json
 e619be40f9d20efc8c101098a3327cb85c16fd6831ed356bbce9cb48e98f6055  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_9/COMPLETE
 1d948b1999105e1b09a3c70f34393f682866dda17539e97a1ab0f0874598ac53  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_9/validation_summary.json
