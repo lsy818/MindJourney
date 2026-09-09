@@ -4,7 +4,23 @@
 
 本文件同时记录实验优先级和已验证的实验产物。优先级数字越小，优先级越高；`P0` 表示用户指定为已经运行的项目，但只有带有正式 `COMPLETE`、可复核结果文件和哈希的项目才记为“已验证完成”。
 
-## 最新进展：2026-09-09 02:32 MMSI/9B 第二片完成并续提
+## 最新进展：2026-09-09 10:01 新增四片完成，9B 分片4/5继续运行
+
+以下四片均已 COMPLETED 0:0，严格题目覆盖、零 skip、运行指纹和 COMPLETE 结果哈希验证通过；原始 results.json、COMPLETE 与 validation_summary 已逐片归档，原始结果无尾换行的字节格式保持不变。表中用时是本次作业时长，含断点续跑的片不是全部尝试累计用时。
+
+| 实验 | 分片 / 作业 | 正确 / 总数 | 单片准确率 | 本次用时 | 完成标记时间（HKT） |
+|---|---|---|---|---|---|
+| MMSI / Qwen3.5-9B | 2 / `67300_2` | 31 / 100 | 31.00% | 03:24:27 | 03:50:03 |
+| MMSI / Qwen3.5-9B | 3 / `67377_3` | 28 / 100 | 28.00% | 03:31:43 | 06:03:57 |
+| MMSI / Qwen3.8-27B | 2 / `67292_2` | 21 / 100 | 21.00% | 06:01:52 | 06:23:54 |
+| MindCube / Qwen3.5-27B | 1 / `67220_1` | 42 / 95 | 44.21% | 10:05:27 | 09:16:51 |
+
+- 归档结果：[9B chunk2](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_2/results.json)、[9B chunk3](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_3/results.json)、[3.8 chunk2](./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/chunks/question_chunk_2/results.json)、[MindCube/27B chunk1](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/chunks/question_chunk_1/results.json)。MindCube/27B 新增运行清单，run-group `2878daf0a74e8eb106dc44bf2e02f54a593888278bec99017b21418493147738`；其他片均与各自既有归档 run-group 一致。详细逐文件哈希见 SHA256SUMS。
+- P1 现正式归档 8 片：9B chunk0–3 共 400 题，113 对 / 287 错（28.25%）；MMSI/3.8 chunk0/2 共 200 题，40 对 / 160 错（20.00%）；MindCube/27B chunk1 共 95 题（44.21%）；MindCube/72B chunk0 共95题（40.00%）。这些均为已完成分片的部分指标，不是全量成绩。
+- 06:26 刷新配额及队列后，9B 完成0–3且无活动片，在合计上限2内续提 chunk4/5 为 `67459_[4,5]`，每片2×A10080GB；原始命令见[续提审计](./scheduling/20260908T222642Z-mmsi9b-next-shards.json)。10:01 两片均在 srv15 RUNNING，随后题数读取分别93/100和82/100，没有新 COMPLETE，不能提前计入正式完成。其他存活旧任务均正常完成，没有主动中断。
+- 当前仅两片9B使用4×A100；MindCube与MMSI/3.8新增/失败片仍按已有共享存储故障保护暂缓，9B上限2已满，不重复提交。连接曾被远端关闭，后改为自动响应用户已授权密码以避免交互等待；未改服务器认证配置。没有重新配环境、扫描权重或修改 BF16/no-thinking/65536/图片顺序/SVC 设置。所有旧失败产物与日志继续保留。
+
+## 历史进展：2026-09-09 02:32 MMSI/9B 第二片完成并续提
 
 - MMSI/Qwen3.5-9B chunk1 作业 `67293_1` 已 COMPLETED 0:0，本次续跑用时 01:08:27，完成标记时间 01:30:33 HKT（包含此前失败尝试保存的进度，不是该片总累计 GPU 用时）。严格验证通过：100/100 题，29 对 / 71 错，0 skip，单片准确率 29.00%；run-group 与已归档 chunk0 一致。原始[结果](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_1/results.json)、COMPLETE 与校验摘要已归档，结果 SHA256 `17d5dd7965bbc5d55e7bc5451c992f5d7ff1df8b92707c4dda4da73dbf57488d`。9B 已正式完成 2/10 片，共 200 题、54 对 / 146 错，27.00% 仅为已完成两片，不是全量成绩。P1 累计归档 4 个完成片。
 - 02:32 刷新 GPU 与账号限制后，确认9B仅 chunk2 `67300_2` 活动，按跨数组上限2补交未完成且未活动的 chunk3，作业 `67377_3`；即时队列 PENDING，不能记为已开始推理。实际 sbatch 审计见[续提记录](./scheduling/20260908T183211Z-mmsi9b-next-shard.json)。同 Run ID/r8/2×A10080GB，所有设置不变，不重复环境检查、不重启其他任务。
