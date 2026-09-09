@@ -4,7 +4,12 @@
 
 本文件同时记录实验优先级和已验证的实验产物。优先级数字越小，优先级越高；`P0` 表示用户指定为已经运行的项目，但只有带有正式 `COMPLETE`、可复核结果文件和哈希的项目才记为“已验证完成”。
 
-## 最新进展：2026-09-09 10:35 MMSI/9B 完成一半分片
+## 最新进展：2026-09-09 10:49 MMSI/9B 已完成6片
+
+- chunk5 `67459_5` 已 COMPLETED 0:0，用时04:19:49；严格核验100/100题、27对73错、0 skip。原始[结果](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_5/results.json)、COMPLETE与验证摘要已归档，SHA `aaf4e81c76221ee5540bb8d3d1663f2f12cdc49b9dde1d7d97cb60489ec79870`。9B已完成0–5共600/1000题，172对428错，部分准确率28.67%；非全量成绩。P1累计归档10片。
+- 10:49实查chunk6 `67550_6` RUNNING，去重及配额检查后补交chunk7为 `67560_7`，即时队列已分配srv15；两片各2×A10080GB、合计4卡，chunk7刚启动不等同已推理。[续提审计](./scheduling/20260909T024911Z-mmsi9b-next-shard.json)保留实际sbatch参数。沿用原Run、r8源码、本地环境与论文设置，不重启活动片；其他存储故障组合新增继续暂缓。
+
+## 历史进展：2026-09-09 10:35 MMSI/9B 完成一半分片
 
 - chunk4 `67459_4` 已 COMPLETED 0:0，用时03:46:18，100/100题、32对68错、0 skip，严格验证及COMPLETE哈希一致。原始[结果](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_4/results.json)、完成标记和验证摘要已归档，SHA `bc91d242f6550a6db98f8df0617a63e4448dcefac72572edb5dfc891f8a12280`。9B正式完成chunk0–4共500/1000题，145对355错，部分准确率29.00%；不是全量成绩。P1累计归档9片。
 - 10:35确认chunk5 `67459_5`仍RUNNING，无重复/完成片冲突，按9B合计上限2续提chunk6为 `67550_6`（即时PENDING），每片2×A10080GB；[实际续提命令](./scheduling/20260909T023528Z-mmsi9b-next-shard.json)。QOS仍5运行/10提交；同Run/r8/原环境与论文设置不变，其他存储故障组合继续暂缓新增，未中断任何运行任务。
