@@ -1,0 +1,185 @@
+{
+  "utc": "2026-09-09T03:42:49.910239+00:00",
+  "policy": "quota-first, two settings; MMSI9B primary, MindCube27B secondary",
+  "before": [
+    {
+      "id": "55278",
+      "name": "kb-qwen36",
+      "state": "PENDING",
+      "reason": "(DependencyNeverSatisfied)"
+    },
+    {
+      "id": "67600_8",
+      "name": "mj-p1-mmsi-qwen35-9b-array",
+      "state": "PENDING",
+      "reason": "(Resources)"
+    },
+    {
+      "id": "67600_9",
+      "name": "mj-p1-mmsi-qwen35-9b-array",
+      "state": "PENDING",
+      "reason": "(Resources)"
+    },
+    {
+      "id": "67579_0",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv12"
+    },
+    {
+      "id": "67579_2",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv12"
+    },
+    {
+      "id": "67560_7",
+      "name": "mj-p1-mmsi-qwen35-9b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv15"
+    },
+    {
+      "id": "67550_6",
+      "name": "mj-p1-mmsi-qwen35-9b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv15"
+    }
+  ],
+  "dispatch": [
+    {
+      "run_id": "mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908",
+      "cap": 5,
+      "completed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "active": [
+        {
+          "id": "67600_8",
+          "name": "mj-p1-mmsi-qwen35-9b-array",
+          "state": "PENDING",
+          "reason": "(Resources)"
+        },
+        {
+          "id": "67600_9",
+          "name": "mj-p1-mmsi-qwen35-9b-array",
+          "state": "PENDING",
+          "reason": "(Resources)"
+        },
+        {
+          "id": "67560_7",
+          "name": "mj-p1-mmsi-qwen35-9b-array",
+          "state": "RUNNING",
+          "reason": "hkbugpusrv15"
+        },
+        {
+          "id": "67550_6",
+          "name": "mj-p1-mmsi-qwen35-9b-array",
+          "state": "RUNNING",
+          "reason": "hkbugpusrv15"
+        }
+      ],
+      "new_indices": [],
+      "account_active": 7,
+      "utc": "2026-09-09T03:42:49.687251+00:00"
+    },
+    {
+      "run_id": "mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908",
+      "cap": 5,
+      "completed": [
+        1
+      ],
+      "active": [
+        {
+          "id": "67579_0",
+          "name": "mj-p1-mindcube-qwen35-27b-array",
+          "state": "RUNNING",
+          "reason": "hkbugpusrv12"
+        },
+        {
+          "id": "67579_2",
+          "name": "mj-p1-mindcube-qwen35-27b-array",
+          "state": "RUNNING",
+          "reason": "hkbugpusrv12"
+        }
+      ],
+      "new_indices": [
+        3,
+        4,
+        5
+      ],
+      "account_active": 7,
+      "command": "sbatch --parsable --account=daai --partition=short --job-name=mj-p1-mindcube-qwen35-27b-array --array=3,4,5%3 --gres=gpu:a100:2 --cpus-per-task=8 --mem=160G --time=5-00:00:00 --output=/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/logs/%x-%A_%a.out --error=/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/logs/%x-%A_%a.err --export=P1_REPO_DIR=/home/comp/24482277/shiyang/MindJourney-p1-startup-r8-20260908,P1_MODEL_KEY=qwen35-27b,P1_DATASET=mindcube,P1_ACCELERATOR=a100,P1_RUN_MODE=array,P1_RUN_ID=mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908,P1_RUN_ROOT=/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908,P1_INPUT_DIR=/home/datasets/shiyang/MindCube_9c941b46/processed,P1_SPLIT=test,P1_NUM_QUESTIONS=1050,P1_NUM_CHUNKS=11,P1_MAX_IMAGES=4,P1_MODEL_PATH=/home/datasets/chentao/models/Qwen3.5-27B,P1_CACHE_ROOT=/home/datasets/shiyang/daai_runtime/model_cache,P1_MODEL_VALIDATION_ROOT=/home/datasets/shiyang/mindjourney_storage/model_validation,P1_REQUIRE_REVISION_MARKER=1,P1_MANIFEST=/home/comp/24482277/shiyang/MindJourney-p1-startup-r8-20260908/configs/p1_svc_multiimage.json,P1_DATASET_PROVENANCE=/home/datasets/shiyang/MindCube_9c941b46/processed/test_provenance.json,P1_EXPECTED_INPUT_SHA256=03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083,P1_EXPECTED_PROVENANCE_SHA256=55af7c4dd6e125b5323a798ba871d3297c6c89098f5911b6d84561af26effac6,P1_EXPECTED_MANIFEST_SHA256=1b13b98fc39873515eb3794a4c417197ae222f844b6ae41402442103aa93f77f,P1_EXPECTED_SOURCE_SHA256=e6d08e5a782bbf8f2521d25637cb197f52b7d8dfc1edf7cd29d403b6ac123e64,P1_SVC_PYTHON=python,P1_VLLM_BIN=vllm,P1_ALLOW_NETWORK=0,P1_MODEL_TREE_MANIFEST=/home/datasets/chentao/models/Qwen3.5-27B/.cache/huggingface/trees/fc05daec18b0a78c049392ed2e771dde82bdf654.json,P1_MODEL_TREE_SHA256=0dc5ca5bf2a3d58c9b57c0d68790796d92656bfb228d76eaeae73342e7fcbe6c,P1_JOB_PROLOG=/home/comp/24482277/shiyang/MindJourney-p1-startup-r8-20260908/scripts/p1_persistent_env_prolog.sh,P1_PERSISTENT_ENV_ROOT=/home/datasets/shiyang/daai_runtime/envs/p1-01ef26c-v1,P1_EXPECTED_ENV_COMPLETE_SHA256=4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50 --exclude=hkbugpudgx01,hkbugpusrv07,hkbugpusrv08,hkbugpusrv13,hkbugpusrv14 /home/comp/24482277/shiyang/MindJourney-p1-startup-r8-20260908/scripts/p1_array.sbatch",
+      "utc": "2026-09-09T03:42:49.821624+00:00",
+      "submitted_job_id": "67605"
+    }
+  ],
+  "after": [
+    {
+      "id": "55278",
+      "name": "kb-qwen36",
+      "state": "PENDING",
+      "reason": "(DependencyNeverSatisfied)"
+    },
+    {
+      "id": "67600_8",
+      "name": "mj-p1-mmsi-qwen35-9b-array",
+      "state": "PENDING",
+      "reason": "(Resources)"
+    },
+    {
+      "id": "67600_9",
+      "name": "mj-p1-mmsi-qwen35-9b-array",
+      "state": "PENDING",
+      "reason": "(Resources)"
+    },
+    {
+      "id": "67605_3",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "PENDING",
+      "reason": "(None)"
+    },
+    {
+      "id": "67605_4",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "PENDING",
+      "reason": "(None)"
+    },
+    {
+      "id": "67605_5",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "PENDING",
+      "reason": "(None)"
+    },
+    {
+      "id": "67579_0",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv12"
+    },
+    {
+      "id": "67579_2",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv12"
+    },
+    {
+      "id": "67560_7",
+      "name": "mj-p1-mmsi-qwen35-9b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv15"
+    },
+    {
+      "id": "67550_6",
+      "name": "mj-p1-mmsi-qwen35-9b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv15"
+    }
+  ],
+  "resource_check_utc": "2026-09-09T03:41:29Z",
+  "resource_check_output": "\r\nCHECK ['date']\r\nWed Sep  9 11:41:29 HKT 2026\r\nCHECK ['squeue', '-r', '-u', '24482277', '-o', '%.18i %.40j %.12T %.12M %.35R %b']\r\n             JOBID                                     NAME        STATE         TIME                    NODELIST(REASON) TRES_PER_NODE\r\n             55278                                kb-qwen36      PENDING         0:00          (DependencyNeverSatisfied) gres/gpu:h20:2\r\n           67600_8               mj-p1-mmsi-qwen35-9b-array      PENDING         0:00                         (Resources) gres/gpu:a100:2\r\n           67600_9               mj-p1-mmsi-qwen35-9b-array      PENDING         0:00                         (Resources) gres/gpu:a100:2\r\n           67579_0          mj-p1-mindcube-qwen35-27b-array      RUNNING         5:58                        hkbugpusrv12 gres/gpu:a100:2\r\n           67579_2          mj-p1-mindcube-qwen35-27b-array      RUNNING         5:58                        hkbugpusrv12 gres/gpu:a100:2\r\n           67560_7               mj-p1-mmsi-qwen35-9b-array      RUNNING        52:15                        hkbugpusrv15 gres/gpu:a100:2\r\n           67550_6               mj-p1-mmsi-qwen35-9b-array      RUNNING      1:05:58                        hkbugpusrv15 gres/gpu:a100:2\r\nCHECK ['sacctmgr', '-nP', 'show', 'assoc', 'where', 'user=24482277', 'format=Account,User,Partition,QOS,MaxJobs,MaxSubmit,GrpTRES,MaxTRES']\r\ndaai|24482277||daai_qos||||\r\ndaai|24482277||daai_qos||||\r\nCHECK ['sacctmgr', '-nP', 'show', 'qos', 'format=Name,MaxJobsPU,MaxSubmitJobsPU,MaxTRESPU,GrpTRES']\r\nnormal||||\r\ndaai_qos|5|10||\r\nqos_short|||cpu=592,gres/gpu:a100=64,gres/gpu:h20=8,gres/gpu:rtx4080=20,mem=17T|\r\nqos_long|||cpu=120,gres/gpu:v100=24,mem=3T|\r\nCHECK ['sinfo', '-N', '-h', '-o', '%N %T %G %C']\r\nhkbugpudgx01 mixed gpu:a100:8,gpu_mem:40000 48/208/0/256\r\nhkbugpusrv01 mixed gpu:v100:4,gpu_mem:32480 28/12/0/40\r\nhkbugpusrv02 idle gpu:v100:4,gpu_mem:32480 0/40/0/40\r\nhkbugpusrv03 idle gpu:v100:4,gpu_mem:32480 0/40/0/40\r\nhkbugpusrv04 mixed gpu:v100:4,gpu_mem:32480 4/36/0/40\r\nhkbugpusrv05 mixed gpu:v100:4,gpu_mem:32480 8/32/0/40\r\nhkbugpusrv06 allocated gpu:v100:4,gpu_mem:32480 40/0/0/40\r\nhkbugpusrv07 mixed gpu:a100:8,gpu_mem:80000 14/26/0/40\r\nhkbugpusrv08 allocated gpu:a100:8,gpu_mem:80000 40/0/0/40\r\nhkbugpusrv09 mixed gpu:rtx4080:7,gpu_mem:16376 56/8/0/64\r\nhkbugpusrv10 mixed gpu:rtx4080:10,gpu_mem:16376 4/60/0/64\r\nhkbugpusrv11 mixed- gpu:a100:8,gpu_mem:80K 46/98/0/144\r\nhkbugpusrv12 mixed- gpu:a100:8,gpu_mem:80K 48/96/0/144\r\nhkbugpusrv13 mixed gpu:a100:8,gpu_mem:80K 80/64/0/144\r\nhkbugpusrv14 mixed gpu:a100:8,gpu_mem:80K 64/80/0/144\r\nhkbugpusrv15 mixed gpu:a100:8,gpu_mem:80K 46/98/0/144\r\nhkbugpusrv16 mixed gpu:h20:8,gpu_mem:97871 64/80/0/144\r\nCHECK ['scontrol', 'show', 'node', 'hkbugpusrv11,hkbugpusrv12,hkbugpusrv15,hkbugpusrv16']\r\nNodeName=hkbugpusrv11 Arch=x86_64 CoresPerSocket=36 \r\n   CPUAlloc=46 CPUEfctv=144 CPUTot=144 CPULoad=22.57\r\n   AvailableFeatures=cpu_xeon,a100,A100\r\n   ActiveFeatures=cpu_xeon,a100,A100\r\n   Gres=gpu:a100:8,gpu_mem:80K\r\n   NodeAddr=hkbugpusrv11 NodeHostName=hkbugpusrv11 Version=25.05.5\r\n   OS=Linux 5.15.0-101.103.2.1.el8uek.x86_64 #2 SMP Mon May 1 20:11:30 PDT 2023 \r\n   RealMemory=2063906 AllocMem=0 FreeMem=481704 Sockets=2 Boards=1\r\n   State=MIXED+PLANNED ThreadsPerCore=2 TmpDisk=140000 Weight=500 Owner=N/A MCS_label=N/A\r\n   Partitions=short \r\n   BootTime=2026-03-16T14:33:20 SlurmdStartTime=2026-06-12T14:15:09\r\n   LastBusyTime=2026-09-07T23:36:16 ResumeAfterTime=None\r\n   CfgTRES=cpu=144,mem=2063906M,billing=144,gres/gpu=8,gres/gpu:a100=8\r\n   AllocTRES=cpu=46,gres/gpu=8,gres/gpu:a100=8\r\n   CurrentWatts=0 AveWatts=0\r\n\r\nNodeName=hkbugpusrv12 Arch=x86_64 CoresPerSocket=36 \r\n   CPUAlloc=48 CPUEfctv=144 CPUTot=144 CPULoad=6.96\r\n   AvailableFeatures=cpu_xeon,a100,A100\r\n   ActiveFeatures=cpu_xeon,a100,A100\r\n   Gres=gpu:a100:8,gpu_mem:80K\r\n   NodeAddr=hkbugpusrv12 NodeHostName=hkbugpusrv12 Version=25.05.5\r\n   OS=Linux 5.15.0-101.103.2.1.el8uek.x86_64 #2 SMP Mon May 1 20:11:30 PDT 2023 \r\n   RealMemory=2063906 AllocMem=0 FreeMem=1168269 Sockets=2 Boards=1\r\n   State=MIXED+PLANNED ThreadsPerCore=2 TmpDisk=140000 Weight=500 Owner=N/A MCS_label=N/A\r\n   Partitions=short \r\n   BootTime=2026-08-26T11:24:57 SlurmdStartTime=2026-08-26T11:25:37\r\n   LastBusyTime=2026-09-08T23:51:21 ResumeAfterTime=None\r\n   CfgTRES=cpu=144,mem=2063906M,billing=144,gres/gpu=8,gres/gpu:a100=8\r\n   AllocTRES=cpu=48,gres/gpu=8,gres/gpu:a100=8\r\n   CurrentWatts=0 AveWatts=0\r\n\r\nNodeName=hkbugpusrv15 Arch=x86_64 CoresPerSocket=36 \r\n   CPUAlloc=46 CPUEfctv=144 CPUTot=144 CPULoad=25.76\r\n   AvailableFeatures=cpu_xeon,a100,A100\r\n   ActiveFeatures=cpu_xeon,a100,A100\r\n   Gres=gpu:a100:8,gpu_mem:80K\r\n   NodeAddr=hkbugpusrv15 NodeHostName=hkbugpusrv15 Version=25.05.5\r\n   OS=Linux 5.15.0-101.103.2.1.el8uek.x86_64 #2 SMP Mon May 1 20:11:30 PDT 2023 \r\n   RealMemory=2063906 AllocMem=0 FreeMem=1230012 Sockets=2 Boards=1\r\n   State=MIXED ThreadsPerCore=2 TmpDisk=140000 Weight=500 Owner=N/A MCS_label=N/A\r\n   Partitions=short \r\n   BootTime=2026-06-03T14:01:33 SlurmdStartTime=2026-06-12T14:15:09\r\n   LastBusyTime=2026-08-19T05:30:26 ResumeAfterTime=None\r\n   CfgTRES=cpu=144,mem=2063906M,billing=144,gres/gpu=8,gres/gpu:a100=8\r\n   AllocTRES=cpu=46,gres/gpu=8,gres/gpu:a100=8\r\n   CurrentWatts=0 AveWatts=0\r\n\r\nNodeName=hkbugpusrv16 Arch=x86_64 CoresPerSocket=36 \r\n   CPUAlloc=64 CPUEfctv=144 CPUTot=144 CPULoad=10.19\r\n   AvailableFeatures=cpu_xeon,h20,H20\r\n   ActiveFeatures=cpu_xeon,h20,H20\r\n   Gres=gpu:h20:8,gpu_mem:97871\r\n   NodeAddr=hkbugpusrv16 NodeHostName=hkbugpusrv16 Version=25.05.5\r\n   OS=Linux 5.15.0-101.103.2.1.el8uek.x86_64 #2 SMP Mon May 1 20:11:30 PDT 2023 \r\n   RealMemory=2063906 AllocMem=0 FreeMem=78841 Sockets=2 Boards=1\r\n   State=MIXED ThreadsPerCore=2 TmpDisk=140000 Weight=500 Owner=N/A MCS_label=N/A\r\n   Partitions=short \r\n   BootTime=2026-02-09T08:58:24 SlurmdStartTime=2026-06-12T14:15:09\r\n   LastBusyTime=2026-09-09T09:06:30 ResumeAfterTime=None\r\n   CfgTRES=cpu=144,mem=2063906M,billing=144,gres/gpu=8,gres/gpu:h20=8\r\n   AllocTRES=cpu=64,gres/gpu=8,gres/gpu:h20=8\r\n   CurrentWatts=0 AveWatts=0\r\n\r\nConnection to hkbugpumanode.hkbuad.local closed.\r\nConnection to faith.comp.hkbu.edu.hk closed.\r\r\n"
+}

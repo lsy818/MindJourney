@@ -19,7 +19,8 @@ aaf4e81c76221ee5540bb8d3d1663f2f12cdc49b9dde1d7d97cb60489ec79870  ./mmsi/qwen3.5
 840908316df8f3c12481a265cec354bd48a141b129b9b2eeb11e77e043f565ff  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_5/COMPLETE
 3490d8b1e566301e2da06619225aa5055452ebd07d4fda4bf0dc0f70a2d6dcb7  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_5/validation_summary.json
 20416dcd1a687a74e5f60a4857239294d61b1e0c396479384cd424efc26bb66f  ./scheduling/20260909T024911Z-mmsi9b-next-shard.json
-6bc0aa48c62cb6bc3b72c52c25e75caacebcff5b71658c8de16fef6388d4cf2c  ./EXPERIMENTS.md
+045ea426d614abbf7417c41b48fbc282ef62da15ed3dfa5048234c686b7864bb  ./EXPERIMENTS.md
+18625c051887eeaba3b3736e1991da87c234c730fd044b7b04ddc4a3c319861d  ./scheduling/20260909T034249Z-two-setting-quota-first.json
 37163c1e158f59387b39826205a3168f70bb4b622cc75c67691f2fb4ae9f2ba9  ./scheduling/20260909T033604Z-single-setting-focus.json
 7ba2699498dd6f888d7cb8e586b303a07329e3d280cdf48c1a79a28c28fee709  ./scheduling/20260909T032134Z-user-full-queue.json
 965ebe3bcf1e101306d623a0e0162f02d29e915e5076f799851e3b05d8bcbeb1  ./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/launch_manifest.txt
