@@ -1,0 +1,178 @@
+{
+  "utc": "2026-09-09T03:36:04.334106+00:00",
+  "policy": "single-setting focus; MMSI Qwen3.5-9B first",
+  "before": [
+    {
+      "id": "67580_1",
+      "name": "mj-p1-mindcube-qwen25vl-72b-array",
+      "state": "PENDING",
+      "reason": "(Resources)"
+    },
+    {
+      "id": "67580_2",
+      "name": "mj-p1-mindcube-qwen25vl-72b-array",
+      "state": "PENDING",
+      "reason": "(Resources)"
+    },
+    {
+      "id": "67581_1",
+      "name": "mj-p1-mmsi-qwen38-27b-array",
+      "state": "PENDING",
+      "reason": "(Priority)"
+    },
+    {
+      "id": "67581_3",
+      "name": "mj-p1-mmsi-qwen38-27b-array",
+      "state": "PENDING",
+      "reason": "(Priority)"
+    },
+    {
+      "id": "67579_3",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "PENDING",
+      "reason": "(Priority)"
+    },
+    {
+      "id": "55278",
+      "name": "kb-qwen36",
+      "state": "PENDING",
+      "reason": "(DependencyNeverSatisfied)"
+    },
+    {
+      "id": "67579_0",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv12"
+    },
+    {
+      "id": "67579_2",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv12"
+    },
+    {
+      "id": "67560_7",
+      "name": "mj-p1-mmsi-qwen35-9b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv15"
+    },
+    {
+      "id": "67550_6",
+      "name": "mj-p1-mmsi-qwen35-9b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv15"
+    }
+  ],
+  "cancellations": [
+    {
+      "id": "67580_1",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "id": "67580_2",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "id": "67581_1",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "id": "67581_3",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "id": "67579_3",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "dispatch": [
+    {
+      "run_id": "mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908",
+      "cap": 5,
+      "completed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "active": [
+        {
+          "id": "67560_7",
+          "name": "mj-p1-mmsi-qwen35-9b-array",
+          "state": "RUNNING",
+          "reason": "hkbugpusrv15"
+        },
+        {
+          "id": "67550_6",
+          "name": "mj-p1-mmsi-qwen35-9b-array",
+          "state": "RUNNING",
+          "reason": "hkbugpusrv15"
+        }
+      ],
+      "new_indices": [
+        8,
+        9
+      ],
+      "account_active": 5,
+      "command": "sbatch --parsable --account=daai --partition=short --job-name=mj-p1-mmsi-qwen35-9b-array --array=8,9%3 --gres=gpu:a100:2 --cpus-per-task=8 --mem=160G --time=5-00:00:00 --output=/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/logs/%x-%A_%a.out --error=/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/logs/%x-%A_%a.err --export=P1_REPO_DIR=/home/comp/24482277/shiyang/MindJourney-p1-startup-r8-20260908,P1_MODEL_KEY=qwen35-9b,P1_DATASET=mmsi,P1_ACCELERATOR=a100,P1_RUN_MODE=array,P1_RUN_ID=mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908,P1_RUN_ROOT=/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908,P1_INPUT_DIR=/home/datasets/shiyang/MMSI_Bench_ec7c92bf/processed_daai,P1_SPLIT=test,P1_NUM_QUESTIONS=1000,P1_NUM_CHUNKS=10,P1_MAX_IMAGES=10,P1_MODEL_PATH=/home/datasets/chentao/models/Qwen3.5-9B,P1_CACHE_ROOT=/home/datasets/shiyang/daai_runtime/model_cache,P1_MODEL_VALIDATION_ROOT=/home/datasets/shiyang/mindjourney_storage/model_validation,P1_REQUIRE_REVISION_MARKER=1,P1_MANIFEST=/home/comp/24482277/shiyang/MindJourney-p1-startup-r8-20260908/configs/p1_svc_multiimage.json,P1_DATASET_PROVENANCE=/home/datasets/shiyang/MMSI_Bench_ec7c92bf/processed_daai/test_provenance.json,P1_EXPECTED_INPUT_SHA256=5de75a94eebb2ad31b44ab0f33d7225c56157165292d8112e287c410f56180c9,P1_EXPECTED_PROVENANCE_SHA256=fa5f4ee9223cf72fd4dcbc941b8fbd66788b37d854844532bde581cd2aebdf9f,P1_EXPECTED_MANIFEST_SHA256=1b13b98fc39873515eb3794a4c417197ae222f844b6ae41402442103aa93f77f,P1_EXPECTED_SOURCE_SHA256=e6d08e5a782bbf8f2521d25637cb197f52b7d8dfc1edf7cd29d403b6ac123e64,P1_SVC_PYTHON=python,P1_VLLM_BIN=vllm,P1_ALLOW_NETWORK=0,P1_JOB_PROLOG=/home/comp/24482277/shiyang/MindJourney-p1-startup-r8-20260908/scripts/p1_persistent_env_prolog.sh,P1_PERSISTENT_ENV_ROOT=/home/datasets/shiyang/daai_runtime/envs/p1-01ef26c-v1,P1_EXPECTED_ENV_COMPLETE_SHA256=4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50 --exclude=hkbugpudgx01,hkbugpusrv07,hkbugpusrv08,hkbugpusrv13,hkbugpusrv14 /home/comp/24482277/shiyang/MindJourney-p1-startup-r8-20260908/scripts/p1_array.sbatch",
+      "utc": "2026-09-09T03:36:04.202533+00:00",
+      "submitted_job_id": "67600"
+    }
+  ],
+  "after": [
+    {
+      "id": "55278",
+      "name": "kb-qwen36",
+      "state": "PENDING",
+      "reason": "(DependencyNeverSatisfied)"
+    },
+    {
+      "id": "67600_8",
+      "name": "mj-p1-mmsi-qwen35-9b-array",
+      "state": "PENDING",
+      "reason": "(Resources)"
+    },
+    {
+      "id": "67600_9",
+      "name": "mj-p1-mmsi-qwen35-9b-array",
+      "state": "PENDING",
+      "reason": "(Resources)"
+    },
+    {
+      "id": "67579_0",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv12"
+    },
+    {
+      "id": "67579_2",
+      "name": "mj-p1-mindcube-qwen35-27b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv12"
+    },
+    {
+      "id": "67560_7",
+      "name": "mj-p1-mmsi-qwen35-9b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv15"
+    },
+    {
+      "id": "67550_6",
+      "name": "mj-p1-mmsi-qwen35-9b-array",
+      "state": "RUNNING",
+      "reason": "hkbugpusrv15"
+    }
+  ]
+}
