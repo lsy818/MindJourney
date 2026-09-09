@@ -4,7 +4,20 @@
 
 本文件同时记录实验优先级和已验证的实验产物。优先级数字越小，优先级越高；`P0` 表示用户指定为已经运行的项目，但只有带有正式 `COMPLETE`、可复核结果文件和哈希的项目才记为“已验证完成”。
 
-## 最新进展：2026-09-09 11:55 已用满5个运行名额
+## 最新进展：2026-09-09 15:55 MMSI/9B 已完成9/10片
+
+- 新增3个完成片均COMPLETED 0:0，严格题ID覆盖、配置/run-group、零skip和COMPLETE哈希一致；原始results.json字节（无尾换行）、COMPLETE及validation_summary均已归档。9B已完成chunk0–8，共900/1000题，251对649错，27.89%仅为已完成9片的部分准确率。P1正式归档累计13片，尚不合并未完成的全量结果。
+
+| 分片 / 作业 | 正确 / 总数 | 本次作业用时 | COMPLETE时间（HKT） | 原始结果 |
+|---|---|---|---|---|
+| 6 / `67550_6` | 27 / 100 | 03:27:46 | 14:03:16 | [results.json](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_6/results.json) |
+| 7 / `67560_7` | 27 / 100 | 03:16:59 | 14:06:12 | [results.json](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_7/results.json) |
+| 8 / `67600_8` | 25 / 100 | 03:50:08 | 15:37:49 | [results.json](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_8/results.json) |
+
+- 15:55远端实查：9B最后chunk9 `67600_9` 在srv15 RUNNING，已48/100题（15对33错），未COMPLETE。MindCube/27B chunk0/2 `67579_0/2`（srv12）、chunk3/4 `67605_3/4`（srv15/srv11）也RUNNING；chunk0/2/3分别92/37/15题，chunk4尚未发现结果文件，不能宣称已开始题目推理。无新失败，旧失败日志保留。
+- 当前仍5/5运行名额、共10×A100；MindCube chunk5 `67605_5`等待QOS运行名额。含无关55278共7个活动作业，虽有3个提交槽，但MC27B已跨数组活动5片、9B仅余最后1片已运行，因此不重复提交、不超既定cap或扩大到第三组。候补已接替完成片，未重启任何作业；继续两组集中推进，完成即严格归档。
+
+## 历史进展：2026-09-09 11:55 已用满5个运行名额
 
 - MMSI/9B chunk8 `67600_8` 已在srv11启动并产出3题（1对2错），不是仅排队或模型加载。连同9B chunk6 `67550_6`、chunk7 `67560_7`（srv15），以及MindCube/27B chunk0/2 `67579_0/2`（srv12），共5个RUNNING、10×A10080GB，已用满MaxJobsPU=5。
 - 9B chunk9 `67600_9`、MindCube/27B chunk3/4/5 `67605_[3,4,5]` 共4个P1候补，排队原因均为QOSMaxJobsPerUserLimit。加无关55278，仍占满10/10提交槽；不重复提交。
