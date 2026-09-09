@@ -4,7 +4,13 @@
 
 本文件同时记录实验优先级和已验证的实验产物。优先级数字越小，优先级越高；`P0` 表示用户指定为已经运行的项目，但只有带有正式 `COMPLETE`、可复核结果文件和哈希的项目才记为“已验证完成”。
 
-## 最新进展：2026-09-09 15:55 MMSI/9B 已完成9/10片
+## 最新进展：2026-09-09 16:24 MindCube/27B 新完成chunk0并续提
+
+- MindCube/Qwen3.5-27B chunk0 `67579_0` 已COMPLETED 0:0，本次续跑耗时04:46:08（非包含旧失败尝试的总耗时）。严格验证95/95题、45对50错、0skip，run-group与既有chunk1一致，COMPLETE结果SHA为 `ea0641df980f90c0801648b148922ad1b8b7c7160e6237f939b90cb4a052c854`。原始[结果](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/chunks/question_chunk_0/results.json)、COMPLETE及validation_summary已归档，原始字节保持。MC27B正式完成0/1两片，共190题87对103错，45.79%为部分成绩；P1累计14个完成片。
+- 候补chunk5 `67605_5`已自动接上srv12；16:24仍5个RUNNING、10×A100：9B最后chunk9 `67600_9`，MC27B chunk2 `67579_2`、chunk3/4/5 `67605_3/4/5`。16:22题数快照：9B9为63/100，MC27B2/3/4为41/18/3题，0skip；chunk5刚启动不冒充已进入推理。
+- 刷新配额与资源后，MC27B活动4片、完成0/1，去重补交未完成chunk6为 `67823_6`，每片2×A10080GB，即时PENDING QOSMaxJobsPerUserLimit。MC27B跨数组活动回到cap5，含无关55278账号共7/10提交；5/5运行额度已满。H20此时有4卡未分配，但不能越过5个运行上限，也不在两组集中策略中额外引入第三组。实际命令及资源证据见[续提审计](./scheduling/20260909T082405Z-mindcube27-next-shard.json)。所有Run/r8/环境与论文设置不变，未重启或删除任何任务、结果和日志。
+
+## 历史进展：2026-09-09 15:55 MMSI/9B 已完成9/10片
 
 - 新增3个完成片均COMPLETED 0:0，严格题ID覆盖、配置/run-group、零skip和COMPLETE哈希一致；原始results.json字节（无尾换行）、COMPLETE及validation_summary均已归档。9B已完成chunk0–8，共900/1000题，251对649错，27.89%仅为已完成9片的部分准确率。P1正式归档累计13片，尚不合并未完成的全量结果。
 
