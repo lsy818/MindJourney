@@ -4,7 +4,14 @@
 
 本文件同时记录实验优先级和已验证的实验产物。优先级数字越小，优先级越高；`P0` 表示用户指定为已经运行的项目，但只有带有正式 `COMPLETE`、可复核结果文件和哈希的项目才记为“已验证完成”。
 
-## 最新进展：2026-09-09 16:24 MindCube/27B 新完成chunk0并续提
+## 最新进展：2026-09-09 21:00 MMSI/9B 全量完成并严格合并
+
+- MMSI-Bench / Qwen3.5-9B / SVC 正式全量1000题：**288对 / 712错，准确率28.80%**，10/10片完成，0skip。最后chunk9 `67600_9` 已COMPLETED 0:0，用时03:30:10，37/100正确。原始[最后一片](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_9/results.json)、COMPLETE和validation_summary已归档，结果SHA `29f343f8e55324bc4c5651728649a2c55f13d482b8ccb4329f863dc6ae6ffa60`。
+- 用冻结r8的严格合并器核对全部10片的精确题ID、无遗漏/重复、0skip、正式配置、run-group指纹、完成标记及原始结果哈希，均通过。正式[合并结果](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/results_merged.json)及[全量摘要](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/formal_run_summary.json)已保存，合并SHA `3c32217b6e7ce23274c47de105e8f6f860b250a6b330513dd860e324580fbc81`。服务器合并文件位于原Run的results_merged.json，不覆盖已有分片结果。P1累计15个完成片。
+- 20:59远端实查：MindCube/27B chunk2 `67579_2`、chunk3/4/5 `67605_3/4/5`、chunk6 `67823_6`均RUNNING，分别75/56/38/31/24题，均0skip；共5/5运行名额、10×A100满额。MC27B正式完成仍为chunk0/1两片，不把运行部分计为全量。
+- 9B全量归档推送后，按既定两组策略转以MindCube/27B为主，MindCube/72B作为候补第二组；不重启这5个活动任务，不更改Run、冻结源码、环境及BF16/no-thinking/65536/官方图片顺序/论文SVC设置。
+
+## 历史进展：2026-09-09 16:24 MindCube/27B 新完成chunk0并续提
 
 - MindCube/Qwen3.5-27B chunk0 `67579_0` 已COMPLETED 0:0，本次续跑耗时04:46:08（非包含旧失败尝试的总耗时）。严格验证95/95题、45对50错、0skip，run-group与既有chunk1一致，COMPLETE结果SHA为 `ea0641df980f90c0801648b148922ad1b8b7c7160e6237f939b90cb4a052c854`。原始[结果](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/chunks/question_chunk_0/results.json)、COMPLETE及validation_summary已归档，原始字节保持。MC27B正式完成0/1两片，共190题87对103错，45.79%为部分成绩；P1累计14个完成片。
 - 候补chunk5 `67605_5`已自动接上srv12；16:24仍5个RUNNING、10×A100：9B最后chunk9 `67600_9`，MC27B chunk2 `67579_2`、chunk3/4/5 `67605_3/4/5`。16:22题数快照：9B9为63/100，MC27B2/3/4为41/18/3题，0skip；chunk5刚启动不冒充已进入推理。
