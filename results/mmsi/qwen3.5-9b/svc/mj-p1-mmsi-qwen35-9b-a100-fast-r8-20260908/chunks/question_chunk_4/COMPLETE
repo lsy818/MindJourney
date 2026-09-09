@@ -1,0 +1,9 @@
+run_id=mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908
+dataset=mmsi
+model=Qwen/Qwen3.5-9B
+revision=c202236235762e1c871ad0ccb60c8ee5ba337b9a
+execution_scope=formal
+diagnostic_host=none
+chunk_index=4
+results_sha256=bc91d242f6550a6db98f8df0617a63e4448dcefac72572edb5dfc891f8a12280
+completed_utc=2026-09-09T02:13:02Z
