@@ -1,10 +1,16 @@
 # MindJourney 实验结果与计划
 
-最后更新：2026-09-09（Asia/Shanghai）
+最后更新：2026-09-10（Asia/Shanghai）
 
 本文件同时记录实验优先级和已验证的实验产物。优先级数字越小，优先级越高；`P0` 表示用户指定为已经运行的项目，但只有带有正式 `COMPLETE`、可复核结果文件和哈希的项目才记为“已验证完成”。
 
-## 最新进展：2026-09-09 21:02 转入MindCube两组集中队列
+## 最新进展：2026-09-10 01:04 MindCube/27B 完成第3片并补交chunk7
+
+- MindCube/27B chunk2 `67579_2` 已COMPLETED 0:0，本次作业用时11:45:53。严格核验95/95题、54对41错、0skip，配置/run-group与已归档片一致，COMPLETE哈希通过。原始[结果](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/chunks/question_chunk_2/results.json)、COMPLETE及validation_summary已归档，结果SHA `7aab77ce33aebddbd9c39b25dcc976c4adfba0e924af101a39e60651bf0e17e3`。MC27B正式完成0–2共285题141对144错，49.47%为部分准确率；P1累计16个完成片。
+- 01:03实查MC27B chunk3/4/5/6 `67605_3/4/5`、`67823_6`继续RUNNING，分别87/68/59/54题，均0skip；72B `68005_1/2/3/4`仍PENDING Resources，H20全8卡已分配，旧断点保留不冒充新进度。未发现新失败。
+- 01:04更新配额（5运行/10提交）及GPU资源，去重后实际补交MC27B chunk7为 `68108_7`，每片2×A10080GB，即时PENDING；不将提交成功误报为已经推理。账号回到10/10活动提交（含无关55278），MC27B跨数组cap5已满。操作后即时4运行、5个P1候补，待Slurm分配可用资源；实际命令及前后队列见[续提审计](./scheduling/20260909T170441Z-mindcube27-next-shard.json)。所有Run/r8/本地环境和论文设置不变，未中断其他作业。
+
+## 历史进展：2026-09-09 21:02 转入MindCube两组集中队列
 
 - MMSI/9B全量288/1000（28.80%）及全部原始分片已严格验证、归档并push（`e185b52`）；不再提交该已完成Run。现在主攻MindCube/27B，72B为第二setting候补，其他setting暂不新增。
 - 21:02刷新GPU/配额和全部活动数组后，27B chunk2–6共5片仍RUNNING、10×A100，5/5运行额度已满；27B跨数组活动cap5已满，不重复提交。为利用候补提交额度，实际提交72B chunk1/2/3/4为 `68005_[1,2,3,4]`，各3×H20（TP2+独占SVC1），全部PENDING QOSMaxJobsPerUserLimit。实际sbatch的export显式保留 `P1_GPU_MEMORY_UTILIZATION=0.93`，原Run/r8及所有论文设置不变，旧chunk1/2断点和日志保留。
