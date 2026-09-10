@@ -4,7 +4,22 @@
 
 本文件同时记录实验优先级和已验证的实验产物。优先级数字越小，优先级越高；`P0` 表示用户指定为已经运行的项目，但只有带有正式 `COMPLETE`、可复核结果文件和哈希的项目才记为“已验证完成”。
 
-## 最新进展：2026-09-10 01:04 MindCube/27B 完成第3片并补交chunk7
+## 最新进展：2026-09-10 12:06 MindCube/27B 已完成7/11片，72B两片已推理
+
+- 新增MC27B chunk3/4/5/6均COMPLETED 0:0，严格验证95/95题、0skip、精确ID、配置/run-group及COMPLETE原始结果SHA全通过；四片原始JSON、COMPLETE与validation_summary均已归档。MC27B正式完成0–6共665题330对335错，49.62%为部分准确率；P1累计20个完成片，不提前发布1050题全量成绩。
+
+| 分片 / 作业 | 正确 / 总数 | 本次用时 | 原始结果 |
+|---|---|---|---|
+| 3 / `67605_3` | 48 / 95 | 11:48:47 | [results.json](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/chunks/question_chunk_3/results.json) |
+| 4 / `67605_4` | 48 / 95 | 13:01:50 | [results.json](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/chunks/question_chunk_4/results.json) |
+| 5 / `67605_5` | 44 / 95 | 13:13:09 | [results.json](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/chunks/question_chunk_5/results.json) |
+| 6 / `67823_6` | 49 / 95 | 12:23:56 | [results.json](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/chunks/question_chunk_6/results.json) |
+
+- 12:04远端实查MC27B chunk7 `68108_7` RUNNING srv15，79/95题；MC72B chunk1/2 `68005_1/2`均RUNNING srv16，分别24/16题，超过旧断点18/10题，已实际继续推理；各3H20，0skip。MC72B3/4仍排队QOSMaxGRESPerUser。查询qos_short的MaxTRESPU显示H20上限8卡，两片已用6卡，第三片会需9卡，且srv16总共也只有8卡。
+- 12:06去重后补交MC27B全部剩余未提交片8/9/10为 `68453_[8,9,10]`，各2A100；再补交72B chunk5为 `68454_5`，3H20且实际export显式0.93，均即时PENDING。原有运行作业不动，全部沿用原Run/r8/本地环境和论文设置。即时3个RUNNING（2A100+6H20）、6个P1候补；加无关55278共10/10提交槽，运行3/5未满，兼容A100 srv11/12/15全8/8已分配，新增需等资源，不能把候补算运行。
+- MC27B剩余7–10已全部活动，不重复补交；72B活动合计5片达到cap5。实际资源、配额与命令见[补位审计](./scheduling/20260910T040621Z-mindcube-refill.json)。未发现新失败；共享存储不宣称已根治，全部旧结果和日志保留。
+
+## 历史进展：2026-09-10 01:04 MindCube/27B 完成第3片并补交chunk7
 
 - MindCube/27B chunk2 `67579_2` 已COMPLETED 0:0，本次作业用时11:45:53。严格核验95/95题、54对41错、0skip，配置/run-group与已归档片一致，COMPLETE哈希通过。原始[结果](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/chunks/question_chunk_2/results.json)、COMPLETE及validation_summary已归档，结果SHA `7aab77ce33aebddbd9c39b25dcc976c4adfba0e924af101a39e60651bf0e17e3`。MC27B正式完成0–2共285题141对144错，49.47%为部分准确率；P1累计16个完成片。
 - 01:03实查MC27B chunk3/4/5/6 `67605_3/4/5`、`67823_6`继续RUNNING，分别87/68/59/54题，均0skip；72B `68005_1/2/3/4`仍PENDING Resources，H20全8卡已分配，旧断点保留不冒充新进度。未发现新失败。
