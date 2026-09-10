@@ -1,0 +1,9 @@
+run_id=mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908
+dataset=mindcube
+model=Qwen/Qwen2.5-VL-72B-Instruct
+revision=89c86200743eec961a297729e7990e8f2ddbc4c5
+execution_scope=formal
+diagnostic_host=none
+chunk_index=2
+results_sha256=0f7834c2ed6a0d0a16e2c06e9a75540db530f72085d4e99989f0239df3d366e8
+completed_utc=2026-09-10T09:05:50Z

@@ -4,7 +4,13 @@
 
 本文件同时记录实验优先级和已验证的实验产物。优先级数字越小，优先级越高；`P0` 表示用户指定为已经运行的项目，但只有带有正式 `COMPLETE`、可复核结果文件和哈希的项目才记为“已验证完成”。
 
-## 最新进展：2026-09-10 16:20 MindCube/72B 新完成分片1，保持5片并行
+## 最新进展：2026-09-10 17:09 MindCube/72B 已完成3/11片
+
+- MC72B chunk2 `68005_2` 已COMPLETED 0:0，本次续跑用时05:35:05（不含旧失败尝试）；严格核验95/95题、42对53错、0skip，精确题ID、配置/run-group和COMPLETE结果SHA全通过。原始[结果](./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/chunks/question_chunk_2/results.json)、COMPLETE与validation_summary已归档，结果SHA `0f7834c2ed6a0d0a16e2c06e9a75540db530f72085d4e99989f0239df3d366e8`。72B完成0–2共285题120对165错，42.11%仅为部分准确率；P1累计23个正式完成片，不提前合并全量。
+- 17:07 MC72B chunk4 `68005_4` 已接替RUNNING约2分钟，尚无结果文件，不冒充已开始题目推理；chunk3 `68005_3` 已21/95题。MC27B chunk8/9/10 `68453_8/9/10` 继续运行，分别35/18/18题，均0skip。合计5/5运行名额、6×A10080GB＋6×H20，未发现新失败。
+- 17:09刷新GPU、配额与全部数组去重后，新增72B chunk7为 `68871_7`，即时PENDING QOSMaxJobsPerUserLimit；待运行5/6/7为 `68454_5`、`68804_6`、`68871_7`，该setting跨数组活动3–7共5片已满。含无关55278账号9/10活动，MC27B剩余全已运行，不重复提交、不引入第三setting。72B原Run/r8、TP2＋独占SVC1共3H20及实际export 0.93保持不变，未重启作业或重配环境。见[补位审计](./scheduling/20260910T090900Z-mindcube72-chunk7-refill.json)。所有结果和日志保留，共享存储不宣称根治。
+
+## 历史进展：2026-09-10 16:20 MindCube/72B 新完成分片1，保持5片并行
 
 - MC72B chunk1 `68005_1` 已COMPLETED 0:0，本次续跑用时04:39:40（不含旧失败尝试）；严格核验95/95题、40对55错、0skip，精确题ID、配置/run-group和COMPLETE结果SHA全通过。原始[结果](./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/chunks/question_chunk_1/results.json)、COMPLETE与validation_summary已归档，结果SHA `b112a7818010f66fb5e2323963b006c38eab692ec208c8a74361e5209a77a37f`。72B现完成0–1两片共190题78对112错，41.05%仅为部分准确率；P1累计22个正式完成片，不提前合并全量。
 - MC72B chunk3 `68005_3` 已自动接替运行，16:19已保存3题；chunk2 `68005_2` 已85/95题。MC27B chunk8/9/10 `68453_8/9/10` 继续运行，分别28/13/12题，均0skip。合计5/5运行名额、6×A10080GB＋6×H20；未发现新失败。
