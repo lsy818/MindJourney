@@ -19,7 +19,11 @@ aaf4e81c76221ee5540bb8d3d1663f2f12cdc49b9dde1d7d97cb60489ec79870  ./mmsi/qwen3.5
 840908316df8f3c12481a265cec354bd48a141b129b9b2eeb11e77e043f565ff  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_5/COMPLETE
 3490d8b1e566301e2da06619225aa5055452ebd07d4fda4bf0dc0f70a2d6dcb7  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_5/validation_summary.json
 20416dcd1a687a74e5f60a4857239294d61b1e0c396479384cd424efc26bb66f  ./scheduling/20260909T024911Z-mmsi9b-next-shard.json
-75d36596fe1f762f5d3a36a606071f5e365d89e65e2e123a7808d0d43b3581f8  ./EXPERIMENTS.md
+bd2a12add482e05722372eeb842ad7330c82b5e41a1bcd9d94e6699e66ff49d7  ./EXPERIMENTS.md
+04dc0a548b0029b97c074d160dcdfa7c262d9e504a1f0e267b7b03320174941d  ./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/chunks/question_chunk_3/results.json
+8feff20f72057199381067b41e76b442305fa7261db43d49c281b1f9fd53479f  ./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/chunks/question_chunk_3/COMPLETE
+cb71ca74aa64ac0f45079083ba8a2f2549c6599212cf286f8fa74d9202ed7455  ./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/chunks/question_chunk_3/validation_summary.json
+015e35fecc105abce173d00866de63438bd3c47d172e33a320e7e28f4348b9ec  ./scheduling/20260910T124620Z-mindcube72-chunk8-refill.json
 0f7834c2ed6a0d0a16e2c06e9a75540db530f72085d4e99989f0239df3d366e8  ./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/chunks/question_chunk_2/results.json
 3459f013effd3d81afbeeae2fd6e7d5877d060ab55eefcfba6e5bd9dad5cb6e0  ./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/chunks/question_chunk_2/COMPLETE
 0419d1c5b4bdb478a3bcfbaa34b22ef88586094196c22a388c18a82c2378ea0e  ./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/chunks/question_chunk_2/validation_summary.json
