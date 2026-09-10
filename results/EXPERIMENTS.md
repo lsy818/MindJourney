@@ -4,7 +4,13 @@
 
 本文件同时记录实验优先级和已验证的实验产物。优先级数字越小，优先级越高；`P0` 表示用户指定为已经运行的项目，但只有带有正式 `COMPLETE`、可复核结果文件和哈希的项目才记为“已验证完成”。
 
-## 最新进展：2026-09-10 12:06 MindCube/27B 已完成7/11片，72B两片已推理
+## 最新进展：2026-09-10 14:32 MindCube/27B 已完成8/11片
+
+- MC27B chunk7 `68108_7` 已COMPLETED 0:0，用时13:27:32；严格验证95/95题、36对59错、0skip，配置/run-group和COMPLETE原始结果SHA通过。原始[结果](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/chunks/question_chunk_7/results.json)、COMPLETE与validation_summary已归档，SHA `42ff07ea953582151922a5a64acba47ec4bcc597e2f45e3a8c07dc5552712dd1`。MC27B正式完成0–7共760题366对394错，48.16%为部分准确率；P1累计21个完成片，不提前合并未完整Run。
+- 候补MC27B chunk9 `68453_9`已接上srv15，刚启动不冒充已推理；chunk8 `68453_8`在srv11已15/95题，chunk10 `68453_10`仍PENDING Resources。全部剩余8–10已活动，无缺失可新增片，禁止重复提交。
+- MC72B chunk1/2 `68005_1/2`继续srv16 RUNNING，各3H20，题数67/54；chunk3/4/5 `68005_3/4`、`68454_5`仍排队QOSMaxGRESPerUser，跨数组cap5满。即时共4RUNNING（4A100+6H20）、4个P1候补；含55278账号9/10活动。虽有1个提交槽，但两组无可在既定cap内补交的分片，不重复提交、不引入第三组。未发现新失败或skip，所有设置和既有产物保留。
+
+## 历史进展：2026-09-10 12:06 MindCube/27B 已完成7/11片，72B两片已推理
 
 - 新增MC27B chunk3/4/5/6均COMPLETED 0:0，严格验证95/95题、0skip、精确ID、配置/run-group及COMPLETE原始结果SHA全通过；四片原始JSON、COMPLETE与validation_summary均已归档。MC27B正式完成0–6共665题330对335错，49.62%为部分准确率；P1累计20个完成片，不提前发布1050题全量成绩。
 
