@@ -4,7 +4,13 @@
 
 本文件同时记录实验优先级和已验证的实验产物。优先级数字越小，优先级越高；`P0` 表示用户指定为已经运行的项目，但只有带有正式 `COMPLETE`、可复核结果文件和哈希的项目才记为“已验证完成”。
 
-## 最新进展：2026-09-11 21:34 MMSI/3.8 已完成4/10片
+## 最新进展：2026-09-11 23:34 MindCube/72B 全量完成并严格合并
+
+- MindCube / Qwen2.5-VL-72B-Instruct / SVC 全量1050题：**416对 / 634错，准确率39.62%**。11/11片全部完成，0skip；冻结r8验证器通过精确题ID覆盖、无重复遗漏、正式参数、run-group和所有COMPLETE结果SHA检查。[全量结果](./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_merged.json)与[正式汇总](./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/formal_run_summary.json)已归档。合并SHA `e8a48d429b72c20a2efb2f8eeebfd6135cf84d32f8446606f9a2ade341833f95`，服务器原Run根目录results_merged.json保留。
+- 最后片9/10分别37/95、43/100正确，作业 `69407_9/10` 均COMPLETED 0:0，用时05:40:24、05:36:52；原始JSON、COMPLETE和validation_summary均已逐片核验归档。类别准确率among 36.83%、around 43.60%、rotation 43.00%。TP2＋独占SVC1、每片3H20、实际export 0.93及BF16/no-thinking/65536/官方图片顺序/论文SVC设置不变。
+- 四项P1现已有三项全量完成（MC27B 498/1050、MC72B 416/1050、MMSI9B 288/1000），累计36个正式完成片。只剩MMSI/3.8，已完成0–3共400题84对，21.00%仅部分。23:32片4/5/6 `69413_4/5/6` 继续RUNNING，各2A10080GB，进度75/100、33/100、30/100；片7/8 `69723_7`、`69736_8` PENDING Priority。当前3/5运行、6×A100，不能称账户已满；23:34兼容A100 srv11/12/15全8/8已分配，虽H20有6张空余，但不混改既有A100 Run硬件指纹。MMSI活动4–8达到跨数组cap5，剩余片9待活动容量释放后补交，不重复提交、不重启健康作业。所有历史结果和日志保留。
+
+## 历史进展：2026-09-11 21:34 MMSI/3.8 已完成4/10片
 
 - MMSI/Qwen3.8-27B片3 `69413_3` 已COMPLETED 0:0，用时07:30:43，20对80错。固定r8严格验证100题精确覆盖、0skip、配置/run-group及COMPLETE原始结果SHA均通过。原始[结果](./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/chunks/question_chunk_3/results.json)、COMPLETE和validation_summary已归档，SHA `8163aa9864ebccb090969794365ae87f75d0dc61b0f6914de2a8d1ee1dc92f33`。正式完成0–3四片，共400题84对316错，21.00%仅为部分准确率；P1累计34个正式完成片，不提前合并全量。
 - 21:33账户仍5/5运行名额、6×H20＋6×A10080GB。MindCube/72B最后片9/10 `69407_9/10`已61/95、63/100；MMSI片4/5 `69413_4/5`已52/100、3/100；片6 `69413_6`已自动接替片3并保存首题。均0skip，无新失败，所有健康作业继续运行。

@@ -1,0 +1,130 @@
+{
+  "status": "complete_verified",
+  "run_id": "mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908",
+  "dataset": "mindcube",
+  "model": "Qwen2.5-VL-72B-Instruct",
+  "method": "SVC",
+  "verified_utc": "2026-09-11T15:34:04.697662+00:00",
+  "counts": {
+    "correct": 416,
+    "wrong": 634,
+    "total": 1050
+  },
+  "accuracy": {
+    "all": 0.3961904761904762,
+    "types": {
+      "among": 0.36833333333333335,
+      "around": 0.436,
+      "rotation": 0.43
+    }
+  },
+  "validation": {
+    "status": "passed",
+    "dataset": "mindcube",
+    "expected_total": 1050,
+    "num_chunks": 11,
+    "max_images": 4,
+    "dataset_json_sha256": "03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083",
+    "launch_manifest_sha256": "ffb7f2b888466e47180f1a9172af74caab445c9f1f589c25c8f08ecd8642a3e0",
+    "checks": [
+      "pipeline_seed_10_effective_chunk_membership",
+      "zero_skips",
+      "correct_wrong_exhaustive_and_unique",
+      "run_group_fingerprint_consistency",
+      "formal_parameter_consistency",
+      "chunk_completion_checksums"
+    ],
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "expected": 95,
+        "correct": 38,
+        "wrong": 57,
+        "results_sha256": "dd1582fb4166d15a7a18d7d25fa3f3058156d36412b14fd22e114cfd0acd5fad",
+        "source": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_spatial_beam_search_qc11/question_chunk_0/results.json"
+      },
+      {
+        "chunk_index": 1,
+        "expected": 95,
+        "correct": 40,
+        "wrong": 55,
+        "results_sha256": "b112a7818010f66fb5e2323963b006c38eab692ec208c8a74361e5209a77a37f",
+        "source": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_spatial_beam_search_qc11/question_chunk_1/results.json"
+      },
+      {
+        "chunk_index": 2,
+        "expected": 95,
+        "correct": 42,
+        "wrong": 53,
+        "results_sha256": "0f7834c2ed6a0d0a16e2c06e9a75540db530f72085d4e99989f0239df3d366e8",
+        "source": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_spatial_beam_search_qc11/question_chunk_2/results.json"
+      },
+      {
+        "chunk_index": 3,
+        "expected": 95,
+        "correct": 34,
+        "wrong": 61,
+        "results_sha256": "04dc0a548b0029b97c074d160dcdfa7c262d9e504a1f0e267b7b03320174941d",
+        "source": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_spatial_beam_search_qc11/question_chunk_3/results.json"
+      },
+      {
+        "chunk_index": 4,
+        "expected": 95,
+        "correct": 39,
+        "wrong": 56,
+        "results_sha256": "aea1275bf79ffad78eca0e3f51035c161ddd1ebd76d2f932aceda87971a72843",
+        "source": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_spatial_beam_search_qc11/question_chunk_4/results.json"
+      },
+      {
+        "chunk_index": 5,
+        "expected": 95,
+        "correct": 36,
+        "wrong": 59,
+        "results_sha256": "7c231d3f67d0255c04e1f46098f687cebb700a33790a3c49ac9c38c1ae465c00",
+        "source": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_spatial_beam_search_qc11/question_chunk_5/results.json"
+      },
+      {
+        "chunk_index": 6,
+        "expected": 95,
+        "correct": 37,
+        "wrong": 58,
+        "results_sha256": "76a4a8259fdc5964c9f0899cd8458205d9bc49acc03a49dc07966a25affbb660",
+        "source": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_spatial_beam_search_qc11/question_chunk_6/results.json"
+      },
+      {
+        "chunk_index": 7,
+        "expected": 95,
+        "correct": 31,
+        "wrong": 64,
+        "results_sha256": "bacaa2796b3484f6c1c1dd4282692fb178eeb78459210066f4a8987c4ae21d1d",
+        "source": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_spatial_beam_search_qc11/question_chunk_7/results.json"
+      },
+      {
+        "chunk_index": 8,
+        "expected": 95,
+        "correct": 39,
+        "wrong": 56,
+        "results_sha256": "e07537b1bc30d199472137b94ea71bb63acc92c71652e03f32bc9068ecdd9537",
+        "source": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_spatial_beam_search_qc11/question_chunk_8/results.json"
+      },
+      {
+        "chunk_index": 9,
+        "expected": 95,
+        "correct": 37,
+        "wrong": 58,
+        "results_sha256": "a81cdee2438f08dc71cce7527d140035b86f967de80e12098ca28d99c438c0c8",
+        "source": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_spatial_beam_search_qc11/question_chunk_9/results.json"
+      },
+      {
+        "chunk_index": 10,
+        "expected": 100,
+        "correct": 43,
+        "wrong": 57,
+        "results_sha256": "006321307f254e24e0828338c56b8c32b13c02f00c8619757eec9df66323f2c9",
+        "source": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_spatial_beam_search_qc11/question_chunk_10/results.json"
+      }
+    ]
+  },
+  "source_path": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_merged.json",
+  "merged_sha256": "e8a48d429b72c20a2efb2f8eeebfd6135cf84d32f8446606f9a2ade341833f95"
+}
