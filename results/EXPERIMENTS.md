@@ -1,10 +1,17 @@
 # MindJourney 实验结果与计划
 
-最后更新：2026-09-10（Asia/Shanghai）
+最后更新：2026-09-11（Asia/Shanghai）
 
 本文件同时记录实验优先级和已验证的实验产物。优先级数字越小，优先级越高；`P0` 表示用户指定为已经运行的项目，但只有带有正式 `COMPLETE`、可复核结果文件和哈希的项目才记为“已验证完成”。
 
-## 最新进展：2026-09-10 20:46 MindCube/72B 已完成4/11片
+## 最新进展：2026-09-11 13:35 MindCube/27B 全量完成并严格合并
+
+- MindCube / Qwen3.5-27B / SVC 全量1050题：**498对 / 552错，准确率47.43%**。11/11片全部COMPLETED 0:0，0skip。冻结r8严格合并器通过全部题ID精确覆盖、无重复遗漏、正式设置、run-group及COMPLETE原始结果SHA检查。[全量原始结果](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/results_merged.json)与[正式汇总](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/formal_run_summary.json)已归档。合并SHA `9d7f93fb15994a31549fdae0e5efb921dc0ee3c515a9a6cf2fc59eadccc96966`；服务器原文件保留于原Run根目录results_merged.json。
+- 新增27B片8/9/10分别47/95、38/95、47/100正确，作业 `68453_8/9/10` 用时14:52:08、14:13:22、15:56:24；三个原始JSON、COMPLETE和validation_summary均已严格核验归档。按类别准确率among 35.50%、around 56.00%、rotation 72.50%。BF16、no-thinking、65536、官方图片顺序及论文SVC设置不变。
+- 13:32远端发现此前活动实验均已完成、P1队列为空；这是本次监控实际恢复时间，不将旧快照冒充实时。72B片4–8均COMPLETED 0:0，分别39/36/37/31/39对、每片95题，尚待本轮逐片正式归档；该Run共9/11片完成，不提前标记全量。
+- 13:33查资源配额并去重后，实际补交72B最后片9/10为 `69407_9/10`，各3H20、TP2＋独占SVC1，实际export显式0.93，原Run/r8不变，即时PENDING。见[最后两片提交审计](./scheduling/20260911T053346Z-mindcube72-last-two.json)。待本次27B合并结果push后，以MMSI/3.8作为第二setting补位，保持两组集中与额度优先。所有旧结果、日志和失败断点保留，未重新配置环境。
+
+## 历史进展：2026-09-10 20:46 MindCube/72B 已完成4/11片
 
 - MC72B chunk3 `68005_3` 已COMPLETED 0:0，用时04:30:02；严格核验95/95题、34对61错、0skip，精确题ID、配置/run-group和COMPLETE结果SHA全通过。原始[结果](./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/chunks/question_chunk_3/results.json)、COMPLETE与validation_summary已归档，结果SHA `04dc0a548b0029b97c074d160dcdfa7c262d9e504a1f0e267b7b03320174941d`。72B完成0–3共380题154对226错，40.53%仅为部分准确率；P1累计24个正式完成片，不提前合并全量。
 - 20:45 MC72B chunk5 `68454_5` 已接替RUNNING且保存首题，chunk4 `68005_4` 已60/95题。MC27B chunk8/9/10 `68453_8/9/10` 继续运行，分别59/41/42题，均0skip。仍5/5运行名额、6×A10080GB＋6×H20，未发现新失败。

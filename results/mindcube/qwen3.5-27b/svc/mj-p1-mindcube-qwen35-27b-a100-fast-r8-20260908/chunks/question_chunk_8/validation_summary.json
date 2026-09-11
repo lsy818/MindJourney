@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "dataset": "mindcube",
+  "chunk_index": 8,
+  "expected": 95,
+  "correct": 47,
+  "wrong": 48,
+  "run_group_fingerprint": "2878daf0a74e8eb106dc44bf2e02f54a593888278bec99017b21418493147738",
+  "dataset_json_sha256": "03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083",
+  "results_sha256": "0adcba517a0a2f5b4e822702b8110e5c5314240b4e8d263b4b9551de7f94c33d",
+  "results_file": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/results_spatial_beam_search_qc11/question_chunk_8/results.json"
+}
