@@ -1,10 +1,16 @@
 # MindJourney 实验结果与计划
 
-最后更新：2026-09-11（Asia/Shanghai）
+最后更新：2026-09-12（Asia/Shanghai）
 
 本文件同时记录实验优先级和已验证的实验产物。优先级数字越小，优先级越高；`P0` 表示用户指定为已经运行的项目，但只有带有正式 `COMPLETE`、可复核结果文件和哈希的项目才记为“已验证完成”。
 
-## 最新进展：2026-09-11 23:34 MindCube/72B 全量完成并严格合并
+## 最新进展：2026-09-12 01:17 MMSI/3.8 完成5/10片，最后一片已提交
+
+- MMSI/Qwen3.8-27B片4 `69413_4` COMPLETED 0:0，用时07:24:49，20对80错。冻结r8严格核验100题精确覆盖、0skip、参数/run-group及COMPLETE结果SHA通过。原始[结果](./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/chunks/question_chunk_4/results.json)、COMPLETE和validation_summary已归档，SHA `72a082d981c75ac467e11b3176bbc5ef8f9650b7d767e5b301da00770323699f`。正式完成0–4共500题104对396错，20.80%仅为部分准确率；P1累计37个正式完成片，不提前合并全量。
+- 01:16片5/6 `69413_5/6`继续RUNNING srv11，各2A10080GB，已58/100、55/100；片7 `69723_7`于01:11接替片4在srv15启动，尚未保存首题，不冒充已开始题目推理。片8 `69736_8`仍PENDING Priority。01:17检查GPU/配额并跨数组去重后，补交最后未提交片9为 `69913_9`，2A10080GB，即时PENDING。全部剩余5–9现在均已运行或排队，跨数组cap5，不再新增重复分片。
+- 即时3/5运行、6×A100，2个P1候补；含无关55278共6/10活动。兼容A100 srv11/12/15均8/8已分配，等待资源，不把排队算作额度已满。见[最后一片提交审计](./scheduling/20260911T171712Z-mmsi38-last-shard.json)。原Run/r8、本地环境和BF16/no-thinking/65536/官方图片顺序/论文SVC设置完全不变，未重启健康作业或重复环境检查，全部结果及日志保留。
+
+## 历史进展：2026-09-11 23:34 MindCube/72B 全量完成并严格合并
 
 - MindCube / Qwen2.5-VL-72B-Instruct / SVC 全量1050题：**416对 / 634错，准确率39.62%**。11/11片全部完成，0skip；冻结r8验证器通过精确题ID覆盖、无重复遗漏、正式参数、run-group和所有COMPLETE结果SHA检查。[全量结果](./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_merged.json)与[正式汇总](./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/formal_run_summary.json)已归档。合并SHA `e8a48d429b72c20a2efb2f8eeebfd6135cf84d32f8446606f9a2ade341833f95`，服务器原Run根目录results_merged.json保留。
 - 最后片9/10分别37/95、43/100正确，作业 `69407_9/10` 均COMPLETED 0:0，用时05:40:24、05:36:52；原始JSON、COMPLETE和validation_summary均已逐片核验归档。类别准确率among 36.83%、around 43.60%、rotation 43.00%。TP2＋独占SVC1、每片3H20、实际export 0.93及BF16/no-thinking/65536/官方图片顺序/论文SVC设置不变。

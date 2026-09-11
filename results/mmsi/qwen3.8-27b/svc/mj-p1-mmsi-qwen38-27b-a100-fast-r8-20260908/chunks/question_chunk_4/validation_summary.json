@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "dataset": "mmsi",
+  "chunk_index": 4,
+  "expected": 100,
+  "correct": 20,
+  "wrong": 80,
+  "run_group_fingerprint": "0b7685afd2a15bee511ee2251e480d24d8393a50eebe8a3dc5a5c69b14438a96",
+  "dataset_json_sha256": "5de75a94eebb2ad31b44ab0f33d7225c56157165292d8112e287c410f56180c9",
+  "results_sha256": "72a082d981c75ac467e11b3176bbc5ef8f9650b7d767e5b301da00770323699f",
+  "results_file": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_spatial_beam_search_qc10/question_chunk_4/results.json"
+}
