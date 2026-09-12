@@ -117,7 +117,7 @@ class DiagnosticSmokeResultTests(unittest.TestCase):
             "model_dtype": "bfloat16",
             "qwen_enable_thinking": False,
             "qwen_context_limit": "65536",
-            "qwen_max_tokens": "1024",
+            "qwen_max_tokens": "8192",
             "vllm_version": "0.28.0",
             "svc_revision": SVC_REVISION,
             "svc_weight_sha256": SVC_WEIGHT_SHA256,

@@ -84,7 +84,7 @@ class OpenAICompatibleConfig:
         self.top_p = 1.0
         self.max_tokens = int(
             os.environ.get(
-                "P1_VLM_MAX_TOKENS", os.environ.get("QWEN_MAX_TOKENS", "1024")
+                "P1_VLM_MAX_TOKENS", os.environ.get("QWEN_MAX_TOKENS", "8192")
             )
         )
         if self.max_tokens <= 0:

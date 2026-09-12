@@ -262,6 +262,7 @@ fi
 job_name="mj-p1-${dataset}-${P1_SPEC_ALIAS}-${mode}"
 array_request="${array_spec}%${max_concurrent}"
 export_spec="P1_REPO_DIR=$repo_dir,P1_MODEL_KEY=$P1_SPEC_ALIAS,P1_DATASET=$dataset,P1_ACCELERATOR=$accelerator,P1_RUN_MODE=$mode,P1_RUN_ID=$run_id,P1_RUN_ROOT=$run_root,P1_INPUT_DIR=$input_dir,P1_SPLIT=$split,P1_NUM_QUESTIONS=$effective_questions,P1_NUM_CHUNKS=$effective_chunks,P1_MAX_IMAGES=$max_images,P1_MODEL_PATH=$model_path,P1_CACHE_ROOT=$cache_root,P1_MODEL_VALIDATION_ROOT=$validation_root,P1_REQUIRE_REVISION_MARKER=1,P1_MANIFEST=$experiment_manifest,P1_DATASET_PROVENANCE=$dataset_provenance,P1_EXPECTED_INPUT_SHA256=$input_sha256,P1_EXPECTED_PROVENANCE_SHA256=$provenance_sha256,P1_EXPECTED_MANIFEST_SHA256=$manifest_sha256,P1_EXPECTED_SOURCE_SHA256=$source_sha256,P1_SVC_PYTHON=$svc_python,P1_VLLM_BIN=$vllm_bin,P1_ALLOW_NETWORK=0"
+export_spec+=",P1_VLM_MAX_TOKENS=8192,QWEN_MAX_TOKENS=8192"
 if [[ "$model_tree_sha256" != "unavailable" ]]; then
   export_spec+=",P1_MODEL_TREE_MANIFEST=$model_tree_manifest,P1_MODEL_TREE_SHA256=$model_tree_sha256"
 fi
@@ -399,6 +400,7 @@ if [[ -e "$run_root" ]]; then
     "experiment_manifest_sha256=$manifest_sha256"
     "num_questions=$effective_questions"
     "num_chunks=$effective_chunks"
+    "max_output_tokens=8192"
     "persistent_environment_root=${persistent_env_root:-none}"
     "persistent_environment_complete_sha256=$persistent_env_complete_sha256"
   )
@@ -432,6 +434,7 @@ else
     "thinking=$P1_SPEC_THINKING" \
     "dtype=bfloat16" \
     "max_model_len=65536" \
+    "max_output_tokens=8192" \
     "accelerator=$accelerator" \
     "tensor_parallel_size=$P1_SPEC_TP" \
     "svc_gpus=1" \

@@ -274,6 +274,14 @@ def _first_seen_types(questions: Iterable[Mapping[str, Any]]) -> list[str]:
     return types
 
 
+def _validate_output_budget(run_group, manifest):
+    # Old archived runs have no explicit launch budget; their own frozen
+    # validator remains usable. New runs must match the declared budget.
+    expected = manifest.get("max_output_tokens")
+    if expected is not None and str(run_group.get("qwen_max_tokens")) != expected:
+        raise P1ResultsError("Result output-token budget differs from launch manifest.")
+
+
 def validate_single_chunk(
     *,
     run_root: str | os.PathLike[str],
@@ -392,6 +400,7 @@ def validate_single_chunk(
             f"{result_path} dataset_json_sha256 does not match {input_path}."
         )
     manifest_model = manifest.get("model")
+    _validate_output_budget(run_group, manifest)
     if manifest_model is not None and arguments.get("vlm_model_name") != manifest_model:
         raise P1ResultsError(
             f"{result_path} model {arguments.get('vlm_model_name')!r} "
@@ -649,6 +658,7 @@ def validate_and_merge(
                 f"{results_path} dataset_json_sha256 does not match {input_path}."
             )
         manifest_model = manifest.get("model")
+        _validate_output_budget(run_group, manifest)
         if manifest_model is not None and arguments.get("vlm_model_name") != manifest_model:
             raise P1ResultsError(
                 f"{results_path} model {arguments.get('vlm_model_name')!r} "

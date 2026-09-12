@@ -89,7 +89,7 @@
     "top_p": 1.0,
     "seed": 44,
     "context_limit": 65536,
-    "max_output_tokens": 1024,
+    "max_output_tokens": 8192,
     "vllm_version": "0.28.0"
   },
   "svc_weights": {

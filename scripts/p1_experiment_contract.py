@@ -50,6 +50,8 @@ def validate(dataset, model, input_file, manifest, num_questions, max_images):
     require(config["models"][model]["dtype"] == "bfloat16", "BF16 required")
     require(config["models"][model]["enable_thinking"] is False, "No-thinking required")
     require(config["generation"]["context_limit"] == 65536, "Context must be 65536")
+    require(config["generation"]["max_output_tokens"] == 8192,
+            "User-requested maximum output must be 8192")
     input_file = Path(input_file)
     require(input_file.name == "test.json", "Official test split required")
     payload = input_file.read_bytes()
