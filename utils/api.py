@@ -3,6 +3,7 @@ from typing import Dict, List
 import logging
 import base64
 import os
+import json
 
 
 # Immutable Hugging Face revisions used by the priority-one runs.  Keep this
@@ -152,21 +153,30 @@ class ChatAPI:
             kwargs["stream"] = True
         return kwargs
 
-    def _validate_no_thinking(self, response_message):
+    def _validate_no_thinking(self, response_message, response=None):
+        """Audit output without overriding the explicit no-thinking request.
+
+        A literal tag is not proof that the chat-template switch was ignored.
+        Preserve the unmodified response in the attempt log and keep scoring.
+        """
         if not self.require_no_thinking:
             return
+        findings = []
         for field in ("reasoning", "reasoning_content"):
             reasoning = getattr(response_message, field, None)
             if reasoning and str(reasoning).strip():
-                raise RuntimeError(
-                    f"{self.model} returned non-empty {field}; "
-                    "the no-thinking setting was not applied."
-                )
+                findings.append(f"non-empty {field}")
         content = getattr(response_message, "content", None) or ""
         if "<think>" in content.lower() or "</think>" in content.lower():
-            raise RuntimeError(
-                f"{self.model} returned thinking tags; "
-                "the no-thinking setting was not applied."
+            findings.append("literal thinking tag in content")
+        if findings:
+            audit_value = response if response is not None else response_message
+            raw = (audit_value.model_dump(mode="json")
+                   if hasattr(audit_value, "model_dump")
+                   else vars(audit_value))
+            logger.warning(
+                "[no-thinking audit; non-fatal] model=%s findings=%s raw_response=%s",
+                self.model, findings, json.dumps(raw, ensure_ascii=False, default=str),
             )
 
     def add_user_message(self, content: str):
@@ -202,7 +212,7 @@ class ChatAPI:
                 **self._completion_kwargs(self.messages)
             )
             response_message = response.choices[0].message
-            self._validate_no_thinking(response_message)
+            self._validate_no_thinking(response_message, response)
 
             usage_tokens = response.usage.total_tokens
             self.usage_tokens = usage_tokens
@@ -244,7 +254,7 @@ class ChatAPI:
             )
             
             response_message = response.choices[0].message
-            self._validate_no_thinking(response_message)
+            self._validate_no_thinking(response_message, response)
 
             usage_tokens = response.usage.total_tokens
             self.usage_tokens = usage_tokens

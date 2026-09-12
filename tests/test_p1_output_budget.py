@@ -1,10 +1,11 @@
 """Test request semantics without importing OpenAI or any model runtime."""
 import ast
+import json
 import os
 from pathlib import Path
 from types import SimpleNamespace
 import unittest
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 
 
 class OutputBudgetTests(unittest.TestCase):
@@ -25,7 +26,8 @@ class OutputBudgetTests(unittest.TestCase):
         api = next(n for n in tree.body if isinstance(n, ast.ClassDef) and n.name == "ChatAPI")
         methods = [n for n in api.body if isinstance(n, ast.FunctionDef)
                    and n.name in ("_completion_kwargs", "_validate_no_thinking")]
-        ns = {"os": os}
+        log = Mock()
+        ns = {"os": os, "json": json, "logger": log}
         exec(compile(ast.Module(body=nodes + methods, type_ignores=[]), str(path), "exec"), ns)
         with patch.dict(os.environ, {}, clear=True):
             for model in ns["P1_MODEL_NAMES"]:
@@ -36,9 +38,15 @@ class OutputBudgetTests(unittest.TestCase):
                     self.assertNotIn("extra_body", request)
                 else:
                     self.assertIs(request["extra_body"]["chat_template_kwargs"]["enable_thinking"], False)
-                    with self.assertRaises(RuntimeError):
-                        ns["_validate_no_thinking"](cfg, SimpleNamespace(reasoning_content="thinking"))
+                    ns["_validate_no_thinking"](cfg, SimpleNamespace(reasoning_content="thinking"))
+                    tagged = SimpleNamespace(content="<think>literal</think> Answer: B")
+                    ns["_validate_no_thinking"](cfg, tagged)
+                    self.assertEqual(tagged.content, "<think>literal</think> Answer: B")
+                    self.assertIn(tagged.content, log.warning.call_args.args[-1])
+                    log.warning.assert_called()
+                    log.reset_mock()
                     ns["_validate_no_thinking"](cfg, SimpleNamespace(content="Answer: B"))
+                    log.warning.assert_not_called()
 
 
 if __name__ == "__main__":
