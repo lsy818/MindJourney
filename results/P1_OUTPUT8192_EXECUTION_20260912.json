@@ -314,7 +314,10 @@
       "archive_directory": "results/mindcube/qwen3.8-27b/svc/mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912",
       "state": "submitted",
       "initial_job_id": "70207",
-      "blocked_shards": [{"shard": 0, "job_id": "70207_0", "reason": "no-thinking guard detected think tags in final answer_scaling response; FAILED 1:0 after 03:39:53, saved39/95", "retry_policy": "No unchanged retry or guard bypass. All three Qwen3 settings now affected; diagnostic-only instrumentation awaiting user confirmation."}],
+      "blocked_shards": [
+        {"shard": 0, "job_id": "70207_0", "reason": "no-thinking guard detected think tags in final answer_scaling response; FAILED 1:0 after 03:39:53, saved39/95", "retry_policy": "No unchanged retry or guard bypass. All three Qwen3 settings now affected; diagnostic-only instrumentation awaiting user confirmation."},
+        {"shard": 2, "job_id": "70271_2", "reason": "no-thinking guard detected think tags in final answer_scaling response; FAILED 1:0 after 03:02:28, saved34/95; verified 2026-09-12 21:25 +08:00", "retry_policy": "No unchanged retry or guard bypass. Preserve frozen r10 and all partial results; diagnostic-only instrumentation awaiting user confirmation."}
+      ],
       "additional_submissions": [
         {
           "job_id": "70263",
@@ -349,7 +352,7 @@
       "initial_shards": [
         0
       ],
-      "scheduling_note": "MindCube/3.8 shard0 now also failed think-tag guard, in final QA. Do not expand or retry unchanged until diagnosed. Keep healthy shards1-4 and existing queued5; remaining arrays70263(%1)/70271(%2)/70281(%1) aggregate cap4. All three Qwen3 settings have failures; awaiting diagnostic instrumentation confirmation. Frozen r10, model settings and all old results unchanged."
+      "scheduling_note": "At 21:25 +08:00 MindCube/3.8 shards0/2 failed final-QA think-tag guard; shards1/3/4 running and5 queued. Do not expand or retry unchanged until diagnosed. Remaining arrays70263(1 task)/70271(1 task)/70281(%1) effective aggregate cap3. All three Qwen3 settings have failures; diagnostic-only instrumentation awaiting user confirmation. 21:46 heartbeat SSH reconnection failed, so latest live status is unverified. Frozen r10, model settings and all old results unchanged."
     }
   ],
   "submission_environment": {
