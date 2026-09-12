@@ -4,7 +4,22 @@
 
 本文件同时记录实验优先级和已验证的实验产物。优先级数字越小，优先级越高；`P0` 表示用户指定为已经运行的项目，但只有带有正式 `COMPLETE`、可复核结果文件和哈希的项目才记为“已验证完成”。
 
-## 最新进展：2026-09-12 10:58 MMSI/3.8 完成9/10片
+## 最新进展：2026-09-12 11:13 四项P1全部完成并严格合并
+
+四项均为SVC，沿用各自固定r8、BF16、no-thinking、65536上下文、官方图片顺序和既定论文设置。全部42片完成，精确题ID覆盖、无重复遗漏、0skip、正式参数、run-group及COMPLETE结果SHA检查均通过。以下为全量成绩，不含未完成片估算。
+
+| 数据集 | 模型 | 正确 / 总数 | 准确率 | 全量结果 |
+|---|---|---:|---:|---|
+| MindCube | Qwen3.5-27B | 498 / 1050 | 47.43% | [结果](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/results_merged.json) |
+| MindCube | Qwen2.5-VL-72B-Instruct | 416 / 1050 | 39.62% | [结果](./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_merged.json) |
+| MMSI-Bench | Qwen3.5-9B | 288 / 1000 | 28.80% | [结果](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/results_merged.json) |
+| MMSI-Bench | Qwen3.8-27B | 208 / 1000 | 20.80% | [结果](./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_merged.json) |
+
+- MMSI/3.8最后片8 `69736_8` COMPLETED 0:0，用时07:16:17，17对83错，原始[结果](./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/chunks/question_chunk_8/results.json)、COMPLETE和validation_summary已逐片核验归档。结果SHA `4c211353f1a785811549315eeaf4c766e2b80312abe9536167a48ea0da370fb0`。
+- MMSI/3.8全量208对792错1000题、10/10片；冻结r8合并器验证通过。[正式汇总](./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/formal_run_summary.json)记录校验细节及分类准确率。合并SHA `2097acd68189ceafea154d00214b2e5edf863cb54e3ffc0ff43d1ac5dedc6b02`；服务器原Run根目录results_merged.json保留。
+- 11:12账户已无P1运行或排队作业；无关55278仍等待其失效依赖，未修改。最后结果推送后结束本轮P1自动监控，不自动拓展P2/P3。所有历史结果、失败尝试、视频和日志保留；不将本轮成功宣称为共享存储故障已根治。
+
+## 历史进展：2026-09-12 10:58 MMSI/3.8 完成9/10片
 
 - MMSI/Qwen3.8-27B片9 `69913_9` COMPLETED 0:0，用时06:35:34，27对73错。冻结r8严格验证100题精确覆盖、0skip、参数/run-group和COMPLETE结果SHA通过。原始[结果](./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/chunks/question_chunk_9/results.json)、COMPLETE及validation_summary已归档，SHA `1f3be831a4ea51ad85ddd7386b62c0cb4fa4c6cd1e80c11eeeefdd095574f638`。正式完成0–7及9共900题191对709错，21.22%仅为部分准确率；P1累计41个正式完成片，不提前合并全量。
 - 10:58唯一剩余片8 `69736_8`仍在srv11 RUNNING，使用2A10080GB，已97/100题、0skip。无P1候补或未提交片，不重复提交；待本片完成后逐片核验并严格合并1000题。原Run/r8、本地环境、BF16/no-thinking/65536/官方图片顺序及论文SVC设置不变，全部历史结果和日志保留。

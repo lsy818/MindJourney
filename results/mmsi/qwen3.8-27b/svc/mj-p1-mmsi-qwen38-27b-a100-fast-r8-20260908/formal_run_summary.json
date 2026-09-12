@@ -1,0 +1,130 @@
+{
+  "status": "complete_verified",
+  "run_id": "mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908",
+  "dataset": "mmsi",
+  "model": "Qwen3.8-27B",
+  "method": "SVC",
+  "verified_utc": "2026-09-12T03:13:00.936198+00:00",
+  "counts": {
+    "correct": 208,
+    "wrong": 792,
+    "total": 1000
+  },
+  "accuracy": {
+    "all": 0.208,
+    "types": {
+      "Positional Relationship (Cam.–Cam.)": 0.1935483870967742,
+      "Motion (Cam.)": 0.24324324324324326,
+      "Positional Relationship (Reg.–Reg.)": 0.13580246913580246,
+      "Positional Relationship (Cam.–Reg.)": 0.37349397590361444,
+      "MSR": 0.1414141414141414,
+      "Positional Relationship (Obj.–Reg.)": 0.12941176470588237,
+      "Positional Relationship (Cam.–Obj.)": 0.1511627906976744,
+      "Positional Relationship (Obj.–Obj.)": 0.19148936170212766,
+      "Attribute (Meas.)": 0.46875,
+      "Motion (Obj.)": 0.2894736842105263,
+      "Attribute (Appr.)": 0.12121212121212122
+    }
+  },
+  "validation": {
+    "status": "passed",
+    "dataset": "mmsi",
+    "expected_total": 1000,
+    "num_chunks": 10,
+    "max_images": 10,
+    "dataset_json_sha256": "5de75a94eebb2ad31b44ab0f33d7225c56157165292d8112e287c410f56180c9",
+    "launch_manifest_sha256": "c53a30aef5e7ff23457b4caf9c6fa78e58d230333d1c9455c257362b9b1ff9b8",
+    "checks": [
+      "pipeline_seed_10_effective_chunk_membership",
+      "zero_skips",
+      "correct_wrong_exhaustive_and_unique",
+      "run_group_fingerprint_consistency",
+      "formal_parameter_consistency",
+      "chunk_completion_checksums"
+    ],
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "expected": 100,
+        "correct": 19,
+        "wrong": 81,
+        "results_sha256": "5759bc5859fe540f015e1bdfbf0aaed0a15c88c3138133eb6bc35a400140bee9",
+        "source": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_spatial_beam_search_qc10/question_chunk_0/results.json"
+      },
+      {
+        "chunk_index": 1,
+        "expected": 100,
+        "correct": 24,
+        "wrong": 76,
+        "results_sha256": "ca590d614f708d1aee485a0755d651651a6d751b424404c9d706bd2af08b790c",
+        "source": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_spatial_beam_search_qc10/question_chunk_1/results.json"
+      },
+      {
+        "chunk_index": 2,
+        "expected": 100,
+        "correct": 21,
+        "wrong": 79,
+        "results_sha256": "cce675ccd65d826da61a4cf0fb72f42cf47077d39dcaf7d2e9cc90cfefbc2b9a",
+        "source": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_spatial_beam_search_qc10/question_chunk_2/results.json"
+      },
+      {
+        "chunk_index": 3,
+        "expected": 100,
+        "correct": 20,
+        "wrong": 80,
+        "results_sha256": "8163aa9864ebccb090969794365ae87f75d0dc61b0f6914de2a8d1ee1dc92f33",
+        "source": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_spatial_beam_search_qc10/question_chunk_3/results.json"
+      },
+      {
+        "chunk_index": 4,
+        "expected": 100,
+        "correct": 20,
+        "wrong": 80,
+        "results_sha256": "72a082d981c75ac467e11b3176bbc5ef8f9650b7d767e5b301da00770323699f",
+        "source": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_spatial_beam_search_qc10/question_chunk_4/results.json"
+      },
+      {
+        "chunk_index": 5,
+        "expected": 100,
+        "correct": 23,
+        "wrong": 77,
+        "results_sha256": "ebfbc08a599fb2b8080bc009ab98fafde412d8c559f8126f7260b4c905b57cf4",
+        "source": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_spatial_beam_search_qc10/question_chunk_5/results.json"
+      },
+      {
+        "chunk_index": 6,
+        "expected": 100,
+        "correct": 15,
+        "wrong": 85,
+        "results_sha256": "0b608afd36bc3cf16165c46eb7991d36f4026d7bb869b313d75c62cedcb18869",
+        "source": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_spatial_beam_search_qc10/question_chunk_6/results.json"
+      },
+      {
+        "chunk_index": 7,
+        "expected": 100,
+        "correct": 22,
+        "wrong": 78,
+        "results_sha256": "c8029011fc907f0972a0e8653ca48dbfb5df579110f5e6e4772a1695d7910a74",
+        "source": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_spatial_beam_search_qc10/question_chunk_7/results.json"
+      },
+      {
+        "chunk_index": 8,
+        "expected": 100,
+        "correct": 17,
+        "wrong": 83,
+        "results_sha256": "4c211353f1a785811549315eeaf4c766e2b80312abe9536167a48ea0da370fb0",
+        "source": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_spatial_beam_search_qc10/question_chunk_8/results.json"
+      },
+      {
+        "chunk_index": 9,
+        "expected": 100,
+        "correct": 27,
+        "wrong": 73,
+        "results_sha256": "1f3be831a4ea51ad85ddd7386b62c0cb4fa4c6cd1e80c11eeeefdd095574f638",
+        "source": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_spatial_beam_search_qc10/question_chunk_9/results.json"
+      }
+    ]
+  },
+  "source_path": "/home/datasets/shiyang/daai_runtime/p1_runs/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_merged.json",
+  "merged_sha256": "2097acd68189ceafea154d00214b2e5edf863cb54e3ffc0ff43d1ac5dedc6b02"
+}
