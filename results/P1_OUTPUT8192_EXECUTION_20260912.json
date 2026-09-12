@@ -55,6 +55,7 @@
       "state": "submitted",
       "initial_job_id": "70201",
       "blocked_shards": [
+        {"shard": 5, "job_id": "70250_5", "reason": "no-thinking guard detected think tags in scoring response; FAILED 1:0 after 01:18:20", "retry_policy": "No unchanged retry or guard bypass; diagnostic instrumentation awaiting user confirmation."},
         {
           "shard": 0,
           "job_id": "70201_0",
@@ -80,7 +81,7 @@
           "retry_policy": "No unchanged retry or guard bypass."
         }
       ],
-      "scheduling_note": "Shards0-3 failed due to think-tag guard. Do not expand or retry unchanged. Existing shards4/5 continue; MMSI current aggregate cap2 across70219/70250. Diagnostic-only instrumentation remains awaiting user confirmation; do not alter frozen r10.",
+      "scheduling_note": "Shards0/1/2/3/5 failed due to think-tag guard. Do not expand or retry unchanged. Only existing shard4 continues; MMSI current aggregate cap1 in70219. Diagnostic-only instrumentation remains awaiting user confirmation; do not alter frozen r10.",
       "initial_shards": [
         0
       ],
