@@ -1,0 +1,131 @@
+{
+  "checked_at": "2026-09-12T16:15:04.789190+08:00",
+  "runs": [
+    {
+      "run_id": "mj-p1-8192-mindcube-qwen35-9b-a100-r10-20260912",
+      "chunks": [
+        {
+          "chunk": "question_chunk_0",
+          "current": "3 / 95",
+          "skip": [],
+          "answer_parse_errors": 0,
+          "score_parse_errors": 2,
+          "source": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+          "model": "Qwen/Qwen3.5-9B",
+          "output_tokens": "8192",
+          "thinking": false,
+          "context": "65536",
+          "sample": {
+            "qid": "among_group525_q0_2_2",
+            "outcome": "correct",
+            "source_and_qa_order": "passed",
+            "has_thinking_tags": false
+          }
+        },
+        {
+          "chunk": "question_chunk_1",
+          "current": "2 / 95",
+          "skip": [],
+          "answer_parse_errors": 0,
+          "score_parse_errors": 1,
+          "source": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+          "model": "Qwen/Qwen3.5-9B",
+          "output_tokens": "8192",
+          "thinking": false,
+          "context": "65536",
+          "sample": {
+            "qid": "among_group582_q0_2_2",
+            "outcome": "wrong",
+            "source_and_qa_order": "passed",
+            "has_thinking_tags": false
+          }
+        },
+        {
+          "chunk": "question_chunk_2",
+          "current": "6 / 95",
+          "skip": [],
+          "answer_parse_errors": 0,
+          "score_parse_errors": 1,
+          "source": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+          "model": "Qwen/Qwen3.5-9B",
+          "output_tokens": "8192",
+          "thinking": false,
+          "context": "65536",
+          "sample": {
+            "qid": "among_011ee9e638b75b983746252c02622e56d5477cbc8f1ae7e1a27410cbce89b282_q3_5_2",
+            "outcome": "wrong",
+            "source_and_qa_order": "passed",
+            "has_thinking_tags": false
+          }
+        },
+        {
+          "chunk": "question_chunk_3",
+          "current": "3 / 95",
+          "skip": [],
+          "answer_parse_errors": 0,
+          "score_parse_errors": 1,
+          "source": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+          "model": "Qwen/Qwen3.5-9B",
+          "output_tokens": "8192",
+          "thinking": false,
+          "context": "65536",
+          "sample": {
+            "qid": "among_group582_q3_1_1",
+            "outcome": "correct",
+            "source_and_qa_order": "passed",
+            "has_thinking_tags": false
+          }
+        },
+        {
+          "chunk": "question_chunk_4",
+          "current": "1 / 95",
+          "skip": [],
+          "answer_parse_errors": 0,
+          "score_parse_errors": 0,
+          "source": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+          "model": "Qwen/Qwen3.5-9B",
+          "output_tokens": "8192",
+          "thinking": false,
+          "context": "65536",
+          "sample": {
+            "qid": "among_9bf509056d90440300efa33d614564feb1ae17672e2dd1fb722aef2ddc534318_q3_1_2",
+            "outcome": "correct",
+            "source_and_qa_order": "passed",
+            "has_thinking_tags": false
+          }
+        }
+      ]
+    },
+    {
+      "run_id": "mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912",
+      "chunks": []
+    },
+    {
+      "run_id": "mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912",
+      "chunks": []
+    },
+    {
+      "run_id": "mj-p1-8192-mmsi-qwen35-27b-a100-r10-20260912",
+      "chunks": []
+    }
+  ],
+  "failures": {
+    "jobs": [
+      "70200_1",
+      "70200_3"
+    ],
+    "stage": "prompt_scores / _validate_no_thinking",
+    "error": "Qwen/Qwen3.5-9B returned thinking tags; the no-thinking setting was not applied.",
+    "server_evidence": {
+      "default_chat_template_kwargs": {
+        "enable_thinking": false
+      },
+      "reasoning_parser": "qwen3",
+      "model": "/home/datasets/chentao/models/Qwen3.5-9B",
+      "dtype": "bfloat16",
+      "max_model_len": 65536
+    },
+    "interpretation": "Guard detects literal think tags; error wording alone does not prove missing configuration. Actual server args show false. Rejected raw response was not persisted before exception; root cause and whether genuine reasoning versus literal tags remain unresolved.",
+    "policy": "Preserve all attempts; do not bypass guard, retry unchanged, change frozen r10, or fall back to1024. Healthy jobs continue."
+  }
+}

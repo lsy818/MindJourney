@@ -56,6 +56,18 @@
       "initial_job_id": "70201",
       "initial_shards": [
         0
+      ],
+      "additional_submissions": [
+        {
+          "job_id": "70214",
+          "shards": [
+            1,
+            2
+          ],
+          "array_max_concurrent": 1,
+          "combined_experiment_max_concurrent": 2,
+          "submitted_at": "2026-09-12T16:15:00+08:00"
+        }
       ]
     },
     {
@@ -165,6 +177,20 @@
         3,
         4,
         5
+      ],
+      "blocked_shards": [
+        {
+          "shard": 1,
+          "job_id": "70200_1",
+          "reason": "no-thinking guard detected think tags in scoring response",
+          "retry_policy": "Do not retry unchanged or bypass guard; diagnose raw-response/template/parser issue first."
+        },
+        {
+          "shard": 3,
+          "job_id": "70200_3",
+          "reason": "no-thinking guard detected think tags in scoring response",
+          "retry_policy": "Do not retry unchanged or bypass guard; diagnose raw-response/template/parser issue first."
+        }
       ]
     },
     {
