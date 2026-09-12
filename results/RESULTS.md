@@ -6,7 +6,7 @@
 
 **本表遵循用户原始清单，用户没有修改优先级。** 此前我将 MindCube/MMSI 的执行组合配反，旧 Run ID 及日志中的“P1”是错误执行清单的遗留命名，不代表用户要求的 P1 已完成。旧结果全部保留，正确四项 P1 已使用独立 Run ID 重启；详见[重启核对记录](./P1_RESTART_AUDIT_20260912.md)。
 
-19:19最新状态：MindCube/3.8片0–4并行运行（片4新获GPU），集中使用10×A100，运行额度5/5；片5及MMSI/72B片0排队，含无关55278提交8/10。MMSI/27B与MindCube/9B已提交的各6片均标签检查失败，保留现场、不原样重试，独立诊断等待确认。8192/BF16/65536/no-thinking未变，暂无新全量成绩。详情见[实验日志](./EXPERIMENTS.md)。
+20:05最新状态：MindCube/3.8片0也因最终作答中的thinking标签检查失败（39/95），片1–4继续，4运行/8×A100；片5及MMSI/72B片0排队，含无关55278提交7/10。三个Qwen3组合均出现标签失败，暂停新增、保留现场、不原样重试，独立诊断等待确认。8192/BF16/65536/no-thinking未变，暂无新全量成绩。详情见[实验日志](./EXPERIMENTS.md)。
 
 ## 全部实验总览
 
@@ -19,7 +19,7 @@
 | MindCube 1050 | Qwen3.5-27B | P0 | 已验证完成 | 498 / 1050 | 47.43% | [JSON](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/results_merged.json) |
 | MindCube 1050 | Qwen2.5-VL-72B-Instruct | P0 | 已验证完成 | 416 / 1050 | 39.62% | [JSON](./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_merged.json) |
 | MindCube 1050 | Qwen3.5-9B | P1 | 8192：已提交0–5全部标签检查失败，暂停扩片 | — | — | [执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json) |
-| MindCube 1050 | Qwen3.8-27B | P1 | 8192：片0–4运行，片5排队 | — | — | [执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json) |
+| MindCube 1050 | Qwen3.8-27B | P1 | 8192：片1–4运行，5排队；0标签检查失败 | — | — | [执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json) |
 | SAT-Syn 500 | Qwen3.5-27B | P0 | 已验证完成 | 392 / 500 | 78.40% | [JSON](./sat-syn/qwen3.5-27b/svc/mj-svc-qwen35-sat-syn500-20260903T185438Z/results_merged.json) |
 | SAT-Syn 500 | Qwen2.5-VL-72B-Instruct | P0 | 用户反馈已跑，结果待归档 | — | — | — |
 | SAT-Syn 500 | Qwen3.5-9B | P2 | 结果待补充 | — | — | — |
@@ -141,7 +141,7 @@ Run ID：`mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908`。
 
 ### Qwen3.8-27B（P1）
 
-8192版本片0–4（70207_0、70263_1、70271_2、70271_3、70281_4）运行，片5（70281_5）排队；旧1024部分结果保留，不合并到本轮。见[执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json)。
+8192版本片1–4（70263_1、70271_2、70271_3、70281_4）运行，片5（70281_5）排队；片0因最终QA标签检查失败，不原样重试或新增分片。旧1024部分结果保留，不合并到本轮。见[执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json)。
 
 ## SAT-Syn 500
 

@@ -1,0 +1,70 @@
+{
+  "checked_at": "2026-09-12T20:05:53.538324",
+  "chunks": [
+    {
+      "shard": 0,
+      "current": "39 / 95",
+      "skip": [],
+      "max_tokens": "8192",
+      "thinking": false,
+      "source": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+      "answer_errors": 3,
+      "result_file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912/results_spatial_beam_search_qc11/question_chunk_0/results.json",
+      "sha256": "21ac1c0aba9d1f83962e914fbe98b93d2a4eb3b3ba6ec8ca611095657b484c93",
+      "vllm.log": "(APIServer pid=1819122) INFO 09-12 20:02:07 [utils.py:615] [shutdown] Process manager: send sigterm to process EngineCore\n(APIServer pid=1819122) WARNING 09-12 20:02:07 [utils.py:635] [shutdown] Process manager: force killing remaining processes count=1\n(APIServer pid=1819122) WARNING 09-12 20:02:07 [utils.py:640] [shutdown] Process manager: force killing remaining process EngineCore pid 1822918\n(EngineCore pid=1822918) INFO 09-12 20:02:07 [core.py:1329] [shutdown] EngineCore: trigger received signal=SIGTERM\n(EngineCore pid=1822918) INFO 09-12 20:02:07 [core.py:1465] [shutdown] EngineCore: start mode=abort timeout=0s\n(EngineCore pid=1822918) INFO 09-12 20:02:07 [core.py:1496] [shutdown] EngineCore: request processing complete; starting resource teardown\n(EngineCore pid=1822918) INFO 09-12 20:02:07 [core.py:1342] [shutdown] EngineCore: exiting busy loop\n(APIServer pid=1819122) INFO 09-12 20:02:07 [core_client.py:693] [shutdown] MPClient: engine manager stopped\n(APIServer pid=1819122) INFO 09-12 20:02:07 [core_client.py:694] [shutdown] MPClient: cleaning up background resources\n(APIServer pid=1819122) INFO 09-12 20:02:07 [core_client.py:696] [shutdown] MPClient: complete\n(APIServer pid=1819122) INFO 09-12 20:02:07 [launcher.py:139] [shutdown] API server: engine client stopped\n(APIServer pid=1819122) INFO 09-12 20:02:07 [launcher.py:142] [shutdown] API server: signalling HTTP server shutdown\n(APIServer pid=1819122) INFO 09-12 20:02:07 [launcher.py:163] [shutdown] API server: shutting down FastAPI HTTP server\n(APIServer pid=1819122) INFO:     Shutting down\n(APIServer pid=1819122) INFO:     Waiting for application shutdown.\n(APIServer pid=1819122) INFO:     Application shutdown complete.\n/usr/local/miniconda/py312_24.7.1-0/lib/python3.12/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown\n  warnings.warn('resource_tracker: There appear to be %d '",
+      "pipeline.log": "!!!prev_action_len_list:[]\nNo action candidates found. Goes to Q&A.\nNumber of imaginations: 0\nWARNING:utils.api:[ChatGPT] Error: Qwen/Qwen3.8-27B returned thinking tags; the no-thinking setting was not applied.\nTraceback (most recent call last):\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/pipelines/pipeline_svc_scaling_spatial_beam_search.py\", line 795, in <module>\n    pipeline.run()\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/pipelines/pipeline_svc_scaling_spatial_beam_search.py\", line 385, in run\n    response = self.vlm.run_prompt(\"answer_scaling\", sys_prompt, content)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/utils/vlm_wrapper.py\", line 109, in run_prompt\n    response = self.model.get_system_response_with_content(system_prompt, content)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/utils/api.py\", line 247, in get_system_response_with_content\n    self._validate_no_thinking(response_message)\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/utils/api.py\", line 167, in _validate_no_thinking\n    raise RuntimeError(\nRuntimeError: Qwen/Qwen3.8-27B returned thinking tags; the no-thinking setting was not applied."
+    },
+    {
+      "shard": 1,
+      "current": "28 / 95",
+      "skip": [],
+      "max_tokens": "8192",
+      "thinking": false,
+      "source": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+      "answer_errors": 1,
+      "result_file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912/results_spatial_beam_search_qc11/question_chunk_1/results.json",
+      "sha256": "1b0f79e113d62d199c57202701bb122a9f21c24c0738662934820efaf2fab3bb",
+      "vllm.log": "(APIServer pid=1097572) INFO 09-12 20:05:49 [loggers.py:310] Engine 000: Avg prompt throughput: 662.2 tokens/s, Avg generation throughput: 2.6 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 5.3%, Prefix cache hit rate: 8.3%, MM cache hit rate: 69.3%\n(APIServer pid=1097572) INFO:     127.0.0.1:46766 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK",
+      "pipeline.log": "No action candidates found. Goes to Q&A.\nNumber of imaginations: 0"
+    },
+    {
+      "shard": 2,
+      "current": "21 / 95",
+      "skip": [],
+      "max_tokens": "8192",
+      "thinking": false,
+      "source": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+      "answer_errors": 1,
+      "result_file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912/results_spatial_beam_search_qc11/question_chunk_2/results.json",
+      "sha256": "7b4b7485a1f61d306658d3dc3b0aadd5536808b6610851cfef1dc620f3092376",
+      "vllm.log": "(APIServer pid=51786) INFO 09-12 20:05:44 [loggers.py:310] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 28.5 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 8.5%, Prefix cache hit rate: 8.7%, MM cache hit rate: 67.8%\n(APIServer pid=51786) INFO 09-12 20:05:54 [loggers.py:310] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 28.5 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 8.5%, Prefix cache hit rate: 8.7%, MM cache hit rate: 67.8%",
+      "pipeline.log": "[LLM RESPONSE in choose n] 7, 7, 7, 6, 6, 6, 8, 8, 8, 8, 8, 8\nNumber of imaginations: 18"
+    },
+    {
+      "shard": 3,
+      "current": "8 / 95",
+      "skip": [],
+      "max_tokens": "8192",
+      "thinking": false,
+      "source": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+      "answer_errors": 2,
+      "result_file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912/results_spatial_beam_search_qc11/question_chunk_3/results.json",
+      "sha256": "d3c91119cc855bd1be4b781fdc1469c05f22b7396719a0078b8fd72c292238fc",
+      "vllm.log": "(APIServer pid=60900) INFO:     127.0.0.1:56406 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\n(APIServer pid=60900) INFO 09-12 20:05:48 [loggers.py:310] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 3.7 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 11.1%, MM cache hit rate: 62.7%",
+      "pipeline.log": "\nSampling:  80%|████████  | 16/20 [00:13<00:03,  1.20it/s]"
+    },
+    {
+      "shard": 4,
+      "current": "13 / 95",
+      "skip": [],
+      "max_tokens": "8192",
+      "thinking": false,
+      "source": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+      "answer_errors": 0,
+      "result_file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912/results_spatial_beam_search_qc11/question_chunk_4/results.json",
+      "sha256": "56caf5a04a0c056479c00d7e2e89b0079d0b992b833f89e0ca302fc8fd4bf689",
+      "vllm.log": "(APIServer pid=2580806) INFO 09-12 20:05:22 [loggers.py:310] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.8 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 15.4%, MM cache hit rate: 73.1%\n(APIServer pid=2580806) INFO 09-12 20:05:32 [loggers.py:310] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 15.4%, MM cache hit rate: 73.1%",
+      "pipeline.log": "\nSampling:  60%|██████    | 12/20 [00:13<00:09,  1.16s/it]"
+    }
+  ]
+}

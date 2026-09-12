@@ -314,6 +314,7 @@
       "archive_directory": "results/mindcube/qwen3.8-27b/svc/mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912",
       "state": "submitted",
       "initial_job_id": "70207",
+      "blocked_shards": [{"shard": 0, "job_id": "70207_0", "reason": "no-thinking guard detected think tags in final answer_scaling response; FAILED 1:0 after 03:39:53, saved39/95", "retry_policy": "No unchanged retry or guard bypass. All three Qwen3 settings now affected; diagnostic-only instrumentation awaiting user confirmation."}],
       "additional_submissions": [
         {
           "job_id": "70263",
@@ -348,7 +349,7 @@
       "initial_shards": [
         0
       ],
-      "scheduling_note": "Current arrays70207(%1)/70263(%1)/70271(%2)/70281(%1) aggregate cap5, bounded by account-wide max5 running jobs. Concentrate unblocked MindCube/3.8; keep all other healthy P1 jobs, no duplicate shards. Never exceed aggregate5 when adding further arrays."
+      "scheduling_note": "MindCube/3.8 shard0 now also failed think-tag guard, in final QA. Do not expand or retry unchanged until diagnosed. Keep healthy shards1-4 and existing queued5; remaining arrays70263(%1)/70271(%2)/70281(%1) aggregate cap4. All three Qwen3 settings have failures; awaiting diagnostic instrumentation confirmation. Frozen r10, model settings and all old results unchanged."
     }
   ],
   "submission_environment": {
