@@ -1,0 +1,36 @@
+alias=qwen38-27b
+model_id=Qwen/Qwen3.8-27B
+revision=1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0
+thinking=false
+accelerator=a100
+dtype=bfloat16
+max_model_len=65536
+tensor_parallel_size=1
+svc_gpus=1
+total_gpus=2
+cpus_per_task=8
+gres=gpu:a100:2
+exclude=hkbugpudgx01,hkbugpusrv07,hkbugpusrv08,hkbugpusrv13,hkbugpusrv14
+default_concurrency=4
+diagnostic_only=false
+mode=array
+dataset=mindcube
+input_file=/home/datasets/shiyang/MindCube_9c941b46/processed/test.json
+input_sha256=03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083
+dataset_provenance=/home/datasets/shiyang/MindCube_9c941b46/processed/test_provenance.json
+dataset_provenance_sha256=55af7c4dd6e125b5323a798ba871d3297c6c89098f5911b6d84561af26effac6
+experiment_manifest=/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/configs/p1_svc_multiimage.json
+experiment_manifest_sha256=988da48b21c8cb33145aa45a2defe084287a165e769db9b52b6f8d74ffc2cec1
+model_tree_manifest=unavailable
+model_tree_sha256=unavailable
+persistent_environment_complete_sha256=4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50
+source_sha256=27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf
+source_questions=1050
+run_questions=1050
+num_chunks=11
+array=0%1
+run_root=/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912
+command=sbatch --parsable --account=daai --partition=short --job-name=mj-p1-mindcube-qwen38-27b-array --array=0%1 --gres=gpu:a100:2 --cpus-per-task=8 --mem=160G --time=5-00:00:00 --output=/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912/logs/%x-%A_%a.out --error=/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912/logs/%x-%A_%a.err --export=P1_REPO_DIR=/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912\,P1_MODEL_KEY=qwen38-27b\,P1_DATASET=mindcube\,P1_ACCELERATOR=a100\,P1_RUN_MODE=array\,P1_RUN_ID=mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912\,P1_RUN_ROOT=/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912\,P1_INPUT_DIR=/home/datasets/shiyang/MindCube_9c941b46/processed\,P1_SPLIT=test\,P1_NUM_QUESTIONS=1050\,P1_NUM_CHUNKS=11\,P1_MAX_IMAGES=4\,P1_MODEL_PATH=/home/datasets/chentao/models/Qwen3.8-27B\,P1_CACHE_ROOT=/home/datasets/shiyang/daai_runtime/model_cache\,P1_MODEL_VALIDATION_ROOT=/home/datasets/shiyang/mindjourney_storage/model_validation\,P1_REQUIRE_REVISION_MARKER=1\,P1_MANIFEST=/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/configs/p1_svc_multiimage.json\,P1_DATASET_PROVENANCE=/home/datasets/shiyang/MindCube_9c941b46/processed/test_provenance.json\,P1_EXPECTED_INPUT_SHA256=03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\,P1_EXPECTED_PROVENANCE_SHA256=55af7c4dd6e125b5323a798ba871d3297c6c89098f5911b6d84561af26effac6\,P1_EXPECTED_MANIFEST_SHA256=988da48b21c8cb33145aa45a2defe084287a165e769db9b52b6f8d74ffc2cec1\,P1_EXPECTED_SOURCE_SHA256=27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf\,P1_SVC_PYTHON=python\,P1_VLLM_BIN=vllm\,P1_ALLOW_NETWORK=0\,P1_VLM_MAX_TOKENS=8192\,QWEN_MAX_TOKENS=8192\,P1_JOB_PROLOG=/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/scripts/p1_persistent_env_prolog.sh\,P1_PERSISTENT_ENV_ROOT=/home/datasets/shiyang/daai_runtime/envs/p1-01ef26c-v1\,P1_EXPECTED_ENV_COMPLETE_SHA256=4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50 --exclude=hkbugpudgx01\,hkbugpusrv07\,hkbugpusrv08\,hkbugpusrv13\,hkbugpusrv14 /home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/scripts/p1_array.sbatch 
+{"dataset": "mindcube", "input_sha256": "03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083", "max_images": 4, "model": "Qwen/Qwen3.8-27B", "questions": 1050, "status": "passed"}
+{"input_file": "/home/datasets/shiyang/MindCube_9c941b46/processed/test.json", "max_images": 4, "order_check": "img_paths validated in stored order; no sorting performed", "records": 1050, "sha256": "03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083"}
+Submitted run_id=mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912 job_id=70207; results remain under /home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912.

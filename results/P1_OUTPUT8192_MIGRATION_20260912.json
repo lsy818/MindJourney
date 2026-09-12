@@ -1,0 +1,59 @@
+{
+  "checked_at": "2026-09-12T15:58:48.285965+08:00",
+  "old_results_preserved": [
+    {
+      "file": "/home/datasets/shiyang/daai_runtime/p1_corrected_runs/mj-p1-correct-mindcube-qwen35-9b-a100-r9-20260912/results_spatial_beam_search_qc11/question_chunk_0/results.json",
+      "sha256": "51496db2bfa63ee1dd8c9bbae18b8bb4758abef00416a8f6e8ef5af1c472813b",
+      "current": "52 / 95",
+      "status": "stopped for user-requested 8192 rerun; not a completed shard"
+    },
+    {
+      "file": "/home/datasets/shiyang/daai_runtime/p1_corrected_runs/mj-p1-correct-mindcube-qwen35-9b-a100-r9-20260912/results_spatial_beam_search_qc11/question_chunk_1/results.json",
+      "sha256": "2775d1bca3fbe65c6f45a041d0c964888e2534187bf996b020ad67e7f5e2b18e",
+      "current": "45 / 95",
+      "status": "stopped for user-requested 8192 rerun; not a completed shard"
+    },
+    {
+      "file": "/home/datasets/shiyang/daai_runtime/p1_corrected_runs/mj-p1-correct-mindcube-qwen35-9b-a100-r9-20260912/results_spatial_beam_search_qc11/question_chunk_2/results.json",
+      "sha256": "526c07c59f5bcfc788cf2ceec2acb7e65e79ad4e24fa13fae9c78f93c7317911",
+      "current": "54 / 95",
+      "status": "stopped for user-requested 8192 rerun; not a completed shard"
+    },
+    {
+      "file": "/home/datasets/shiyang/daai_runtime/p1_corrected_runs/mj-p1-correct-mindcube-qwen38-27b-a100-r9-20260912/results_spatial_beam_search_qc11/question_chunk_0/results.json",
+      "sha256": "6fcba563f28c1bcd1ae7056fc5ba01434cc1d2f6ad61b3757060b101115dac31",
+      "current": "32 / 95",
+      "status": "stopped for user-requested 8192 rerun; not a completed shard"
+    },
+    {
+      "file": "/home/datasets/shiyang/daai_runtime/p1_corrected_runs/mj-p1-correct-mmsi-qwen35-27b-a100-r9-20260912/results_spatial_beam_search_qc10/question_chunk_0/results.json",
+      "sha256": "01e27c10fb69dbc7bc17589155b473068154dcfca364b7378beb2de2c27663d1",
+      "current": "16 / 100",
+      "status": "stopped for user-requested 8192 rerun; not a completed shard"
+    }
+  ],
+  "new_manifests": {
+    "mj-p1-8192-mindcube-qwen35-9b-a100-r10-20260912": "run_id=mj-p1-8192-mindcube-qwen35-9b-a100-r10-20260912\ndataset=mindcube\nmethod=SVC\nmodel=Qwen/Qwen3.5-9B\nrevision=c202236235762e1c871ad0ccb60c8ee5ba337b9a\nthinking=false\ndtype=bfloat16\nmax_model_len=65536\nmax_output_tokens=8192\naccelerator=a100\ntensor_parallel_size=1\nsvc_gpus=1\ntotal_gpus=2\ninput_file=/home/datasets/shiyang/MindCube_9c941b46/processed/test.json\ninput_sha256=03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\ndataset_provenance=/home/datasets/shiyang/MindCube_9c941b46/processed/test_provenance.json\ndataset_provenance_sha256=55af7c4dd6e125b5323a798ba871d3297c6c89098f5911b6d84561af26effac6\nexperiment_manifest=/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/configs/p1_svc_multiimage.json\nexperiment_manifest_sha256=988da48b21c8cb33145aa45a2defe084287a165e769db9b52b6f8d74ffc2cec1\n\n\nsource_sha256=27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf\nsplit=test\nnum_questions=1050\nnum_chunks=11\nmax_images=4\npersistent_environment_root=/home/datasets/shiyang/daai_runtime/envs/p1-01ef26c-v1\npersistent_environment_complete_sha256=4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50\ncreated_utc=2026-09-12T07:57:00Z\n",
+    "mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912": "run_id=mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912\ndataset=mindcube\nmethod=SVC\nmodel=Qwen/Qwen3.8-27B\nrevision=1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0\nthinking=false\ndtype=bfloat16\nmax_model_len=65536\nmax_output_tokens=8192\naccelerator=a100\ntensor_parallel_size=1\nsvc_gpus=1\ntotal_gpus=2\ninput_file=/home/datasets/shiyang/MindCube_9c941b46/processed/test.json\ninput_sha256=03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\ndataset_provenance=/home/datasets/shiyang/MindCube_9c941b46/processed/test_provenance.json\ndataset_provenance_sha256=55af7c4dd6e125b5323a798ba871d3297c6c89098f5911b6d84561af26effac6\nexperiment_manifest=/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/configs/p1_svc_multiimage.json\nexperiment_manifest_sha256=988da48b21c8cb33145aa45a2defe084287a165e769db9b52b6f8d74ffc2cec1\n\n\nsource_sha256=27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf\nsplit=test\nnum_questions=1050\nnum_chunks=11\nmax_images=4\npersistent_environment_root=/home/datasets/shiyang/daai_runtime/envs/p1-01ef26c-v1\npersistent_environment_complete_sha256=4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50\ncreated_utc=2026-09-12T07:57:17Z\n",
+    "mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912": "run_id=mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912\ndataset=mmsi\nmethod=SVC\nmodel=Qwen/Qwen2.5-VL-72B-Instruct\nrevision=89c86200743eec961a297729e7990e8f2ddbc4c5\nthinking=unsupported\ndtype=bfloat16\nmax_model_len=65536\nmax_output_tokens=8192\naccelerator=h20\ntensor_parallel_size=2\nsvc_gpus=1\ntotal_gpus=3\ninput_file=/home/datasets/shiyang/MMSI_Bench_ec7c92bf/processed_daai/test.json\ninput_sha256=5de75a94eebb2ad31b44ab0f33d7225c56157165292d8112e287c410f56180c9\ndataset_provenance=/home/datasets/shiyang/MMSI_Bench_ec7c92bf/processed_daai/test_provenance.json\ndataset_provenance_sha256=fa5f4ee9223cf72fd4dcbc941b8fbd66788b37d854844532bde581cd2aebdf9f\nexperiment_manifest=/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/configs/p1_svc_multiimage.json\nexperiment_manifest_sha256=988da48b21c8cb33145aa45a2defe084287a165e769db9b52b6f8d74ffc2cec1\n\n\nsource_sha256=27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf\nsplit=test\nnum_questions=1000\nnum_chunks=10\nmax_images=10\npersistent_environment_root=/home/datasets/shiyang/daai_runtime/envs/p1-01ef26c-v1\npersistent_environment_complete_sha256=4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50\ncreated_utc=2026-09-12T07:57:12Z\n",
+    "mj-p1-8192-mmsi-qwen35-27b-a100-r10-20260912": "run_id=mj-p1-8192-mmsi-qwen35-27b-a100-r10-20260912\ndataset=mmsi\nmethod=SVC\nmodel=Qwen/Qwen3.5-27B\nrevision=fc05daec18b0a78c049392ed2e771dde82bdf654\nthinking=false\ndtype=bfloat16\nmax_model_len=65536\nmax_output_tokens=8192\naccelerator=a100\ntensor_parallel_size=1\nsvc_gpus=1\ntotal_gpus=2\ninput_file=/home/datasets/shiyang/MMSI_Bench_ec7c92bf/processed_daai/test.json\ninput_sha256=5de75a94eebb2ad31b44ab0f33d7225c56157165292d8112e287c410f56180c9\ndataset_provenance=/home/datasets/shiyang/MMSI_Bench_ec7c92bf/processed_daai/test_provenance.json\ndataset_provenance_sha256=fa5f4ee9223cf72fd4dcbc941b8fbd66788b37d854844532bde581cd2aebdf9f\nexperiment_manifest=/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/configs/p1_svc_multiimage.json\nexperiment_manifest_sha256=988da48b21c8cb33145aa45a2defe084287a165e769db9b52b6f8d74ffc2cec1\nmodel_tree_manifest=/home/datasets/chentao/models/Qwen3.5-27B/.cache/huggingface/trees/fc05daec18b0a78c049392ed2e771dde82bdf654.json\nmodel_tree_sha256=0dc5ca5bf2a3d58c9b57c0d68790796d92656bfb228d76eaeae73342e7fcbe6c\nsource_sha256=27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf\nsplit=test\nnum_questions=1000\nnum_chunks=10\nmax_images=10\npersistent_environment_root=/home/datasets/shiyang/daai_runtime/envs/p1-01ef26c-v1\npersistent_environment_complete_sha256=4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50\ncreated_utc=2026-09-12T07:57:07Z\n"
+  },
+  "new_logs": [
+    {
+      "file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen35-9b-a100-r10-20260912/logs/mj-p1-mindcube-qwen35-9b-array-70200_0.out",
+      "tail": "{\"dataset\": \"mindcube\", \"input_sha256\": \"03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\", \"max_images\": 4, \"model\": \"Qwen/Qwen3.5-9B\", \"questions\": 1050, \"status\": \"passed\"}\n{\"experiment_manifest_sha256\": \"988da48b21c8cb33145aa45a2defe084287a165e769db9b52b6f8d74ffc2cec1\", \"input_sha256\": \"03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\", \"provenance_sha256\": \"55af7c4dd6e125b5323a798ba871d3297c6c89098f5911b6d84561af26effac6\", \"source_sha256\": \"27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf\"}\n"
+    },
+    {
+      "file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen35-9b-a100-r10-20260912/logs/mj-p1-mindcube-qwen35-9b-array-70200_1.out",
+      "tail": "{\"dataset\": \"mindcube\", \"input_sha256\": \"03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\", \"max_images\": 4, \"model\": \"Qwen/Qwen3.5-9B\", \"questions\": 1050, \"status\": \"passed\"}\n{\"experiment_manifest_sha256\": \"988da48b21c8cb33145aa45a2defe084287a165e769db9b52b6f8d74ffc2cec1\", \"input_sha256\": \"03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\", \"provenance_sha256\": \"55af7c4dd6e125b5323a798ba871d3297c6c89098f5911b6d84561af26effac6\", \"source_sha256\": \"27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf\"}\n"
+    },
+    {
+      "file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen35-9b-a100-r10-20260912/logs/mj-p1-mindcube-qwen35-9b-array-70200_2.out",
+      "tail": "{\"dataset\": \"mindcube\", \"input_sha256\": \"03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\", \"max_images\": 4, \"model\": \"Qwen/Qwen3.5-9B\", \"questions\": 1050, \"status\": \"passed\"}\n{\"experiment_manifest_sha256\": \"988da48b21c8cb33145aa45a2defe084287a165e769db9b52b6f8d74ffc2cec1\", \"input_sha256\": \"03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\", \"provenance_sha256\": \"55af7c4dd6e125b5323a798ba871d3297c6c89098f5911b6d84561af26effac6\", \"source_sha256\": \"27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf\"}\n"
+    },
+    {
+      "file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen35-9b-a100-r10-20260912/logs/mj-p1-mindcube-qwen35-9b-array-70200_3.out",
+      "tail": "{\"dataset\": \"mindcube\", \"input_sha256\": \"03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\", \"max_images\": 4, \"model\": \"Qwen/Qwen3.5-9B\", \"questions\": 1050, \"status\": \"passed\"}\n{\"experiment_manifest_sha256\": \"988da48b21c8cb33145aa45a2defe084287a165e769db9b52b6f8d74ffc2cec1\", \"input_sha256\": \"03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\", \"provenance_sha256\": \"55af7c4dd6e125b5323a798ba871d3297c6c89098f5911b6d84561af26effac6\", \"source_sha256\": \"27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf\"}\n"
+    }
+  ]
+}

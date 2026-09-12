@@ -10,14 +10,14 @@
 
 | 数据集 | 模型 | 优先级 | 状态 | 正确 / 总数 | 准确率 | 结果文件 |
 |---|---|---|---|---:|---:|---|
-| MMSI-Bench 1000 | Qwen3.5-27B | P1 | 首片推理中 `70165_0` | — | — | [提交记录](./mmsi/qwen3.5-27b/svc/mj-p1-correct-mmsi-qwen35-27b-a100-r9-20260912/submission_initial.txt) |
-| MMSI-Bench 1000 | Qwen2.5-VL-72B-Instruct | P1 | 首片排队 `70166_0` | — | — | [提交记录](./mmsi/qwen2.5-vl-72b/svc/mj-p1-correct-mmsi-qwen25vl-72b-h20-r9-20260912/submission_initial.txt) |
+| MMSI-Bench 1000 | Qwen3.5-27B | P1 | 8192重跑排队 `70201_0` | — | — | [提交记录](./mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r10-20260912/submission_initial.txt) |
+| MMSI-Bench 1000 | Qwen2.5-VL-72B-Instruct | P1 | 8192重跑排队 `70202_0` | — | — | [提交记录](./mmsi/qwen2.5-vl-72b/svc/mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912/submission_initial.txt) |
 | MMSI-Bench 1000 | Qwen3.5-9B | P3 | 已验证完成 | 288 / 1000 | 28.80% | [JSON](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/results_merged.json) |
 | MMSI-Bench 1000 | Qwen3.8-27B | P3 | 已验证完成 | 208 / 1000 | 20.80% | [JSON](./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_merged.json) |
 | MindCube 1050 | Qwen3.5-27B | P0 | 已验证完成 | 498 / 1050 | 47.43% | [JSON](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/results_merged.json) |
 | MindCube 1050 | Qwen2.5-VL-72B-Instruct | P0 | 已验证完成 | 416 / 1050 | 39.62% | [JSON](./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_merged.json) |
-| MindCube 1050 | Qwen3.5-9B | P1 | 推理中；分片1–5已补提 `70179` | — | — | [提交记录](./mindcube/qwen3.5-9b/svc/mj-p1-correct-mindcube-qwen35-9b-a100-r9-20260912/submission_initial.txt) |
-| MindCube 1050 | Qwen3.8-27B | P1 | 首片推理中 `70168_0` | — | — | [提交记录](./mindcube/qwen3.8-27b/svc/mj-p1-correct-mindcube-qwen38-27b-a100-r9-20260912/submission_initial.txt) |
+| MindCube 1050 | Qwen3.5-9B | P1 | 8192重跑；0–3启动中 `70200` | — | — | [提交记录](./mindcube/qwen3.5-9b/svc/mj-p1-8192-mindcube-qwen35-9b-a100-r10-20260912/submission_initial.txt) |
+| MindCube 1050 | Qwen3.8-27B | P1 | 8192重跑排队 `70207_0` | — | — | [提交记录](./mindcube/qwen3.8-27b/svc/mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912/submission_initial.txt) |
 | SAT-Syn 500 | Qwen3.5-27B | P0 | 已验证完成 | 392 / 500 | 78.40% | [JSON](./sat-syn/qwen3.5-27b/svc/mj-svc-qwen35-sat-syn500-20260903T185438Z/results_merged.json) |
 | SAT-Syn 500 | Qwen2.5-VL-72B-Instruct | P0 | 用户反馈已跑，结果待归档 | — | — | — |
 | SAT-Syn 500 | Qwen3.5-9B | P2 | 结果待补充 | — | — | — |
@@ -27,7 +27,7 @@
 | SAT-Real 150 | Qwen3.5-9B | P4 | 结果待补充 | — | — | — |
 | SAT-Real 150 | Qwen3.8-27B | P4 | 结果待补充 | — | — | — |
 
-当前进度快照（2026-09-12 15:46）：MindCube/9B 已答137/1050（3片并行），MindCube/3.8 已答31/1050，MMSI/27B 已答16/1000；72B排队。账户5/5运行、10×A100，提交槽位10/10。以上均为进行中题数，尚无完整分片，不作为全量成绩；解析失败及时间估计见[实验日志](./EXPERIMENTS.md)。
+当前版本：按用户要求改为 **8192最大输出、no-thinking**，独立r10从头重跑正确四项P1。15:58 MindCube/9B四片启动中、其余三组排队；新8192首题尚未核验。旧1024结果全部保留、不混合统计，详见[8192执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json)及[实验日志](./EXPERIMENTS.md)。
 
 ## 统计口径与设置说明
 
@@ -43,11 +43,11 @@
 
 ### Qwen3.5-27B（P1）
 
-正确组合已重启，首片 `70165_0` 已实际推理，已完成题目输入和图片顺序核验通过；全量与分类成绩待完成后补充。见[执行清单](./P1_CORRECTED_EXECUTION_20260912.json)。
+8192版本已提交，首片 `70201_0` 排队；旧1024部分结果保留，不合并到本轮。见[执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json)。
 
 ### Qwen2.5-VL-72B-Instruct（P1）
 
-正确组合已重启，首片 `70166_0` 排队；全量与分类成绩待完成后补充。见[执行清单](./P1_CORRECTED_EXECUTION_20260912.json)。
+8192版本已提交，首片 `70202_0` 排队，3×H20。见[执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json)。
 
 ### Qwen3.5-9B（P3）
 
@@ -131,11 +131,11 @@ Run ID：`mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908`。
 
 ### Qwen3.5-9B（P1）
 
-正确组合已重启，首片 `70167_0` 已实际推理且首题核验通过；新增 `70179` 分片1–5，其中1已启动、2–5排队；全量与分类成绩待完成后补充。见[执行清单](./P1_CORRECTED_EXECUTION_20260912.json)。
+8192版本已提交，数组 `70200` 分片0–5；0–3已分配GPU启动中，4–5候补。旧1024部分结果保留，不合并到本轮。见[执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json)。
 
 ### Qwen3.8-27B（P1）
 
-正确组合已重启，首片 `70168_0` 已实际推理，已完成题目输入和图片顺序核验通过；全量与分类成绩待完成后补充。见[执行清单](./P1_CORRECTED_EXECUTION_20260912.json)。
+8192版本已提交，首片 `70207_0` 排队；旧1024部分结果保留，不合并到本轮。见[执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json)。
 
 ## SAT-Syn 500
 
