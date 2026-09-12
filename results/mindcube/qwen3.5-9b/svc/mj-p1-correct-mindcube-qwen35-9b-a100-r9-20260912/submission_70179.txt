@@ -1,0 +1,14 @@
+job_id=70179
+array=1-5%3
+submitted_utc=2026-09-12T05:54:37Z
+           JOBID      STATE         TIME           NODELIST             NODELIST(REASON)
+         70166_0    PENDING         0:00                                      (Priority)
+           55278    PENDING         0:00                      (DependencyNeverSatisfied)
+         70179_2    PENDING         0:00                                      (Priority)
+         70179_3    PENDING         0:00                                      (Priority)
+         70179_4    PENDING         0:00                                      (Priority)
+         70179_5    PENDING         0:00                                      (Priority)
+         70168_0    RUNNING        21:34       hkbugpusrv12                 hkbugpusrv12
+         70179_1    RUNNING         2:49       hkbugpusrv12                 hkbugpusrv12
+         70165_0    RUNNING        26:34       hkbugpusrv11                 hkbugpusrv11
+         70167_0    RUNNING        26:34       hkbugpusrv11                 hkbugpusrv11

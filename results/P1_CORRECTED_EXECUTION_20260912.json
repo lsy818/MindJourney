@@ -154,7 +154,22 @@
       "initial_job_id": "70167",
       "initial_shard": 0,
       "state_at_20260912_1330": "PENDING:Priority",
-      "archive_directory": "results/mindcube/qwen3.5-9b/svc/mj-p1-correct-mindcube-qwen35-9b-a100-r9-20260912"
+      "archive_directory": "results/mindcube/qwen3.5-9b/svc/mj-p1-correct-mindcube-qwen35-9b-a100-r9-20260912",
+      "additional_submissions": [
+        {
+          "job_id": "70179",
+          "shards": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "array_max_concurrent": 3,
+          "combined_experiment_max_concurrent": 4,
+          "submitted_at": "2026-09-12T13:54:37+08:00"
+        }
+      ]
     },
     {
       "run_id": "mj-p1-correct-mindcube-qwen38-27b-a100-r9-20260912",
@@ -206,5 +221,10 @@
       "state_at_20260912_1330": "PENDING:Priority",
       "archive_directory": "results/mindcube/qwen3.8-27b/svc/mj-p1-correct-mindcube-qwen38-27b-a100-r9-20260912"
     }
-  ]
+  ],
+  "submission_environment": {
+    "P1_CACHE_ROOT": "/home/datasets/shiyang/daai_runtime/model_cache",
+    "P1_MODEL_VALIDATION_ROOT": "/home/datasets/shiyang/mindjourney_storage/model_validation"
+  },
+  "submission_environment_note": "Required for every resume: inherited by initial submissions but omitted from the original submit_args list. Use these exact existing cache paths; do not fall back to script defaults."
 }

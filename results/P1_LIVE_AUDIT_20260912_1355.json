@@ -1,0 +1,294 @@
+{
+  "checked_at": "2026-09-12T13:56:09.965428+08:00",
+  "runs": [
+    {
+      "run_id": "mj-p1-correct-mindcube-qwen35-9b-a100-r9-20260912",
+      "current": "5 / 95",
+      "parsing_err_stats": {
+        "scores": 6,
+        "answer": 0,
+        "answer_qid": [],
+        "scores_qid": [
+          "among_group525_q0_2_2",
+          "around_9839c696dbdb1601651ad79fa3959dbcebe7cc3acb76a7a38db4a26e07557b8d_q2_8",
+          "around_0a6c01ac3212768772f8f6eca86314c72d5ca320c3e3def148ddaceab23c07f4_q1_1",
+          "among_group412_q0_2_3",
+          "among_group412_q0_2_3",
+          "among_group412_q0_2_3"
+        ]
+      },
+      "skip_indices": [],
+      "run_group": {
+        "arguments": {
+          "task": "img2trajvid_s-prob",
+          "replace_or_include_input": true,
+          "cfg": 4.0,
+          "guider": 1,
+          "L_short": 576,
+          "num_targets": 8,
+          "use_traj_prior": true,
+          "chunk_strategy": "interp",
+          "input_dir": "/home/datasets/shiyang/MindCube_9c941b46/processed",
+          "scaling_strategy": "spatial_beam_search",
+          "question_type": "None",
+          "sampling_interval_angle": 9,
+          "sampling_interval_meter": 0.25,
+          "fixed_rotation_magnitudes": 27,
+          "fixed_forward_magnitudes": 0.75,
+          "max_steps_per_question": 3,
+          "max_tries_gpt": 5,
+          "num_questions": 1050,
+          "num_frames": 9,
+          "frame_interval": 3,
+          "split": "test",
+          "max_turn_angle": 60.0,
+          "max_forward_distance": 1.5,
+          "num_top_candidates": 18,
+          "max_inference_batch_size": 1,
+          "num_beams": 2,
+          "max_images": 4,
+          "helpful_score_threshold": 8,
+          "exploration_score_threshold": 8,
+          "vlm_model_name": "Qwen/Qwen3.5-9B",
+          "vlm_qa_model_name": "None",
+          "num_question_chunks": 11,
+          "camera_mixed": false
+        },
+        "dataset_json_sha256": "03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083",
+        "dataset_provenance_sha256": "55af7c4dd6e125b5323a798ba871d3297c6c89098f5911b6d84561af26effac6",
+        "manifest_sha256": "9bad2b075226db529a0270d9b2add97303bea7528125bf68e7e9b66ca3118b9a",
+        "source_sha256": "d0eca40528e27676e4c47c6bb68f7198f6195259b83f6e7509f3921b958b53b0",
+        "submitted_source_sha256": "d0eca40528e27676e4c47c6bb68f7198f6195259b83f6e7509f3921b958b53b0",
+        "model_revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+        "model_tree_sha256": null,
+        "model_dtype": "bfloat16",
+        "qwen_enable_thinking": false,
+        "qwen_context_limit": "65536",
+        "qwen_max_tokens": "1024",
+        "vllm_version": "0.28.0",
+        "svc_revision": "e538e251c1009e9a41cf8b7fee5f21332a1960de",
+        "svc_weight_sha256": "10e69ea003c313e6bdfc7ee40376d1c19ea6036c20bd384e94b483dec8350396",
+        "svc_strict_load": "1",
+        "runtime_environment": "mindjourney-p1-persistent-v1-4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50",
+        "hardware": "DAAI:a100:TP1+SVC1",
+        "protocol": "paper-aligned SVC multi-image adaptation"
+      },
+      "completed_question_audits": [
+        {
+          "qid": "among_group412_q0_2_3",
+          "result": "correct",
+          "images": 4,
+          "official_order_and_question": "passed"
+        },
+        {
+          "qid": "among_group525_q0_2_2",
+          "result": "correct",
+          "images": 4,
+          "official_order_and_question": "passed"
+        },
+        {
+          "qid": "among_group534_q1_1_2",
+          "result": "wrong",
+          "images": 2,
+          "official_order_and_question": "passed"
+        },
+        {
+          "qid": "around_0a6c01ac3212768772f8f6eca86314c72d5ca320c3e3def148ddaceab23c07f4_q1_1",
+          "result": "wrong",
+          "images": 2,
+          "official_order_and_question": "passed"
+        },
+        {
+          "qid": "around_9839c696dbdb1601651ad79fa3959dbcebe7cc3acb76a7a38db4a26e07557b8d_q2_8",
+          "result": "correct",
+          "images": 3,
+          "official_order_and_question": "passed"
+        }
+      ]
+    },
+    {
+      "run_id": "mj-p1-correct-mindcube-qwen38-27b-a100-r9-20260912",
+      "current": "5 / 95",
+      "parsing_err_stats": {
+        "scores": 0,
+        "answer": 2,
+        "answer_qid": [
+          "among_group534_q1_1_2",
+          "among_group412_q0_2_3"
+        ],
+        "scores_qid": []
+      },
+      "skip_indices": [],
+      "run_group": {
+        "arguments": {
+          "task": "img2trajvid_s-prob",
+          "replace_or_include_input": true,
+          "cfg": 4.0,
+          "guider": 1,
+          "L_short": 576,
+          "num_targets": 8,
+          "use_traj_prior": true,
+          "chunk_strategy": "interp",
+          "input_dir": "/home/datasets/shiyang/MindCube_9c941b46/processed",
+          "scaling_strategy": "spatial_beam_search",
+          "question_type": "None",
+          "sampling_interval_angle": 9,
+          "sampling_interval_meter": 0.25,
+          "fixed_rotation_magnitudes": 27,
+          "fixed_forward_magnitudes": 0.75,
+          "max_steps_per_question": 3,
+          "max_tries_gpt": 5,
+          "num_questions": 1050,
+          "num_frames": 9,
+          "frame_interval": 3,
+          "split": "test",
+          "max_turn_angle": 60.0,
+          "max_forward_distance": 1.5,
+          "num_top_candidates": 18,
+          "max_inference_batch_size": 1,
+          "num_beams": 2,
+          "max_images": 4,
+          "helpful_score_threshold": 8,
+          "exploration_score_threshold": 8,
+          "vlm_model_name": "Qwen/Qwen3.8-27B",
+          "vlm_qa_model_name": "None",
+          "num_question_chunks": 11,
+          "camera_mixed": false
+        },
+        "dataset_json_sha256": "03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083",
+        "dataset_provenance_sha256": "55af7c4dd6e125b5323a798ba871d3297c6c89098f5911b6d84561af26effac6",
+        "manifest_sha256": "9bad2b075226db529a0270d9b2add97303bea7528125bf68e7e9b66ca3118b9a",
+        "source_sha256": "d0eca40528e27676e4c47c6bb68f7198f6195259b83f6e7509f3921b958b53b0",
+        "submitted_source_sha256": "d0eca40528e27676e4c47c6bb68f7198f6195259b83f6e7509f3921b958b53b0",
+        "model_revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+        "model_tree_sha256": null,
+        "model_dtype": "bfloat16",
+        "qwen_enable_thinking": false,
+        "qwen_context_limit": "65536",
+        "qwen_max_tokens": "1024",
+        "vllm_version": "0.28.0",
+        "svc_revision": "e538e251c1009e9a41cf8b7fee5f21332a1960de",
+        "svc_weight_sha256": "10e69ea003c313e6bdfc7ee40376d1c19ea6036c20bd384e94b483dec8350396",
+        "svc_strict_load": "1",
+        "runtime_environment": "mindjourney-p1-persistent-v1-4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50",
+        "hardware": "DAAI:a100:TP1+SVC1",
+        "protocol": "paper-aligned SVC multi-image adaptation"
+      },
+      "completed_question_audits": [
+        {
+          "qid": "among_group412_q0_2_3",
+          "result": "out of control",
+          "images": 4,
+          "official_order_and_question": "passed"
+        },
+        {
+          "qid": "among_group525_q0_2_2",
+          "result": "correct",
+          "images": 4,
+          "official_order_and_question": "passed"
+        },
+        {
+          "qid": "among_group534_q1_1_2",
+          "result": "out of control",
+          "images": 2,
+          "official_order_and_question": "passed"
+        },
+        {
+          "qid": "around_0a6c01ac3212768772f8f6eca86314c72d5ca320c3e3def148ddaceab23c07f4_q1_1",
+          "result": "correct",
+          "images": 2,
+          "official_order_and_question": "passed"
+        },
+        {
+          "qid": "around_9839c696dbdb1601651ad79fa3959dbcebe7cc3acb76a7a38db4a26e07557b8d_q2_8",
+          "result": "correct",
+          "images": 3,
+          "official_order_and_question": "passed"
+        }
+      ]
+    },
+    {
+      "run_id": "mj-p1-correct-mmsi-qwen35-27b-a100-r9-20260912",
+      "current": "2 / 100",
+      "parsing_err_stats": {
+        "scores": 4,
+        "answer": 0,
+        "answer_qid": [],
+        "scores_qid": [
+          585,
+          585
+        ]
+      },
+      "skip_indices": [],
+      "run_group": {
+        "arguments": {
+          "task": "img2trajvid_s-prob",
+          "replace_or_include_input": true,
+          "cfg": 4.0,
+          "guider": 1,
+          "L_short": 576,
+          "num_targets": 8,
+          "use_traj_prior": true,
+          "chunk_strategy": "interp",
+          "input_dir": "/home/datasets/shiyang/MMSI_Bench_ec7c92bf/processed_daai",
+          "scaling_strategy": "spatial_beam_search",
+          "question_type": "None",
+          "sampling_interval_angle": 9,
+          "sampling_interval_meter": 0.25,
+          "fixed_rotation_magnitudes": 27,
+          "fixed_forward_magnitudes": 0.75,
+          "max_steps_per_question": 3,
+          "max_tries_gpt": 5,
+          "num_questions": 1000,
+          "num_frames": 9,
+          "frame_interval": 3,
+          "split": "test",
+          "max_turn_angle": 60.0,
+          "max_forward_distance": 1.5,
+          "num_top_candidates": 18,
+          "max_inference_batch_size": 1,
+          "num_beams": 2,
+          "max_images": 10,
+          "helpful_score_threshold": 8,
+          "exploration_score_threshold": 8,
+          "vlm_model_name": "Qwen/Qwen3.5-27B",
+          "vlm_qa_model_name": "None",
+          "num_question_chunks": 10,
+          "camera_mixed": false
+        },
+        "dataset_json_sha256": "5de75a94eebb2ad31b44ab0f33d7225c56157165292d8112e287c410f56180c9",
+        "dataset_provenance_sha256": "fa5f4ee9223cf72fd4dcbc941b8fbd66788b37d854844532bde581cd2aebdf9f",
+        "manifest_sha256": "9bad2b075226db529a0270d9b2add97303bea7528125bf68e7e9b66ca3118b9a",
+        "source_sha256": "d0eca40528e27676e4c47c6bb68f7198f6195259b83f6e7509f3921b958b53b0",
+        "submitted_source_sha256": "d0eca40528e27676e4c47c6bb68f7198f6195259b83f6e7509f3921b958b53b0",
+        "model_revision": "fc05daec18b0a78c049392ed2e771dde82bdf654",
+        "model_tree_sha256": "0dc5ca5bf2a3d58c9b57c0d68790796d92656bfb228d76eaeae73342e7fcbe6c",
+        "model_dtype": "bfloat16",
+        "qwen_enable_thinking": false,
+        "qwen_context_limit": "65536",
+        "qwen_max_tokens": "1024",
+        "vllm_version": "0.28.0",
+        "svc_revision": "e538e251c1009e9a41cf8b7fee5f21332a1960de",
+        "svc_weight_sha256": "10e69ea003c313e6bdfc7ee40376d1c19ea6036c20bd384e94b483dec8350396",
+        "svc_strict_load": "1",
+        "runtime_environment": "mindjourney-p1-persistent-v1-4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50",
+        "hardware": "DAAI:a100:TP1+SVC1",
+        "protocol": "paper-aligned SVC multi-image adaptation"
+      },
+      "completed_question_audits": [
+        {
+          "qid": "33",
+          "result": "wrong",
+          "images": 2,
+          "official_order_and_question": "passed"
+        },
+        {
+          "qid": "585",
+          "result": "wrong",
+          "images": 2,
+          "official_order_and_question": "passed"
+        }
+      ]
+    }
+  ]
+}
