@@ -190,6 +190,12 @@
       ],
       "blocked_shards": [
         {
+          "shard": 2,
+          "job_id": "70200_2",
+          "reason": "no-thinking guard detected think tags in scoring response; confirmed 2026-09-12 17:11 +08:00",
+          "retry_policy": "Do not retry unchanged or bypass guard; raw-response diagnosis required."
+        },
+        {
           "shard": 1,
           "job_id": "70200_1",
           "reason": "no-thinking guard detected think tags in scoring response",
@@ -214,7 +220,7 @@
           "retry_policy": "Do not retry unchanged or bypass guard; raw-response diagnosis required."
         }
       ],
-      "scheduling_note": "Do not expand MindCube/9B until thinking-tag failures are diagnosed. Leave healthy shards2/5 running. MMSI/27B fills available slots; combined current MMSI cap3 across70201/70214/70219, overall Slurm5."
+      "scheduling_note": "Do not expand MindCube/9B until thinking-tag failures are diagnosed. Shards0/1/2/3/4 failed; leave healthy shard5 running. MMSI/27B fills available slots; combined current MMSI cap3 across70201/70214/70219, overall Slurm5."
     },
     {
       "run_id": "mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912",
