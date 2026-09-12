@@ -4,7 +4,12 @@
 
 本文件同时记录实验优先级和已验证的实验产物。优先级数字越小，优先级越高；`P0` 表示用户指定为已经运行的项目，但只有带有正式 `COMPLETE`、可复核结果文件和哈希的项目才记为“已验证完成”。
 
-## 最新进展：2026-09-12 07:53 MMSI/3.8 完成8/10片
+## 最新进展：2026-09-12 10:58 MMSI/3.8 完成9/10片
+
+- MMSI/Qwen3.8-27B片9 `69913_9` COMPLETED 0:0，用时06:35:34，27对73错。冻结r8严格验证100题精确覆盖、0skip、参数/run-group和COMPLETE结果SHA通过。原始[结果](./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/chunks/question_chunk_9/results.json)、COMPLETE及validation_summary已归档，SHA `1f3be831a4ea51ad85ddd7386b62c0cb4fa4c6cd1e80c11eeeefdd095574f638`。正式完成0–7及9共900题191对709错，21.22%仅为部分准确率；P1累计41个正式完成片，不提前合并全量。
+- 10:58唯一剩余片8 `69736_8`仍在srv11 RUNNING，使用2A10080GB，已97/100题、0skip。无P1候补或未提交片，不重复提交；待本片完成后逐片核验并严格合并1000题。原Run/r8、本地环境、BF16/no-thinking/65536/官方图片顺序及论文SVC设置不变，全部历史结果和日志保留。
+
+## 历史进展：2026-09-12 07:53 MMSI/3.8 完成8/10片
 
 - MMSI/Qwen3.8-27B片7 `69723_7` COMPLETED 0:0，用时06:35:53，22对78错。冻结r8严格验证100题精确覆盖、0skip、参数/run-group和COMPLETE结果SHA通过。原始[结果](./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/chunks/question_chunk_7/results.json)、COMPLETE及validation_summary已归档，SHA `c8029011fc907f0972a0e8653ca48dbfb5df579110f5e6e4772a1695d7910a74`。正式完成0–7共800题164对636错，20.50%仅为部分准确率；P1累计40个正式完成片，不提前合并全量。
 - 07:53最后片8/9 `69736_8`、`69913_9`在srv11继续RUNNING，各2A10080GB，共4卡，进度51/100、54/100且0skip。全部剩余分片均已运行，无P1候补或未提交片；不重复提交以填运行名额。
