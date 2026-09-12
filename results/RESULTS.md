@@ -6,20 +6,20 @@
 
 **本表遵循用户原始清单，用户没有修改优先级。** 此前我将 MindCube/MMSI 的执行组合配反，旧 Run ID 及日志中的“P1”是错误执行清单的遗留命名，不代表用户要求的 P1 已完成。旧结果全部保留，正确四项 P1 已使用独立 Run ID 重启；详见[重启核对记录](./P1_RESTART_AUDIT_20260912.md)。
 
-最后成功核验于21:25：MindCube/3.8片0/2最终作答标签检查失败（39/95、34/95），片1/3/4运行（42/95、28/95、29/95，共6×A100）；片5及MMSI/72B片0排队，含无关55278提交6/10。21:46监控轮次SSH重连失败，当前实时状态未确认。三个Qwen3组合暂停新增、不原样重试，独立诊断等待确认。8192/BF16/65536/no-thinking未变，暂无新全量成绩。详情见[实验日志](./EXPERIMENTS.md)。
+23:01最新状态：用户已授权将额外thinking输出检查改为告警，不终止实验。修正版r11数组70438（MindCube/3.8片0/2/5/6/7）已提交；原健康1/3/4继续运行，进度63/95、52/95、54/95，共6×A100。72B片0继续等待H20。10/10提交槽已满，其余正确P1已准备续接，自动按额度集中补交。8192/BF16/65536/no-thinking及评分不变，旧答案和来源完整保留，尚无新全量成绩。详见[修复续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json)及[实验日志](./EXPERIMENTS.md)。
 
 ## 全部实验总览
 
 | 数据集 | 模型 | 优先级 | 状态 | 正确 / 总数 | 准确率 | 结果文件 |
 |---|---|---|---|---:|---:|---|
-| MMSI-Bench 1000 | Qwen3.5-27B | P1 | 8192：已提交0–5全部标签检查失败，暂停扩片 | — | — | [执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json) |
+| MMSI-Bench 1000 | Qwen3.5-27B | P1 | r11续接7题已准备，待提交槽位 | — | — | [续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json) |
 | MMSI-Bench 1000 | Qwen2.5-VL-72B-Instruct | P1 | 8192重跑排队 `70202_0` | — | — | [提交记录](./mmsi/qwen2.5-vl-72b/svc/mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912/submission_initial.txt) |
 | MMSI-Bench 1000 | Qwen3.5-9B | P3 | 已验证完成 | 288 / 1000 | 28.80% | [JSON](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/results_merged.json) |
 | MMSI-Bench 1000 | Qwen3.8-27B | P3 | 已验证完成 | 208 / 1000 | 20.80% | [JSON](./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_merged.json) |
 | MindCube 1050 | Qwen3.5-27B | P0 | 已验证完成 | 498 / 1050 | 47.43% | [JSON](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/results_merged.json) |
 | MindCube 1050 | Qwen2.5-VL-72B-Instruct | P0 | 已验证完成 | 416 / 1050 | 39.62% | [JSON](./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_merged.json) |
-| MindCube 1050 | Qwen3.5-9B | P1 | 8192：已提交0–5全部标签检查失败，暂停扩片 | — | — | [执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json) |
-| MindCube 1050 | Qwen3.8-27B | P1 | 21:25核验：片1/3/4运行，5排队；0/2标签检查失败 | — | — | [执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json) |
+| MindCube 1050 | Qwen3.5-9B | P1 | r11续接44题已准备，待提交槽位 | — | — | [续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json) |
+| MindCube 1050 | Qwen3.8-27B | P1 | 片1/3/4继续运行；r11片0/2/5/6/7已排70438 | — | — | [续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json) |
 | SAT-Syn 500 | Qwen3.5-27B | P0 | 已验证完成 | 392 / 500 | 78.40% | [JSON](./sat-syn/qwen3.5-27b/svc/mj-svc-qwen35-sat-syn500-20260903T185438Z/results_merged.json) |
 | SAT-Syn 500 | Qwen2.5-VL-72B-Instruct | P0 | 用户反馈已跑，结果待归档 | — | — | — |
 | SAT-Syn 500 | Qwen3.5-9B | P2 | 结果待补充 | — | — | — |
@@ -29,7 +29,7 @@
 | SAT-Real 150 | Qwen3.5-9B | P4 | 结果待补充 | — | — | — |
 | SAT-Real 150 | Qwen3.8-27B | P4 | 结果待补充 | — | — | — |
 
-当前版本：按用户要求改为 **8192最大输出、no-thinking**，独立r10从头重跑正确四项P1。旧1024结果全部保留、不混合统计。已有8192产物核验，尚无完整分片；详见[8192执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json)及[实验日志](./EXPERIMENTS.md)。
+当前版本：**8192最大输出、no-thinking**。三组Qwen3使用非致命告警修复r11，已保存r10题按明确来源续接；健康r10作业不重启，72B保留r10。旧1024全部保留、不混合统计。尚无完整分片；详见[续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json)及[实验日志](./EXPERIMENTS.md)。
 
 16:15更新：MindCube/9B片0/2/4/5运行，片1/3因thinking标签检查失败、保留现场未重试；实际已保存产物确认8192。MMSI/27B新增1–2片`70214`排队。当前8×A100、10/10提交槽位，详情见[实时核验](./P1_OUTPUT8192_LIVE_AUDIT_20260912_1615.json)，不把失败片视为完成。
 
@@ -49,7 +49,7 @@
 
 ### Qwen3.5-27B（P1）
 
-8192版本已提交片0–5全部因thinking标签检查失败，暂不重试或扩片。旧1024部分结果保留，不合并到本轮。见[执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json)。
+旧r10片0–5曾因额外thinking检查失败；用户已授权非致命告警修复。r11已保留来源续接7道保存答案，待槽位提交剩余题。旧1024不合并。见[续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json)。
 
 ### Qwen2.5-VL-72B-Instruct（P1）
 
@@ -137,11 +137,11 @@ Run ID：`mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908`。
 
 ### Qwen3.5-9B（P1）
 
-8192版本数组 `70200` 已提交0–5均因thinking标签检查失败，保留现场、暂停扩片且不原样重试。旧1024部分结果保留，不合并到本轮。见[执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json)。
+旧r10数组70200的0–5曾因额外thinking检查失败；r11已保留来源续接44道保存答案，待槽位提交剩余题。旧现场与1024全部保留，1024不合并。见[续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json)。
 
 ### Qwen3.8-27B（P1）
 
-21:25核验：8192版本片1/3/4（70263_1、70271_3、70281_4）运行，片5（70281_5）排队；片0/2因最终QA标签检查失败，不原样重试或新增分片。21:46轮次SSH受阻，尚无更晚实时状态。旧1024部分结果保留，不合并到本轮。见[执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json)。
+23:01核验：健康旧片1/3/4（70263_1、70271_3、70281_4）继续；r11数组70438片0/2/5/6/7已提交，其中0/2续接39/34道答案。旧候补70281_5仅在未启动时被替换。新旧合计并发上限5，不重复生成已保存题；所有续接题保留原来源，1024不合并。见[续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json)。
 
 ## SAT-Syn 500
 

@@ -1,5 +1,7 @@
 {
   "date": "2026-09-12",
+  "continuation_superseded_by": "P1_AUDITFIX_EXECUTION_20260912.json",
+  "historical_status_note": "User authorized non-fatal warning/raw-response audit and r11 continuation. Prior blocked_shards/scheduling notes below are historical, not current authorization. Keep healthy r10 jobs; do not submit more r10 Qwen3 jobs. 72B remains r10.",
   "protocol": "paper-aligned SVC multi-image adaptation; released-code diffusion default 20",
   "source_commit": "c1a10559a7ca54136283960a629aeda3d8bb6cad",
   "source_sha256": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",

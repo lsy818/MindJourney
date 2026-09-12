@@ -1,0 +1,64 @@
+{
+  "time": "2026-09-12T23:01:50.702921",
+  "queue": "               JOBID        STATE         TIME       NODELIST(REASON)        TRES_PER_NODE\n             70202_0      PENDING         0:00             (Priority)       gres/gpu:h20:3\n               55278      PENDING         0:00 (DependencyNeverSatisf       gres/gpu:h20:2\n             70438_0      PENDING         0:00             (Priority)      gres/gpu:a100:2\n             70438_2      PENDING         0:00             (Priority)      gres/gpu:a100:2\n             70438_5      PENDING         0:00             (Priority)      gres/gpu:a100:2\n             70438_6      PENDING         0:00             (Priority)      gres/gpu:a100:2\n             70438_7      PENDING         0:00             (Priority)      gres/gpu:a100:2\n             70271_3      RUNNING      4:00:22           hkbugpusrv12      gres/gpu:a100:2\n             70281_4      RUNNING      3:44:23           hkbugpusrv11      gres/gpu:a100:2\n             70263_1      RUNNING      5:12:32           hkbugpusrv15      gres/gpu:a100:2\n",
+  "chunks": [
+    {
+      "version": "r10",
+      "chunk": 1,
+      "current": "63 / 95",
+      "answer_errors": 3,
+      "source": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+      "imported": 0,
+      "pipeline.log": "    Final check of the question: \"Based on these four images... If I am standing at the same spot and facing the same direction as shown in image 2, what is behind me?\"\n    - Spot: Camera 2 position.\n    - Direction: Camera 2 direction.\n\n",
+      "vllm.log": "(APIServer pid=1097572) INFO 09-12 23:00:59 [loggers.py:310] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 28.6 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 3.7%, Prefix cache hit rate: 11.7%, MM cache hit rate: 74.8%\n(APIServer pid=1097572) INFO 09-12 23:01:09 [loggers.py:310] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 28.6 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 3.7%, Prefix cache hit rate: 11.7%, MM cache hit rate: 74.8%\n(APIServer pid=1097572) INFO 09-12 23:01:19 [loggers.py:310] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 28.6 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 3.7%, Prefix cache hit rate: 11.7%, MM cache hit rate: 74.8%\n(APIServer pid=1097572) INFO 09-12 23:01:29 [loggers.py:310] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 28.6 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 4.0%, Prefix cache hit rate: 11.7%, MM cache hit rate: 74.8%\n"
+    },
+    {
+      "version": "r10",
+      "chunk": 3,
+      "current": "52 / 95",
+      "answer_errors": 4,
+      "source": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+      "imported": 0,
+      "pipeline.log": "[SpatialVQA] Simulating actions: ['move-forward 0.75', 'turn-left 27', 'turn-right 27']\n!!!prev_action_len_list:[]\nNo action candidates found. Goes to Q&A.\nNumber of imaginations: 0\n",
+      "vllm.log": "(APIServer pid=60900) INFO:     127.0.0.1:35444 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\n(APIServer pid=60900) INFO:     127.0.0.1:35444 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\n(APIServer pid=60900) INFO 09-12 23:01:39 [loggers.py:310] Engine 000: Avg prompt throughput: 1121.9 tokens/s, Avg generation throughput: 20.7 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 1.3%, Prefix cache hit rate: 10.5%, MM cache hit rate: 70.4%\n(APIServer pid=60900) INFO 09-12 23:01:49 [loggers.py:310] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 28.9 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 1.3%, Prefix cache hit rate: 10.5%, MM cache hit rate: 70.4%\n"
+    },
+    {
+      "version": "r10",
+      "chunk": 4,
+      "current": "54 / 95",
+      "answer_errors": 2,
+      "source": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+      "imported": 0,
+      "pipeline.log": "            *   Answer: No.\n\n    *   **Is there any visual cue to distinguish Left and Right?**\n        *  \n",
+      "vllm.log": "(APIServer pid=2580806) INFO 09-12 23:01:32 [loggers.py:310] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 28.5 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 4.2%, Prefix cache hit rate: 9.3%, MM cache hit rate: 71.8%\n(APIServer pid=2580806) INFO 09-12 23:01:42 [loggers.py:310] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 28.5 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 4.2%, Prefix cache hit rate: 9.3%, MM cache hit rate: 71.8%\n(APIServer pid=2580806) INFO:     127.0.0.1:37926 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\n(APIServer pid=2580806) INFO 09-12 23:01:52 [loggers.py:310] Engine 000: Avg prompt throughput: 12.7 tokens/s, Avg generation throughput: 28.3 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 1.6%, Prefix cache hit rate: 9.4%, MM cache hit rate: 71.8%\n"
+    },
+    {
+      "version": "r11",
+      "chunk": 0,
+      "current": "39 / 95",
+      "answer_errors": 3,
+      "source": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa",
+      "imported": 39
+    },
+    {
+      "version": "r11",
+      "chunk": 2,
+      "current": "34 / 95",
+      "answer_errors": 2,
+      "source": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa",
+      "imported": 34
+    },
+    {
+      "version": "r11",
+      "chunk": 5
+    },
+    {
+      "version": "r11",
+      "chunk": 6
+    },
+    {
+      "version": "r11",
+      "chunk": 7
+    }
+  ]
+}
