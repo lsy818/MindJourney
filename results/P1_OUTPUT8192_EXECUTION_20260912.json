@@ -54,15 +54,42 @@
       "archive_directory": "results/mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r10-20260912",
       "state": "submitted",
       "initial_job_id": "70201",
-      "blocked_shards": [{"shard": 0, "job_id": "70201_0", "reason": "no-thinking guard detected think tags in scoring response; FAILED 1:0 after 01:09:49", "retry_policy": "No unchanged retry, no guard bypass; capture original failing response before changing inference semantics."}, {"shard": 3, "job_id": "70219_3", "reason": "no-thinking guard detected think tags in scoring response; FAILED 1:0 after 00:10:56", "retry_policy": "No unchanged retry or guard bypass."}],
-      "scheduling_note": "After shard0/3 thinking-tag failures, do not expand MMSI/27B until diagnosed. Leave healthy/pending existing shards1/2/4/5 untouched; current aggregate array cap3 across70214/70219/70250. Prefer available unblocked MindCube/3.8 next. No formal source/config changes.",
+      "blocked_shards": [
+        {
+          "shard": 0,
+          "job_id": "70201_0",
+          "reason": "no-thinking guard detected think tags in scoring response; FAILED 1:0 after 01:09:49",
+          "retry_policy": "No unchanged retry, no guard bypass; capture original failing response before changing inference semantics."
+        },
+        {
+          "shard": 3,
+          "job_id": "70219_3",
+          "reason": "no-thinking guard detected think tags in scoring response; FAILED 1:0 after 00:10:56",
+          "retry_policy": "No unchanged retry or guard bypass."
+        },
+        {
+          "shard": 1,
+          "job_id": "70214_1",
+          "reason": "no-thinking guard detected think tags in scoring response; FAILED 1:0 after 01:02:27",
+          "retry_policy": "No unchanged retry or guard bypass."
+        },
+        {
+          "shard": 2,
+          "job_id": "70214_2",
+          "reason": "no-thinking guard detected think tags in scoring response; FAILED 1:0 after 00:05:38",
+          "retry_policy": "No unchanged retry or guard bypass."
+        }
+      ],
+      "scheduling_note": "Shards0-3 failed due to think-tag guard. Do not expand or retry unchanged. Existing shards4/5 continue; MMSI current aggregate cap2 across70219/70250. Diagnostic-only instrumentation remains awaiting user confirmation; do not alter frozen r10.",
       "initial_shards": [
         0
       ],
       "additional_submissions": [
         {
           "job_id": "70250",
-          "shards": [5],
+          "shards": [
+            5
+          ],
           "array_max_concurrent": 1,
           "combined_experiment_max_concurrent": 4,
           "submitted_at": "2026-09-12T17:28:00+08:00"
@@ -198,7 +225,12 @@
         5
       ],
       "blocked_shards": [
-        {"shard": 5, "job_id": "70200_5", "reason": "no-thinking guard detected think tags in scoring response; FAILED 1:0 after 01:29:26", "retry_policy": "All six submitted shards now failed. No unchanged retries or guard bypass; original rejected response capture requires separate diagnostic instrumentation, not frozen-source edits."},
+        {
+          "shard": 5,
+          "job_id": "70200_5",
+          "reason": "no-thinking guard detected think tags in scoring response; FAILED 1:0 after 01:29:26",
+          "retry_policy": "All six submitted shards now failed. No unchanged retries or guard bypass; original rejected response capture requires separate diagnostic instrumentation, not frozen-source edits."
+        },
         {
           "shard": 2,
           "job_id": "70200_2",
@@ -230,7 +262,7 @@
           "retry_policy": "Do not retry unchanged or bypass guard; raw-response diagnosis required."
         }
       ],
-      "scheduling_note": "All submitted MindCube/9B shards0-5 failed: do not expand or retry unchanged. MMSI/27B also has tag failures: do not expand it further. Existing MMSI arrays70214/70219/70250 aggregate cap3; MindCube/3.8 arrays70207/70263/70271 cap4. Overall Slurm5. Prefer unblocked MindCube/3.8 for future free slots."
+      "scheduling_note": "MindCube/9B submitted shards0-5 all failed. No expansion or unchanged retry. MMSI/27B shards0-3 also failed. Keep healthy jobs, await diagnostic instrumentation approval. MindCube/3.8 cap may grow to5 only through explicitly recorded new array; global Slurm5."
     },
     {
       "run_id": "mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912",
@@ -280,10 +312,41 @@
       "archive_directory": "results/mindcube/qwen3.8-27b/svc/mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912",
       "state": "submitted",
       "initial_job_id": "70207",
-      "additional_submissions": [{"job_id": "70263", "shards": [1], "array_max_concurrent": 1, "combined_experiment_max_concurrent": 2, "submitted_at": "2026-09-12T17:32:00+08:00"}, {"job_id": "70271", "shards": [2, 3], "array_max_concurrent": 2, "combined_experiment_max_concurrent": 4, "submitted_at": "2026-09-12T17:48:00+08:00"}],
+      "additional_submissions": [
+        {
+          "job_id": "70263",
+          "shards": [
+            1
+          ],
+          "array_max_concurrent": 1,
+          "combined_experiment_max_concurrent": 2,
+          "submitted_at": "2026-09-12T17:32:00+08:00"
+        },
+        {
+          "job_id": "70271",
+          "shards": [
+            2,
+            3
+          ],
+          "array_max_concurrent": 2,
+          "combined_experiment_max_concurrent": 4,
+          "submitted_at": "2026-09-12T17:48:00+08:00"
+        },
+        {
+          "job_id": "70281",
+          "shards": [
+            4,
+            5
+          ],
+          "array_max_concurrent": 1,
+          "combined_experiment_max_concurrent": 5,
+          "submitted_at": "2026-09-12T18:17:00+08:00"
+        }
+      ],
       "initial_shards": [
         0
-      ]
+      ],
+      "scheduling_note": "Current arrays70207(%1)/70263(%1)/70271(%2)/70281(%1) aggregate cap5, bounded by account-wide max5 running jobs. Concentrate unblocked MindCube/3.8; keep all other healthy P1 jobs, no duplicate shards. Never exceed aggregate5 when adding further arrays."
     }
   ],
   "submission_environment": {
