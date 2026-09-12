@@ -1,0 +1,170 @@
+{
+  "checked_at": "2026-09-12T17:47:01.034551",
+  "chunks": [
+    {
+      "file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen35-9b-a100-r10-20260912/results_spatial_beam_search_qc11/question_chunk_0/results.json",
+      "current": "4 / 95",
+      "skip": [],
+      "parsing_err_stats": {
+        "scores": 2,
+        "answer": 0,
+        "answer_qid": [],
+        "scores_qid": [
+          "among_group525_q0_2_2",
+          "around_9839c696dbdb1601651ad79fa3959dbcebe7cc3acb76a7a38db4a26e07557b8d_q2_8"
+        ]
+      },
+      "max_tokens": "8192",
+      "thinking": false,
+      "source_sha256": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+      "sha256": "8350578e0e46c44038071445246c979a40ba6e5628db794ff13f8ee4d8c6e84b"
+    },
+    {
+      "file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen35-9b-a100-r10-20260912/results_spatial_beam_search_qc11/question_chunk_1/results.json",
+      "current": "2 / 95",
+      "skip": [],
+      "parsing_err_stats": {
+        "scores": 1,
+        "answer": 0,
+        "answer_qid": [],
+        "scores_qid": []
+      },
+      "max_tokens": "8192",
+      "thinking": false,
+      "source_sha256": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+      "sha256": "bd9557abf3e0fbbedbb586ebbe7b053f0cacd0d508eb245755cc596b0eebc49a"
+    },
+    {
+      "file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen35-9b-a100-r10-20260912/results_spatial_beam_search_qc11/question_chunk_2/results.json",
+      "current": "17 / 95",
+      "skip": [],
+      "parsing_err_stats": {
+        "scores": 7,
+        "answer": 0,
+        "answer_qid": [],
+        "scores_qid": [
+          "among_group665_q1_2_3",
+          "around_38dcc531371d5cfddf3d2b6c306c67c52735847ed0da53b6b2274f0a98822327_q2_7",
+          "among_7ae6ffaa7d3a703ce4e8dbe7c189f147024d3ca344f00ff3f8fe1587d617d117_q1_2_2",
+          "among_7ae6ffaa7d3a703ce4e8dbe7c189f147024d3ca344f00ff3f8fe1587d617d117_q1_2_2"
+        ]
+      },
+      "max_tokens": "8192",
+      "thinking": false,
+      "source_sha256": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+      "sha256": "288cdb4104a48c81bd1351a6a1dae3467ee0ac00c0ded6ff54ba844ba2675c68"
+    },
+    {
+      "file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen35-9b-a100-r10-20260912/results_spatial_beam_search_qc11/question_chunk_3/results.json",
+      "current": "3 / 95",
+      "skip": [],
+      "parsing_err_stats": {
+        "scores": 1,
+        "answer": 0,
+        "answer_qid": [],
+        "scores_qid": [
+          "among_group582_q3_1_1"
+        ]
+      },
+      "max_tokens": "8192",
+      "thinking": false,
+      "source_sha256": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+      "sha256": "8cf379928d9f290c969933fac67c4d64b126e1ea267f1faae419c7325eff68ba"
+    },
+    {
+      "file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen35-9b-a100-r10-20260912/results_spatial_beam_search_qc11/question_chunk_4/results.json",
+      "current": "1 / 95",
+      "skip": [],
+      "parsing_err_stats": {
+        "scores": 0,
+        "answer": 0,
+        "answer_qid": [],
+        "scores_qid": []
+      },
+      "max_tokens": "8192",
+      "thinking": false,
+      "source_sha256": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+      "sha256": "00d5da94d105981fd8d39e5be430801c6c7ec8e570be50490ec9d802c360e539"
+    },
+    {
+      "file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen35-9b-a100-r10-20260912/results_spatial_beam_search_qc11/question_chunk_5/results.json",
+      "current": "17 / 95",
+      "skip": [],
+      "parsing_err_stats": {
+        "scores": 9,
+        "answer": 1,
+        "answer_qid": [
+          "among_ad49ff114077b5f68deb6c56119c461ed5698fe73e769b94c57ad21c7878458c_gen_6_2"
+        ],
+        "scores_qid": [
+          "among_group008_q0_2_1",
+          "among_group411_q3_2_3",
+          "among_group411_q3_2_3",
+          "among_group413_q0_2_3",
+          "among_group316_q2_2_1"
+        ]
+      },
+      "max_tokens": "8192",
+      "thinking": false,
+      "source_sha256": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+      "sha256": "69646efa1e5d043ab3a7ddc65c524611bbf2658135ef3143c22f379bf89bced7"
+    },
+    {
+      "file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912/results_spatial_beam_search_qc11/question_chunk_0/results.json",
+      "current": "17 / 95",
+      "skip": [],
+      "parsing_err_stats": {
+        "scores": 1,
+        "answer": 1,
+        "answer_qid": [
+          "among_group646_q3_5_1"
+        ],
+        "scores_qid": []
+      },
+      "max_tokens": "8192",
+      "thinking": false,
+      "source_sha256": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+      "sha256": "3ed9246390a92ad66dc82a22bf3561a437ddfd94231ce7a55c844419d3d32739"
+    },
+    {
+      "file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mmsi-qwen35-27b-a100-r10-20260912/results_spatial_beam_search_qc10/question_chunk_0/results.json",
+      "current": "2 / 100",
+      "skip": [],
+      "parsing_err_stats": {
+        "scores": 0,
+        "answer": 0,
+        "answer_qid": [],
+        "scores_qid": []
+      },
+      "max_tokens": "8192",
+      "thinking": false,
+      "source_sha256": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+      "sha256": "60660e6f7b68f0384bd3b8a51f92ab524e2eb126ba1a40c25c4f9e1b1e1e36ae"
+    },
+    {
+      "file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mmsi-qwen35-27b-a100-r10-20260912/results_spatial_beam_search_qc10/question_chunk_3/results.json",
+      "current": "1 / 100",
+      "skip": [],
+      "parsing_err_stats": {
+        "scores": 0,
+        "answer": 0,
+        "answer_qid": [],
+        "scores_qid": []
+      },
+      "max_tokens": "8192",
+      "thinking": false,
+      "source_sha256": "27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf",
+      "sha256": "b5b7202338b16f44f9a187642198fd39f10283fe60c07358543b48c6ab5d5e0c"
+    }
+  ],
+  "new_failure_logs": [
+    {
+      "file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen35-9b-a100-r10-20260912/attempts/question_chunk_5/70200-20260912T081323Z/pipeline.log",
+      "tail": "!!!sampled_indices [0, 2, 4]\n[ChatGPT] current model Qwen/Qwen3.5-9B, usage_tokens: 7337, cost: $0.00000, price: $0.00000\n[LLM RESPONSE in choose n] 8,7,8,8,8,8,8,8,8,8,8,8\nWARNING:utils.api:[ChatGPT] Error: Qwen/Qwen3.5-9B returned thinking tags; the no-thinking setting was not applied.\nTraceback (most recent call last):\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/pipelines/pipeline_svc_scaling_spatial_beam_search.py\", line 795, in <module>\n    pipeline.run()\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/pipelines/pipeline_svc_scaling_spatial_beam_search.py\", line 281, in run\n    response = self.vlm.run_prompt(\"prompt_scores\", sys_prompt, content)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/utils/vlm_wrapper.py\", line 109, in run_prompt\n    response = self.model.get_system_response_with_content(system_prompt, content)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/utils/api.py\", line 247, in get_system_response_with_content\n    self._validate_no_thinking(response_message)\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/utils/api.py\", line 167, in _validate_no_thinking\n    raise RuntimeError(\nRuntimeError: Qwen/Qwen3.5-9B returned thinking tags; the no-thinking setting was not applied."
+    },
+    {
+      "file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mmsi-qwen35-27b-a100-r10-20260912/attempts/question_chunk_3/70262-20260912T092951Z/pipeline.log",
+      "tail": "!!!sampled_indices [0, 2, 4]\n[ChatGPT] current model Qwen/Qwen3.5-27B, usage_tokens: 6804, cost: $0.00000, price: $0.00000\n[LLM RESPONSE in choose n] 0,0,0,0,0,0,6,8,9\nWARNING:utils.api:[ChatGPT] Error: Qwen/Qwen3.5-27B returned thinking tags; the no-thinking setting was not applied.\nTraceback (most recent call last):\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/pipelines/pipeline_svc_scaling_spatial_beam_search.py\", line 795, in <module>\n    pipeline.run()\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/pipelines/pipeline_svc_scaling_spatial_beam_search.py\", line 281, in run\n    response = self.vlm.run_prompt(\"prompt_scores\", sys_prompt, content)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/utils/vlm_wrapper.py\", line 109, in run_prompt\n    response = self.model.get_system_response_with_content(system_prompt, content)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/utils/api.py\", line 247, in get_system_response_with_content\n    self._validate_no_thinking(response_message)\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/utils/api.py\", line 167, in _validate_no_thinking\n    raise RuntimeError(\nRuntimeError: Qwen/Qwen3.5-27B returned thinking tags; the no-thinking setting was not applied."
+    }
+  ]
+}

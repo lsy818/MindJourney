@@ -19,8 +19,8 @@ aaf4e81c76221ee5540bb8d3d1663f2f12cdc49b9dde1d7d97cb60489ec79870  ./mmsi/qwen3.5
 840908316df8f3c12481a265cec354bd48a141b129b9b2eeb11e77e043f565ff  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_5/COMPLETE
 3490d8b1e566301e2da06619225aa5055452ebd07d4fda4bf0dc0f70a2d6dcb7  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_5/validation_summary.json
 20416dcd1a687a74e5f60a4857239294d61b1e0c396479384cd424efc26bb66f  ./scheduling/20260909T024911Z-mmsi9b-next-shard.json
-8bd7d427c768f7f8ded1e9f038cb3b9e5c54a0c540c9c5d40966d32db0c14e55  ./EXPERIMENTS.md
-940051651538114b61d85326450e3913a0833d6457d709d00a1d5d2811c3196a  ./RESULTS.md
+6df15d9f6ec105e3d87ea2b7b5657a1e1042e0546da22f5dcc9616a53759c101  ./EXPERIMENTS.md
+ccbad34387999140da8fc114722327427cc1767edb8e7013d91e6a9124465277  ./RESULTS.md
 4c211353f1a785811549315eeaf4c766e2b80312abe9536167a48ea0da370fb0  ./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/chunks/question_chunk_8/results.json
 e5dc35d40f01f9210621e19b11a7322e10db73211cad0a3f095864a9dc10a914  ./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/chunks/question_chunk_8/COMPLETE
 01d4853bd937ee6707e8caa0e30e4df763da9951c6c93c667f0cc763af405a2f  ./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/chunks/question_chunk_8/validation_summary.json
@@ -222,7 +222,7 @@ eb58e3443e94bd7ad623ac608730317ffc659a70710f504bcffd47ba7796be3e  ./mindcube/qwe
 a20c90a923bfcfb92c2724d1ede18f88845bd4ccc3229b90c22e1cda93a110bc  results/P1_LIVE_AUDIT_20260912_1355.json
 13a97954483dc9898a101c4661caa321877710d80b5a70bf83a726b42e53c895  results/mindcube/qwen3.5-9b/svc/mj-p1-correct-mindcube-qwen35-9b-a100-r9-20260912/submission_70179.txt
 48d048806c13294262c9a4af40b481be6a1b8844c5cc5ba306ff91760675ff47  results/P1_PROGRESS_20260912_1546.json
-4fcc1885b115e5aad3565fabc3ac6579cc00f7503c12209e6ada7c96dcf740ef  results/P1_OUTPUT8192_EXECUTION_20260912.json
+1e24f07a856a63d8bd19f68d188518ec836af116cf1b7d0cb14a21624481f059  results/P1_OUTPUT8192_EXECUTION_20260912.json
 64d94b8be73fe7ad807b79d587f5cb639491efc5e0eaf5eade9754a9be3842d3  results/P1_OUTPUT8192_MIGRATION_20260912.json
 bd211ffa95be614c788d8041c1e15604ca01f0ec861b23cc8cd2c4c0fbe16e06  results/mindcube/qwen3.5-9b/svc/mj-p1-8192-mindcube-qwen35-9b-a100-r10-20260912/launch_manifest.txt
 d4e649c40015580a0109dcad55289684278cc7494976060e6765ccd9879eba64  results/mindcube/qwen3.5-9b/svc/mj-p1-8192-mindcube-qwen35-9b-a100-r10-20260912/submission_initial.txt
@@ -239,3 +239,5 @@ ba0fbac7cd8f6602ca5f7fb8d93ce20fa0481892a7c6dd74a4db6b0c6526a49c  results/P1_OUT
 fb0f2a27d8f9e5e435cf7965d0bf5a8bee0ebadc8a1a590cdfb6a9e881a2d517  results/P1_OUTPUT8192_DIAGNOSTIC_20260912_1730.json
 7ba0953a0366d317ba6bd461739070aee9dd8995eb71786c4dc7b2df18aec913  results/mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r10-20260912/submission_70250.txt
 298fb0b9f2d8aebbaa0e1cb5f5931df4f8b30eb5f8c8cf80ea7cb457681be90c  results/mindcube/qwen3.8-27b/svc/mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912/submission_70263.txt
+91a987cec3d5afee8470636468a00ef406ad3a910dd51896c49be88c869e56ac  results/P1_OUTPUT8192_PROGRESS_20260912_1747.json
+d45a4aba170c47aa994207d09a53fae79ba3b17138b018750d905b278f27f1eb  results/mindcube/qwen3.8-27b/svc/mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912/submission_70271.txt
