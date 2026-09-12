@@ -6,20 +6,20 @@
 
 **本表遵循用户原始清单，用户没有修改优先级。** 此前我将 MindCube/MMSI 的执行组合配反，旧 Run ID 及日志中的“P1”是错误执行清单的遗留命名，不代表用户要求的 P1 已完成。旧结果全部保留，正确四项 P1 已使用独立 Run ID 重启；详见[重启核对记录](./P1_RESTART_AUDIT_20260912.md)。
 
-17:12最新状态：8192/BF16/65536/thinking=false参数已复核。MMSI/27B片0/1、MindCube/3.8片0、MindCube/9B片5运行，共8×A100；MindCube/9B片0–4因thinking标签检查失败，保留现场、不原样重试。下表提交时状态仅作历史记录，实时进展见[实验日志](./EXPERIMENTS.md)。暂无新全量成绩。
+17:33最新状态：MMSI/27B片1/3、MindCube/3.8片0、MindCube/9B片5运行，共8×A100。补交MMSI/27B片5=70250_5、MindCube/3.8片1=70263_1，提交槽位10/10（含无关55278）；MMSI/27B片0和MindCube/9B片0–4标签检查失败保留。8192/BF16/65536/no-thinking未变。独立诊断出现8192输出重复截断，未复现标签错误，详见[实验日志](./EXPERIMENTS.md)。暂无新全量成绩。
 
 ## 全部实验总览
 
 | 数据集 | 模型 | 优先级 | 状态 | 正确 / 总数 | 准确率 | 结果文件 |
 |---|---|---|---|---:|---:|---|
-| MMSI-Bench 1000 | Qwen3.5-27B | P1 | 8192重跑排队 `70201_0` | — | — | [提交记录](./mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r10-20260912/submission_initial.txt) |
+| MMSI-Bench 1000 | Qwen3.5-27B | P1 | 8192：片1/3运行，2/4/5排队；0标签检查失败 | — | — | [执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json) |
 | MMSI-Bench 1000 | Qwen2.5-VL-72B-Instruct | P1 | 8192重跑排队 `70202_0` | — | — | [提交记录](./mmsi/qwen2.5-vl-72b/svc/mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912/submission_initial.txt) |
 | MMSI-Bench 1000 | Qwen3.5-9B | P3 | 已验证完成 | 288 / 1000 | 28.80% | [JSON](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/results_merged.json) |
 | MMSI-Bench 1000 | Qwen3.8-27B | P3 | 已验证完成 | 208 / 1000 | 20.80% | [JSON](./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_merged.json) |
 | MindCube 1050 | Qwen3.5-27B | P0 | 已验证完成 | 498 / 1050 | 47.43% | [JSON](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/results_merged.json) |
 | MindCube 1050 | Qwen2.5-VL-72B-Instruct | P0 | 已验证完成 | 416 / 1050 | 39.62% | [JSON](./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_merged.json) |
-| MindCube 1050 | Qwen3.5-9B | P1 | 8192重跑；0–3启动中 `70200` | — | — | [提交记录](./mindcube/qwen3.5-9b/svc/mj-p1-8192-mindcube-qwen35-9b-a100-r10-20260912/submission_initial.txt) |
-| MindCube 1050 | Qwen3.8-27B | P1 | 8192重跑排队 `70207_0` | — | — | [提交记录](./mindcube/qwen3.8-27b/svc/mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912/submission_initial.txt) |
+| MindCube 1050 | Qwen3.5-9B | P1 | 8192：片5运行，0–4标签检查失败 | — | — | [执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json) |
+| MindCube 1050 | Qwen3.8-27B | P1 | 8192：片0运行 `70207_0`、片1排队 `70263_1` | — | — | [执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json) |
 | SAT-Syn 500 | Qwen3.5-27B | P0 | 已验证完成 | 392 / 500 | 78.40% | [JSON](./sat-syn/qwen3.5-27b/svc/mj-svc-qwen35-sat-syn500-20260903T185438Z/results_merged.json) |
 | SAT-Syn 500 | Qwen2.5-VL-72B-Instruct | P0 | 用户反馈已跑，结果待归档 | — | — | — |
 | SAT-Syn 500 | Qwen3.5-9B | P2 | 结果待补充 | — | — | — |
@@ -29,7 +29,7 @@
 | SAT-Real 150 | Qwen3.5-9B | P4 | 结果待补充 | — | — | — |
 | SAT-Real 150 | Qwen3.8-27B | P4 | 结果待补充 | — | — | — |
 
-当前版本：按用户要求改为 **8192最大输出、no-thinking**，独立r10从头重跑正确四项P1。15:58 MindCube/9B四片启动中、其余三组排队；新8192首题尚未核验。旧1024结果全部保留、不混合统计，详见[8192执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json)及[实验日志](./EXPERIMENTS.md)。
+当前版本：按用户要求改为 **8192最大输出、no-thinking**，独立r10从头重跑正确四项P1。旧1024结果全部保留、不混合统计。已有8192产物核验，尚无完整分片；详见[8192执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json)及[实验日志](./EXPERIMENTS.md)。
 
 16:15更新：MindCube/9B片0/2/4/5运行，片1/3因thinking标签检查失败、保留现场未重试；实际已保存产物确认8192。MMSI/27B新增1–2片`70214`排队。当前8×A100、10/10提交槽位，详情见[实时核验](./P1_OUTPUT8192_LIVE_AUDIT_20260912_1615.json)，不把失败片视为完成。
 
@@ -49,7 +49,7 @@
 
 ### Qwen3.5-27B（P1）
 
-8192版本已提交，首片 `70201_0` 排队；旧1024部分结果保留，不合并到本轮。见[执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json)。
+8192版本片1/3运行（70214_1、70219_3），片2/4/5排队；片0因thinking标签检查失败，暂不重试。旧1024部分结果保留，不合并到本轮。见[执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json)。
 
 ### Qwen2.5-VL-72B-Instruct（P1）
 
@@ -137,11 +137,11 @@ Run ID：`mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908`。
 
 ### Qwen3.5-9B（P1）
 
-8192版本已提交，数组 `70200` 分片0–5；0–3已分配GPU启动中，4–5候补。旧1024部分结果保留，不合并到本轮。见[执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json)。
+8192版本数组 `70200` 分片5运行；0–4因thinking标签检查失败，保留现场且暂不重试。旧1024部分结果保留，不合并到本轮。见[执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json)。
 
 ### Qwen3.8-27B（P1）
 
-8192版本已提交，首片 `70207_0` 排队；旧1024部分结果保留，不合并到本轮。见[执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json)。
+8192版本首片 `70207_0` 运行，片1 `70263_1` 排队；旧1024部分结果保留，不合并到本轮。见[执行清单](./P1_OUTPUT8192_EXECUTION_20260912.json)。
 
 ## SAT-Syn 500
 
