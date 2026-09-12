@@ -4,20 +4,20 @@
 
 本文件维护 4 个数据集 × 4 个模型，共 16 组 **SVC** 实验的全量与分类结果。当前已归档 6 组完整结果，其余 10 组待补充可核验产物；“—”表示暂无可报告结果，不代表 0 分或从未运行。
 
-**本表遵循用户原始清单，用户没有修改优先级。** 此前我将 MindCube/MMSI 的执行组合配反，旧 Run ID 及日志中的“P1”是错误执行清单的遗留命名，不代表用户要求的 P1 已完成。旧结果全部保留，正确四项 P1 将使用独立 Run ID 重启；详见[重启核对记录](./P1_RESTART_AUDIT_20260912.md)。
+**本表遵循用户原始清单，用户没有修改优先级。** 此前我将 MindCube/MMSI 的执行组合配反，旧 Run ID 及日志中的“P1”是错误执行清单的遗留命名，不代表用户要求的 P1 已完成。旧结果全部保留，正确四项 P1 已使用独立 Run ID 重启；详见[重启核对记录](./P1_RESTART_AUDIT_20260912.md)。
 
 ## 全部实验总览
 
 | 数据集 | 模型 | 优先级 | 状态 | 正确 / 总数 | 准确率 | 结果文件 |
 |---|---|---|---|---:|---:|---|
-| MMSI-Bench 1000 | Qwen3.5-27B | P1 | 首片排队 `70165_0` | — | — | [提交记录](./mmsi/qwen3.5-27b/svc/mj-p1-correct-mmsi-qwen35-27b-a100-r9-20260912/submission_initial.txt) |
+| MMSI-Bench 1000 | Qwen3.5-27B | P1 | 首片启动中 `70165_0` | — | — | [提交记录](./mmsi/qwen3.5-27b/svc/mj-p1-correct-mmsi-qwen35-27b-a100-r9-20260912/submission_initial.txt) |
 | MMSI-Bench 1000 | Qwen2.5-VL-72B-Instruct | P1 | 首片排队 `70166_0` | — | — | [提交记录](./mmsi/qwen2.5-vl-72b/svc/mj-p1-correct-mmsi-qwen25vl-72b-h20-r9-20260912/submission_initial.txt) |
 | MMSI-Bench 1000 | Qwen3.5-9B | P3 | 已验证完成 | 288 / 1000 | 28.80% | [JSON](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/results_merged.json) |
 | MMSI-Bench 1000 | Qwen3.8-27B | P3 | 已验证完成 | 208 / 1000 | 20.80% | [JSON](./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_merged.json) |
 | MindCube 1050 | Qwen3.5-27B | P0 | 已验证完成 | 498 / 1050 | 47.43% | [JSON](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/results_merged.json) |
 | MindCube 1050 | Qwen2.5-VL-72B-Instruct | P0 | 已验证完成 | 416 / 1050 | 39.62% | [JSON](./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_merged.json) |
-| MindCube 1050 | Qwen3.5-9B | P1 | 首片排队 `70167_0` | — | — | [提交记录](./mindcube/qwen3.5-9b/svc/mj-p1-correct-mindcube-qwen35-9b-a100-r9-20260912/submission_initial.txt) |
-| MindCube 1050 | Qwen3.8-27B | P1 | 首片排队 `70168_0` | — | — | [提交记录](./mindcube/qwen3.8-27b/svc/mj-p1-correct-mindcube-qwen38-27b-a100-r9-20260912/submission_initial.txt) |
+| MindCube 1050 | Qwen3.5-9B | P1 | 首片启动中 `70167_0` | — | — | [提交记录](./mindcube/qwen3.5-9b/svc/mj-p1-correct-mindcube-qwen35-9b-a100-r9-20260912/submission_initial.txt) |
+| MindCube 1050 | Qwen3.8-27B | P1 | 首片启动中 `70168_0` | — | — | [提交记录](./mindcube/qwen3.8-27b/svc/mj-p1-correct-mindcube-qwen38-27b-a100-r9-20260912/submission_initial.txt) |
 | SAT-Syn 500 | Qwen3.5-27B | P0 | 已验证完成 | 392 / 500 | 78.40% | [JSON](./sat-syn/qwen3.5-27b/svc/mj-svc-qwen35-sat-syn500-20260903T185438Z/results_merged.json) |
 | SAT-Syn 500 | Qwen2.5-VL-72B-Instruct | P0 | 用户反馈已跑，结果待归档 | — | — | — |
 | SAT-Syn 500 | Qwen3.5-9B | P2 | 结果待补充 | — | — | — |
@@ -41,7 +41,7 @@
 
 ### Qwen3.5-27B（P1）
 
-正确组合已重启，首片 `70165_0` 排队；全量与分类成绩待完成后补充。见[执行清单](./P1_CORRECTED_EXECUTION_20260912.json)。
+正确组合已重启，首片 `70165_0` 已分配 GPU、启动中，尚待首题产物核验；全量与分类成绩待完成后补充。见[执行清单](./P1_CORRECTED_EXECUTION_20260912.json)。
 
 ### Qwen2.5-VL-72B-Instruct（P1）
 
@@ -129,11 +129,11 @@ Run ID：`mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908`。
 
 ### Qwen3.5-9B（P1）
 
-正确组合已重启，首片 `70167_0` 排队；全量与分类成绩待完成后补充。见[执行清单](./P1_CORRECTED_EXECUTION_20260912.json)。
+正确组合已重启，首片 `70167_0` 已分配 GPU、启动中，尚待首题产物核验；全量与分类成绩待完成后补充。见[执行清单](./P1_CORRECTED_EXECUTION_20260912.json)。
 
 ### Qwen3.8-27B（P1）
 
-正确组合已重启，首片 `70168_0` 排队；全量与分类成绩待完成后补充。见[执行清单](./P1_CORRECTED_EXECUTION_20260912.json)。
+正确组合已重启，首片 `70168_0` 已分配 GPU、启动中，尚待首题产物核验；全量与分类成绩待完成后补充。见[执行清单](./P1_CORRECTED_EXECUTION_20260912.json)。
 
 ## SAT-Syn 500
 
