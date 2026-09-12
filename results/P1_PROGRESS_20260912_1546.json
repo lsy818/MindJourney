@@ -1,0 +1,207 @@
+{
+  "checked_at": "2026-09-12T15:46:51.554112+08:00",
+  "account": {
+    "running_jobs": 5,
+    "running_limit": 5,
+    "submitted_tasks": 10,
+    "submit_limit": 10,
+    "allocated_a100": 10
+  },
+  "running_jobs": {
+    "70165_0": "MMSI/Qwen3.5-27B",
+    "70167_0": "MindCube/Qwen3.5-9B chunk0",
+    "70168_0": "MindCube/Qwen3.8-27B",
+    "70179_1": "MindCube/Qwen3.5-9B chunk1",
+    "70179_2": "MindCube/Qwen3.5-9B chunk2"
+  },
+  "pending_jobs": [
+    "70166_0",
+    "70179_3",
+    "70179_4",
+    "70179_5"
+  ],
+  "untouched_unrelated_job": "55278",
+  "runs": [
+    {
+      "run_id": "mj-p1-correct-mindcube-qwen35-9b-a100-r9-20260912",
+      "chunks": [
+        {
+          "chunk": "question_chunk_0",
+          "current": "48 / 95",
+          "mtime": "2026-09-12T15:46:02.846668+08:00",
+          "skip": [],
+          "parsing": {
+            "score_errors": 57,
+            "answer_errors": 3
+          },
+          "complete": false,
+          "source": "d0eca40528e27676e4c47c6bb68f7198f6195259b83f6e7509f3921b958b53b0",
+          "model": "Qwen/Qwen3.5-9B",
+          "dtype": "bfloat16",
+          "thinking": false,
+          "context": "65536"
+        },
+        {
+          "chunk": "question_chunk_1",
+          "current": "40 / 95",
+          "mtime": "2026-09-12T15:45:24.958070+08:00",
+          "skip": [],
+          "parsing": {
+            "score_errors": 51,
+            "answer_errors": 0
+          },
+          "complete": false,
+          "source": "d0eca40528e27676e4c47c6bb68f7198f6195259b83f6e7509f3921b958b53b0",
+          "model": "Qwen/Qwen3.5-9B",
+          "dtype": "bfloat16",
+          "thinking": false,
+          "context": "65536"
+        },
+        {
+          "chunk": "question_chunk_2",
+          "current": "49 / 95",
+          "mtime": "2026-09-12T15:41:42.829780+08:00",
+          "skip": [],
+          "parsing": {
+            "score_errors": 45,
+            "answer_errors": 3
+          },
+          "complete": false,
+          "source": "d0eca40528e27676e4c47c6bb68f7198f6195259b83f6e7509f3921b958b53b0",
+          "model": "Qwen/Qwen3.5-9B",
+          "dtype": "bfloat16",
+          "thinking": false,
+          "context": "65536"
+        }
+      ],
+      "recent_logs": [
+        {
+          "attempt": "attempts/question_chunk_0/70167-20260912T053110Z",
+          "logs": [
+            {
+              "name": "pipeline.log",
+              "mtime": "2026-09-12T15:46:35.436908+08:00",
+              "recent_errors": []
+            },
+            {
+              "name": "vllm.log",
+              "mtime": "2026-09-12T15:46:30.317694+08:00",
+              "recent_errors": []
+            }
+          ]
+        },
+        {
+          "attempt": "attempts/question_chunk_1/70180-20260912T055455Z",
+          "logs": [
+            {
+              "name": "pipeline.log",
+              "mtime": "2026-09-12T15:46:31.297121+08:00",
+              "recent_errors": []
+            },
+            {
+              "name": "vllm.log",
+              "mtime": "2026-09-12T15:46:36.417225+08:00",
+              "recent_errors": []
+            }
+          ]
+        },
+        {
+          "attempt": "attempts/question_chunk_2/70182-20260912T060055Z",
+          "logs": [
+            {
+              "name": "pipeline.log",
+              "mtime": "2026-09-12T15:46:35.436908+08:00",
+              "recent_errors": []
+            },
+            {
+              "name": "vllm.log",
+              "mtime": "2026-09-12T15:45:44.242064+08:00",
+              "recent_errors": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": "mj-p1-correct-mindcube-qwen38-27b-a100-r9-20260912",
+      "chunks": [
+        {
+          "chunk": "question_chunk_0",
+          "current": "31 / 95",
+          "mtime": "2026-09-12T15:46:19.975322+08:00",
+          "skip": [],
+          "parsing": {
+            "score_errors": 0,
+            "answer_errors": 14
+          },
+          "complete": false,
+          "source": "d0eca40528e27676e4c47c6bb68f7198f6195259b83f6e7509f3921b958b53b0",
+          "model": "Qwen/Qwen3.8-27B",
+          "dtype": "bfloat16",
+          "thinking": false,
+          "context": "65536"
+        }
+      ],
+      "recent_logs": [
+        {
+          "attempt": "attempts/question_chunk_0/70168-20260912T053609Z",
+          "logs": [
+            {
+              "name": "pipeline.log",
+              "mtime": "2026-09-12T15:46:36.417225+08:00",
+              "recent_errors": []
+            },
+            {
+              "name": "vllm.log",
+              "mtime": "2026-09-12T15:46:31.297121+08:00",
+              "recent_errors": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": "mj-p1-correct-mmsi-qwen25vl-72b-h20-r9-20260912",
+      "chunks": []
+    },
+    {
+      "run_id": "mj-p1-correct-mmsi-qwen35-27b-a100-r9-20260912",
+      "chunks": [
+        {
+          "chunk": "question_chunk_0",
+          "current": "16 / 100",
+          "mtime": "2026-09-12T15:45:18.579149+08:00",
+          "skip": [],
+          "parsing": {
+            "score_errors": 27,
+            "answer_errors": 1
+          },
+          "complete": false,
+          "source": "d0eca40528e27676e4c47c6bb68f7198f6195259b83f6e7509f3921b958b53b0",
+          "model": "Qwen/Qwen3.5-27B",
+          "dtype": "bfloat16",
+          "thinking": false,
+          "context": "65536"
+        }
+      ],
+      "recent_logs": [
+        {
+          "attempt": "attempts/question_chunk_0/70165-20260912T053110Z",
+          "logs": [
+            {
+              "name": "pipeline.log",
+              "mtime": "2026-09-12T15:46:30.317694+08:00",
+              "recent_errors": []
+            },
+            {
+              "name": "vllm.log",
+              "mtime": "2026-09-12T15:46:35.436908+08:00",
+              "recent_errors": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "quality_warning": "MindCube/Qwen3.8: 14/31 answer parsing failures. Three sampled responses end mid-analysis without a final answer, consistent with truncation at the fixed 1024 output-token cap; finish_reason is not persisted, so this cause is not proven. No setting or parser changes made. Responses preserved and counted wrong under existing protocol."
+}
