@@ -1,0 +1,9 @@
+run_id=mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908
+dataset=mmsi
+model=Qwen/Qwen3.8-27B
+revision=1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0
+execution_scope=formal
+diagnostic_host=none
+chunk_index=7
+results_sha256=c8029011fc907f0972a0e8653ca48dbfb5df579110f5e6e4772a1695d7910a74
+completed_utc=2026-09-11T23:47:44Z
