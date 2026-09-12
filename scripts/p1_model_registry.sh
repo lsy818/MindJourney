@@ -126,7 +126,7 @@ p1_load_resource_plan() {
 p1_assert_priority_one_combo() {
   local dataset="${1:?dataset is required}"
   case "${dataset}:${P1_SPEC_ALIAS}" in
-    mindcube:qwen35-27b|mindcube:qwen25vl-72b|mmsi:qwen35-9b|mmsi:qwen38-27b)
+    mmsi:qwen35-27b|mmsi:qwen25vl-72b|mindcube:qwen35-9b|mindcube:qwen38-27b)
       return 0
       ;;
     *)

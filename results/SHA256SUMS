@@ -19,8 +19,8 @@ aaf4e81c76221ee5540bb8d3d1663f2f12cdc49b9dde1d7d97cb60489ec79870  ./mmsi/qwen3.5
 840908316df8f3c12481a265cec354bd48a141b129b9b2eeb11e77e043f565ff  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_5/COMPLETE
 3490d8b1e566301e2da06619225aa5055452ebd07d4fda4bf0dc0f70a2d6dcb7  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_5/validation_summary.json
 20416dcd1a687a74e5f60a4857239294d61b1e0c396479384cd424efc26bb66f  ./scheduling/20260909T024911Z-mmsi9b-next-shard.json
-d95cd43ad436e9d0ead0a713ae794bb4e1e8cc4605b6cf6fb377a4dfc3962a8e  ./EXPERIMENTS.md
-4080df6c9c5c7a78f03cc1e75852d7e3f5436d48d7c43a50cacbc9a707591cbd  ./RESULTS.md
+e6e91107e9df2f277eb415d4ac3c94c8a1fa404bfdb36025095ad69313668b48  ./EXPERIMENTS.md
+a9853b24da92d473437d29713a5d2408627cab5acc9d8355872c78ae88d06d75  ./RESULTS.md
 4c211353f1a785811549315eeaf4c766e2b80312abe9536167a48ea0da370fb0  ./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/chunks/question_chunk_8/results.json
 e5dc35d40f01f9210621e19b11a7322e10db73211cad0a3f095864a9dc10a914  ./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/chunks/question_chunk_8/COMPLETE
 01d4853bd937ee6707e8caa0e30e4df763da9951c6c93c667f0cc763af405a2f  ./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/chunks/question_chunk_8/validation_summary.json
@@ -209,3 +209,4 @@ f88d6ebfc52703b4be3283e57528304bd1f704619e9ebf7709f64e2744b9ca27  ./sat-syn/qwen
 b83ec8f1e7f58321ee953ea7550821c8db53cdf05b4240879f7ec05151d17994  ./sat-syn/qwen3.5-27b/svc/mj-svc-qwen35-sat-syn500-20260903T185438Z/submissions/20260903T185446Z-merge-64588.txt
 492c75832221e0d3a52662856314e2c97191f74e36b8c00364793db9f23290fb  ./sat-syn/qwen3.5-27b/svc/mj-svc-qwen35-sat-syn500-20260903T185438Z/submissions/20260904T100922Z-array-64865.txt
 8345240ddfde67ba954fbaa3a25126033bca7e1b10c1fdc77eb48fb51f3791e3  ./sat-syn/qwen3.5-27b/svc/mj-svc-qwen35-sat-syn500-20260903T185438Z/submissions/20260904T100922Z-merge-64866.txt
+74fc0821956068888a303a4bc7d15b735a0749a7fc17fd38c5de7d9f855678a4  ./P1_RESTART_AUDIT_20260912.md

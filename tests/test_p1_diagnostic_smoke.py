@@ -302,7 +302,7 @@ class DiagnosticLauncherTests(unittest.TestCase):
             "--model",
             model,
             "--dataset",
-            "mmsi",
+            "mindcube",
             "--gpus",
             "0,1",
             "--input-dir",

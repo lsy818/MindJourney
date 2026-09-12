@@ -24,6 +24,7 @@ SOURCE_FILES = (
     "pipelines/pipeline_wan_scaling_beam_search_double_rank.py",
     "scripts/p1_array.sbatch",
     "scripts/p1_env_prolog.sh",
+    "scripts/p1_experiment_contract.py",
     "scripts/p1_model_registry.sh",
     "scripts/p1_persistent_env_prolog.sh",
     "scripts/p1_run_chunk.sh",

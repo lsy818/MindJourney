@@ -271,6 +271,9 @@ fi
 if [[ -n "$persistent_env_root" ]]; then
   export_spec+=",P1_PERSISTENT_ENV_ROOT=$persistent_env_root,P1_EXPECTED_ENV_COMPLETE_SHA256=$persistent_env_complete_sha256"
 fi
+if [[ "$P1_SPEC_SIZE_CLASS" == "72b" ]]; then
+  export_spec+=",P1_GPU_MEMORY_UTILIZATION=0.93"
+fi
 
 sbatch_cmd=(
   sbatch --parsable
@@ -325,6 +328,12 @@ fi
 if [[ ! -r "$dataset_provenance" || ! -r "$experiment_manifest" ]]; then
   echo "Formal submission requires readable dataset provenance and experiment manifest files." >&2
   exit 1
+fi
+if [[ "$mode" == "array" ]]; then
+  python3 "$script_dir/p1_experiment_contract.py" \
+    --dataset "$dataset" --model "$P1_SPEC_MODEL_ID" \
+    --input-file "$input_file" --manifest "$experiment_manifest" \
+    --num-questions "$effective_questions" --max-images "$max_images"
 fi
 validation_args=(
   --input-dir "$input_dir"

@@ -291,7 +291,7 @@ class PersistentEnvironmentPrologTests(unittest.TestCase):
                 "--model",
                 "qwen35-9b",
                 "--dataset",
-                "mmsi",
+                "mindcube",
                 "--input-dir",
                 str(self.root / "not-needed-for-dry-run"),
                 "--runtime-root",

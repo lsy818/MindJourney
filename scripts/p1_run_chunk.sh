@@ -30,6 +30,12 @@ expected_input_sha256="${P1_EXPECTED_INPUT_SHA256:?P1_EXPECTED_INPUT_SHA256 is r
 expected_provenance_sha256="${P1_EXPECTED_PROVENANCE_SHA256:?P1_EXPECTED_PROVENANCE_SHA256 is required}"
 expected_manifest_sha256="${P1_EXPECTED_MANIFEST_SHA256:?P1_EXPECTED_MANIFEST_SHA256 is required}"
 expected_source_sha256="${P1_EXPECTED_SOURCE_SHA256:?P1_EXPECTED_SOURCE_SHA256 is required}"
+if [[ "$run_mode" == "array" ]]; then
+  python3 "$repo_dir/scripts/p1_experiment_contract.py" \
+    --dataset "$dataset" --model "$P1_SPEC_MODEL_ID" \
+    --input-file "$input_file" --manifest "${P1_MANIFEST:?}" \
+    --num-questions "${P1_NUM_QUESTIONS:?}" --max-images "${P1_MAX_IMAGES:?}"
+fi
 
 if [[ "$P1_SPEC_DIAGNOSTIC_ONLY" == "1" ]]; then
   if [[ "$run_mode" != "smoke" || "$execution_scope" != "diagnostic_smoke" ]]; then

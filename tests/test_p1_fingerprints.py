@@ -184,7 +184,7 @@ class SubmitResumeFingerprintTests(unittest.TestCase):
                 "--model",
                 "qwen35-9b",
                 "--dataset",
-                "mmsi",
+                "mindcube",
                 "--input-dir",
                 str(input_dir),
                 "--runtime-root",

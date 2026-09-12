@@ -112,9 +112,9 @@
     "note": "hardware substitution only; BF16 and algorithmic settings remain fixed"
   },
   "priority_1": [
-    "MindCube 1050 / Qwen3.5-27B",
-    "MindCube 1050 / Qwen2.5-VL-72B-Instruct",
-    "MMSI-Bench 1000 / Qwen3.5-9B",
-    "MMSI-Bench 1000 / Qwen3.8-27B"
+    "MMSI-Bench 1000 / Qwen3.5-27B",
+    "MMSI-Bench 1000 / Qwen2.5-VL-72B-Instruct",
+    "MindCube 1050 / Qwen3.5-9B",
+    "MindCube 1050 / Qwen3.8-27B"
   ]
 }
