@@ -67,6 +67,16 @@
           "array_max_concurrent": 1,
           "combined_experiment_max_concurrent": 2,
           "submitted_at": "2026-09-12T16:15:00+08:00"
+        },
+        {
+          "job_id": "70219",
+          "shards": [
+            3,
+            4
+          ],
+          "array_max_concurrent": 1,
+          "combined_experiment_max_concurrent": 3,
+          "submitted_at": "2026-09-12T16:30:00+08:00"
         }
       ]
     },
@@ -190,8 +200,21 @@
           "job_id": "70200_3",
           "reason": "no-thinking guard detected think tags in scoring response",
           "retry_policy": "Do not retry unchanged or bypass guard; diagnose raw-response/template/parser issue first."
+        },
+        {
+          "shard": 0,
+          "job_id": "70200_0",
+          "reason": "no-thinking guard detected think tags in scoring response",
+          "retry_policy": "Do not retry unchanged or bypass guard; raw-response diagnosis required."
+        },
+        {
+          "shard": 4,
+          "job_id": "70200_4",
+          "reason": "no-thinking guard detected think tags in scoring response",
+          "retry_policy": "Do not retry unchanged or bypass guard; raw-response diagnosis required."
         }
-      ]
+      ],
+      "scheduling_note": "Do not expand MindCube/9B until thinking-tag failures are diagnosed. Leave healthy shards2/5 running. MMSI/27B fills available slots; combined current MMSI cap3 across70201/70214/70219, overall Slurm5."
     },
     {
       "run_id": "mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912",
