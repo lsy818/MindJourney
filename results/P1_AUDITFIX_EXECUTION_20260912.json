@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-13T12:05:00+08:00",
+  "updated_at": "2026-09-13T14:53:00+08:00",
   "authorization": "User approved replacing added fatal output guard with warning/raw-response logging and restarting P1 promptly.",
   "source_commit": "dac49f6db2f0873134b6905ac2244e4284c09948",
   "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa",
@@ -425,7 +425,13 @@
             2
           ],
           "max_concurrent": 3,
-          "status": "0 RUNNING/startup, 1/2 PENDING at12:01"
+          "status": "0/1 RUNNING,2 PENDING at14:49"
+        },
+        {
+          "job_id": "70825",
+          "shards": [3],
+          "max_concurrent": 1,
+          "status": "submitted14:50; same Run ID/source/settings, combined9B array cap4"
         }
       ],
       "note": "Resume using --resume --submit. Preserve original answers/score/RNG and per-question r10 provenance; never resubmit a running/pending shard in either version. Nonfatal audit authorization supersedes previous blocked notes."
@@ -734,7 +740,6 @@
         {
           "job_id": "70438",
           "shards": [
-            6,
             7
           ],
           "original_shards": [
@@ -745,7 +750,7 @@
             7
           ],
           "max_concurrent": 2,
-          "status": "6/7 running;0/2/5 completed and archived"
+          "status": "7 running;0/2/5/6 completed and archived"
         },
         {
           "job_id": "70765",
@@ -771,7 +776,8 @@
         2,
         3,
         4,
-        5
+        5,
+        6
       ],
       "completed_legacy_shards": [
         {
@@ -888,7 +894,7 @@
     "unrelated_job": "55278 (never modify)",
     "focus": "MindCube/Qwen3.8-27B first, then MindCube/Qwen3.5-9B or other ready P1 to fill resources; H20 priority, A10080 nodes11/12/15 only.",
     "combined_current_mindcube38_cap": 5,
-    "rule": "MindCube/3.8 all11 shards now completed or submitted. Six completed;6/7 in70438%2,8/9 in70765%2,10 retry70775%1: combined cap5. At12:01 five running jobs use10 A100;9B70766_0 starting,70766_1/2 pending. As this group drains, fill freed slots with MindCube/9B then MMSI/27B or available H2072B. Account global5 running/10submitted always applies; do not resubmit legacy1/3/4 or import them again.",
+    "rule": "MindCube/3.8 all11 shards completed or submitted:0-6 completed;7 in70438%2,8/9 in70765%2,10 retry70775%1, nominal cap5 with only4 remaining tasks. MindCube/9B70766%3 plus70825%1 combinedcap4;0/1 running,2/3 pending. Next free submission slots:9B4 onward, then MMSI27B or availableH2072B. Global5 running/10submitted applies. Do not reimport/rerun completed0-6 or resubmit any active shard.",
     "replaced_pending_job": "70281_5 cancelled only while PENDING; replaces with70438_5, all old logs retained."
   },
   "continuation": {
