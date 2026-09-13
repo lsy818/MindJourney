@@ -149,13 +149,24 @@
     ]
   },
   "raw_archive": {
-    "status": "in_progress_shared_directory_read_wait",
+    "status": "archived_and_verified",
     "remote_path": "/home/datasets/shiyang/daai_runtime/p1_archives_8192/20260913/mindcube-completed-batch2345.tar.gz",
     "step": "70825_3.1",
     "process": 619245,
     "tool_session": 99220,
     "helper": "/home/datasets/shiyang/daai_runtime/mj-p1-archive-batch2345-20260913.py",
-    "note": "Do not restart or overwrite. Wait for archive process completion, transfer full archive, verify hash and credentials, then update this status. All originals retained."
+    "note": "Shared directory read delay resolved without restarting inference. Archive completed; never recreate or overwrite it. All server originals retained.",
+    "file": "results/raw_logs/mindcube-completed-batch2345-20260913.tar.gz",
+    "sha256": "a3e9699aceb6429c8777fac31fc5ac750916c7830624f2886f96465207ef0fed",
+    "bytes": 5819279,
+    "members": 2350,
+    "gzip_crc": "passed",
+    "credential_scan": "passed",
+    "qa_coverage": "475/475; each of5 shards has all95 original gpt.json responses",
+    "result_complete_checkpoint_match": "passed",
+    "archive_step_state": "COMPLETED",
+    "archive_elapsed": "00:23:04",
+    "verified_at": "2026-09-14T00:10:00+08:00"
   },
   "submission": {
     "job_id": "71002",
