@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-14T01:07:00+08:00",
+  "updated_at": "2026-09-14T02:23:00+08:00",
   "authorization": "User approved replacing added fatal output guard with warning/raw-response logging and restarting P1 promptly.",
   "source_commit": "dac49f6db2f0873134b6905ac2244e4284c09948",
   "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa",
@@ -69,7 +69,7 @@
       "gres": "--gres=gpu:a100:2",
       "export_gpu_memory": null,
       "predecessor_run_id": "mj-p1-8192-mmsi-qwen35-27b-a100-r10-20260912",
-      "state": "checkpoint_prepared_waiting_submission_slots",
+      "state": "submitted",
       "migration": {
         "run_id": "mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912",
         "checked_at": "2026-09-12T14:59:15.484516+00:00",
@@ -154,8 +154,18 @@
           }
         ]
       },
-      "active_arrays": [],
-      "note": "Resume using --resume --submit. Preserve original answers/score/RNG and per-question r10 provenance; never resubmit a running/pending shard in either version. Nonfatal audit authorization supersedes previous blocked notes."
+      "active_arrays": [
+        {
+          "job_id": "71064",
+          "shards": [
+            0
+          ],
+          "max_concurrent": 1,
+          "status": "PENDING Priority"
+        }
+      ],
+      "note": "Resume using --resume --submit. Preserve original answers/score/RNG and per-question r10 provenance; never resubmit a running/pending shard in either version. Nonfatal audit authorization supersedes previous blocked notes.",
+      "latest_submission_record": "results/P1_SUBMIT_71064.txt"
     },
     {
       "run_id": "mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912",
@@ -435,7 +445,7 @@
             9
           ],
           "max_concurrent": 3,
-          "status": "5 RUNNING with actual inference;6-9 PENDING"
+          "status": "5/6/7 RUNNING;8/9 PENDING JobArrayTaskLimit"
         },
         {
           "job_id": "71041",
@@ -507,7 +517,7 @@
       "gres": "--gres=gpu:a100:2",
       "export_gpu_memory": null,
       "predecessor_run_id": "mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912",
-      "state": "submitted",
+      "state": "completed_validated_archived",
       "migration": {
         "checked_at": "2026-09-12T14:57:29.861861+00:00",
         "new_source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa",
@@ -754,16 +764,7 @@
           }
         ]
       },
-      "active_arrays": [
-        {
-          "job_id": "70775",
-          "shards": [
-            10
-          ],
-          "max_concurrent": 1,
-          "status": "RUNNING at23:43"
-        }
-      ],
+      "active_arrays": [],
       "legacy_active_shards": [],
       "note": "Resume using --resume --submit. Preserve original answers/score/RNG and per-question r10 provenance; never resubmit a running/pending shard in either version. Nonfatal audit authorization supersedes previous blocked notes.",
       "completed_shards": [
@@ -776,7 +777,8 @@
         6,
         7,
         8,
-        9
+        9,
+        10
       ],
       "completed_legacy_shards": [
         {
@@ -842,7 +844,13 @@
           }
         ]
       },
-      "completed_validation_record": "P1_AUDITFIX_COMPLETED_20260913_1055.json"
+      "completed_validation_record": "P1_AUDITFIX_COMPLETED_20260913_1055.json",
+      "full_result": {
+        "correct": 578,
+        "total": 1050,
+        "accuracy": 0.5504761904761905,
+        "record": "results/P1_MINDCUBE38_FULL_20260914.json"
+      }
     }
   ],
   "submission": {
@@ -930,13 +938,42 @@
   "pending_archives": [],
   "completed_archive_batch2345": "results/P1_COMPLETED_BATCH_20260913_2345.json",
   "latest_progress": {
-    "checked_at": "2026-09-14T01:06:00+08:00",
-    "mindcube38_shard10": "84/100",
-    "mindcube9b_shard4": "57/95",
-    "mindcube9b_shard5": "actual inference confirmed87.5 tokens/s",
-    "running_jobs": 3,
-    "running_a100": 6,
-    "submitted_jobs": 10
+    "updated_at": "2026-09-14T02:23:00+08:00",
+    "completed_p1_groups": 1,
+    "total_p1_groups": 4,
+    "mindcube_qwen38": {
+      "complete": true,
+      "correct": 578,
+      "total": 1050
+    },
+    "mindcube_qwen35_9b": {
+      "completed_shards": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "running_shards": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "pending_shards": [
+        8,
+        9,
+        10
+      ],
+      "partial_correct": 168,
+      "partial_total": 380
+    },
+    "running_jobs": 4,
+    "running_a100_gpus": 8,
+    "submitted_tasks_including_unrelated": 10,
+    "max_running_jobs": 5,
+    "max_submitted_tasks": 10,
+    "next_action": "Concentrate MindCube9B; use freed slots to advance MMSI without duplicate submissions. Do not resubmit completed MindCube3.8."
   },
-  "completed_archive_9b3": "results/P1_9B_SHARD3_20260914.json"
+  "completed_archive_9b3": "results/P1_9B_SHARD3_20260914.json",
+  "completed_archive_mindcube38_full": "results/P1_MINDCUBE38_FULL_20260914.json"
 }

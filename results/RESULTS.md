@@ -2,24 +2,24 @@
 
 最后更新：2026-09-14（Asia/Shanghai）
 
-本文件维护 4 个数据集 × 4 个模型，共 16 组 **SVC** 实验的全量与分类结果。当前已归档 6 组完整结果，其余 10 组待补充可核验产物；“—”表示暂无可报告结果，不代表 0 分或从未运行。
+本文件维护 4 个数据集 × 4 个模型，共 16 组 **SVC** 实验的全量与分类结果。当前已归档 7 组完整结果，其余 9 组待补充可核验产物；“—”表示暂无可报告结果，不代表 0 分或从未运行。
 
 **本表遵循用户原始清单，用户没有修改优先级。** 此前我将 MindCube/MMSI 的执行组合配反，旧 Run ID 及日志中的“P1”是错误执行清单的遗留命名，不代表用户要求的 P1 已完成。旧结果全部保留，正确四项 P1 已使用独立 Run ID 重启；详见[重启核对记录](./P1_RESTART_AUDIT_20260912.md)。
 
-09-14 01:10最新状态：MindCube/3.8完成10/11片，部分530/950（55.79%），最后片10运行84/100；MindCube/9B完成0–3共4/11片，部分168/380（44.21%），4/5运行、6–9排71002、10已补交71041。3运行/6×A100，10/10提交槽满。新增片3结果、原始来源及完整日志已保存；所有MindCube分片均已完成或提交，下个空余提交槽推进MMSI27B。8192/BF16/65536/no-thinking及评分不变。详见[最新核验](./P1_9B_SHARD3_20260914.json)、[实验日志](./EXPERIMENTS.md)。
+09-14 02:23最新状态：正确P1已有1/4组全量完成：MindCube/Qwen3.8-27B为578/1050（55.05%），全部11片及逐题来源、完整日志已归档。MindCube/9B完成0–3共4/11片，部分168/380（44.21%）；4–7运行，8–10排队。MMSI/27B首片已补交71064_0；MMSI/72B首片70202_0等待3×H20。当前4运行/8×A100、10/10提交槽满。8192/BF16/65536/no-thinking及评分不变。详见[全量核验](./P1_MINDCUBE38_FULL_20260914.json)、[实验日志](./EXPERIMENTS.md)。
 
 ## 全部实验总览
 
 | 数据集 | 模型 | 优先级 | 状态 | 正确 / 总数 | 准确率 | 结果文件 |
 |---|---|---|---|---:|---:|---|
-| MMSI-Bench 1000 | Qwen3.5-27B | P1 | r11续接7题已准备，待提交槽位 | — | — | [续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json) |
+| MMSI-Bench 1000 | Qwen3.5-27B | P1 | r11首片排队 `71064_0` | — | — | [续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json) |
 | MMSI-Bench 1000 | Qwen2.5-VL-72B-Instruct | P1 | 8192重跑排队 `70202_0` | — | — | [提交记录](./mmsi/qwen2.5-vl-72b/svc/mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912/submission_initial.txt) |
 | MMSI-Bench 1000 | Qwen3.5-9B | P3 | 已验证完成 | 288 / 1000 | 28.80% | [JSON](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/results_merged.json) |
 | MMSI-Bench 1000 | Qwen3.8-27B | P3 | 已验证完成 | 208 / 1000 | 20.80% | [JSON](./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_merged.json) |
 | MindCube 1050 | Qwen3.5-27B | P0 | 已验证完成 | 498 / 1050 | 47.43% | [JSON](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/results_merged.json) |
 | MindCube 1050 | Qwen2.5-VL-72B-Instruct | P0 | 已验证完成 | 416 / 1050 | 39.62% | [JSON](./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_merged.json) |
-| MindCube 1050 | Qwen3.5-9B | P1 | 完成0–3；4/5运行，6–10排队71002/71041 | — | — | [续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json) |
-| MindCube 1050 | Qwen3.8-27B | P1 | 已完成0–9；10运行70775 | — | — | [完成片核验](./P1_COMPLETED_SHARD6_20260913.json) |
+| MindCube 1050 | Qwen3.5-9B | P1 | 完成0–3；4–7运行，8–10排队71002/71041 | — | — | [续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json) |
+| MindCube 1050 | Qwen3.8-27B | P1 | 已验证完成（8192） | 578 / 1050 | 55.05% | [JSON](./mindcube/qwen3.8-27b/svc/mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912/results_merged.json) |
 | SAT-Syn 500 | Qwen3.5-27B | P0 | 已验证完成 | 392 / 500 | 78.40% | [JSON](./sat-syn/qwen3.5-27b/svc/mj-svc-qwen35-sat-syn500-20260903T185438Z/results_merged.json) |
 | SAT-Syn 500 | Qwen2.5-VL-72B-Instruct | P0 | 用户反馈已跑，结果待归档 | — | — | — |
 | SAT-Syn 500 | Qwen3.5-9B | P2 | 结果待补充 | — | — | — |
@@ -29,7 +29,7 @@
 | SAT-Real 150 | Qwen3.5-9B | P4 | 结果待补充 | — | — | — |
 | SAT-Real 150 | Qwen3.8-27B | P4 | 结果待补充 | — | — | — |
 
-当前版本：**8192最大输出、no-thinking**。三组Qwen3使用非致命告警修复r11，已保存r10题按明确来源续接；72B保留r10。旧1024全部保留、不混合统计。MindCube/3.8已有10片、9B已有4片严格核验完成，尚无正确P1全量成绩；详见[续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json)及[实验日志](./EXPERIMENTS.md)。
+当前版本：**8192最大输出、no-thinking**。三组Qwen3使用非致命告警修复r11，已保存r10题按明确来源续接；72B保留r10。旧1024全部保留、不混合统计。MindCube/3.8全量11片已完成，9B已有4片严格核验完成；正确P1完成1/4组；详见[续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json)及[实验日志](./EXPERIMENTS.md)。
 
 16:15更新：MindCube/9B片0/2/4/5运行，片1/3因thinking标签检查失败、保留现场未重试；实际已保存产物确认8192。MMSI/27B新增1–2片`70214`排队。当前8×A100、10/10提交槽位，详情见[实时核验](./P1_OUTPUT8192_LIVE_AUDIT_20260912_1615.json)，不把失败片视为完成。
 
@@ -39,7 +39,7 @@
 
 - 所有表格由对应合并结果的 `progress.<类别>.correct/wrong` 题 ID 列表重新计数，并与 `accuracy`、全量题数及无重复 ID 检查交叉核对；总体准确率为总正确数 ÷ 总题数，不是类别准确率的简单平均。
 - 已归档结果均为 SVC，配置记录 `qwen_enable_thinking=false`、上下文上限 `65536`。BF16 等推理配置和模型/数据版本以各 Run 的正式清单及配置为准；本汇总不修改实验设置。
-- MindCube/MMSI 是 **paper-aligned SVC multi-image adaptation**，不是论文原生 benchmark 成绩。保持官方原始图片顺序；SVC 以第 1 张原图生成视图，其余原图作为题目上下文。两类数据的已归档运行均采用固定 r8，正式记录中 `model_dtype=bfloat16`。
+- MindCube/MMSI 是 **paper-aligned SVC multi-image adaptation**，不是论文原生 benchmark 成绩。保持官方原始图片顺序；SVC 以第 1 张原图生成视图，其余原图作为题目上下文。旧结果采用固定 r8；本轮8192结果使用固定 r11，并明确保留r10已保存答案的逐题来源。正式记录中 `model_dtype=bfloat16`；不同输出预算分别归档，不混合统计。
 - SAT-Syn 使用用户提供的 `rand42` 500 题子集。论文未公开对应的确切随机题号，不能声称子集与论文完全相同；其中 1 道最终答案解析失败已计为错误。
 - 原始分片、完成标记、配置及运行记录保留于各结果目录；逐文件哈希见 [SHA256SUMS](./SHA256SUMS)，详细运行历史与服务器路径见 [EXPERIMENTS.md](./EXPERIMENTS.md)。
 
@@ -49,7 +49,7 @@
 
 ### Qwen3.5-27B（P1）
 
-旧r10片0–5曾因额外thinking检查失败；用户已授权非致命告警修复。r11已保留来源续接7道保存答案，待槽位提交剩余题。旧1024不合并。见[续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json)。
+旧r10片0–5曾因额外thinking检查失败；用户已授权非致命告警修复。r11已保留来源续接7道保存答案，首片71064_0已提交排队，其余待提交槽。旧1024不合并。见[续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json)。
 
 ### Qwen2.5-VL-72B-Instruct（P1）
 
@@ -137,11 +137,22 @@ Run ID：`mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908`。
 
 ### Qwen3.5-9B（P1）
 
-旧r10数组70200的0–5曾因额外thinking检查失败；r11已保留来源续接44道保存答案，片0–2已排70766，其余待槽位。旧现场与1024全部保留，1024不合并。见[续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json)。
+旧r10数组70200的0–5曾因额外thinking检查失败；r11已保留来源续接44道保存答案；当前0–3完成、4–7运行、8–10排队，所有分片均已完成或已提交。旧现场与1024全部保留，1024不合并。见[续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json)。
 
 ### Qwen3.8-27B（P1）
 
-09-13 11:05：片0–5完成并核验，共327/570（57.37%，仅已完成部分）。片6/7=`70438_6/7`与8=`70765_8`运行，9/10=`70765_9/10`排队，全组11片已完成或已提交。旧完整1/3/4已带来源导入r11，无GPU重跑；所有原始结果及续接题来源保留，1024不合并。见[完成片记录](./P1_AUDITFIX_COMPLETED_20260913_1055.json)及[续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json)。
+MindCube 1050 全量 1050 题结果如下（8192输出预算）：
+
+| 类别 | 正确 / 总数 | 准确率 |
+|---|---:|---:|
+| `among` | 257 / 600 | 42.83% |
+| `around` | 150 / 250 | 60.00% |
+| `rotation` | 171 / 200 | 85.50% |
+| **总体** | **578 / 1050** | **55.05%** |
+
+Run ID：`mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912`。严格全量核验通过，11片、1050题无重复遗漏、0 skip。358题来自r10已保存答案，692题由r11生成；r11仅将额外thinking检查改为非致命告警，推理参数与评分不变。旧1024结果不参与本次合并。
+
+[合并结果](./mindcube/qwen3.8-27b/svc/mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912/results_merged.json) · [逐题来源](./mindcube/qwen3.8-27b/svc/mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912/question_source_provenance.json) · [全量核验与日志索引](./P1_MINDCUBE38_FULL_20260914.json)
 
 ## SAT-Syn 500
 

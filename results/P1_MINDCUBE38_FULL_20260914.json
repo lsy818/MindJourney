@@ -1,0 +1,97 @@
+{
+  "checked_at": "2026-09-14T02:23:00+08:00",
+  "run_id": "mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912",
+  "status": "full_merge_validated_and_all_shard_logs_archived",
+  "counts": {
+    "correct": 578,
+    "wrong": 472,
+    "total": 1050
+  },
+  "categories": {
+    "among": {
+      "correct": 257,
+      "total": 600
+    },
+    "around": {
+      "correct": 150,
+      "total": 250
+    },
+    "rotation": {
+      "correct": 171,
+      "total": 200
+    }
+  },
+  "settings": {
+    "max_output_tokens": 8192,
+    "no_thinking": true,
+    "dtype": "bfloat16",
+    "context_limit": 65536,
+    "experiment_manifest_sha256": "988da48b21c8cb33145aa45a2defe084287a165e769db9b52b6f8d74ffc2cec1",
+    "official_image_order": "unchanged",
+    "svc_diffusion_steps": 20
+  },
+  "validation": {
+    "frozen_validator": "utils.p1_results.validate_and_merge",
+    "shards": 11,
+    "unique_questions": 1050,
+    "skip": 0,
+    "complete_hashes_match": true,
+    "official_input_sha256": "03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083",
+    "run_group_sha256": "50532a858d5f8d3935c0b83eaae5ae134bc4b28c99de10e4081d694be30ea367"
+  },
+  "source_counts": {
+    "r10": 358,
+    "r11": 692
+  },
+  "merged_result": {
+    "path": "results/mindcube/qwen3.8-27b/svc/mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912/results_merged.json",
+    "sha256": "c1c2f6c7e6e20681495c63054521ebfc96bbfceecccc455985d928f8436bd9e3"
+  },
+  "question_provenance": {
+    "path": "results/mindcube/qwen3.8-27b/svc/mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912/question_source_provenance.json",
+    "sha256": "f672f0e025ab2aeeee23cb36440b1e66083c19ee6e415896199a736322d0864d"
+  },
+  "last_shard": {
+    "index": 10,
+    "job_id": "70775_10",
+    "elapsed": "07:40:11",
+    "correct": 48,
+    "total": 100,
+    "raw_qa_coverage": 100,
+    "archive_crc_and_credential_scan": "passed",
+    "archive_members": 518,
+    "archive_bytes": 964902
+  },
+  "raw_archives": [
+    {
+      "path": "results/raw_logs/mindcube-qwen38-shards0-5-raw-20260913.tar.gz",
+      "sha256": "104781d6b082c604a535f2aacc12d55ed100817a78b20e134e78d01ba60b48d6",
+      "bytes": 7530345
+    },
+    {
+      "path": "results/raw_logs/mindcube-qwen38-shard6-raw-20260913.tar.gz",
+      "sha256": "745298be103fbdd28c21e8a3f616aad161a46ff11875899b64aac8a534493e53",
+      "bytes": 873533
+    },
+    {
+      "path": "results/raw_logs/mindcube-qwen38-shard9-raw-20260913.tar.gz",
+      "sha256": "68f595471ff683fa04fd9db7e83a56d21a30c222df0cbfd3f245a86a54163713",
+      "bytes": 860171
+    },
+    {
+      "path": "results/raw_logs/mindcube-completed-batch2345-20260913.tar.gz",
+      "sha256": "a3e9699aceb6429c8777fac31fc5ac750916c7830624f2886f96465207ef0fed",
+      "bytes": 5819279
+    },
+    {
+      "path": "results/raw_logs/mindcube-qwen38-shard10-raw-20260914.tar.gz",
+      "sha256": "e2f6f4857aae3826c520a2f67ff53b6ab612e273345d1be46be922538acb95b6",
+      "bytes": 964902
+    }
+  ],
+  "notes": [
+    "All server originals retained.",
+    "358 saved r10 answers explicitly attributed; 692 r11 answers. No 1024-output results mixed.",
+    "Paper-aligned SVC multi-image adaptation, not an original paper benchmark row."
+  ]
+}
