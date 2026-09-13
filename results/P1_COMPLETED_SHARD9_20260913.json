@@ -1,0 +1,61 @@
+{
+  "checked_at": "2026-09-13T18:07:00+08:00",
+  "run_id": "mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912",
+  "job": "70765_9",
+  "slurm_state": "COMPLETED",
+  "elapsed": "05:53:38",
+  "validation": {
+    "status": "passed",
+    "dataset": "mindcube",
+    "chunk_index": 9,
+    "expected": 95,
+    "correct": 49,
+    "wrong": 46,
+    "skip_count": 0
+  },
+  "results_sha256": "ec926f1b3b2497311eb37772c741611772db6a3330e106ed9ae5370be39bdd70",
+  "complete_sha256": "b71db127f921d201e7d786241de624db91145920c47b2c024354bd126ab23189",
+  "completed_utc": "2026-09-13T09:39:11Z",
+  "run_group_fingerprint": "50532a858d5f8d3935c0b83eaae5ae134bc4b28c99de10e4081d694be30ea367",
+  "source_and_submitted_source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa",
+  "settings": {
+    "max_tokens": 8192,
+    "context": 65536,
+    "dtype": "bfloat16",
+    "enable_thinking": false,
+    "source_and_group_match_previous_r11": true
+  },
+  "imported_answers": 0,
+  "new_r11_answers": 95,
+  "partial_only": true,
+  "completed_shards": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    9
+  ],
+  "partial_correct": 431,
+  "partial_total": 760,
+  "raw_archive": {
+    "file": "results/raw_logs/mindcube-qwen38-shard9-raw-20260913.tar.gz",
+    "remote_original": "/home/datasets/shiyang/daai_runtime/p1_archives_8192/20260913/mindcube-qwen38-shard9-raw-1805.tar.gz",
+    "sha256": "68f595471ff683fa04fd9db7e83a56d21a30c222df0cbfd3f245a86a54163713",
+    "bytes": 860171,
+    "members": 510,
+    "contents": "Full attempt logs, raw QA/scoring JSON, image-order records, results, COMPLETE; all server originals retained. No imported checkpoint exists for this shard."
+  },
+  "new_submission": {
+    "job": "70926_4",
+    "dataset": "mindcube",
+    "model": "Qwen/Qwen3.5-9B",
+    "array": "4%1",
+    "gpu": "2xA10080",
+    "combined_model_cap": 5,
+    "source_run_id_settings_unchanged": true
+  },
+  "unrelated_job_55278": "untouched"
+}
