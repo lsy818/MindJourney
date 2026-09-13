@@ -1,0 +1,61 @@
+{
+  "checked_at": "2026-09-14T01:07:00+08:00",
+  "run_id": "mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912",
+  "job_id": "70825_3",
+  "slurm_state": "COMPLETED",
+  "elapsed": "06:21:35",
+  "validation": {
+    "status": "passed frozen r11 utils/p1_results.py",
+    "chunk_index": 3,
+    "correct": 35,
+    "wrong": 60,
+    "total": 95,
+    "skip_count": 0
+  },
+  "results_sha256": "4afab62103a464f721ff3b3409399facd3d82c8e63237ef9e41310e8557a0343",
+  "complete_sha256": "85f1814fd8cc2b83248188a072f04c9428b318debd28d963a36c68168fb931d5",
+  "completed_utc": "2026-09-13T16:49:03Z",
+  "run_group_fingerprint": "46728a77b686dce511e899ece805f8d82be4de30e0128ab298afca070e619d48",
+  "source_and_submitted_source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa",
+  "settings_verified": {
+    "max_tokens": 8192,
+    "context": 65536,
+    "dtype": "bfloat16",
+    "enable_thinking": false,
+    "same_group_as_shards0_2": true
+  },
+  "imported_r10_answers": 3,
+  "new_r11_answers": 92,
+  "partial_only": true,
+  "completed_shards": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "partial_correct": 168,
+  "partial_total": 380,
+  "raw_archive": {
+    "status": "archived_and_verified",
+    "remote_path": "/home/datasets/shiyang/daai_runtime/p1_archives_8192/20260913/mindcube-qwen35-9b-shard3-raw-20260914.tar.gz",
+    "step": "70926_4.0",
+    "tool_session": 59603,
+    "note": "Archive completed and verified; original server files retained. Do not recreate or overwrite.",
+    "file": "results/raw_logs/mindcube-qwen35-9b-shard3-raw-20260914.tar.gz",
+    "sha256": "7118dccfe8a7b8c8e29175f06073df61d66e0175167501eb8331c24afd84ce9e",
+    "bytes": 1239824,
+    "members": 421,
+    "qa_coverage": "95/95",
+    "gzip_crc": "passed",
+    "credential_scan": "passed",
+    "result_complete_checkpoint_match": "passed"
+  },
+  "new_submission": {
+    "job_id": "71041_10",
+    "array": "10%1",
+    "gpu": "2xA10080",
+    "settings_and_run_id_unchanged": true,
+    "combined_9b_cap": 5
+  },
+  "next_submission": "MMSI/Qwen3.5-27B shard0 when a slot frees; all MindCube9B shards now completed or submitted."
+}
