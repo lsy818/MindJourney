@@ -1,0 +1,9 @@
+run_id=mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912
+dataset=mindcube
+model=Qwen/Qwen3.8-27B
+revision=1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0
+execution_scope=formal
+chunk_index=4
+results_sha256=ddca59e638fbcb17ad05bbb948bba436cbc6e52a2c6e40cfd3cb6c14826055d4
+completion_kind=validated-import-of-completed-r10-shard
+original_results_sha256=a2999e1d23371063ec0c95d5546dfb1ec545750dc8347701073b89859bbd46bd

@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-13T00:26:00+08:00",
+  "updated_at": "2026-09-13T11:05:00+08:00",
   "authorization": "User approved replacing added fatal output guard with warning/raw-response logging and restarting P1 promptly.",
   "source_commit": "dac49f6db2f0873134b6905ac2244e4284c09948",
   "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa",
@@ -274,7 +274,7 @@
       "gres": "--gres=gpu:a100:2",
       "export_gpu_memory": null,
       "predecessor_run_id": "mj-p1-8192-mindcube-qwen35-9b-a100-r10-20260912",
-      "state": "checkpoint_prepared_waiting_submission_slots",
+      "state": "submitted",
       "migration": {
         "run_id": "mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912",
         "checked_at": "2026-09-12T14:59:16.796591+00:00",
@@ -416,7 +416,18 @@
           }
         ]
       },
-      "active_arrays": [],
+      "active_arrays": [
+        {
+          "job_id": "70766",
+          "shards": [
+            0,
+            1,
+            2
+          ],
+          "max_concurrent": 3,
+          "status": "PENDING at11:04"
+        }
+      ],
       "note": "Resume using --resume --submit. Preserve original answers/score/RNG and per-question r10 provenance; never resubmit a running/pending shard in either version. Nonfatal audit authorization supersedes previous blocked notes."
     },
     {
@@ -723,6 +734,10 @@
         {
           "job_id": "70438",
           "shards": [
+            6,
+            7
+          ],
+          "original_shards": [
             0,
             2,
             5,
@@ -730,10 +745,30 @@
             7
           ],
           "max_concurrent": 2,
-          "status": "At2026-09-13 00:26 shard0 RUNNING on hkbugpusrv11; shards2/5/6/7 PENDING. Shard0 reused node-local environment, completed SVC/scoring requests and entered final QA; still39 imported answers, no newly saved answer yet."
+          "status": "6/7 running;0/2/5 completed and archived"
+        },
+        {
+          "job_id": "70765",
+          "shards": [
+            8,
+            9,
+            10
+          ],
+          "max_concurrent": 3,
+          "status": "8 running;9/10 pending at11:04"
         }
       ],
-      "legacy_active_shards": [
+      "legacy_active_shards": [],
+      "note": "Resume using --resume --submit. Preserve original answers/score/RNG and per-question r10 provenance; never resubmit a running/pending shard in either version. Nonfatal audit authorization supersedes previous blocked notes.",
+      "completed_shards": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "completed_legacy_shards": [
         {
           "shard": 1,
           "job_id": "70263_1"
@@ -747,7 +782,57 @@
           "job_id": "70281_4"
         }
       ],
-      "note": "Resume using --resume --submit. Preserve original answers/score/RNG and per-question r10 provenance; never resubmit a running/pending shard in either version. Nonfatal audit authorization supersedes previous blocked notes."
+      "completed_checkpoint_import": {
+        "new_source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa",
+        "records": [
+          {
+            "status": "passed",
+            "dataset": "mindcube",
+            "chunk_index": 1,
+            "expected": 95,
+            "correct": 48,
+            "wrong": 47,
+            "run_group_fingerprint": "50532a858d5f8d3935c0b83eaae5ae134bc4b28c99de10e4081d694be30ea367",
+            "dataset_json_sha256": "03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083",
+            "results_sha256": "176a2615410d6b895bef6e3c1b2db530c9b13afa4c4c63a8c8a6a1ae6ec55c2e",
+            "results_file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912/results_spatial_beam_search_qc11/question_chunk_1/results.json",
+            "original_results_file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912/results_spatial_beam_search_qc11/question_chunk_1/results.json",
+            "original_results_sha256": "89599e503fc7b42481405a468631d89b25c4998c884ed444be24c31664a59ef7",
+            "imported": 95
+          },
+          {
+            "status": "passed",
+            "dataset": "mindcube",
+            "chunk_index": 3,
+            "expected": 95,
+            "correct": 52,
+            "wrong": 43,
+            "run_group_fingerprint": "50532a858d5f8d3935c0b83eaae5ae134bc4b28c99de10e4081d694be30ea367",
+            "dataset_json_sha256": "03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083",
+            "results_sha256": "72f3756576cd09ce7562426a48e46f78f5ad1e416591c6cfd4c4907ee553abf6",
+            "results_file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912/results_spatial_beam_search_qc11/question_chunk_3/results.json",
+            "original_results_file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912/results_spatial_beam_search_qc11/question_chunk_3/results.json",
+            "original_results_sha256": "6b9a73023b4197b02694133dba07fdab95609feb6a3a6d03a0c1fc7d90bcc8e1",
+            "imported": 95
+          },
+          {
+            "status": "passed",
+            "dataset": "mindcube",
+            "chunk_index": 4,
+            "expected": 95,
+            "correct": 53,
+            "wrong": 42,
+            "run_group_fingerprint": "50532a858d5f8d3935c0b83eaae5ae134bc4b28c99de10e4081d694be30ea367",
+            "dataset_json_sha256": "03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083",
+            "results_sha256": "ddca59e638fbcb17ad05bbb948bba436cbc6e52a2c6e40cfd3cb6c14826055d4",
+            "results_file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912/results_spatial_beam_search_qc11/question_chunk_4/results.json",
+            "original_results_file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r10-20260912/results_spatial_beam_search_qc11/question_chunk_4/results.json",
+            "original_results_sha256": "a2999e1d23371063ec0c95d5546dfb1ec545750dc8347701073b89859bbd46bd",
+            "imported": 95
+          }
+        ]
+      },
+      "completed_validation_record": "P1_AUDITFIX_COMPLETED_20260913_1055.json"
     }
   ],
   "submission": {
@@ -798,7 +883,7 @@
     "unrelated_job": "55278 (never modify)",
     "focus": "MindCube/Qwen3.8-27B first, then MindCube/Qwen3.5-9B or other ready P1 to fill resources; H20 priority, A10080 nodes11/12/15 only.",
     "combined_current_mindcube38_cap": 5,
-    "rule": "Count legacy r10 and r11 arrays together. Three healthy legacy shards plus70438%2 equals5. As legacy shards end, may increase70438 ArrayTaskThrottle to keep this group up to5 without duplicate arrays, within actual quota. Fill freed submission slots with its remaining8/9/10 first, then other ready P1.",
+    "rule": "MindCube/3.8 all11 shards now completed or submitted. Six completed, remaining6/7 in70438%2 and8/9/10 in70765%3: combined cap5. As this group drains, fill freed slots with MindCube/9B then MMSI/27B or available H20 72B. Account global5 running/10submitted always applies; do not resubmit legacy1/3/4 or import them again.",
     "replaced_pending_job": "70281_5 cancelled only while PENDING; replaces with70438_5, all old logs retained."
   },
   "continuation": {
@@ -806,8 +891,30 @@
     "old_repo": "/home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912",
     "new_repo": "/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912",
     "procedure": "Use --old-repo/--new-repo --old-run-root/--new-run-root --chunks comma-list only after corresponding legacy shards are terminal and no pending duplicate exists. Imports only saved IDs, RNG and results; links completed question artifacts without writes; untouched originals + original fingerprints retained. Do not repeat import on an existing target shard.",
-    "completed_legacy": "When a healthy r10 shard completes, first strictly validate/archive it with r10 validator. Then import into r11 with explicit lineage and validate completeness using r11 validator; create new COMPLETE referencing new results hash only after coverage validation, no GPU rerun. Preserve both original and continuation provenance in final merge/archive.",
+    "completed_legacy": "Legacy1/3/4 were completed, strictly verified, imported once into r11 with full lineage, then validated as95/95 each and given new COMPLETE. Do not repeat or rerun them.",
     "failed_legacy": "If a healthy legacy shard later fails, import latest checkpoint only once and schedule its remaining questions in r11; no more r10 Qwen3 retries.",
     "archive": "Preserve resume_original_results.json, resume_lineage, original question artifacts and original r10 COMPLETE. Final merged scores must keep separate provenance manifest listing which IDs came from r10."
-  }
+  },
+  "additional_submissions_20260913": [
+    {
+      "run_id": "mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912",
+      "shards": [
+        8,
+        9,
+        10
+      ],
+      "returncode": 0,
+      "output": "alias=qwen38-27b\nmodel_id=Qwen/Qwen3.8-27B\nrevision=1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0\nthinking=false\naccelerator=a100\ndtype=bfloat16\nmax_model_len=65536\ntensor_parallel_size=1\nsvc_gpus=1\ntotal_gpus=2\ncpus_per_task=8\ngres=gpu:a100:2\nexclude=hkbugpudgx01,hkbugpusrv07,hkbugpusrv08,hkbugpusrv13,hkbugpusrv14\ndefault_concurrency=4\ndiagnostic_only=false\nmode=array\ndataset=mindcube\ninput_file=/home/datasets/shiyang/MindCube_9c941b46/processed/test.json\ninput_sha256=03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\ndataset_provenance=/home/datasets/shiyang/MindCube_9c941b46/processed/test_provenance.json\ndataset_provenance_sha256=55af7c4dd6e125b5323a798ba871d3297c6c89098f5911b6d84561af26effac6\nexperiment_manifest=/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/configs/p1_svc_multiimage.json\nexperiment_manifest_sha256=988da48b21c8cb33145aa45a2defe084287a165e769db9b52b6f8d74ffc2cec1\nmodel_tree_manifest=unavailable\nmodel_tree_sha256=unavailable\npersistent_environment_complete_sha256=4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50\nsource_sha256=72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa\nsource_questions=1050\nrun_questions=1050\nnum_chunks=11\narray=8-10%3\nrun_root=/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912\ncommand=sbatch --parsable --account=daai --partition=short --job-name=mj-p1-mindcube-qwen38-27b-array --array=8-10%3 --gres=gpu:a100:2 --cpus-per-task=8 --mem=160G --time=5-00:00:00 --output=/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912/logs/%x-%A_%a.out --error=/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912/logs/%x-%A_%a.err --export=P1_REPO_DIR=/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912\\,P1_MODEL_KEY=qwen38-27b\\,P1_DATASET=mindcube\\,P1_ACCELERATOR=a100\\,P1_RUN_MODE=array\\,P1_RUN_ID=mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912\\,P1_RUN_ROOT=/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912\\,P1_INPUT_DIR=/home/datasets/shiyang/MindCube_9c941b46/processed\\,P1_SPLIT=test\\,P1_NUM_QUESTIONS=1050\\,P1_NUM_CHUNKS=11\\,P1_MAX_IMAGES=4\\,P1_MODEL_PATH=/home/datasets/chentao/models/Qwen3.8-27B\\,P1_CACHE_ROOT=/home/datasets/shiyang/daai_runtime/model_cache\\,P1_MODEL_VALIDATION_ROOT=/home/datasets/shiyang/mindjourney_storage/model_validation\\,P1_REQUIRE_REVISION_MARKER=1\\,P1_MANIFEST=/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/configs/p1_svc_multiimage.json\\,P1_DATASET_PROVENANCE=/home/datasets/shiyang/MindCube_9c941b46/processed/test_provenance.json\\,P1_EXPECTED_INPUT_SHA256=03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\\,P1_EXPECTED_PROVENANCE_SHA256=55af7c4dd6e125b5323a798ba871d3297c6c89098f5911b6d84561af26effac6\\,P1_EXPECTED_MANIFEST_SHA256=988da48b21c8cb33145aa45a2defe084287a165e769db9b52b6f8d74ffc2cec1\\,P1_EXPECTED_SOURCE_SHA256=72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa\\,P1_SVC_PYTHON=python\\,P1_VLLM_BIN=vllm\\,P1_ALLOW_NETWORK=0\\,P1_VLM_MAX_TOKENS=8192\\,QWEN_MAX_TOKENS=8192\\,P1_JOB_PROLOG=/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/scripts/p1_persistent_env_prolog.sh\\,P1_PERSISTENT_ENV_ROOT=/home/datasets/shiyang/daai_runtime/envs/p1-01ef26c-v1\\,P1_EXPECTED_ENV_COMPLETE_SHA256=4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50 --exclude=hkbugpudgx01\\,hkbugpusrv07\\,hkbugpusrv08\\,hkbugpusrv13\\,hkbugpusrv14 /home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/scripts/p1_array.sbatch \n{\"dataset\": \"mindcube\", \"input_sha256\": \"03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\", \"max_images\": 4, \"model\": \"Qwen/Qwen3.8-27B\", \"questions\": 1050, \"status\": \"passed\"}\n{\"input_file\": \"/home/datasets/shiyang/MindCube_9c941b46/processed/test.json\", \"max_images\": 4, \"order_check\": \"img_paths validated in stored order; no sorting performed\", \"records\": 1050, \"sha256\": \"03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\"}\nSubmitted run_id=mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912 job_id=70765; results remain under /home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912.\n"
+    },
+    {
+      "run_id": "mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912",
+      "shards": [
+        0,
+        1,
+        2
+      ],
+      "returncode": 0,
+      "output": "alias=qwen35-9b\nmodel_id=Qwen/Qwen3.5-9B\nrevision=c202236235762e1c871ad0ccb60c8ee5ba337b9a\nthinking=false\naccelerator=a100\ndtype=bfloat16\nmax_model_len=65536\ntensor_parallel_size=1\nsvc_gpus=1\ntotal_gpus=2\ncpus_per_task=8\ngres=gpu:a100:2\nexclude=hkbugpudgx01,hkbugpusrv07,hkbugpusrv08,hkbugpusrv13,hkbugpusrv14\ndefault_concurrency=4\ndiagnostic_only=false\nmode=array\ndataset=mindcube\ninput_file=/home/datasets/shiyang/MindCube_9c941b46/processed/test.json\ninput_sha256=03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\ndataset_provenance=/home/datasets/shiyang/MindCube_9c941b46/processed/test_provenance.json\ndataset_provenance_sha256=55af7c4dd6e125b5323a798ba871d3297c6c89098f5911b6d84561af26effac6\nexperiment_manifest=/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/configs/p1_svc_multiimage.json\nexperiment_manifest_sha256=988da48b21c8cb33145aa45a2defe084287a165e769db9b52b6f8d74ffc2cec1\nmodel_tree_manifest=unavailable\nmodel_tree_sha256=unavailable\npersistent_environment_complete_sha256=4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50\nsource_sha256=72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa\nsource_questions=1050\nrun_questions=1050\nnum_chunks=11\narray=0-2%3\nrun_root=/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912\ncommand=sbatch --parsable --account=daai --partition=short --job-name=mj-p1-mindcube-qwen35-9b-array --array=0-2%3 --gres=gpu:a100:2 --cpus-per-task=8 --mem=160G --time=5-00:00:00 --output=/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912/logs/%x-%A_%a.out --error=/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912/logs/%x-%A_%a.err --export=P1_REPO_DIR=/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912\\,P1_MODEL_KEY=qwen35-9b\\,P1_DATASET=mindcube\\,P1_ACCELERATOR=a100\\,P1_RUN_MODE=array\\,P1_RUN_ID=mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912\\,P1_RUN_ROOT=/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912\\,P1_INPUT_DIR=/home/datasets/shiyang/MindCube_9c941b46/processed\\,P1_SPLIT=test\\,P1_NUM_QUESTIONS=1050\\,P1_NUM_CHUNKS=11\\,P1_MAX_IMAGES=4\\,P1_MODEL_PATH=/home/datasets/chentao/models/Qwen3.5-9B\\,P1_CACHE_ROOT=/home/datasets/shiyang/daai_runtime/model_cache\\,P1_MODEL_VALIDATION_ROOT=/home/datasets/shiyang/mindjourney_storage/model_validation\\,P1_REQUIRE_REVISION_MARKER=1\\,P1_MANIFEST=/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/configs/p1_svc_multiimage.json\\,P1_DATASET_PROVENANCE=/home/datasets/shiyang/MindCube_9c941b46/processed/test_provenance.json\\,P1_EXPECTED_INPUT_SHA256=03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\\,P1_EXPECTED_PROVENANCE_SHA256=55af7c4dd6e125b5323a798ba871d3297c6c89098f5911b6d84561af26effac6\\,P1_EXPECTED_MANIFEST_SHA256=988da48b21c8cb33145aa45a2defe084287a165e769db9b52b6f8d74ffc2cec1\\,P1_EXPECTED_SOURCE_SHA256=72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa\\,P1_SVC_PYTHON=python\\,P1_VLLM_BIN=vllm\\,P1_ALLOW_NETWORK=0\\,P1_VLM_MAX_TOKENS=8192\\,QWEN_MAX_TOKENS=8192\\,P1_JOB_PROLOG=/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/scripts/p1_persistent_env_prolog.sh\\,P1_PERSISTENT_ENV_ROOT=/home/datasets/shiyang/daai_runtime/envs/p1-01ef26c-v1\\,P1_EXPECTED_ENV_COMPLETE_SHA256=4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50 --exclude=hkbugpudgx01\\,hkbugpusrv07\\,hkbugpusrv08\\,hkbugpusrv13\\,hkbugpusrv14 /home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/scripts/p1_array.sbatch \n{\"dataset\": \"mindcube\", \"input_sha256\": \"03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\", \"max_images\": 4, \"model\": \"Qwen/Qwen3.5-9B\", \"questions\": 1050, \"status\": \"passed\"}\n{\"input_file\": \"/home/datasets/shiyang/MindCube_9c941b46/processed/test.json\", \"max_images\": 4, \"order_check\": \"img_paths validated in stored order; no sorting performed\", \"records\": 1050, \"sha256\": \"03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\"}\nSubmitted run_id=mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912 job_id=70766; results remain under /home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912.\n"
+    }
+  ]
 }

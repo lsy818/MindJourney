@@ -1,0 +1,8 @@
+{
+  "archive_path": "/home/datasets/shiyang/daai_runtime/p1_archives_8192/20260913/mindcube-qwen38-shards0-5-raw-1055.tar.gz",
+  "sha256": "104781d6b082c604a535f2aacc12d55ed100817a78b20e134e78d01ba60b48d6",
+  "size": 7530345,
+  "file_count": 4981,
+  "contents": "Full attempt logs, raw QA/scoring JSON, image-order manifests, results, COMPLETE, and original checkpoint lineage; no weights/videos copied.",
+  "repository_archive": "results/raw_logs/mindcube-qwen38-shards0-5-raw-20260913.tar.gz"
+}
