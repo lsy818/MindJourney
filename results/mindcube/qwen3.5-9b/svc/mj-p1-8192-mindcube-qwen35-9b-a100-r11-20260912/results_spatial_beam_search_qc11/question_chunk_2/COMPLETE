@@ -1,0 +1,9 @@
+run_id=mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912
+dataset=mindcube
+model=Qwen/Qwen3.5-9B
+revision=c202236235762e1c871ad0ccb60c8ee5ba337b9a
+execution_scope=formal
+diagnostic_host=none
+chunk_index=2
+results_sha256=c7595938c76d414eb7e70ff0fd2a80d81b57c8d133e021f4ee459e2128511e26
+completed_utc=2026-09-13T15:33:25Z

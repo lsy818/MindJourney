@@ -1,0 +1,170 @@
+{
+  "checked_at": "2026-09-13T23:52:00+08:00",
+  "records": [
+    {
+      "model": "qwen38-27b",
+      "chunk_index": 7,
+      "correct": 46,
+      "total": 95,
+      "validation": "passed frozen r11 utils/p1_results.py on DAAI",
+      "results_file": "results/mindcube/qwen3.8-27b/svc/mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912/results_spatial_beam_search_qc11/question_chunk_7/results.json",
+      "results_sha256": "982073ace791cf3f814148fb10c56cc336b4906046b45a347eb862e1c870205c",
+      "complete": {
+        "run_id": "mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912",
+        "dataset": "mindcube",
+        "model": "Qwen/Qwen3.8-27B",
+        "revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+        "execution_scope": "formal",
+        "diagnostic_host": "none",
+        "chunk_index": "7",
+        "results_sha256": "982073ace791cf3f814148fb10c56cc336b4906046b45a347eb862e1c870205c",
+        "completed_utc": "2026-09-13T11:31:27Z"
+      },
+      "complete_sha256": "6713aaf6459e8adeba1ecc5e072154faac0108ad8c26472f8484e9e8f9a25e84",
+      "run_group_fingerprint": "50532a858d5f8d3935c0b83eaae5ae134bc4b28c99de10e4081d694be30ea367",
+      "settings_verified": true,
+      "imported_answers": 0
+    },
+    {
+      "model": "qwen38-27b",
+      "chunk_index": 8,
+      "correct": 53,
+      "total": 95,
+      "validation": "passed frozen r11 utils/p1_results.py on DAAI",
+      "results_file": "results/mindcube/qwen3.8-27b/svc/mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912/results_spatial_beam_search_qc11/question_chunk_8/results.json",
+      "results_sha256": "77b38c0465b26a35ba8e28ea1014cb9b24adbedf4759bef629db76e31393f02a",
+      "complete": {
+        "run_id": "mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912",
+        "dataset": "mindcube",
+        "model": "Qwen/Qwen3.8-27B",
+        "revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+        "execution_scope": "formal",
+        "diagnostic_host": "none",
+        "chunk_index": "8",
+        "results_sha256": "77b38c0465b26a35ba8e28ea1014cb9b24adbedf4759bef629db76e31393f02a",
+        "completed_utc": "2026-09-13T10:27:11Z"
+      },
+      "complete_sha256": "f5279b0040c2f5157d6a30c4f2713b3a7b1b826525bf14d47f90c7cfafb9b1e9",
+      "run_group_fingerprint": "50532a858d5f8d3935c0b83eaae5ae134bc4b28c99de10e4081d694be30ea367",
+      "settings_verified": true,
+      "imported_answers": 0
+    },
+    {
+      "model": "qwen35-9b",
+      "chunk_index": 0,
+      "correct": 44,
+      "total": 95,
+      "validation": "passed frozen r11 utils/p1_results.py on DAAI",
+      "results_file": "results/mindcube/qwen3.5-9b/svc/mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912/results_spatial_beam_search_qc11/question_chunk_0/results.json",
+      "results_sha256": "91f42984fdff73fec59170a83f561c5920958dcb064d9dd88640ca37529daa73",
+      "complete": {
+        "run_id": "mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912",
+        "dataset": "mindcube",
+        "model": "Qwen/Qwen3.5-9B",
+        "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+        "execution_scope": "formal",
+        "diagnostic_host": "none",
+        "chunk_index": "0",
+        "results_sha256": "91f42984fdff73fec59170a83f561c5920958dcb064d9dd88640ca37529daa73",
+        "completed_utc": "2026-09-13T10:16:42Z"
+      },
+      "complete_sha256": "f6c9eb13a87406ba74b6846bb637e6cda21bf45df62d9374c76431667ebf6360",
+      "run_group_fingerprint": "46728a77b686dce511e899ece805f8d82be4de30e0128ab298afca070e619d48",
+      "settings_verified": true,
+      "imported_answers": 4
+    },
+    {
+      "model": "qwen35-9b",
+      "chunk_index": 1,
+      "correct": 45,
+      "total": 95,
+      "validation": "passed frozen r11 utils/p1_results.py on DAAI",
+      "results_file": "results/mindcube/qwen3.5-9b/svc/mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912/results_spatial_beam_search_qc11/question_chunk_1/results.json",
+      "results_sha256": "4ad5e6f414b41657baceda3219dde2159dc7679bc1866266d7fff04f63945761",
+      "complete": {
+        "run_id": "mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912",
+        "dataset": "mindcube",
+        "model": "Qwen/Qwen3.5-9B",
+        "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+        "execution_scope": "formal",
+        "diagnostic_host": "none",
+        "chunk_index": "1",
+        "results_sha256": "4ad5e6f414b41657baceda3219dde2159dc7679bc1866266d7fff04f63945761",
+        "completed_utc": "2026-09-13T13:28:03Z"
+      },
+      "complete_sha256": "fa3a2b8d9015a217d857cb27e03f4477f804610c20074ff69ff5b5840c2b019b",
+      "run_group_fingerprint": "46728a77b686dce511e899ece805f8d82be4de30e0128ab298afca070e619d48",
+      "settings_verified": true,
+      "imported_answers": 2
+    },
+    {
+      "model": "qwen35-9b",
+      "chunk_index": 2,
+      "correct": 44,
+      "total": 95,
+      "validation": "passed frozen r11 utils/p1_results.py on DAAI",
+      "results_file": "results/mindcube/qwen3.5-9b/svc/mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912/results_spatial_beam_search_qc11/question_chunk_2/results.json",
+      "results_sha256": "c7595938c76d414eb7e70ff0fd2a80d81b57c8d133e021f4ee459e2128511e26",
+      "complete": {
+        "run_id": "mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912",
+        "dataset": "mindcube",
+        "model": "Qwen/Qwen3.5-9B",
+        "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+        "execution_scope": "formal",
+        "diagnostic_host": "none",
+        "chunk_index": "2",
+        "results_sha256": "c7595938c76d414eb7e70ff0fd2a80d81b57c8d133e021f4ee459e2128511e26",
+        "completed_utc": "2026-09-13T15:33:25Z"
+      },
+      "complete_sha256": "1df5c81769481f6af527b3ae57a53f981b1ee2ebb98214fd509f96aa88d95ed9",
+      "run_group_fingerprint": "46728a77b686dce511e899ece805f8d82be4de30e0128ab298afca070e619d48",
+      "settings_verified": true,
+      "imported_answers": 17
+    }
+  ],
+  "partial_only": true,
+  "mindcube38": {
+    "correct": 530,
+    "total": 950,
+    "completed_shards": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  },
+  "mindcube9b": {
+    "correct": 133,
+    "total": 285,
+    "completed_shards": [
+      0,
+      1,
+      2
+    ]
+  },
+  "raw_archive": {
+    "status": "in_progress_shared_directory_read_wait",
+    "remote_path": "/home/datasets/shiyang/daai_runtime/p1_archives_8192/20260913/mindcube-completed-batch2345.tar.gz",
+    "step": "70825_3.1",
+    "process": 619245,
+    "tool_session": 99220,
+    "helper": "/home/datasets/shiyang/daai_runtime/mj-p1-archive-batch2345-20260913.py",
+    "note": "Do not restart or overwrite. Wait for archive process completion, transfer full archive, verify hash and credentials, then update this status. All originals retained."
+  },
+  "submission": {
+    "job_id": "71002",
+    "array": "5-9%3",
+    "model": "qwen35-9b",
+    "dataset": "mindcube",
+    "gpu_per_shard": "2xA10080",
+    "run_id": "mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912",
+    "combined_active_model_cap": 5,
+    "source_and_settings_unchanged": true
+  }
+}
