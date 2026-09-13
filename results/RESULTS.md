@@ -6,7 +6,7 @@
 
 **本表遵循用户原始清单，用户没有修改优先级。** 此前我将 MindCube/MMSI 的执行组合配反，旧 Run ID 及日志中的“P1”是错误执行清单的遗留命名，不代表用户要求的 P1 已完成。旧结果全部保留，正确四项 P1 已使用独立 Run ID 重启；详见[重启核对记录](./P1_RESTART_AUDIT_20260912.md)。
 
-09-13 11:05最新状态：MindCube/3.8片0–5已核验完成，部分成绩327/570（57.37%，非全量）。片6/7/8运行，9/10已排70765；MindCube/9B片0–2已排70766，72B片0继续等H20。3运行/6×A100，10/10提交槽已满。原始结果与续接来源已保存，8192/BF16/65536/no-thinking及评分不变。详见[完成片核验](./P1_AUDITFIX_COMPLETED_20260913_1055.json)、[续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json)及[实验日志](./EXPERIMENTS.md)。
+09-13 12:05最新状态：MindCube/3.8片0–5已核验完成，部分成绩327/570（57.37%，非全量）。片6/7/8/9运行；片10启动时端口冲突退出，已重排70775_10。MindCube/9B片0已启动、1/2排队70766，72B片0继续排队。5/5运行、10×A100，重提后10/10提交槽已满。原始结果与续接来源已保存，8192/BF16/65536/no-thinking及评分不变。详见[完成片核验](./P1_AUDITFIX_COMPLETED_20260913_1055.json)、[续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json)及[实验日志](./EXPERIMENTS.md)。
 
 ## 全部实验总览
 
@@ -18,8 +18,8 @@
 | MMSI-Bench 1000 | Qwen3.8-27B | P3 | 已验证完成 | 208 / 1000 | 20.80% | [JSON](./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_merged.json) |
 | MindCube 1050 | Qwen3.5-27B | P0 | 已验证完成 | 498 / 1050 | 47.43% | [JSON](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/results_merged.json) |
 | MindCube 1050 | Qwen2.5-VL-72B-Instruct | P0 | 已验证完成 | 416 / 1050 | 39.62% | [JSON](./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/results_merged.json) |
-| MindCube 1050 | Qwen3.5-9B | P1 | r11片0–2已排70766；保留44题检查点 | — | — | [续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json) |
-| MindCube 1050 | Qwen3.8-27B | P1 | 已完成0–5；6/7/8运行，9/10排队 | — | — | [完成片核验](./P1_AUDITFIX_COMPLETED_20260913_1055.json) |
+| MindCube 1050 | Qwen3.5-9B | P1 | r11片0启动、1/2排队70766；保留44题检查点 | — | — | [续跑清单](./P1_AUDITFIX_EXECUTION_20260912.json) |
+| MindCube 1050 | Qwen3.8-27B | P1 | 已完成0–5；6/7/8/9运行，10重排70775 | — | — | [完成片核验](./P1_AUDITFIX_COMPLETED_20260913_1055.json) |
 | SAT-Syn 500 | Qwen3.5-27B | P0 | 已验证完成 | 392 / 500 | 78.40% | [JSON](./sat-syn/qwen3.5-27b/svc/mj-svc-qwen35-sat-syn500-20260903T185438Z/results_merged.json) |
 | SAT-Syn 500 | Qwen2.5-VL-72B-Instruct | P0 | 用户反馈已跑，结果待归档 | — | — | — |
 | SAT-Syn 500 | Qwen3.5-9B | P2 | 结果待补充 | — | — | — |

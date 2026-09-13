@@ -1,0 +1,29 @@
+{
+  "observed_at": "2026-09-13T12:04:00+08:00",
+  "run_id": "mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912",
+  "failed_job": "70765_10",
+  "sacct": {"state": "FAILED", "exit_code": "1:0", "elapsed": "00:00:02", "node": "hkbugpusrv12"},
+  "stderr": "Reusing local dependencies: /dev/shm/mj-p1-1194/env-4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50\nTCP port 30775 is already in use.\n",
+  "failure_stage": "before model server launch; not an I/O or disk-full failure",
+  "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa",
+  "replacement_job": "70775_10",
+  "replacement_state": "PENDING",
+  "replacement_reason": "QOSMaxJobsPerUserLimit",
+  "submitted_at": "2026-09-13T12:02:26+08:00",
+  "replacement_gpus": "2xA10080",
+  "replacement_array": "10%1",
+  "settings": {"max_output_tokens": 8192, "context": 65536, "dtype": "bfloat16", "enable_thinking": false, "source_and_run_id_unchanged": true},
+  "combined_main_group_cap": {"70438": 2, "70765": 2, "70775": 1, "sum": 5},
+  "queue": {
+    "running": ["70438_6", "70438_7", "70765_8", "70765_9", "70766_0"],
+    "pending_p1": ["70775_10", "70766_1", "70766_2", "70202_0"],
+    "unrelated_pending_untouched": ["55278"],
+    "running_gpu_total": 10,
+    "max_jobs_per_user": 5,
+    "max_submit_jobs_per_user": 10
+  },
+  "mindcube38_saved_progress": {"6": "78/95", "7": "9/95", "8": "7/95", "9": "2/95"},
+  "mindcube9_status": "70766_0 RUNNING; node-local environment reuse confirmed; no new completed answer verified at this snapshot",
+  "healthy_jobs_restarted": false,
+  "all_original_logs_retained": true
+}
