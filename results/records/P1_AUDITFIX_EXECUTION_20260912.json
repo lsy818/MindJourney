@@ -197,7 +197,7 @@
         }
       ],
       "note": "Resume using --resume --submit. Preserve original answers/score/RNG and per-question r10 provenance; never resubmit a running/pending shard in either version. Nonfatal audit authorization supersedes previous blocked notes.",
-      "latest_submission_record": "results/P1_SUBMIT_71187.txt"
+      "latest_submission_record": "results/submissions/P1_SUBMIT_71187.txt"
     },
     {
       "run_id": "mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912",
@@ -874,7 +874,7 @@
         "correct": 578,
         "total": 1050,
         "accuracy": 0.5504761904761905,
-        "record": "results/P1_MINDCUBE38_FULL_20260914.json"
+        "record": "results/records/P1_MINDCUBE38_FULL_20260914.json"
       }
     }
   ],
@@ -961,7 +961,7 @@
     }
   ],
   "pending_archives": [],
-  "completed_archive_batch2345": "results/P1_COMPLETED_BATCH_20260913_2345.json",
+  "completed_archive_batch2345": "results/records/P1_COMPLETED_BATCH_20260913_2345.json",
   "latest_progress": {
     "updated_at": "2026-09-14T10:55:00+08:00",
     "completed_p1_groups": 1,
@@ -998,10 +998,10 @@
     "max_submitted_tasks": 10,
     "next_action": "Concentrate MindCube9B final shards8-10. MMSI27B0-4 submitted; next slot submits5, adjusting combined active-array throttle to no more than5. Never duplicate."
   },
-  "completed_archive_9b3": "results/P1_9B_SHARD3_20260914.json",
-  "completed_archive_mindcube38_full": "results/P1_MINDCUBE38_FULL_20260914.json",
-  "completed_archive_9b4": "results/P1_9B_SHARD4_20260914.json",
-  "completed_archive_9b5": "results/P1_9B_SHARD5_20260914.json",
-  "completed_archive_9b6": "results/P1_9B_SHARD6_20260914.json",
-  "completed_archive_9b7": "results/P1_9B_SHARD7_20260914.json"
+  "completed_archive_9b3": "results/records/P1_9B_SHARD3_20260914.json",
+  "completed_archive_mindcube38_full": "results/records/P1_MINDCUBE38_FULL_20260914.json",
+  "completed_archive_9b4": "results/records/P1_9B_SHARD4_20260914.json",
+  "completed_archive_9b5": "results/records/P1_9B_SHARD5_20260914.json",
+  "completed_archive_9b6": "results/records/P1_9B_SHARD6_20260914.json",
+  "completed_archive_9b7": "results/records/P1_9B_SHARD7_20260914.json"
 }
