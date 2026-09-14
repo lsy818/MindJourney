@@ -1,0 +1,73 @@
+{
+  "checked_at": "2026-09-14T14:55:00+08:00",
+  "run_id": "mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912",
+  "job_id": "71002_8",
+  "slurm_state": "COMPLETED",
+  "elapsed": "07:02:57",
+  "validation": {
+    "status": "passed frozen r11 utils/p1_results.py",
+    "chunk_index": 8,
+    "correct": 44,
+    "wrong": 51,
+    "total": 95,
+    "skip_count": 0
+  },
+  "results_sha256": "f23d54774b4869bb500cef83c9d25e6c2dd61aade5a8c217774c0539b914d30a",
+  "complete_sha256": "308aa4c347e5675b40eb45ffc9509db6712f61b3865e92374e58666b885ea953",
+  "completed_utc": "2026-09-14T05:58:18Z",
+  "run_group_fingerprint": "46728a77b686dce511e899ece805f8d82be4de30e0128ab298afca070e619d48",
+  "source_and_submitted_source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa",
+  "settings_verified": {
+    "max_tokens": 8192,
+    "context": 65536,
+    "dtype": "bfloat16",
+    "enable_thinking": false,
+    "same_group_as_previous_completed_shards": true
+  },
+  "imported_r10_answers": 0,
+  "new_r11_answers": 95,
+  "partial_only": true,
+  "completed_shards": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "partial_correct": 360,
+  "partial_total": 855,
+  "raw_archive": {
+    "status": "archived_and_verified",
+    "remote_path": "/home/datasets/shiyang/daai_runtime/p1_archives_8192/20260913/mindcube-qwen35-9b-shard8-raw-20260914.tar.gz",
+    "allocation_job": "71002",
+    "file": "results/raw_logs/mindcube-qwen35-9b-shard8-raw-20260914.tar.gz",
+    "sha256": "9db4ff760ba4fddc46bf4ed0e477bfe6839ffd40046b9b04fd1fb6ef3a5a1dc4",
+    "bytes": 1164149,
+    "members": 428,
+    "qa_coverage": "95/95",
+    "gzip_crc": "passed",
+    "credential_scan": "passed",
+    "result_complete_checkpoint_match": "results and COMPLETE byte-identical; no imported checkpoint for shard8",
+    "note": "All server originals retained; do not recreate or overwrite."
+  },
+  "scheduling": {
+    "mindcube9b_active_caps": {
+      "71002": 4,
+      "71041": 1
+    },
+    "new_mmsi27b_shards": [
+      4,
+      5
+    ],
+    "new_mmsi27b_array": "71345",
+    "new_array_cap": 1,
+    "mmsi27b_combined_cap": 5,
+    "replaced_pending_job": "71187_4",
+    "replacement_reason": "Consolidate pending shard4 with new shard5 under one shared throttle; maintain cap5 across all active arrays, no duplicate submission. Old shard4 was held and cancelled only while PENDING, no model loaded, all logs/checkpoints retained.",
+    "resource_observation": "Node11 MIXED+DRAIN: Kill task failed (JobId=71040 StepId=batch); node12 6/8 GPUs allocated, pending work still Priority/PLANNED; H20 full. No admin-state changes."
+  }
+}
