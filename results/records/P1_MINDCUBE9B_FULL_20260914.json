@@ -1,0 +1,135 @@
+{
+  "checked_at": "2026-09-14T20:10:00+08:00",
+  "run_id": "mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912",
+  "status": "full_merge_validated_and_all_shard_logs_archived",
+  "counts": {
+    "correct": 453,
+    "wrong": 597,
+    "total": 1050
+  },
+  "categories": {
+    "among": {
+      "correct": 234,
+      "total": 600
+    },
+    "around": {
+      "correct": 122,
+      "total": 250
+    },
+    "rotation": {
+      "correct": 97,
+      "total": 200
+    }
+  },
+  "settings": {
+    "max_output_tokens": 8192,
+    "no_thinking": true,
+    "dtype": "bfloat16",
+    "context_limit": 65536,
+    "experiment_manifest_sha256": "988da48b21c8cb33145aa45a2defe084287a165e769db9b52b6f8d74ffc2cec1",
+    "official_image_order": "unchanged",
+    "svc_diffusion_steps": 20
+  },
+  "validation": {
+    "frozen_validator": "utils.p1_results.validate_and_merge",
+    "shards": 11,
+    "unique_questions": 1050,
+    "skip": 0,
+    "complete_hashes_match": true,
+    "official_input_sha256": "03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083",
+    "run_group_sha256": "46728a77b686dce511e899ece805f8d82be4de30e0128ab298afca070e619d48"
+  },
+  "source_counts": {
+    "r10": 44,
+    "r11": 1006
+  },
+  "merged_result": {
+    "path": "results/mindcube/qwen3.5-9b/svc/mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912/results_merged.json",
+    "sha256": "9488c121deba0adffe84b1f5f211911a924b5b0d1660a377b326ce74ae0648c2"
+  },
+  "question_provenance": {
+    "path": "results/mindcube/qwen3.5-9b/svc/mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912/question_source_provenance.json",
+    "sha256": "721747f3fb46ebb4bfc27055380c90360da9287b3f4f0b64de80d3e4d86fe8e2"
+  },
+  "raw_archives": [
+    {
+      "path": "results/raw_logs/mindcube-completed-batch2345-20260913.tar.gz",
+      "sha256": "a3e9699aceb6429c8777fac31fc5ac750916c7830624f2886f96465207ef0fed",
+      "bytes": 5819279
+    },
+    {
+      "path": "results/raw_logs/mindcube-qwen35-9b-shard3-raw-20260914.tar.gz",
+      "sha256": "7118dccfe8a7b8c8e29175f06073df61d66e0175167501eb8331c24afd84ce9e",
+      "bytes": 1239824
+    },
+    {
+      "path": "results/raw_logs/mindcube-qwen35-9b-shard4-raw-20260914.tar.gz",
+      "sha256": "872bb9b577ac9f100445323fb1eaa85f3f04765e5459bec07d23b89ae996fbf6",
+      "bytes": 1531464
+    },
+    {
+      "path": "results/raw_logs/mindcube-qwen35-9b-shard5-raw-20260914.tar.gz",
+      "sha256": "65e480c44a5305f64d3836d1cf4298b014ae7fefeaa6eca867221059bddffc08",
+      "bytes": 1169644
+    },
+    {
+      "path": "results/raw_logs/mindcube-qwen35-9b-shard6-raw-20260914.tar.gz",
+      "sha256": "578eb4009f319a37d4b6b5dfa701be8400d6d84ef18fd2d97014b104ff3dfd85",
+      "bytes": 1365687
+    },
+    {
+      "path": "results/raw_logs/mindcube-qwen35-9b-shard7-raw-20260914.tar.gz",
+      "sha256": "3568b69e7d94463d7efd408052d16f5875964cdce2f2c9eb427edd58f8013cd5",
+      "bytes": 1353422
+    },
+    {
+      "path": "results/raw_logs/mindcube-qwen35-9b-shard8-raw-20260914.tar.gz",
+      "sha256": "9db4ff760ba4fddc46bf4ed0e477bfe6839ffd40046b9b04fd1fb6ef3a5a1dc4",
+      "bytes": 1164149
+    },
+    {
+      "path": "results/raw_logs/mindcube-qwen35-9b-shards9-10-raw-20260914.tar.gz",
+      "sha256": "750956d44993a318940fd99823675d62f806e6fc793f40291a656a723c620658",
+      "bytes": 2986738
+    }
+  ],
+  "notes": [
+    "All server originals retained.",
+    "44 saved r10 answers explicitly attributed; 1006 r11 answers. No 1024-output results mixed.",
+    "Paper-aligned SVC multi-image adaptation, not an original paper benchmark row.",
+    "Original parser preserved; score parsing error count is an event count, not number of failed questions. Final-answer parse failures remain in original scoring."
+  ],
+  "last_shards": [
+    {
+      "index": 9,
+      "job_id": "71002_9",
+      "elapsed": "09:57:58",
+      "ended_at": "2026-09-14T17:33:53+08:00",
+      "correct": 51,
+      "total": 95,
+      "raw_qa_coverage": 95
+    },
+    {
+      "index": 10,
+      "job_id": "71041_10",
+      "elapsed": "08:20:57",
+      "ended_at": "2026-09-14T18:58:32+08:00",
+      "correct": 42,
+      "total": 100,
+      "raw_qa_coverage": 100
+    }
+  ],
+  "last_archive_validation": {
+    "gzip_crc": "passed",
+    "credential_scan": "passed",
+    "members": 899,
+    "qa_coverage": "195/195",
+    "result_and_complete_bytes": "match",
+    "allocation_job": "71114",
+    "remote_path": "/home/datasets/shiyang/daai_runtime/p1_archives_8192/20260913/mindcube-qwen35-9b-shards9-10-raw-20260914.tar.gz"
+  },
+  "parsing_error_counts": {
+    "scores": 868,
+    "answer": 26
+  }
+}

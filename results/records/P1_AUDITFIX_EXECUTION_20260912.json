@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-14T14:55:00+08:00",
+  "updated_at": "2026-09-14T20:10:00+08:00",
   "authorization": "User approved replacing added fatal output guard with warning/raw-response logging and restarting P1 promptly.",
   "source_commit": "dac49f6db2f0873134b6905ac2244e4284c09948",
   "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa",
@@ -161,7 +161,7 @@
             0
           ],
           "max_concurrent": 1,
-          "status": "PENDING Priority"
+          "status": "RUNNING; saved answers confirmed"
         },
         {
           "job_id": "71095",
@@ -169,7 +169,7 @@
             1
           ],
           "max_concurrent": 1,
-          "status": "PENDING"
+          "status": "RUNNING; saved answers confirmed"
         },
         {
           "job_id": "71114",
@@ -177,7 +177,7 @@
             2
           ],
           "max_concurrent": 1,
-          "status": "PENDING"
+          "status": "RUNNING; saved answers confirmed"
         },
         {
           "job_id": "71151",
@@ -188,17 +188,19 @@
           "status": "PENDING"
         },
         {
-          "job_id": "71345",
+          "job_id": "71510",
           "shards": [
             4,
-            5
+            5,
+            6,
+            7
           ],
           "max_concurrent": 1,
-          "status": "PENDING; shared cap1 plus four existing cap1 arrays =5"
+          "status": "PENDING Priority; aggregate cap across all arrays=5"
         }
       ],
       "note": "Resume using --resume --submit. Preserve original answers/score/RNG and per-question r10 provenance; never resubmit a running/pending shard in either version. Nonfatal audit authorization supersedes previous blocked notes.",
-      "latest_submission_record": "results/submissions/P1_SUBMIT_71345.txt",
+      "latest_submission_record": "results/submissions/P1_SUBMIT_71510.txt",
       "replaced_pending_arrays": [
         {
           "job_id": "71187",
@@ -209,6 +211,17 @@
           "replacement_job_id": "71345",
           "records_retained": "results/submissions/P1_SUBMIT_71187.txt",
           "reason": "merge with shard5 to bound aggregate concurrency"
+        },
+        {
+          "job_id": "71345",
+          "shards": [
+            4,
+            5
+          ],
+          "status": "CANCELLED while PENDING, zero runtime",
+          "replacement_job_id": "71510",
+          "records_retained": "results/submissions/P1_SUBMIT_71345.txt",
+          "reason": "Consolidate pending4-5 with new6-7 under shared cap1, resetting only pending4-5 queue age; no running job touched."
         }
       ]
     },
@@ -329,7 +342,7 @@
       "gres": "--gres=gpu:a100:2",
       "export_gpu_memory": null,
       "predecessor_run_id": "mj-p1-8192-mindcube-qwen35-9b-a100-r10-20260912",
-      "state": "submitted",
+      "state": "completed_validated_archived",
       "migration": {
         "run_id": "mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912",
         "checked_at": "2026-09-12T14:59:16.796591+00:00",
@@ -471,24 +484,7 @@
           }
         ]
       },
-      "active_arrays": [
-        {
-          "job_id": "71002",
-          "shards": [
-            9
-          ],
-          "max_concurrent": 4,
-          "status": "9 RUNNING"
-        },
-        {
-          "job_id": "71041",
-          "shards": [
-            10
-          ],
-          "max_concurrent": 1,
-          "status": "10 RUNNING; local environment reused, SVC/scoring and vLLM HTTP200 confirmed"
-        }
-      ],
+      "active_arrays": [],
       "note": "Resume using --resume --submit. Preserve original answers/score/RNG and per-question r10 provenance; never resubmit a running/pending shard in either version. Nonfatal audit authorization supersedes previous blocked notes.",
       "completed_shards": [
         0,
@@ -499,8 +495,16 @@
         5,
         6,
         7,
-        8
-      ]
+        8,
+        9,
+        10
+      ],
+      "full_result": {
+        "correct": 453,
+        "total": 1050,
+        "accuracy": 0.43142857142857144,
+        "record": "results/records/P1_MINDCUBE9B_FULL_20260914.json"
+      }
     },
     {
       "run_id": "mj-p1-8192-mindcube-qwen38-27b-a100-r11-20260912",
@@ -976,8 +980,8 @@
   "pending_archives": [],
   "completed_archive_batch2345": "results/records/P1_COMPLETED_BATCH_20260913_2345.json",
   "latest_progress": {
-    "updated_at": "2026-09-14T14:55:00+08:00",
-    "completed_p1_groups": 1,
+    "updated_at": "2026-09-14T20:10:00+08:00",
+    "completed_p1_groups": 2,
     "total_p1_groups": 4,
     "mindcube_qwen38": {
       "complete": true,
@@ -985,6 +989,7 @@
       "total": 1050
     },
     "mindcube_qwen35_9b": {
+      "complete": true,
       "completed_shards": [
         0,
         1,
@@ -994,23 +999,22 @@
         5,
         6,
         7,
-        8
-      ],
-      "running_shards": [
+        8,
         9,
         10
       ],
+      "running_shards": [],
       "pending_shards": [],
-      "partial_correct": 360,
-      "partial_total": 855
+      "correct": 453,
+      "total": 1050
     },
-    "running_jobs": 2,
-    "running_a100_gpus": 4,
+    "running_jobs": 3,
+    "running_a100_gpus": 6,
     "submitted_tasks_including_unrelated": 10,
     "max_running_jobs": 5,
     "max_submitted_tasks": 10,
-    "next_action": "Finish MindCube9B9/10. MMSI27B0-5 submitted with aggregate cap5; use next freed slot for remaining6-9 while retaining aggregate cap<=5 and avoiding duplicate shards. Keep all healthy jobs running.",
-    "resource_note": "Node11 MIXED+DRAIN: Kill task failed (JobId=71040 StepId=batch); node12 6/8 GPUs allocated, pending work still Priority/PLANNED; H20 full. No admin-state changes."
+    "next_action": "Concentrate MMSI27B0-7 already submitted; on freed slots add remaining8-9 without duplicate submission and keep all experiment array caps combined<=5. Keep72B70202_0 waiting for3H20 and expand after actual answer success. Archive every completed shard; no healthy restart or environment checks.",
+    "resource_note": "At19:43 compatible A100 nodes11/12/15 and H20node16 each had8/8 GPUs allocated. Three user jobs running, 10/10 submission slots after71510."
   },
   "completed_archive_9b3": "results/records/P1_9B_SHARD3_20260914.json",
   "completed_archive_mindcube38_full": "results/records/P1_MINDCUBE38_FULL_20260914.json",
@@ -1018,5 +1022,6 @@
   "completed_archive_9b5": "results/records/P1_9B_SHARD5_20260914.json",
   "completed_archive_9b6": "results/records/P1_9B_SHARD6_20260914.json",
   "completed_archive_9b7": "results/records/P1_9B_SHARD7_20260914.json",
-  "completed_archive_9b8": "results/records/P1_9B_SHARD8_20260914.json"
+  "completed_archive_9b8": "results/records/P1_9B_SHARD8_20260914.json",
+  "completed_archive_9b_full": "results/records/P1_MINDCUBE9B_FULL_20260914.json"
 }
