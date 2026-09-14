@@ -1,0 +1,66 @@
+{
+  "checked_at": "2026-09-14T10:55:00+08:00",
+  "run_id": "mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912",
+  "job_id": "71002_7",
+  "slurm_state": "COMPLETED",
+  "elapsed": "08:40:23",
+  "validation": {
+    "status": "passed frozen r11 utils/p1_results.py",
+    "chunk_index": 7,
+    "correct": 30,
+    "wrong": 65,
+    "total": 95,
+    "skip_count": 0
+  },
+  "results_sha256": "54d40a0692294b66cae7e597db18e1a6382e572da7c485303c2304e458deb24c",
+  "complete_sha256": "bca6a9ddf272e7e0d3de79f36b4cf1a8a9ebb1d972e34309b4f68d28ccba9ac1",
+  "completed_utc": "2026-09-14T02:37:32Z",
+  "run_group_fingerprint": "46728a77b686dce511e899ece805f8d82be4de30e0128ab298afca070e619d48",
+  "source_and_submitted_source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa",
+  "settings_verified": {
+    "max_tokens": 8192,
+    "context": 65536,
+    "dtype": "bfloat16",
+    "enable_thinking": false,
+    "same_group_as_previous_completed_shards": true
+  },
+  "imported_r10_answers": 0,
+  "new_r11_answers": 95,
+  "partial_only": true,
+  "completed_shards": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "partial_correct": 316,
+  "partial_total": 760,
+  "raw_archive": {
+    "status": "archived_and_verified",
+    "remote_path": "/home/datasets/shiyang/daai_runtime/p1_archives_8192/20260913/mindcube-qwen35-9b-shard7-raw-20260914.tar.gz",
+    "allocation_job": "71113",
+    "file": "results/raw_logs/mindcube-qwen35-9b-shard7-raw-20260914.tar.gz",
+    "sha256": "3568b69e7d94463d7efd408052d16f5875964cdce2f2c9eb427edd58f8013cd5",
+    "bytes": 1353422,
+    "members": 426,
+    "qa_coverage": "95/95",
+    "gzip_crc": "passed",
+    "credential_scan": "passed",
+    "result_complete_checkpoint_match": "results and COMPLETE byte-identical; no imported checkpoint for shard7",
+    "note": "All server originals retained; do not recreate or overwrite."
+  },
+  "scheduling": {
+    "mindcube9b_active_caps": {
+      "71002": 4,
+      "71041": 1
+    },
+    "new_mmsi27b_shard": 4,
+    "new_mmsi27b_job_id": "71187_4",
+    "mmsi27b_combined_cap": 5,
+    "authorization_basis": "Existing successful answers and user-authorized r11 warning-only parallel continuation; unchanged inference settings."
+  }
+}
