@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-14T20:10:00+08:00",
+  "updated_at": "2026-09-15T10:19:00+08:00",
   "authorization": "User approved replacing added fatal output guard with warning/raw-response logging and restarting P1 promptly.",
   "source_commit": "dac49f6db2f0873134b6905ac2244e4284c09948",
   "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa",
@@ -180,12 +180,12 @@
           "status": "RUNNING; saved answers confirmed"
         },
         {
-          "job_id": "71151",
+          "job_id": "71779",
           "shards": [
             3
           ],
           "max_concurrent": 1,
-          "status": "PENDING"
+          "status": "PENDING Priority; restored shard3 after administrator cancellation of71151_3"
         },
         {
           "job_id": "71510",
@@ -200,7 +200,7 @@
         }
       ],
       "note": "Resume using --resume --submit. Preserve original answers/score/RNG and per-question r10 provenance; never resubmit a running/pending shard in either version. Nonfatal audit authorization supersedes previous blocked notes.",
-      "latest_submission_record": "results/submissions/P1_SUBMIT_71510.txt",
+      "latest_submission_record": "results/submissions/P1_SUBMIT_71779.txt",
       "replaced_pending_arrays": [
         {
           "job_id": "71187",
@@ -222,6 +222,22 @@
           "replacement_job_id": "71510",
           "records_retained": "results/submissions/P1_SUBMIT_71345.txt",
           "reason": "Consolidate pending4-5 with new6-7 under shared cap1, resetting only pending4-5 queue age; no running job touched."
+        }
+      ],
+      "cancelled_runtime_attempts": [
+        {
+          "job_id": "71151_3",
+          "shard": 3,
+          "state": "CANCELLED by 0",
+          "node": "hkbugpusrv15",
+          "start": "2026-09-15T09:20:25+08:00",
+          "end": "2026-09-15T09:24:37+08:00",
+          "elapsed": "00:04:12",
+          "reason": "Slurm reports administrator UID0 cancellation; detailed cause unknown. Log only shows dependency reuse and SIGTERM; no model error shown.",
+          "replacement_job_id": "71779_3",
+          "checkpoint_saved_questions": 1,
+          "checkpoint_source": "r10 imported answer preserved; no new shard3 answer",
+          "original_logs_retained": true
         }
       ]
     },
@@ -980,7 +996,7 @@
   "pending_archives": [],
   "completed_archive_batch2345": "results/records/P1_COMPLETED_BATCH_20260913_2345.json",
   "latest_progress": {
-    "updated_at": "2026-09-14T20:10:00+08:00",
+    "updated_at": "2026-09-15T10:19:00+08:00",
     "completed_p1_groups": 2,
     "total_p1_groups": 4,
     "mindcube_qwen38": {
@@ -1014,7 +1030,12 @@
     "max_running_jobs": 5,
     "max_submitted_tasks": 10,
     "next_action": "Concentrate MMSI27B0-7 already submitted; on freed slots add remaining8-9 without duplicate submission and keep all experiment array caps combined<=5. Keep72B70202_0 waiting for3H20 and expand after actual answer success. Archive every completed shard; no healthy restart or environment checks.",
-    "resource_note": "At19:43 compatible A100 nodes11/12/15 and H20node16 each had8/8 GPUs allocated. Three user jobs running, 10/10 submission slots after71510."
+    "resource_note": "2026-09-15 10:19 HKT: 3 running/6 A100,10/10 submitted after restoring administrator-cancelled shard3 as71779_3. Compatible A10011/12/15 and H20node16 GPU8/8 allocated; node15 no longer DRAIN. No healthy task restarted.",
+    "mmsi_qwen35_27b_saved_running": {
+      "0": 31,
+      "1": 37,
+      "2": 25
+    }
   },
   "completed_archive_9b3": "results/records/P1_9B_SHARD3_20260914.json",
   "completed_archive_mindcube38_full": "results/records/P1_MINDCUBE38_FULL_20260914.json",
