@@ -1,19 +1,19 @@
 # MindJourney 全部实验结果汇总
 
-最后更新：2026-09-15（Asia/Shanghai）
+最后更新：2026-09-16（Asia/Shanghai）
 
 本文件维护 4 个数据集 × 4 个模型，共 16 组 **SVC** 实验的全量与分类结果。当前已归档 8 组完整结果，其余 8 组待补充可核验产物；“—”表示暂无可报告结果，不代表 0 分或从未运行。
 
 **本表遵循用户原始清单，用户没有修改优先级。** 此前我将 MindCube/MMSI 的执行组合配反，旧 Run ID 及日志中的“P1”是错误执行清单的遗留命名，不代表用户要求的 P1 已完成。旧结果全部保留，正确四项 P1 已使用独立 Run ID 重启；详见[重启核对记录](./P1_RESTART_AUDIT_20260912.md)。
 
-09-15 11:44最新状态：正确P1已完成2/4组（MindCube/9B 453/1050、MindCube/3.8 578/1050），结果与完整日志已归档。MMSI27B片0/1/2/4实际推理，片3=71779_3、片5–7=71510排队；MMSI72B70202_0已开始实际推理，保存4道答案，[首题成功记录](./records/P1_MMSI72B_FIRST_SUCCESS_20260915.json)。账户5/5运行、8×A100＋3×H20、10/10提交槽；无新增全量成绩。
+09-16 00:40最新状态：正确P1仍2/4组全量完成。MMSI/72B片0已核验归档36/100（分片成绩，非全量），片1=`72432_1`已补交；27B片0/1/2/4运行，3及5–7排队。账户4/5运行、8×A100、10/10提交槽，H20已满；详见[片0核验与完整日志索引](./records/P1_MMSI72B_SHARD0_20260916.json)。
 
 ## 全部实验总览
 
 | 数据集 | 模型 | 优先级 | 状态 | 正确 / 总数 | 准确率 | 结果文件 |
 |---|---|---|---|---:|---:|---|
 | MMSI-Bench 1000 | Qwen3.5-27B | P1 | r11片0/1/2/4运行；3及5–7排队 | — | — | [续跑清单](./records/P1_AUDITFIX_EXECUTION_20260912.json) |
-| MMSI-Bench 1000 | Qwen2.5-VL-72B-Instruct | P1 | 8192运行 `70202_0`，首题成功 | — | — | [提交记录](./mmsi/qwen2.5-vl-72b/svc/mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912/submission_initial.txt) |
+| MMSI-Bench 1000 | Qwen2.5-VL-72B-Instruct | P1 | 8192片0已归档；片1=`72432_1`排队 | — | — | [提交记录](./mmsi/qwen2.5-vl-72b/svc/mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912/submission_initial.txt) |
 | MMSI-Bench 1000 | Qwen3.5-9B | P3 | 已验证完成 | 288 / 1000 | 28.80% | [JSON](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/results_merged.json) |
 | MMSI-Bench 1000 | Qwen3.8-27B | P3 | 已验证完成 | 208 / 1000 | 20.80% | [JSON](./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_merged.json) |
 | MindCube 1050 | Qwen3.5-27B | P0 | 已验证完成 | 498 / 1050 | 47.43% | [JSON](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/results_merged.json) |
@@ -53,7 +53,7 @@
 
 ### Qwen2.5-VL-72B-Instruct（P1）
 
-8192版本首片 `70202_0` 已实际推理，3×H20（TP2+独占SVC1），11:44已保存4道答案；尚无完成片/全量成绩。[首题成功记录](./records/P1_MMSI72B_FIRST_SUCCESS_20260915.json)。
+8192版本分片0 `70202_0` 已核验：**36 / 100（36.00%）**，0skip，耗时5:52:39。这是100题分片结果，尚无1000题全量成绩；不将该比例填入全量总览。结果、COMPLETE及552文件完整原始日志均保留，见[核验与归档索引](./records/P1_MMSI72B_SHARD0_20260916.json)。片1已提交为 `72432_1`，继续3×H20（TP2+独占SVC1）及显式0.93，其他设置不变；片2–9待提交槽。
 
 ### Qwen3.5-9B（P3）
 

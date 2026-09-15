@@ -1,0 +1,18 @@
+Submitted: 2026-09-16T00:38:49+08:00
+Job: 72432_1
+Run ID: mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912
+Purpose: fill the single free submission slot after shard0 completed; shard1 absent in r9/r10/r11 and all active jobs checked before submission.
+Invocation: env P1_CACHE_ROOT=/home/datasets/shiyang/daai_runtime/model_cache P1_MODEL_VALIDATION_ROOT=/home/datasets/shiyang/mindjourney_storage/model_validation P1_GPU_MEMORY_UTILIZATION=0.93 bash /home/comp/24482277/shiyang/MindJourney-p1-output8192-r10-20260912/scripts/p1_submit.sh --mode array --model qwen25vl-72b --dataset mmsi --accelerator h20 --input-dir /home/datasets/shiyang/MMSI_Bench_ec7c92bf/processed_daai --split test --runtime-root /home/datasets/shiyang/daai_runtime/p1_output8192_runs --num-questions 1000 --num-chunks 10 --max-images 10 --array 1 --max-concurrent 1 --run-id mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912 --persistent-env-root /home/datasets/shiyang/daai_runtime/envs/p1-01ef26c-v1 --resume --submit
+
+Observed actual sbatch stdout fields (excerpts, not a replacement launch command):
+--account=daai --partition=short --job-name=mj-p1-mmsi-qwen25vl-72b-array --array=1%1 --gres=gpu:h20:3 --cpus-per-task=16 --mem=240G --time=5-00:00:00
+Explicit --export entries included P1_VLM_MAX_TOKENS=8192,QWEN_MAX_TOKENS=8192,P1_GPU_MEMORY_UTILIZATION=0.93
+P1_EXPECTED_SOURCE_SHA256=27b260c67242f0954373643d2b26ed2861394f0697c9cf7856a6d2dac249ebdf
+P1_EXPECTED_INPUT_SHA256=5de75a94eebb2ad31b44ab0f33d7225c56157165292d8112e287c410f56180c9
+P1_EXPECTED_PROVENANCE_SHA256=fa5f4ee9223cf72fd4dcbc941b8fbd66788b37d854844532bde581cd2aebdf9f
+P1_EXPECTED_MANIFEST_SHA256=988da48b21c8cb33145aa45a2defe084287a165e769db9b52b6f8d74ffc2cec1
+P1_EXPECTED_ENV_COMPLETE_SHA256=4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50
+dtype=bfloat16; max_model_len=65536; tensor_parallel_size=2; svc_gpus=1; total_gpus=3; thinking=unsupported (Qwen2.5-VL receives no unsupported thinking parameter).
+Submitter returned: Submitted run_id=mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912 job_id=72432; results remain under /home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912.
+scontrol confirmed: ArrayTaskId=1 ArrayTaskThrottle=1 JobState=PENDING Reason=Priority Dependency=(null) ReqTRES=cpu=16,mem=240G,node=1,billing=16,gres/gpu=3,gres/gpu:h20=3.
+No healthy jobs were cancelled or restarted. No environment installation/import/version/smoke or weight scan was requested.
