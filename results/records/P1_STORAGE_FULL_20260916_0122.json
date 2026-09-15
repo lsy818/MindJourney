@@ -1,0 +1,98 @@
+{
+  "checked_at": "2026-09-16T01:30:00+08:00",
+  "failures": [
+    {
+      "chunk": 0,
+      "job_id": "71064_0",
+      "saved": 56,
+      "results_path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/results_spatial_beam_search_qc10/question_chunk_0/results.json",
+      "results_sha256": "75470f223ca3be874ca0759c84f5bed49aab62bf2babf7a8fca057e4eeafa3ce",
+      "complete": false,
+      "traceback": "Traceback (most recent call last):\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/pipelines/pipeline_svc_scaling_spatial_beam_search.py\", line 795, in <module>\n    pipeline.run()\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/pipelines/pipeline_svc_scaling_spatial_beam_search.py\", line 293, in run\n    self._dump_llm_interaction(save_dir, step, rank_i, question, response, result, action_list, magnitude)\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/pipelines/pipeline_svc_scaling_spatial_beam_search.py\", line 509, in _dump_llm_interaction\n    with open(os.path.join(step_dir, f\"gpt_{double_search_step}.json\"), \"w\") as f:\nOSError: [Errno 28] No space left on device\n",
+      "pipeline_log": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/attempts/question_chunk_0/71064-20260914T081606Z/pipeline.log",
+      "original_logs_retained": true,
+      "end": "2026-09-16T01:18:13+08:00",
+      "exit_code": "1:0",
+      "checkpoint_copy": "results/mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/failed_attempts/71064_0/results_checkpoint.json"
+    },
+    {
+      "chunk": 1,
+      "job_id": "71095_1",
+      "saved": 64,
+      "results_path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/results_spatial_beam_search_qc10/question_chunk_1/results.json",
+      "results_sha256": "7775a211bf790075e303929251ecf39781bf1f6ba432f20e2cb26bcb9a2322e7",
+      "complete": false,
+      "traceback": "Traceback (most recent call last):\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/pipelines/pipeline_svc_scaling_spatial_beam_search.py\", line 795, in <module>\n    pipeline.run()\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/pipelines/pipeline_svc_scaling_spatial_beam_search.py\", line 293, in run\n    self._dump_llm_interaction(save_dir, step, rank_i, question, response, result, action_list, magnitude)\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/pipelines/pipeline_svc_scaling_spatial_beam_search.py\", line 509, in _dump_llm_interaction\n    with open(os.path.join(step_dir, f\"gpt_{double_search_step}.json\"), \"w\") as f:\nOSError: [Errno 28] No space left on device\n",
+      "pipeline_log": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/attempts/question_chunk_1/71095-20260914T092509Z/pipeline.log",
+      "original_logs_retained": true,
+      "end": "2026-09-16T01:18:03+08:00",
+      "exit_code": "1:0",
+      "checkpoint_copy": "results/mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/failed_attempts/71095_1/results_checkpoint.json"
+    },
+    {
+      "chunk": 2,
+      "saved": 50,
+      "results_sha256": "2529c6d0e70d29ece1ca6b9212d65c81aca0141276c1141997aa9e31dafc1f79",
+      "complete": false,
+      "traceback": "Traceback (most recent call last):\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/pipelines/pipeline_svc_scaling_spatial_beam_search.py\", line 795, in <module>\n    pipeline.run()\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/pipelines/pipeline_svc_scaling_spatial_beam_search.py\", line 293, in run\n    self._dump_llm_interaction(save_dir, step, rank_i, question, response, result, action_list, magnitude)\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/pipelines/pipeline_svc_scaling_spatial_beam_search.py\", line 509, in _dump_llm_interaction\n    with open(os.path.join(step_dir, f\"gpt_{double_search_step}.json\"), \"w\") as f:\nOSError: [Errno 28] No space left on device\n",
+      "pipeline_log": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/attempts/question_chunk_2/71114-20260914T093444Z/pipeline.log",
+      "job_id": "71114_2",
+      "results_path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/results_spatial_beam_search_qc10/question_chunk_2/results.json",
+      "original_logs_retained": true,
+      "end": "2026-09-16T01:22:07+08:00",
+      "exit_code": "1:0",
+      "checkpoint_copy": "results/mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/failed_attempts/71114_2/results_checkpoint.json"
+    }
+  ],
+  "filesystem": "Filesystem             Size  Used Avail Use% Mounted on\ngpufcluster:/datasets  129T  129T     0 100% /home/datasets\n",
+  "inodes": "Filesystem                Inodes      IUsed IFree IUse% Mounted on\ngpufcluster:/datasets 2150481567 2150481567     0  100% /home/datasets\n",
+  "queue": "55278|PENDING|(DependencyNeverSatisfied)\n71510_7|PENDING|(JobHeldUser)\n71510_6|PENDING|(JobHeldUser)\n72432_1|PENDING|(JobHeldUser)\n71510_5|PENDING|(JobHeldUser)\n71779_3|PENDING|(JobHeldUser)\n71510_4|RUNNING|hkbugpusrv11\n",
+  "hold_action": {
+    "checked_at": "2026-09-15T17:22:02.212536+00:00",
+    "reason": "shared /home/datasets reports 100% bytes and inodes, zero available; two confirmed ENOSPC failures",
+    "records": [
+      {
+        "job": "71779_3",
+        "action": "hold pending only",
+        "returncode": 0,
+        "output": ""
+      },
+      {
+        "job": "71510_5",
+        "action": "hold pending only",
+        "returncode": 0,
+        "output": ""
+      },
+      {
+        "job": "71510_6",
+        "action": "hold pending only",
+        "returncode": 0,
+        "output": ""
+      },
+      {
+        "job": "71510_7",
+        "action": "hold pending only",
+        "returncode": 0,
+        "output": ""
+      },
+      {
+        "job": "72432_1",
+        "action": "hold pending only",
+        "returncode": 0,
+        "output": ""
+      }
+    ]
+  },
+  "quota_query": "quota RPC to gpufcluster:/home and gpufcluster:/datasets refused; personal quota unknown",
+  "running_snapshot": {
+    "chunk": 4,
+    "saved": 21,
+    "results_sha256": "a8452fbbdb92a8399f9e52d4f4e70d005081e9f434cd849433345c2e96c18097",
+    "complete": false,
+    "traceback": null,
+    "pipeline_log": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/attempts/question_chunk_4/71801-20260915T023806Z/pipeline.log",
+    "job_id": "71510_4"
+  },
+  "node11_independent_df": "Confirmed on hkbugpusrv11 using existing job71801 single-CPU overlap:129T/129T,Avail0; inodes2150481567 used,IFree0.",
+  "recovery_policy": "Do not resubmit failed shards or release these five held pending tasks while storage is full. Keep healthy loaded/inference tasks untouched. Wait for administrator capacity/inode restoration or explicit alternate-storage direction; then verify scoped real read/write health before release/resume with same Run IDs and settings. A single transient successful probe is insufficient to declare storage recovered."
+}
