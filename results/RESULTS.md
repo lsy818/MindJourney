@@ -6,14 +6,14 @@
 
 **本表遵循用户原始清单，用户没有修改优先级。** 此前我将 MindCube/MMSI 的执行组合配反，旧 Run ID 及日志中的“P1”是错误执行清单的遗留命名，不代表用户要求的 P1 已完成。旧结果全部保留，正确四项 P1 已使用独立 Run ID 重启；详见[重启核对记录](./P1_RESTART_AUDIT_20260912.md)。
 
-09-15 10:19最新状态：正确P1完成2/4组，MindCube/9B为453/1050（43.14%）、MindCube/3.8为578/1050（55.05%），均全量核验且原始日志已归档。MMSI27B片0–2运行，已保存31、37、25题；片3原71151_3被管理员UID0取消（原因未说明），保留检查点补交为71779_3。片3及片4–7=71510排队，跨数组上限5；72B70202_0等3×H20。实际3运行/6×A100、10/10提交槽。见[恢复提交](./submissions/P1_SUBMIT_71779.txt)及[实验日志](./EXPERIMENTS.md)。
+09-15 11:44最新状态：正确P1已完成2/4组（MindCube/9B 453/1050、MindCube/3.8 578/1050），结果与完整日志已归档。MMSI27B片0/1/2/4实际推理，片3=71779_3、片5–7=71510排队；MMSI72B70202_0已开始实际推理，保存4道答案，[首题成功记录](./records/P1_MMSI72B_FIRST_SUCCESS_20260915.json)。账户5/5运行、8×A100＋3×H20、10/10提交槽；无新增全量成绩。
 
 ## 全部实验总览
 
 | 数据集 | 模型 | 优先级 | 状态 | 正确 / 总数 | 准确率 | 结果文件 |
 |---|---|---|---|---:|---:|---|
-| MMSI-Bench 1000 | Qwen3.5-27B | P1 | r11片0–2运行；3及4–7排队71779/71510 | — | — | [续跑清单](./records/P1_AUDITFIX_EXECUTION_20260912.json) |
-| MMSI-Bench 1000 | Qwen2.5-VL-72B-Instruct | P1 | 8192重跑排队 `70202_0` | — | — | [提交记录](./mmsi/qwen2.5-vl-72b/svc/mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912/submission_initial.txt) |
+| MMSI-Bench 1000 | Qwen3.5-27B | P1 | r11片0/1/2/4运行；3及5–7排队 | — | — | [续跑清单](./records/P1_AUDITFIX_EXECUTION_20260912.json) |
+| MMSI-Bench 1000 | Qwen2.5-VL-72B-Instruct | P1 | 8192运行 `70202_0`，首题成功 | — | — | [提交记录](./mmsi/qwen2.5-vl-72b/svc/mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912/submission_initial.txt) |
 | MMSI-Bench 1000 | Qwen3.5-9B | P3 | 已验证完成 | 288 / 1000 | 28.80% | [JSON](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/results_merged.json) |
 | MMSI-Bench 1000 | Qwen3.8-27B | P3 | 已验证完成 | 208 / 1000 | 20.80% | [JSON](./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_merged.json) |
 | MindCube 1050 | Qwen3.5-27B | P0 | 已验证完成 | 498 / 1050 | 47.43% | [JSON](./mindcube/qwen3.5-27b/svc/mj-p1-mindcube-qwen35-27b-a100-fast-r8-20260908/results_merged.json) |
@@ -49,11 +49,11 @@
 
 ### Qwen3.5-27B（P1）
 
-旧r10片0–5曾因额外thinking检查失败；r11非致命告警修复保留来源续接7道答案。当前片0–2运行，片3=71779_3（旧71151_3被管理员取消后恢复）及片4–7=71510（4-7%1）排队，片8–9待提交槽。旧未启动71345_[4–5]经PENDING确认后合并替换，记录全部保留；同组跨数组并发合计≤5。旧1024不合并。见[续跑清单](./records/P1_AUDITFIX_EXECUTION_20260912.json)。
+旧r10片0–5曾因额外thinking检查失败；r11非致命告警修复保留来源续接7道答案。当前片0/1/2/4运行，片3=71779_3（旧71151_3被管理员取消后恢复）及71510片5–7排队，片8–9待提交槽。旧未启动71345_[4–5]经PENDING确认后合并替换，记录全部保留；同组跨数组并发合计≤5。旧1024不合并。见[续跑清单](./records/P1_AUDITFIX_EXECUTION_20260912.json)。
 
 ### Qwen2.5-VL-72B-Instruct（P1）
 
-8192版本已提交，首片 `70202_0` 排队，3×H20。见[执行清单](./records/P1_OUTPUT8192_EXECUTION_20260912.json)。
+8192版本首片 `70202_0` 已实际推理，3×H20（TP2+独占SVC1），11:44已保存4道答案；尚无完成片/全量成绩。[首题成功记录](./records/P1_MMSI72B_FIRST_SUCCESS_20260915.json)。
 
 ### Qwen3.5-9B（P3）
 
