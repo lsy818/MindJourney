@@ -1,0 +1,176 @@
+{
+  "checked_at": "2026-09-16T12:51:00+08:00",
+  "decision": "resume_under_storage_monitoring",
+  "evidence": {
+    "earlier_observation": "2026-09-16 ~01:55 HKT:646G available,10570387 free inodes; shard4 saved22",
+    "current_observation": "12:43 HKT:750G available,12278390 free inodes; shard4 saved40 and recent logs no errors",
+    "later_observation": "12:51 HKT:714G available; storage is still near full, not declared permanently fixed",
+    "probe": {
+      "checked_unix": 1789533863.1181333,
+      "node": "hkbugpusrv11",
+      "records": [
+        {
+          "chunk": 0,
+          "checkpoint_sha256": "75470f223ca3be874ca0759c84f5bed49aab62bf2babf7a8fca057e4eeafa3ce",
+          "saved": 56,
+          "probe_bytes": 1048576,
+          "write_fsync_read_equal": true,
+          "temporary_probe_removed": true,
+          "available_bytes": 801921564672,
+          "available_inodes": 12236352
+        },
+        {
+          "chunk": 1,
+          "checkpoint_sha256": "7775a211bf790075e303929251ecf39781bf1f6ba432f20e2cb26bcb9a2322e7",
+          "saved": 64,
+          "probe_bytes": 1048576,
+          "write_fsync_read_equal": true,
+          "temporary_probe_removed": true,
+          "available_bytes": 800783859712,
+          "available_inodes": 12218984
+        },
+        {
+          "chunk": 2,
+          "checkpoint_sha256": "2529c6d0e70d29ece1ca6b9212d65c81aca0141276c1141997aa9e31dafc1f79",
+          "saved": 50,
+          "probe_bytes": 1048576,
+          "write_fsync_read_equal": true,
+          "temporary_probe_removed": true,
+          "available_bytes": 799644057600,
+          "available_inodes": 12201600
+        },
+        {
+          "chunk": 4,
+          "checkpoint_sha256": "56f77da814dcbdf48fe4288781342b4cc19aff1e096c63123ac361e29b1eafdf",
+          "saved": 40,
+          "probe_bytes": 1048576,
+          "write_fsync_read_equal": true,
+          "temporary_probe_removed": true,
+          "available_bytes": 799057903616,
+          "available_inodes": 12192644
+        }
+      ]
+    }
+  },
+  "released_tasks": {
+    "checked_at": "2026-09-16T04:45:16.135784+00:00",
+    "records": [
+      {
+        "job": "71779_3",
+        "action": "release existing held task",
+        "returncode": 0,
+        "output": ""
+      },
+      {
+        "job": "71510_5",
+        "action": "release existing held task",
+        "returncode": 0,
+        "output": ""
+      },
+      {
+        "job": "71510_6",
+        "action": "release existing held task",
+        "returncode": 0,
+        "output": ""
+      },
+      {
+        "job": "71510_7",
+        "action": "release existing held task",
+        "returncode": 0,
+        "output": ""
+      },
+      {
+        "job": "72432_1",
+        "action": "release existing held task",
+        "returncode": 0,
+        "output": ""
+      }
+    ]
+  },
+  "resubmitted": {
+    "job_id": "72732",
+    "shards": [
+      0,
+      1,
+      2
+    ],
+    "array": "0-2%3",
+    "gpu_per_shard": 2,
+    "accelerator": "A10080",
+    "run_id": "mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912",
+    "submit_args": [
+      "bash",
+      "/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/scripts/p1_submit.sh",
+      "--mode",
+      "array",
+      "--model",
+      "qwen35-27b",
+      "--dataset",
+      "mmsi",
+      "--accelerator",
+      "a100",
+      "--input-dir",
+      "/home/datasets/shiyang/MMSI_Bench_ec7c92bf/processed_daai",
+      "--split",
+      "test",
+      "--runtime-root",
+      "/home/datasets/shiyang/daai_runtime/p1_output8192_runs",
+      "--num-questions",
+      "1000",
+      "--num-chunks",
+      "10",
+      "--max-images",
+      "10",
+      "--array",
+      "0-2",
+      "--max-concurrent",
+      "3",
+      "--run-id",
+      "mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912",
+      "--persistent-env-root",
+      "/home/datasets/shiyang/daai_runtime/envs/p1-01ef26c-v1",
+      "--resume",
+      "--submit"
+    ],
+    "submission_record": "results/submissions/P1_SUBMIT_72732.txt",
+    "checkpoint_saved": [
+      56,
+      64,
+      50
+    ],
+    "complete": false
+  },
+  "quota": {
+    "running_jobs": 1,
+    "submitted_tasks": 10,
+    "max_running": 5,
+    "max_submitted": 10,
+    "unrelated_job_untouched": "55278",
+    "aggregate_mmsi27b_cap": 5,
+    "cap_components": {
+      "71510": 1,
+      "71779": 1,
+      "72732": 3
+    }
+  },
+  "queue": {
+    "running": {
+      "71510_4": "2xA100 node11"
+    },
+    "pending": {
+      "71779_3": "2xA100 Priority",
+      "71510_5": "2xA100 JobArrayTaskLimit",
+      "71510_6": "2xA100 JobArrayTaskLimit",
+      "71510_7": "2xA100 JobArrayTaskLimit",
+      "72432_1": "3xH20 Priority",
+      "72732_0": "2xA100 Priority",
+      "72732_1": "2xA100 Priority",
+      "72732_2": "2xA100 Priority"
+    }
+  },
+  "settings_unchanged": true,
+  "healthy_jobs_restarted": false,
+  "files_deleted": false,
+  "permanent_storage_fix_claimed": false,
+  "next_action": "Monitor real outputs and storage. If ENOSPC/EIO recurs, diagnose and hold only verified pending P1 tasks; never stop healthy running jobs or blindly retry. Archive each completion."
+}

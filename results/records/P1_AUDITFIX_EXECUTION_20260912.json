@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-16T01:30:00+08:00",
+  "updated_at": "2026-09-16T12:51:00+08:00",
   "authorization": "User approved replacing added fatal output guard with warning/raw-response logging and restarting P1 promptly.",
   "source_commit": "dac49f6db2f0873134b6905ac2244e4284c09948",
   "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa",
@@ -69,7 +69,7 @@
       "gres": "--gres=gpu:a100:2",
       "export_gpu_memory": null,
       "predecessor_run_id": "mj-p1-8192-mmsi-qwen35-27b-a100-r10-20260912",
-      "state": "storage_blocked_three_failed_one_running",
+      "state": "shard4_running_other_shards_queued_after_storage_recovery",
       "migration": {
         "run_id": "mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912",
         "checked_at": "2026-09-12T14:59:15.484516+00:00",
@@ -161,7 +161,7 @@
             3
           ],
           "max_concurrent": 1,
-          "status": "PENDING JobHeldUser due shared-storage full"
+          "status": "PENDING Priority; released existing hold after storage recovery"
         },
         {
           "job_id": "71510",
@@ -172,11 +172,22 @@
             7
           ],
           "max_concurrent": 1,
-          "status": "shard4 RUNNING; shards5-7 held pending due storage full"
+          "status": "shard4 RUNNING; shards5-7 released, PENDING JobArrayTaskLimit"
+        },
+        {
+          "job_id": "72732",
+          "shards": [
+            0,
+            1,
+            2
+          ],
+          "max_concurrent": 3,
+          "status": "PENDING Priority; resume preserved56/64/50 checkpoints, aggregate cap1+1+3=5",
+          "submission_record": "results/submissions/P1_SUBMIT_72732.txt"
         }
       ],
       "note": "Resume using --resume --submit. Preserve original answers/score/RNG and per-question r10 provenance; never resubmit a running/pending shard in either version. Nonfatal audit authorization supersedes previous blocked notes.",
-      "latest_submission_record": "results/submissions/P1_SUBMIT_71779.txt",
+      "latest_submission_record": "results/submissions/P1_SUBMIT_72732.txt",
       "replaced_pending_arrays": [
         {
           "job_id": "71187",
@@ -229,7 +240,8 @@
           "original_logs_retained": true,
           "end": "2026-09-16T01:18:13+08:00",
           "exit_code": "1:0",
-          "checkpoint_copy": "results/mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/failed_attempts/71064_0/results_checkpoint.json"
+          "checkpoint_copy": "results/mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/failed_attempts/71064_0/results_checkpoint.json",
+          "replacement_job_id": "72732_0"
         },
         {
           "chunk": 1,
@@ -243,7 +255,8 @@
           "original_logs_retained": true,
           "end": "2026-09-16T01:18:03+08:00",
           "exit_code": "1:0",
-          "checkpoint_copy": "results/mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/failed_attempts/71095_1/results_checkpoint.json"
+          "checkpoint_copy": "results/mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/failed_attempts/71095_1/results_checkpoint.json",
+          "replacement_job_id": "72732_1"
         },
         {
           "chunk": 2,
@@ -257,7 +270,8 @@
           "original_logs_retained": true,
           "end": "2026-09-16T01:22:07+08:00",
           "exit_code": "1:0",
-          "checkpoint_copy": "results/mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/failed_attempts/71114_2/results_checkpoint.json"
+          "checkpoint_copy": "results/mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/failed_attempts/71114_2/results_checkpoint.json",
+          "replacement_job_id": "72732_2"
         }
       ]
     },
@@ -321,12 +335,12 @@
             1
           ],
           "max_concurrent": 1,
-          "status": "PENDING JobHeldUser due shared-storage full; preserve TP2+SVC1/3H20 and explicit0.93",
+          "status": "PENDING Priority; existing72432_1 released, 3H20 TP2+SVC1 explicit0.93 unchanged",
           "submission_record": "results/submissions/P1_SUBMIT_72432.txt"
         }
       ],
       "note": "Original r10 72B has no thinking guard enabled. Actual answer success verified; may expand when slots/resources permit, preserving TP2+SVC1/3H20 and explicit memory utilization0.93. No repeat smoke required.",
-      "state": "shard0_complete_shard1_held_storage",
+      "state": "shard0_complete_shard1_queued",
       "first_actual_answer_success": true,
       "first_success_record": "results/records/P1_MMSI72B_FIRST_SUCCESS_20260915.json",
       "completed_arrays": [
@@ -997,7 +1011,7 @@
     "unrelated_job": "55278 (never modify)",
     "focus": "MMSI only: maximize account quota first, concentrate settings second; MindCube P1 groups are complete.",
     "combined_current_mindcube38_cap": 1,
-    "rule": "Storage blocker takes precedence over filling quota. No submissions/releases while datasets reports zero capacity/inodes. Keep healthy71510_4 untouched. Hold71779_3,71510_5/6/7,72432_1 already applied. After verified storage recovery recheck queue/checkpoints, release held tasks and resume failed27B0/1/2 with unchangedRunIDs/r11, aggregate caps<=5 and global5running/10submitted.",
+    "rule": "Maximize quota then concentrateMMSI.27B71779cap1+71510cap1+72732cap3=5;72B72432cap1;global5running/10submitted includingunrelated55278. Never duplicate completed/active shards. Monitor near-full storage and diagnose/hold only pending P1 on renewed ENOSPC/EIO.",
     "replaced_pending_job": "70281_5 cancelled only while PENDING; replaces with70438_5, all old logs retained."
   },
   "continuation": {
@@ -1034,7 +1048,7 @@
   "pending_archives": [],
   "completed_archive_batch2345": "results/records/P1_COMPLETED_BATCH_20260913_2345.json",
   "latest_progress": {
-    "updated_at": "2026-09-16T01:30:00+08:00",
+    "updated_at": "2026-09-16T12:51:00+08:00",
     "completed_p1_groups": 2,
     "total_p1_groups": 4,
     "mindcube_qwen38": {
@@ -1064,17 +1078,17 @@
     },
     "running_jobs": 1,
     "running_a100_gpus": 2,
-    "submitted_tasks_including_unrelated": 7,
+    "submitted_tasks_including_unrelated": 10,
     "max_running_jobs": 5,
     "max_submitted_tasks": 10,
-    "next_action": "Do not resubmit failed shards or release these five held pending tasks while storage is full. Keep healthy loaded/inference tasks untouched. Wait for administrator capacity/inode restoration or explicit alternate-storage direction; then verify scoped real read/write health before release/resume with same Run IDs and settings. A single transient successful probe is insufficient to declare storage recovered.",
-    "resource_note": "Shared datasets reports129T/129T,Avail0,IFree0 on login andsrv11.3ENOSPCfailures;5pendingP1held.Only27B4 still running at01:30; no healthyjobstopped.QuotaRPCrefused,personalquotaunknown.",
+    "next_action": "Keep existing4 healthy; wait for resources for queued27B0-3/5-7 and72B1. Add unsubmitted27B8-9 or72B2-9 only when slots and aggregate caps allow. Monitor near-full storage; no repeated environment/weight checks. Archive each completed shard immediately.",
+    "resource_note": "12:51HKT storage714Gavailable after earlier750G;4 targeted1MiB/fsync/read tests passed plus live shard4 continued22->40 over10h. All compatibleGPU nodes8/8allocated.1/5running,10/10submitted. No claim of permanent storage repair.",
     "mmsi_qwen35_27b_saved_running": {
-      "4": 21
+      "4": 40
     },
     "running_h20_gpus": 0,
     "mmsi_qwen25vl72b_saved_running": {},
-    "mmsi_qwen35_27b_saved_checked_at": "2026-09-16T01:30:00+08:00",
+    "mmsi_qwen35_27b_saved_checked_at": "2026-09-16T12:51:00+08:00",
     "mmsi_qwen25vl72b_completed": {
       "0": {
         "correct": 36,
@@ -1083,12 +1097,17 @@
       }
     },
     "mmsi_qwen25vl72b_pending": {
-      "1": "72432_1 held JobHeldUser"
+      "1": "72432_1 Priority"
     },
     "mmsi_qwen35_27b_failed_saved": {
       "0": 56,
       "1": 64,
       "2": 50
+    },
+    "mmsi_qwen35_27b_resume_queued": {
+      "0": "72732_0",
+      "1": "72732_1",
+      "2": "72732_2"
     }
   },
   "completed_archive_9b3": "results/records/P1_9B_SHARD3_20260914.json",
@@ -1099,25 +1118,18 @@
   "completed_archive_9b7": "results/records/P1_9B_SHARD7_20260914.json",
   "completed_archive_9b8": "results/records/P1_9B_SHARD8_20260914.json",
   "completed_archive_9b_full": "results/records/P1_MINDCUBE9B_FULL_20260914.json",
-  "maintenance_clone": "/private/tmp/mj-p1-recovery.WXOOkx/repo",
+  "maintenance_clone": "Temporary clones may be purged; refresh a clean clone when available. 20260916 Git transport unavailable: records updated via authenticated GitHub Git objects API, preserving main parent/tree.",
   "completed_archive_mmsi72b_shard0": "results/records/P1_MMSI72B_SHARD0_20260916.json",
   "storage_blocker": {
-    "active": true,
+    "active": false,
     "record": "results/records/P1_STORAGE_FULL_20260916_0122.json",
-    "observed_at": "2026-09-16T01:30:00+08:00",
-    "held_pending_tasks": [
-      "71779_3",
-      "71510_5",
-      "71510_6",
-      "71510_7",
-      "72432_1"
-    ],
-    "failed_shards_to_resume_after_recovery": [
-      0,
-      1,
-      2
-    ],
-    "policy": "Do not resubmit failed shards or release these five held pending tasks while storage is full. Keep healthy loaded/inference tasks untouched. Wait for administrator capacity/inode restoration or explicit alternate-storage direction; then verify scoped real read/write health before release/resume with same Run IDs and settings. A single transient successful probe is insufficient to declare storage recovered.",
-    "administrator_action_required": true
-  }
+    "observed_at": "2026-09-16T12:51:00+08:00",
+    "held_pending_tasks": [],
+    "failed_shards_to_resume_after_recovery": [],
+    "policy": "Read/write and ongoing real outputs recovered. Monitor near-full storage; if ENOSPC/EIO recurs, hold only verified pending tasks, preserve healthy inference and all outputs, diagnose before retry.",
+    "administrator_action_required": false,
+    "recovery_record": "results/records/P1_STORAGE_RECOVERY_20260916_1251.json",
+    "monitoring_required": true
+  },
+  "latest_storage_recovery": "results/records/P1_STORAGE_RECOVERY_20260916_1251.json"
 }
