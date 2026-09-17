@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "dataset": "mmsi",
+  "chunk_index": 4,
+  "expected": 100,
+  "correct": 28,
+  "wrong": 72,
+  "run_group_fingerprint": "09873d1bf1153fd2016af0144524b0d0524c510ddd7dd75d3636b8ddc696e3b8",
+  "dataset_json_sha256": "5de75a94eebb2ad31b44ab0f33d7225c56157165292d8112e287c410f56180c9",
+  "results_sha256": "6a757245272f317766c6fbf835bd964407a29354731037c1f888bfd424466dad",
+  "complete_marker_verified": true,
+  "zero_skips": true,
+  "no_duplicate_or_missing_questions": true,
+  "checked_at": "2026-09-17T21:41:28+08:00"
+}
+
