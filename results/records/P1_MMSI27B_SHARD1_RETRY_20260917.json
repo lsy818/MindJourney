@@ -1,0 +1,162 @@
+{
+  "recorded_at": "2026-09-17T12:04:00+08:00",
+  "run_id": "mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912",
+  "dataset": "MMSI-Bench1000",
+  "model": "Qwen/Qwen3.5-27B",
+  "failure": {
+    "chunk": 1,
+    "job_id": "72732_1",
+    "saved": 64,
+    "results_path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/results_spatial_beam_search_qc10/question_chunk_1/results.json",
+    "results_sha256": "7775a211bf790075e303929251ecf39781bf1f6ba432f20e2cb26bcb9a2322e7",
+    "complete": false,
+    "traceback": "Traceback (most recent call last):\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/pipelines/pipeline_svc_scaling_spatial_beam_search.py\", line 795, in <module>\n    pipeline.run()\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/pipelines/pipeline_svc_scaling_spatial_beam_search.py\", line 293, in run\n    self._dump_llm_interaction(save_dir, step, rank_i, question, response, result, action_list, magnitude)\n  File \"/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/pipelines/pipeline_svc_scaling_spatial_beam_search.py\", line 509, in _dump_llm_interaction\n    with open(os.path.join(step_dir, f\"gpt_{double_search_step}.json\"), \"w\") as f:\nOSError: [Errno 28] No space left on device\n",
+    "pipeline_log": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/attempts/question_chunk_1/73349-20260917T024541Z/pipeline.log",
+    "original_logs_retained": true,
+    "end": "2026-09-17T11:40:49+08:00",
+    "exit_code": "1:0",
+    "checkpoint_copy": "results/mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/failed_attempts/71095_1/results_checkpoint.json",
+    "replacement_job_id": "73395_1",
+    "allocation_job_id": "73349",
+    "start": "2026-09-17T10:45:36+08:00",
+    "elapsed": "00:55:13",
+    "checkpoint_unchanged": true,
+    "record": "results/records/P1_MMSI27B_SHARD1_RETRY_20260917.json"
+  },
+  "diagnosis": {
+    "shared_storage": {
+      "total": "129T",
+      "used": "119T",
+      "available": "10T",
+      "used_percent": 93,
+      "free_inodes_at_diagnosis": 167756740
+    },
+    "same_node_local_storage": {
+      "node": "hkbugpusrv11",
+      "allocation_used_for_probe": "71801",
+      "tmp_available": "89G",
+      "dev_shm_available": "279G",
+      "inodes_available": true
+    },
+    "quota_query": "RPC Connection refused; individual quota not established",
+    "last_question_observed": 139,
+    "traceback_does_not_include_exact_gpt_filename": true,
+    "scoped_probe": {
+      "directories": [
+        "question_chunk_1/139/step_0",
+        "question_chunk_1/139/step_1",
+        "question_chunk_1",
+        "question_chunk_2"
+      ],
+      "method": "Unique temporary ~1KiB file per directory, write/fsync/read comparison; remove only own exact temporary files.",
+      "passed": 4,
+      "failed": 0
+    },
+    "conclusion": "ENOSPC recurred while writing a per-step LLM interaction on shared storage, despite aggregate capacity and subsequent scoped writes succeeding. Backend/per-user/per-target restrictions or transient errors not resolved; do not equate aggregate free space with a proven fix."
+  },
+  "retry": {
+    "job_id": "73395_1",
+    "submitted_at": "2026-09-17T11:47:02+08:00",
+    "returncode": 0,
+    "resume_checkpoint_questions": 64,
+    "checkpoint_sha256": "7775a211bf790075e303929251ecf39781bf1f6ba432f20e2cb26bcb9a2322e7",
+    "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa",
+    "run_id_unchanged": true,
+    "settings_unchanged": true,
+    "actual_submission_record": "results/submissions/P1_SUBMIT_73395.txt",
+    "submit_args": [
+      "bash",
+      "/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/scripts/p1_submit.sh",
+      "--mode",
+      "array",
+      "--model",
+      "qwen35-27b",
+      "--dataset",
+      "mmsi",
+      "--accelerator",
+      "a100",
+      "--input-dir",
+      "/home/datasets/shiyang/MMSI_Bench_ec7c92bf/processed_daai",
+      "--split",
+      "test",
+      "--runtime-root",
+      "/home/datasets/shiyang/daai_runtime/p1_output8192_runs",
+      "--num-questions",
+      "1000",
+      "--num-chunks",
+      "10",
+      "--max-images",
+      "10",
+      "--array",
+      "1",
+      "--max-concurrent",
+      "1",
+      "--run-id",
+      "mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912",
+      "--persistent-env-root",
+      "/home/datasets/shiyang/daai_runtime/envs/p1-01ef26c-v1",
+      "--resume",
+      "--submit"
+    ],
+    "submission_environment": {
+      "P1_CACHE_ROOT": "/home/datasets/shiyang/daai_runtime/model_cache",
+      "P1_MODEL_VALIDATION_ROOT": "/home/datasets/shiyang/mindjourney_storage/model_validation",
+      "P1_VLM_MAX_TOKENS": "8192",
+      "QWEN_MAX_TOKENS": "8192"
+    },
+    "state": "PENDING Priority",
+    "policy": "One bounded retry after fresh failure/duplicate/COMPLETE checks and successful scoped writes. Repeated no-progress failure requires diagnosis, not blind retry."
+  },
+  "throttle_change": {
+    "array": "72732",
+    "before": 3,
+    "after": 2,
+    "running_shards_preserved": [
+      0,
+      2
+    ],
+    "combined_27b_cap": "72732cap2 +71779cap1 +71510cap1 +73395cap1 =5"
+  },
+  "snapshot": {
+    "updated_at": "2026-09-17T12:04:00+08:00",
+    "running_jobs": 4,
+    "running_a100_gpus": 8,
+    "running_h20_gpus": 0,
+    "submitted_tasks_including_unrelated": 10,
+    "max_running_jobs": 5,
+    "max_submitted_tasks": 10,
+    "mmsi_qwen35_27b_saved_running": {
+      "0": 62,
+      "2": 50,
+      "3": 41,
+      "4": 80
+    },
+    "mmsi_qwen35_27b_saved_checked_at": "2026-09-17T12:03:00+08:00",
+    "mmsi_qwen35_27b_failed_saved": {
+      "1": 64
+    },
+    "mmsi_qwen35_27b_resume_queued": {
+      "1": "73395_1"
+    },
+    "mmsi_qwen35_27b_pending": {
+      "1": "73395_1 Priority",
+      "5": "71510_5 JobArrayTaskLimit",
+      "6": "71510_6 JobArrayTaskLimit",
+      "7": "71510_7 JobArrayTaskLimit"
+    },
+    "mmsi_qwen35_27b_running": {
+      "0": "72732_0",
+      "2": "72732_2",
+      "3": "71779_3",
+      "4": "71510_4"
+    },
+    "mmsi_qwen25vl72b_pending": {
+      "1": "72432_1 Priority"
+    },
+    "next_action": "No free submission slots. Keep four healthy running shards; monitor bounded retry73395_1. Submit27B8-9 or72B2-9 only after checking live slots, resource availability and aggregate caps. Archive each complete shard immediately. If shard1 repeats ENOSPC without checkpoint progress, diagnose before further retries; do not blindly resubmit.",
+    "resource_note": "Shared storage129T total119Tused10Tavailable93%. All confirmedcompatible A100nodes11/12/15 andH20node16 have8/8GPUsallocated. 4/5running but10/10submitted including unrelated55278. Failure-specific root cause remains unknown; no claim of permanent storage repair."
+  },
+  "no_healthy_jobs_cancelled_or_restarted": true,
+  "no_environment_or_model_changes": true,
+  "original_results_and_logs_retained": true
+}

@@ -19,8 +19,8 @@ aaf4e81c76221ee5540bb8d3d1663f2f12cdc49b9dde1d7d97cb60489ec79870  ./mmsi/qwen3.5
 840908316df8f3c12481a265cec354bd48a141b129b9b2eeb11e77e043f565ff  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_5/COMPLETE
 3490d8b1e566301e2da06619225aa5055452ebd07d4fda4bf0dc0f70a2d6dcb7  ./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/chunks/question_chunk_5/validation_summary.json
 20416dcd1a687a74e5f60a4857239294d61b1e0c396479384cd424efc26bb66f  ./scheduling/20260909T024911Z-mmsi9b-next-shard.json
-2605a3194473c322c4117727d047d23d7df7faa9206bf225fe5103126c316433  ./EXPERIMENTS.md
-ab3de196f6f6a6da24a3d3c5c1749b4ae8d121dee08478782d02be8d29602406  ./RESULTS.md
+684c7d482b8b2350d9aeb3c025afde397a600c85a9abf977398bbf926cfa5d98  ./EXPERIMENTS.md
+8f16c947a057f35d920512c267d55783e432acfeb825bd21c130d62c9680872e  ./RESULTS.md
 4c211353f1a785811549315eeaf4c766e2b80312abe9536167a48ea0da370fb0  ./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/chunks/question_chunk_8/results.json
 e5dc35d40f01f9210621e19b11a7322e10db73211cad0a3f095864a9dc10a914  ./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/chunks/question_chunk_8/COMPLETE
 01d4853bd937ee6707e8caa0e30e4df763da9951c6c93c667f0cc763af405a2f  ./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/chunks/question_chunk_8/validation_summary.json
@@ -365,3 +365,6 @@ acb7c571175ff2b3f0689170b2734f28233eab0a60ff47a88e9d453083dacf91  results/submis
 3a0b6ceb7ca5a1d570b4d1989b7b8d887d262c546d591de137ed66d37716fe30  results/records/P1_STORAGE_FULL_20260916_0122.json
 f60f67781ab4ea3cff610b50e3b95f04c8729d3a6f9104ddf2b3768071631f5f  results/records/P1_STORAGE_RECOVERY_20260916_1251.json
 5c8fe399d5cb280551e2948b23c4d9030de19ca6504ed8c99d163be9d6e331b6  results/submissions/P1_SUBMIT_72732.txt
+8f5aa8d5b56cb04f6e22d0d7d29edccc8ca3541c74bd180e257dbbf3260a4c22  ./records/P1_AUDITFIX_EXECUTION_20260912.json
+1dc6cf8851a81e34b19ca17967c8d247bcb45a1dd800474f8ac92a64afbfa718  ./records/P1_MMSI27B_SHARD1_RETRY_20260917.json
+817dfe2d99c102840283478951bdc475eec6b55c6845dd8d7cf6ea5cd4d75a37  ./submissions/P1_SUBMIT_73395.txt
