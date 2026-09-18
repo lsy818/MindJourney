@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-18T20:01:10+08:00",
+  "updated_at": "2026-09-18T21:52:49+08:00",
   "authorization": "User approved replacing added fatal output guard with warning/raw-response logging and restarting P1 promptly.",
   "source_commit": "dac49f6db2f0873134b6905ac2244e4284c09948",
   "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa",
@@ -372,15 +372,6 @@
       "export_gpu_memory": "0.93",
       "active_arrays": [
         {
-          "job_id": "73646",
-          "shards": [
-            2
-          ],
-          "max_concurrent": 1,
-          "status": "RUNNING node16;64/100 saved at20:01;3H20 TP2+SVC1 explicit0.93",
-          "submission_record": "results/submissions/P1_SUBMIT_73646.txt"
-        },
-        {
           "job_id": "73879",
           "shards": [
             3,
@@ -389,10 +380,19 @@
           "max_concurrent": 1,
           "status": "PENDING Priority;3H20 TP2+SVC1 explicit0.93 unchanged",
           "submission_record": "results/submissions/P1_SUBMIT_73879.txt"
+        },
+        {
+          "job_id": "73893",
+          "shards": [
+            5
+          ],
+          "max_concurrent": 1,
+          "status": "PENDING Priority;3H20 TP2+SVC1 explicit0.93 unchanged",
+          "submission_record": "results/submissions/P1_SUBMIT_73893.txt"
         }
       ],
       "note": "Original r10 72B has no thinking guard enabled. Actual answer success verified; may expand when slots/resources permit, preserving TP2+SVC1/3H20 and explicit memory utilization0.93. No repeat smoke required.",
-      "state": "shards0_1_complete_archived_shard2_running_shards3_4_queued",
+      "state": "shards0_1_2_complete_validated_shards3_4_5_queued_raw_shard2_upload_pending_approval",
       "first_actual_answer_success": true,
       "first_success_record": "results/records/P1_MMSI72B_FIRST_SUCCESS_20260915.json",
       "completed_arrays": [
@@ -403,13 +403,22 @@
           ],
           "status": "COMPLETED; strict validation and full raw logs archived",
           "record": "results/records/P1_MMSI72B_SHARD0_20260916.json"
+        },
+        {
+          "job_id": "73646",
+          "shards": [
+            2
+          ],
+          "status": "COMPLETED; strict validation and full raw archive local/server; raw GitHub upload pending approval",
+          "record": "results/records/P1_MMSI72B_SHARD2_20260918.json"
         }
       ],
       "completed_shards": [
         0,
-        1
+        1,
+        2
       ],
-      "latest_submission_record": "results/submissions/P1_SUBMIT_73879.txt",
+      "latest_submission_record": "results/submissions/P1_SUBMIT_73893.txt",
       "replaced_pending_arrays": [
         {
           "job_id": "73871",
@@ -1079,7 +1088,7 @@
     "unrelated_job": "55278 (never modify)",
     "focus": "MMSI only: maximize account quota first, concentrate settings second; MindCube P1 groups are complete.",
     "combined_current_mindcube38_cap": 0,
-    "rule": "Maximize quota then concentrate MMSI.27B71779cap1+71510cap1+73768cap1+73846cap1=4;72B73646cap1+73879cap1=2;global5running/10submitted including unrelated55278.73395complete;73871cancelled only while pending for consolidation. Never duplicate completed/active shards.",
+    "rule": "Maximize quota then concentrate MMSI.27B71779cap1+71510cap1+73768cap1+73846cap1=4;72B73879cap1+73893cap1=2;global5running/10submitted including unrelated55278.73646 complete, no active cap. Never duplicate completed/active shards.",
     "replaced_pending_job": "70281_5 cancelled only while PENDING; replaces with70438_5, all old logs retained."
   },
   "continuation": {
@@ -1125,11 +1134,23 @@
       "local_path": "/private/tmp/mj-p1-27bshard1.gngU10/mmsi-qwen35-27b-shard1-raw-2000.tar.gz",
       "intended_repository_path": "results/raw_logs/mmsi-qwen35-27b-shard1-raw-20260918.tar.gz",
       "reason": "Automatic safety review rejected external upload of full raw logs; server and local archive retained. No workaround attempted. Results/validation/submission metadata may be published separately."
+    },
+    {
+      "dataset": "mmsi",
+      "model": "Qwen/Qwen2.5-VL-72B-Instruct",
+      "chunk": 2,
+      "record": "results/records/P1_MMSI72B_SHARD2_20260918.json",
+      "status": "full_raw_archive_validated_remote_and_local_pending_upload_approval",
+      "archive_sha256": "251a59e816cb683964adb23d884d9b0fe806c9d828a952daf58509ca6c0b7331",
+      "remote_path": "/home/datasets/shiyang/daai_runtime/p1_archives_8192/20260918/mmsi-qwen25vl-72b-shard2-raw-2150.tar.gz",
+      "local_path": "/private/tmp/mj-p1-72bshard2.GJM5UX/mmsi-qwen25vl-72b-shard2-raw-2150.tar.gz",
+      "intended_repository_path": "results/raw_logs/mmsi-qwen25vl-72b-shard2-raw-20260918.tar.gz",
+      "reason": "Earlier full-raw-log external upload rejected by safety review; await explicit user approval. This commit only publishes authorized result/validation/submission metadata. No raw upload attempted."
     }
   ],
   "completed_archive_batch2345": "results/records/P1_COMPLETED_BATCH_20260913_2345.json",
   "latest_progress": {
-    "updated_at": "2026-09-18T20:01:10+08:00",
+    "updated_at": "2026-09-18T21:52:49+08:00",
     "completed_p1_groups": 2,
     "total_p1_groups": 4,
     "mindcube_qwen38": {
@@ -1157,22 +1178,20 @@
       "correct": 453,
       "total": 1050
     },
-    "running_jobs": 3,
+    "running_jobs": 2,
     "running_a100_gpus": 4,
     "submitted_tasks_including_unrelated": 10,
     "max_running_jobs": 5,
     "max_submitted_tasks": 10,
-    "next_action": "Monitor27B3/5 and72B2. All27Bshards submitted;72B5-9 remain unsubmitted. Use future free slots only after fresh duplicate/resource/aggregatecap reconciliation. Archive each completion immediately. Shard1 full raw archive is verified on server/local, but external raw-log upload was rejected by safety review; wait for explicit user approval. Do not bypass.",
-    "resource_note": "3/5running,10/10submitted including unrelated55278;4A100+3H20.CompatibleA10011/15,H20node16 each only1GPUfree;node12full. Shared9.6Tfree. No new failure; no healthy job restarted.72Bpending3+4 consolidated undercap1; queueage of3 reset.",
+    "next_action": "Monitor27B3/5 and queuedMMSI tasks.27Ballshards submitted;72B6-9 unsubmitted. Use future free slots with fresh duplicate/resource/aggregatecap checks. Validate and archive each completion; full raw uploads of27B1/72B2 await explicit approval, do not bypass rejection.",
+    "resource_note": "2/5running,10/10submitted including unrelated55278;4A100. CompatibleA10011/15 only1GPUfree each,node12full;H20node16now8/8allocated to other jobs. Shared9.6Tfree. No healthy job restarted or settings/environment changed.",
     "mmsi_qwen35_27b_saved_running": {
-      "3": 85,
-      "5": 22
+      "3": 92,
+      "5": 24
     },
-    "running_h20_gpus": 3,
-    "mmsi_qwen25vl72b_saved_running": {
-      "2": 64
-    },
-    "mmsi_qwen35_27b_saved_checked_at": "2026-09-18T20:01:10+08:00",
+    "running_h20_gpus": 0,
+    "mmsi_qwen25vl72b_saved_running": {},
+    "mmsi_qwen35_27b_saved_checked_at": "2026-09-18T21:50:18+08:00",
     "mmsi_qwen25vl72b_completed": {
       "0": {
         "correct": 36,
@@ -1183,11 +1202,18 @@
         "correct": 31,
         "total": 100,
         "record": "results/records/P1_MMSI72B_SHARD1_20260918.json"
+      },
+      "2": {
+        "correct": 32,
+        "total": 100,
+        "record": "results/records/P1_MMSI72B_SHARD2_20260918.json",
+        "raw_upload_status": "pending_user_approval"
       }
     },
     "mmsi_qwen25vl72b_pending": {
       "3": "73879_3 Priority",
-      "4": "73879_4 Priority"
+      "4": "73879_4 Priority",
+      "5": "73893_5 Priority"
     },
     "mmsi_qwen35_27b_failed_saved": {},
     "mmsi_qwen35_27b_resume_queued": {},
@@ -1224,9 +1250,7 @@
         "record": "results/records/P1_MMSI27B_SHARD4_20260917.json"
       }
     },
-    "mmsi_qwen25vl72b_running": {
-      "2": "73646_2 actual inference;64/100 saved"
-    }
+    "mmsi_qwen25vl72b_running": {}
   },
   "completed_archive_9b3": "results/records/P1_9B_SHARD3_20260914.json",
   "completed_archive_mindcube38_full": "results/records/P1_MINDCUBE38_FULL_20260914.json",
@@ -1265,5 +1289,6 @@
     "reason": "Consolidate pending3 with new4 under one cap1; preserve72B aggregatecap2.",
     "old_receipt": "results/submissions/P1_SUBMIT_73871.txt",
     "queue_age_reset": true
-  }
+  },
+  "completed_archive_mmsi72b_shard2": "results/records/P1_MMSI72B_SHARD2_20260918.json"
 }
