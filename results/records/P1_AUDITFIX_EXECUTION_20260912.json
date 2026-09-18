@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-18T10:56:37+08:00",
+  "updated_at": "2026-09-18T15:13:12+08:00",
   "authorization": "User approved replacing added fatal output guard with warning/raw-response logging and restarting P1 promptly.",
   "source_commit": "dac49f6db2f0873134b6905ac2244e4284c09948",
   "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa",
@@ -69,7 +69,7 @@
       "gres": "--gres=gpu:a100:2",
       "export_gpu_memory": null,
       "predecessor_run_id": "mj-p1-8192-mmsi-qwen35-27b-a100-r10-20260912",
-      "state": "shards0_4_complete_archived_shards1_2_3_5_running_6_7_8_queued",
+      "state": "shards0_2_4_complete_archived_shards1_3_5_running_6_7_8_9_queued",
       "migration": {
         "run_id": "mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912",
         "checked_at": "2026-09-12T14:59:15.484516+00:00",
@@ -174,15 +174,6 @@
           "status": "shard5 RUNNING node12 since08:22:06; actual inference observed; shards6/7 pending"
         },
         {
-          "job_id": "72732",
-          "shards": [
-            2
-          ],
-          "max_concurrent": 1,
-          "status": "shard0 completed and archived; only shard2 RUNNING; throttle reduced2 to1 before adding73768",
-          "submission_record": "results/submissions/P1_SUBMIT_72732.txt"
-        },
-        {
           "job_id": "73395",
           "shards": [
             1
@@ -199,10 +190,19 @@
           "max_concurrent": 1,
           "status": "PENDING Priority;2A100; original r11 RunID and frozen settings",
           "submission_record": "results/submissions/P1_SUBMIT_73768.txt"
+        },
+        {
+          "job_id": "73846",
+          "shards": [
+            9
+          ],
+          "max_concurrent": 1,
+          "status": "PENDING Priority;2A100; original r11 RunID and frozen settings",
+          "submission_record": "results/submissions/P1_SUBMIT_73846.txt"
         }
       ],
       "note": "Resume using --resume --submit. Preserve original answers/score/RNG and per-question r10 provenance; never resubmit a running/pending shard in either version. Nonfatal audit authorization supersedes previous blocked notes.",
-      "latest_submission_record": "results/submissions/P1_SUBMIT_73768.txt",
+      "latest_submission_record": "results/submissions/P1_SUBMIT_73846.txt",
       "replaced_pending_arrays": [
         {
           "job_id": "71187",
@@ -311,6 +311,7 @@
       ],
       "completed_shards": [
         0,
+        2,
         4
       ]
     },
@@ -374,7 +375,7 @@
             1
           ],
           "max_concurrent": 1,
-          "status": "RUNNING node16 since2026-09-18T10:54:13+08:00;3H20 TP2+SVC1; existing local environment reused, model loading; no new answer observed",
+          "status": "RUNNING node16; actual inference confirmed;63/100saved at2026-09-18T15:13:12+08:00;3H20 TP2+SVC1 explicit0.93",
           "submission_record": "results/submissions/P1_SUBMIT_72432.txt"
         },
         {
@@ -383,12 +384,12 @@
             2
           ],
           "max_concurrent": 1,
-          "status": "PENDING QOSMaxJobsPerUserLimit;3H20 TP2+SVC1 explicit0.93 unchanged",
+          "status": "PENDING Priority;3H20 TP2+SVC1 explicit0.93 unchanged",
           "submission_record": "results/submissions/P1_SUBMIT_73646.txt"
         }
       ],
       "note": "Original r10 72B has no thinking guard enabled. Actual answer success verified; may expand when slots/resources permit, preserving TP2+SVC1/3H20 and explicit memory utilization0.93. No repeat smoke required.",
-      "state": "shard0_archived_shard1_running_loading_shard2_queued",
+      "state": "shard0_archived_shard1_running_inference_shard2_queued",
       "first_actual_answer_success": true,
       "first_success_record": "results/records/P1_MMSI72B_FIRST_SUCCESS_20260915.json",
       "completed_arrays": [
@@ -1060,7 +1061,7 @@
     "unrelated_job": "55278 (never modify)",
     "focus": "MMSI only: maximize account quota first, concentrate settings second; MindCube P1 groups are complete.",
     "combined_current_mindcube38_cap": 0,
-    "rule": "Maximize quota then concentrate MMSI. 27B72732cap1+71779cap1+71510cap1+73395cap1+73768cap1=5;72B72432cap1+73646cap1=2; global5running/10submitted including unrelated55278. 72732throttle reduced after shard0 completion before adding27B8. Never duplicate completed/active shards.",
+    "rule": "Maximize quota then concentrate MMSI. 27B71779cap1+71510cap1+73395cap1+73768cap1+73846cap1=5;72B72432cap1+73646cap1=2; global5running/10submitted including unrelated55278. Array72732 fully terminal; replace its released cap with shard9 array73846. Never duplicate completed/active shards.",
     "replaced_pending_job": "70281_5 cancelled only while PENDING; replaces with70438_5, all old logs retained."
   },
   "continuation": {
@@ -1097,7 +1098,7 @@
   "pending_archives": [],
   "completed_archive_batch2345": "results/records/P1_COMPLETED_BATCH_20260913_2345.json",
   "latest_progress": {
-    "updated_at": "2026-09-18T10:56:37+08:00",
+    "updated_at": "2026-09-18T15:13:12+08:00",
     "completed_p1_groups": 2,
     "total_p1_groups": 4,
     "mindcube_qwen38": {
@@ -1125,22 +1126,23 @@
       "correct": 453,
       "total": 1050
     },
-    "running_jobs": 5,
-    "running_a100_gpus": 8,
+    "running_jobs": 4,
+    "running_a100_gpus": 6,
     "submitted_tasks_including_unrelated": 10,
     "max_running_jobs": 5,
     "max_submitted_tasks": 10,
-    "next_action": "Monitor72B1startup plus27B1/2/3/5; account fully allocated, no submission slot. Archive each completed shard, then submit27B9 or72B3-9 after duplicate and cross-array-cap checks. Do not repeat MindCube complete groups or already archived MMSI shards.",
-    "resource_note": "Account5/5running,10/10submitted including unrelated55278;8A100+3H20allocated. Compatible11/12/15/16all8/8allocated. Shared9.6Tfree.72B1model loading,not yet inference; no healthy job restarted.",
+    "next_action": "All27B shards now completed/running/pending. Monitor4healthy running; archive each finished shard. Submit72B3-9 when slots and aggregatecap2 permit after live duplicate checks. No spare submission slots; pending jobs await cluster resources.",
+    "resource_note": "4/5running,10/10submitted including unrelated55278;6A100+3H20allocated. Compatible11/12/15/16all8/8allocated at15:06. Shared9.6Tfree; no new I/O failure. No healthy job restarted; no environment or model changes.",
     "mmsi_qwen35_27b_saved_running": {
-      "1": 84,
-      "2": 92,
-      "3": 75,
-      "5": 4
+      "1": 91,
+      "3": 79,
+      "5": 11
     },
     "running_h20_gpus": 3,
-    "mmsi_qwen25vl72b_saved_running": {},
-    "mmsi_qwen35_27b_saved_checked_at": "2026-09-18T10:55:43+08:00",
+    "mmsi_qwen25vl72b_saved_running": {
+      "1": 63
+    },
+    "mmsi_qwen35_27b_saved_checked_at": "2026-09-18T15:13:12+08:00",
     "mmsi_qwen25vl72b_completed": {
       "0": {
         "correct": 36,
@@ -1149,18 +1151,18 @@
       }
     },
     "mmsi_qwen25vl72b_pending": {
-      "2": "73646_2 QOSMaxJobsPerUserLimit"
+      "2": "73646_2 Priority"
     },
     "mmsi_qwen35_27b_failed_saved": {},
     "mmsi_qwen35_27b_resume_queued": {},
     "mmsi_qwen35_27b_pending": {
       "6": "71510_6 JobArrayTaskLimit",
       "7": "71510_7 JobArrayTaskLimit",
-      "8": "73768_8 QOSMaxJobsPerUserLimit"
+      "8": "73768_8 Priority",
+      "9": "73846_9 Priority"
     },
     "mmsi_qwen35_27b_running": {
       "1": "73395_1",
-      "2": "72732_2",
       "3": "71779_3",
       "5": "71510_5"
     },
@@ -1170,6 +1172,11 @@
         "total": 100,
         "record": "results/records/P1_MMSI27B_SHARD0_20260918.json"
       },
+      "2": {
+        "correct": 38,
+        "total": 100,
+        "record": "results/records/P1_MMSI27B_SHARD2_20260918.json"
+      },
       "4": {
         "correct": 28,
         "total": 100,
@@ -1177,7 +1184,7 @@
       }
     },
     "mmsi_qwen25vl72b_running": {
-      "1": "72432_1 model loading; not yet confirmed inference"
+      "1": "72432_1 actual inference;63/100saved"
     }
   },
   "completed_archive_9b3": "results/records/P1_9B_SHARD3_20260914.json",
@@ -1206,5 +1213,6 @@
   "latest_storage_incident": "results/records/P1_MMSI27B_SHARD1_RETRY_20260917.json",
   "completed_archive_mmsi27b_shard4": "results/records/P1_MMSI27B_SHARD4_20260917.json",
   "completed_archive_mmsi27b_shard0": "results/records/P1_MMSI27B_SHARD0_20260918.json",
-  "latest_start_record": "results/records/P1_MMSI72B_SHARD1_START_20260918.json"
+  "latest_start_record": "results/records/P1_MMSI72B_SHARD1_START_20260918.json",
+  "completed_archive_mmsi27b_shard2": "results/records/P1_MMSI27B_SHARD2_20260918.json"
 }

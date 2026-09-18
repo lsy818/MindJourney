@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "dataset": "mmsi",
+  "chunk_index": 2,
+  "expected": 100,
+  "correct": 38,
+  "wrong": 62,
+  "run_group_fingerprint": "09873d1bf1153fd2016af0144524b0d0524c510ddd7dd75d3636b8ddc696e3b8",
+  "dataset_json_sha256": "5de75a94eebb2ad31b44ab0f33d7225c56157165292d8112e287c410f56180c9",
+  "results_sha256": "2ba0ac95fde5f1fedc3bc2872d2449d66ada16ef9a98e05e5b82dcc183f8f7a7",
+  "results_file": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/results_spatial_beam_search_qc10/question_chunk_2/results.json",
+  "complete_marker_verified_sha256": "2ba0ac95fde5f1fedc3bc2872d2449d66ada16ef9a98e05e5b82dcc183f8f7a7",
+  "complete_marker_verified": true,
+  "zero_skips": true,
+  "checked_at": "2026-09-18T15:13:12+08:00"
+}
