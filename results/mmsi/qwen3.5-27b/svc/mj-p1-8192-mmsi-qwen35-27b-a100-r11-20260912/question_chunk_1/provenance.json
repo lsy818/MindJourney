@@ -1,0 +1,709 @@
+{
+  "run_id": "mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912",
+  "chunk_index": 1,
+  "imported_count": 0,
+  "new_count": 100,
+  "original_results_sha256": null,
+  "questions": [
+    {
+      "question_id": 146,
+      "category": "Positional Relationship (Cam.–Reg.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 399,
+      "category": "Positional Relationship (Cam.–Reg.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 410,
+      "category": "Positional Relationship (Cam.–Reg.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 397,
+      "category": "Positional Relationship (Cam.–Reg.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 791,
+      "category": "Positional Relationship (Cam.–Reg.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 676,
+      "category": "Positional Relationship (Cam.–Reg.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 414,
+      "category": "Positional Relationship (Cam.–Reg.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 496,
+      "category": "Positional Relationship (Cam.–Reg.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 793,
+      "category": "Positional Relationship (Cam.–Reg.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 248,
+      "category": "Positional Relationship (Cam.–Cam.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 94,
+      "category": "Positional Relationship (Cam.–Cam.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 98,
+      "category": "Positional Relationship (Cam.–Cam.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 424,
+      "category": "Positional Relationship (Cam.–Cam.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 182,
+      "category": "Positional Relationship (Cam.–Cam.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 247,
+      "category": "Positional Relationship (Cam.–Cam.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 532,
+      "category": "Positional Relationship (Cam.–Cam.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 927,
+      "category": "Positional Relationship (Cam.–Cam.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 425,
+      "category": "Positional Relationship (Cam.–Cam.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 929,
+      "category": "Positional Relationship (Cam.–Cam.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 924,
+      "category": "Positional Relationship (Cam.–Cam.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 351,
+      "category": "Positional Relationship (Cam.–Cam.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 452,
+      "category": "Attribute (Meas.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 281,
+      "category": "Attribute (Meas.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 753,
+      "category": "Attribute (Meas.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 718,
+      "category": "Attribute (Meas.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 155,
+      "category": "Attribute (Meas.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 309,
+      "category": "Attribute (Meas.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 451,
+      "category": "Attribute (Meas.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 743,
+      "category": "Attribute (Meas.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 168,
+      "category": "Motion (Cam.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 491,
+      "category": "Motion (Cam.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 170,
+      "category": "Motion (Cam.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 963,
+      "category": "Motion (Cam.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 458,
+      "category": "Motion (Cam.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 996,
+      "category": "Motion (Cam.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 169,
+      "category": "Motion (Cam.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 36,
+      "category": "Motion (Cam.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 2,
+      "category": "Motion (Cam.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 457,
+      "category": "Motion (Cam.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 826,
+      "category": "MSR",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 357,
+      "category": "MSR",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 697,
+      "category": "MSR",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 534,
+      "category": "MSR",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 899,
+      "category": "MSR",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 981,
+      "category": "MSR",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 689,
+      "category": "MSR",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 690,
+      "category": "MSR",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 971,
+      "category": "MSR",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 469,
+      "category": "MSR",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 466,
+      "category": "MSR",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 537,
+      "category": "MSR",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 896,
+      "category": "MSR",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 472,
+      "category": "MSR",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 139,
+      "category": "MSR",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 973,
+      "category": "MSR",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 893,
+      "category": "MSR",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 358,
+      "category": "MSR",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 464,
+      "category": "MSR",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 265,
+      "category": "MSR",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 195,
+      "category": "Positional Relationship (Reg.–Reg.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 942,
+      "category": "Positional Relationship (Reg.–Reg.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 64,
+      "category": "Positional Relationship (Reg.–Reg.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 5,
+      "category": "Positional Relationship (Cam.–Obj.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 327,
+      "category": "Positional Relationship (Cam.–Obj.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 51,
+      "category": "Positional Relationship (Cam.–Obj.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 443,
+      "category": "Positional Relationship (Cam.–Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 273,
+      "category": "Positional Relationship (Cam.–Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 445,
+      "category": "Positional Relationship (Cam.–Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 44,
+      "category": "Positional Relationship (Cam.–Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 947,
+      "category": "Positional Relationship (Cam.–Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 507,
+      "category": "Positional Relationship (Cam.–Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 616,
+      "category": "Positional Relationship (Cam.–Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 554,
+      "category": "Motion (Obj.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 456,
+      "category": "Motion (Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 961,
+      "category": "Motion (Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 796,
+      "category": "Motion (Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 557,
+      "category": "Motion (Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 729,
+      "category": "Motion (Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 81,
+      "category": "Motion (Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 551,
+      "category": "Motion (Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 548,
+      "category": "Motion (Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 251,
+      "category": "Positional Relationship (Obj.–Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 840,
+      "category": "Positional Relationship (Obj.–Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 180,
+      "category": "Positional Relationship (Obj.–Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 921,
+      "category": "Positional Relationship (Obj.–Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 982,
+      "category": "Positional Relationship (Obj.–Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 839,
+      "category": "Positional Relationship (Obj.–Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 572,
+      "category": "Positional Relationship (Obj.–Obj.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 664,
+      "category": "Attribute (Appr.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 162,
+      "category": "Attribute (Appr.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 632,
+      "category": "Attribute (Appr.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 355,
+      "category": "Attribute (Appr.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 101,
+      "category": "Attribute (Appr.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 111,
+      "category": "Attribute (Appr.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 278,
+      "category": "Positional Relationship (Obj.–Reg.)",
+      "correct": true,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 122,
+      "category": "Positional Relationship (Obj.–Reg.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 339,
+      "category": "Positional Relationship (Obj.–Reg.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 511,
+      "category": "Positional Relationship (Obj.–Reg.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 449,
+      "category": "Positional Relationship (Obj.–Reg.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    },
+    {
+      "question_id": 622,
+      "category": "Positional Relationship (Obj.–Reg.)",
+      "correct": false,
+      "source_version": "r11",
+      "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa"
+    }
+  ]
+}

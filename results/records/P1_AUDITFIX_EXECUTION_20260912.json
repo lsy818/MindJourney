@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-18T17:13:41+08:00",
+  "updated_at": "2026-09-18T20:01:10+08:00",
   "authorization": "User approved replacing added fatal output guard with warning/raw-response logging and restarting P1 promptly.",
   "source_commit": "dac49f6db2f0873134b6905ac2244e4284c09948",
   "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa",
@@ -69,7 +69,7 @@
       "gres": "--gres=gpu:a100:2",
       "export_gpu_memory": null,
       "predecessor_run_id": "mj-p1-8192-mmsi-qwen35-27b-a100-r10-20260912",
-      "state": "shards0_2_4_complete_archived_shards1_3_5_running_6_7_8_9_queued",
+      "state": "shards0_1_2_4_complete_archived_shards3_5_running_6_7_8_9_queued",
       "migration": {
         "run_id": "mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912",
         "checked_at": "2026-09-12T14:59:15.484516+00:00",
@@ -172,15 +172,6 @@
           ],
           "max_concurrent": 1,
           "status": "shard5 RUNNING node12 since08:22:06; actual inference observed; shards6/7 pending"
-        },
-        {
-          "job_id": "73395",
-          "shards": [
-            1
-          ],
-          "max_concurrent": 1,
-          "status": "RUNNING node11 since21:31:36; actual inference observed; bounded retry, original64question checkpoint preserved",
-          "submission_record": "results/submissions/P1_SUBMIT_73395.txt"
         },
         {
           "job_id": "73768",
@@ -311,8 +302,19 @@
       ],
       "completed_shards": [
         0,
+        1,
         2,
         4
+      ],
+      "completed_arrays": [
+        {
+          "job_id": "73395",
+          "shards": [
+            1
+          ],
+          "status": "COMPLETED; strict validation and full raw archive local/server; raw GitHub upload pending approval",
+          "record": "results/records/P1_MMSI27B_SHARD1_20260918.json"
+        }
       ]
     },
     {
@@ -375,21 +377,22 @@
             2
           ],
           "max_concurrent": 1,
-          "status": "RUNNING node16 since17:06:01; model loading, no answers yet;3H20 TP2+SVC1 explicit0.93",
+          "status": "RUNNING node16;64/100 saved at20:01;3H20 TP2+SVC1 explicit0.93",
           "submission_record": "results/submissions/P1_SUBMIT_73646.txt"
         },
         {
-          "job_id": "73871",
+          "job_id": "73879",
           "shards": [
-            3
+            3,
+            4
           ],
           "max_concurrent": 1,
           "status": "PENDING Priority;3H20 TP2+SVC1 explicit0.93 unchanged",
-          "submission_record": "results/submissions/P1_SUBMIT_73871.txt"
+          "submission_record": "results/submissions/P1_SUBMIT_73879.txt"
         }
       ],
       "note": "Original r10 72B has no thinking guard enabled. Actual answer success verified; may expand when slots/resources permit, preserving TP2+SVC1/3H20 and explicit memory utilization0.93. No repeat smoke required.",
-      "state": "shards0_1_complete_archived_shard2_running_loading_shard3_queued",
+      "state": "shards0_1_complete_archived_shard2_running_shards3_4_queued",
       "first_actual_answer_success": true,
       "first_success_record": "results/records/P1_MMSI72B_FIRST_SUCCESS_20260915.json",
       "completed_arrays": [
@@ -406,7 +409,21 @@
         0,
         1
       ],
-      "latest_submission_record": "results/submissions/P1_SUBMIT_73871.txt"
+      "latest_submission_record": "results/submissions/P1_SUBMIT_73879.txt",
+      "replaced_pending_arrays": [
+        {
+          "job_id": "73871",
+          "shards": [
+            3
+          ],
+          "status": "CANCELLED while PENDING;zero runtime",
+          "replacement_job_id": "73879",
+          "records_retained": "results/submissions/P1_SUBMIT_73871.txt",
+          "reason": "Consolidate pending3 with new4 under one cap1; preserve72B aggregatecap2.",
+          "queue_age_reset": true,
+          "at": "2026-09-18T19:58:43+08:00"
+        }
+      ]
     },
     {
       "run_id": "mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912",
@@ -1062,7 +1079,7 @@
     "unrelated_job": "55278 (never modify)",
     "focus": "MMSI only: maximize account quota first, concentrate settings second; MindCube P1 groups are complete.",
     "combined_current_mindcube38_cap": 0,
-    "rule": "Maximize quota then concentrate MMSI. 27B71779cap1+71510cap1+73395cap1+73768cap1+73846cap1=5;72B73646cap1+73871cap1=2;global5running/10submitted including unrelated55278. Completed72732 and72432 arrays contribute no active cap. Never duplicate completed/active shards.",
+    "rule": "Maximize quota then concentrate MMSI.27B71779cap1+71510cap1+73768cap1+73846cap1=4;72B73646cap1+73879cap1=2;global5running/10submitted including unrelated55278.73395complete;73871cancelled only while pending for consolidation. Never duplicate completed/active shards.",
     "replaced_pending_job": "70281_5 cancelled only while PENDING; replaces with70438_5, all old logs retained."
   },
   "continuation": {
@@ -1096,10 +1113,23 @@
       "output": "alias=qwen35-9b\nmodel_id=Qwen/Qwen3.5-9B\nrevision=c202236235762e1c871ad0ccb60c8ee5ba337b9a\nthinking=false\naccelerator=a100\ndtype=bfloat16\nmax_model_len=65536\ntensor_parallel_size=1\nsvc_gpus=1\ntotal_gpus=2\ncpus_per_task=8\ngres=gpu:a100:2\nexclude=hkbugpudgx01,hkbugpusrv07,hkbugpusrv08,hkbugpusrv13,hkbugpusrv14\ndefault_concurrency=4\ndiagnostic_only=false\nmode=array\ndataset=mindcube\ninput_file=/home/datasets/shiyang/MindCube_9c941b46/processed/test.json\ninput_sha256=03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\ndataset_provenance=/home/datasets/shiyang/MindCube_9c941b46/processed/test_provenance.json\ndataset_provenance_sha256=55af7c4dd6e125b5323a798ba871d3297c6c89098f5911b6d84561af26effac6\nexperiment_manifest=/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/configs/p1_svc_multiimage.json\nexperiment_manifest_sha256=988da48b21c8cb33145aa45a2defe084287a165e769db9b52b6f8d74ffc2cec1\nmodel_tree_manifest=unavailable\nmodel_tree_sha256=unavailable\npersistent_environment_complete_sha256=4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50\nsource_sha256=72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa\nsource_questions=1050\nrun_questions=1050\nnum_chunks=11\narray=0-2%3\nrun_root=/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912\ncommand=sbatch --parsable --account=daai --partition=short --job-name=mj-p1-mindcube-qwen35-9b-array --array=0-2%3 --gres=gpu:a100:2 --cpus-per-task=8 --mem=160G --time=5-00:00:00 --output=/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912/logs/%x-%A_%a.out --error=/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912/logs/%x-%A_%a.err --export=P1_REPO_DIR=/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912\\,P1_MODEL_KEY=qwen35-9b\\,P1_DATASET=mindcube\\,P1_ACCELERATOR=a100\\,P1_RUN_MODE=array\\,P1_RUN_ID=mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912\\,P1_RUN_ROOT=/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912\\,P1_INPUT_DIR=/home/datasets/shiyang/MindCube_9c941b46/processed\\,P1_SPLIT=test\\,P1_NUM_QUESTIONS=1050\\,P1_NUM_CHUNKS=11\\,P1_MAX_IMAGES=4\\,P1_MODEL_PATH=/home/datasets/chentao/models/Qwen3.5-9B\\,P1_CACHE_ROOT=/home/datasets/shiyang/daai_runtime/model_cache\\,P1_MODEL_VALIDATION_ROOT=/home/datasets/shiyang/mindjourney_storage/model_validation\\,P1_REQUIRE_REVISION_MARKER=1\\,P1_MANIFEST=/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/configs/p1_svc_multiimage.json\\,P1_DATASET_PROVENANCE=/home/datasets/shiyang/MindCube_9c941b46/processed/test_provenance.json\\,P1_EXPECTED_INPUT_SHA256=03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\\,P1_EXPECTED_PROVENANCE_SHA256=55af7c4dd6e125b5323a798ba871d3297c6c89098f5911b6d84561af26effac6\\,P1_EXPECTED_MANIFEST_SHA256=988da48b21c8cb33145aa45a2defe084287a165e769db9b52b6f8d74ffc2cec1\\,P1_EXPECTED_SOURCE_SHA256=72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa\\,P1_SVC_PYTHON=python\\,P1_VLLM_BIN=vllm\\,P1_ALLOW_NETWORK=0\\,P1_VLM_MAX_TOKENS=8192\\,QWEN_MAX_TOKENS=8192\\,P1_JOB_PROLOG=/home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/scripts/p1_persistent_env_prolog.sh\\,P1_PERSISTENT_ENV_ROOT=/home/datasets/shiyang/daai_runtime/envs/p1-01ef26c-v1\\,P1_EXPECTED_ENV_COMPLETE_SHA256=4c3ccc5763b452719ee9564c6afbff63c9e13bfc1f0b6513ddfbfa0b4e5dec50 --exclude=hkbugpudgx01\\,hkbugpusrv07\\,hkbugpusrv08\\,hkbugpusrv13\\,hkbugpusrv14 /home/comp/24482277/shiyang/MindJourney-p1-output8192-r11-20260912/scripts/p1_array.sbatch \n{\"dataset\": \"mindcube\", \"input_sha256\": \"03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\", \"max_images\": 4, \"model\": \"Qwen/Qwen3.5-9B\", \"questions\": 1050, \"status\": \"passed\"}\n{\"input_file\": \"/home/datasets/shiyang/MindCube_9c941b46/processed/test.json\", \"max_images\": 4, \"order_check\": \"img_paths validated in stored order; no sorting performed\", \"records\": 1050, \"sha256\": \"03a62d4928f790eb2dad9e18a9f5f65643342100b93955de80debea171e88083\"}\nSubmitted run_id=mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912 job_id=70766; results remain under /home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mindcube-qwen35-9b-a100-r11-20260912.\n"
     }
   ],
-  "pending_archives": [],
+  "pending_archives": [
+    {
+      "dataset": "mmsi",
+      "model": "Qwen/Qwen3.5-27B",
+      "chunk": 1,
+      "record": "results/records/P1_MMSI27B_SHARD1_20260918.json",
+      "status": "full_raw_archive_validated_remote_and_local_pending_upload_approval",
+      "archive_sha256": "aff148a9028832935f5b3bcff8c25c8bde201bf70f132c902df66656f1341738",
+      "remote_path": "/home/datasets/shiyang/daai_runtime/p1_archives_8192/20260918/mmsi-qwen35-27b-shard1-raw-2000.tar.gz",
+      "local_path": "/private/tmp/mj-p1-27bshard1.gngU10/mmsi-qwen35-27b-shard1-raw-2000.tar.gz",
+      "intended_repository_path": "results/raw_logs/mmsi-qwen35-27b-shard1-raw-20260918.tar.gz",
+      "reason": "Automatic safety review rejected external upload of full raw logs; server and local archive retained. No workaround attempted. Results/validation/submission metadata may be published separately."
+    }
+  ],
   "completed_archive_batch2345": "results/records/P1_COMPLETED_BATCH_20260913_2345.json",
   "latest_progress": {
-    "updated_at": "2026-09-18T17:13:41+08:00",
+    "updated_at": "2026-09-18T20:01:10+08:00",
     "completed_p1_groups": 2,
     "total_p1_groups": 4,
     "mindcube_qwen38": {
@@ -1127,21 +1157,22 @@
       "correct": 453,
       "total": 1050
     },
-    "running_jobs": 4,
-    "running_a100_gpus": 6,
+    "running_jobs": 3,
+    "running_a100_gpus": 4,
     "submitted_tasks_including_unrelated": 10,
     "max_running_jobs": 5,
     "max_submitted_tasks": 10,
-    "next_action": "Monitor72B2startup and27B1/3/5; all27B shards submitted. Archive each completed shard, then submit72B4-9 only with fresh slot,duplicate,and aggregatecap checks. Do not repeat completed groups/shards.",
-    "resource_note": "4/5running,10/10submitted including unrelated55278;6A100+3H20allocated. CompatibleA100node15only1GPUfree,11/12/H20node16full at17:08. Shared9.5Tfree.72B2model loading; no healthy job restarted or environment/weight change.",
+    "next_action": "Monitor27B3/5 and72B2. All27Bshards submitted;72B5-9 remain unsubmitted. Use future free slots only after fresh duplicate/resource/aggregatecap reconciliation. Archive each completion immediately. Shard1 full raw archive is verified on server/local, but external raw-log upload was rejected by safety review; wait for explicit user approval. Do not bypass.",
+    "resource_note": "3/5running,10/10submitted including unrelated55278;4A100+3H20.CompatibleA10011/15,H20node16 each only1GPUfree;node12full. Shared9.6Tfree. No new failure; no healthy job restarted.72Bpending3+4 consolidated undercap1; queueage of3 reset.",
     "mmsi_qwen35_27b_saved_running": {
-      "1": 92,
-      "3": 80,
-      "5": 15
+      "3": 85,
+      "5": 22
     },
     "running_h20_gpus": 3,
-    "mmsi_qwen25vl72b_saved_running": {},
-    "mmsi_qwen35_27b_saved_checked_at": "2026-09-18T17:13:41+08:00",
+    "mmsi_qwen25vl72b_saved_running": {
+      "2": 64
+    },
+    "mmsi_qwen35_27b_saved_checked_at": "2026-09-18T20:01:10+08:00",
     "mmsi_qwen25vl72b_completed": {
       "0": {
         "correct": 36,
@@ -1155,7 +1186,8 @@
       }
     },
     "mmsi_qwen25vl72b_pending": {
-      "3": "73871_3 Priority"
+      "3": "73879_3 Priority",
+      "4": "73879_4 Priority"
     },
     "mmsi_qwen35_27b_failed_saved": {},
     "mmsi_qwen35_27b_resume_queued": {},
@@ -1166,7 +1198,6 @@
       "9": "73846_9 Priority"
     },
     "mmsi_qwen35_27b_running": {
-      "1": "73395_1",
       "3": "71779_3",
       "5": "71510_5"
     },
@@ -1175,6 +1206,12 @@
         "correct": 32,
         "total": 100,
         "record": "results/records/P1_MMSI27B_SHARD0_20260918.json"
+      },
+      "1": {
+        "correct": 32,
+        "total": 100,
+        "record": "results/records/P1_MMSI27B_SHARD1_20260918.json",
+        "raw_upload_status": "pending_user_approval"
       },
       "2": {
         "correct": 38,
@@ -1188,7 +1225,7 @@
       }
     },
     "mmsi_qwen25vl72b_running": {
-      "2": "73646_2 model loading; no saved answers observed"
+      "2": "73646_2 actual inference;64/100 saved"
     }
   },
   "completed_archive_9b3": "results/records/P1_9B_SHARD3_20260914.json",
@@ -1219,5 +1256,14 @@
   "completed_archive_mmsi27b_shard0": "results/records/P1_MMSI27B_SHARD0_20260918.json",
   "latest_start_record": "results/records/P1_MMSI72B_SHARD1_START_20260918.json",
   "completed_archive_mmsi27b_shard2": "results/records/P1_MMSI27B_SHARD2_20260918.json",
-  "completed_archive_mmsi72b_shard1": "results/records/P1_MMSI72B_SHARD1_20260918.json"
+  "completed_archive_mmsi72b_shard1": "results/records/P1_MMSI72B_SHARD1_20260918.json",
+  "completed_archive_mmsi27b_shard1": "results/records/P1_MMSI27B_SHARD1_20260918.json",
+  "latest_pending_consolidation": {
+    "old_job_id": "73871_3",
+    "old_state": "PENDING,zero runtime",
+    "new_job_id": "73879_3",
+    "reason": "Consolidate pending3 with new4 under one cap1; preserve72B aggregatecap2.",
+    "old_receipt": "results/submissions/P1_SUBMIT_73871.txt",
+    "queue_age_reset": true
+  }
 }
