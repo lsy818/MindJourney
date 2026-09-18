@@ -1,4 +1,4 @@
-7adbd1726ee59bbfb34b282ccd06e985262841f5c018db14436193b0551c1d2b  ./EXPERIMENTS.md
+15c8b8a2ed8d1840548bbd8c0de43a9e929d9074556ce748d1c7763cd26cdfde  ./EXPERIMENTS.md
 fb19a272676255d4d8cd0335a0c50e7f706d4258b62bfc1f4e671b4b2f98c149  ./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/chunks/question_chunk_0/COMPLETE
 dd1582fb4166d15a7a18d7d25fa3f3058156d36412b14fd22e114cfd0acd5fad  ./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/chunks/question_chunk_0/results.json
 bba004f72658e366a2c28dfb7f2b04d39e2398af04ff2ba7cf2b1d53b2c017e2  ./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/chunks/question_chunk_0/validation_summary.json
@@ -188,6 +188,10 @@ f2b5d191f18280506a3eff66ba9ff38c3c5cc27340d8ca5a8c3881e82523da72  ./mmsi/qwen3.5
 71a1611da3f01872e77f4d29262d6fce89a9d8c42f7f32b354d798514baf2e9e  ./mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/question_chunk_2/provenance.json
 2ba0ac95fde5f1fedc3bc2872d2449d66ada16ef9a98e05e5b82dcc183f8f7a7  ./mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/question_chunk_2/results.json
 cd152b81ff3b8b413eb61db035e68a9fccaa5607d77758d798f3601097555a11  ./mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/question_chunk_2/validation_summary.json
+407cf1bd1d326d339d116e65590b8bc80128cab68cc147355483bd0624cc71fe  ./mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/question_chunk_3/COMPLETE
+9190a23e4c2d469dcb7e59b06c6f6da8e88d0ec5f6cd50eeb5c518c4507c99a3  ./mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/question_chunk_3/provenance.json
+80c45b7af196a4d020d2879a6c86a83fed5548ee0a7461e74b0ccb0a5d51a1cd  ./mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/question_chunk_3/results.json
+fadc21e19ec89763fbbd5c9b2b00d2724ddde94df38dfd010643ead264d811ad  ./mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/question_chunk_3/validation.json
 01407d15f43fdda45c005187219189237628c793098bb472cc9a1ba398b648a9  ./mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/question_chunk_4/COMPLETE
 352138501a54e33715e36dcb24b4d674d9c29a0b4df031d1b41827a9515d6318  ./mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/question_chunk_4/provenance.json
 6a757245272f317766c6fbf835bd964407a29354731037c1f888bfd424466dad  ./mmsi/qwen3.5-27b/svc/mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912/question_chunk_4/results.json
@@ -288,7 +292,7 @@ a42a6d2d8de2a43cb9cf0822f1ed1f1b30742df582dfd63e83929eb0f75af21e  ./records/P1_9
 a442df035920c9398b6914a806dba3df04d9946d7f0d6eb4c24148a0a43251e0  ./records/P1_9B_SHARD7_20260914.json
 dfebc356345238d6bd5972f0619f33f108b69baacbf90b89019d5f3c759322aa  ./records/P1_9B_SHARD8_20260914.json
 bd0638abe84d191dafe1b3723c09df0419cc1391f52a5895db3ba62f2b5a40af  ./records/P1_AUDITFIX_COMPLETED_20260913_1055.json
-f62e2f327695cdfa472f60226c829cb8376e0d055b6860fc8f9befe9d6f5f4d8  ./records/P1_AUDITFIX_EXECUTION_20260912.json
+c3992687bb7cabe93d7b48bf77cb9d251cefc12a4a870fcce2d4e461ec3a8fda  ./records/P1_AUDITFIX_EXECUTION_20260912.json
 1bdc16fac045b11fb2bdd5cd1c8edae6ebb1d9955a0cc908f0bdedc943f5e2f6  ./records/P1_AUDITFIX_PROGRESS_20260912_2301.json
 a9a8c408884ae7694ff64be9024aef47f2d390b6ab8ca55996b9ba2a0157694b  ./records/P1_AUDITFIX_PROGRESS_20260913_0026.json
 317fcefc1736c502d1282caa710c79e7ecc98688e80b8ef72f6981b92bfa52b0  ./records/P1_AUDITFIX_RAW_ARCHIVE_20260913.json
@@ -303,6 +307,7 @@ f7b87e4fed07f35767dbe4292ba9bd6be1e9a0830942247db288b5e057d335b6  ./records/P1_M
 9aea45812a5d4dc29e1ff797b0f478e87adbc21ad25150a547e317b5eb6f036e  ./records/P1_MMSI27B_SHARD1_20260918.json
 1dc6cf8851a81e34b19ca17967c8d247bcb45a1dd800474f8ac92a64afbfa718  ./records/P1_MMSI27B_SHARD1_RETRY_20260917.json
 cab6fc390ef9ead0a67fc31b60700e599560869601f18d4c679ea456ffd82e13  ./records/P1_MMSI27B_SHARD2_20260918.json
+b4bf579355217875beccd53fe10dbf91168d3e1855b2cf8032ac20b7fb8c5347  ./records/P1_MMSI27B_SHARD3_20260919.json
 51bdbcf7ffcfe307c62e6940d650d3704982789dbd440ed6c62b65c1c2bcc6cb  ./records/P1_MMSI27B_SHARD4_20260917.json
 2526344d40c6615fc5ff91cf660ab1af79c2342023aa166bae11ebc2665c5b3a  ./records/P1_MMSI72B_FIRST_SUCCESS_20260915.json
 c6605acf16aca3c36519e48e1b2770eb68bb32f8fbdf734350bf92c59d330fc9  ./records/P1_MMSI72B_SHARD0_20260916.json
@@ -324,7 +329,7 @@ f7e28c7b7ef05d36da248f5d837b0101c9770881c7528f865ebc3394daf691c5  ./records/P1_O
 48d048806c13294262c9a4af40b481be6a1b8844c5cc5ba306ff91760675ff47  ./records/P1_PROGRESS_20260912_1546.json
 3a0b6ceb7ca5a1d570b4d1989b7b8d887d262c546d591de137ed66d37716fe30  ./records/P1_STORAGE_FULL_20260916_0122.json
 f60f67781ab4ea3cff610b50e3b95f04c8729d3a6f9104ddf2b3768071631f5f  ./records/P1_STORAGE_RECOVERY_20260916_1251.json
-e6685f0ec5ef30bfd243726ee9e68ecf1d0d6db1466695cfa0fb5be2de43d437  ./RESULTS.md
+45109b26b5c6d118c87413ee82884e31ad5f2cc2262ff8f3b0a23d2c8808d29c  ./RESULTS.md
 1d2781133937b40f41ebd4f7e94ed07bba6149a8c04d8eb04be1e9770883dd3c  ./sat-real/qwen3.5-27b/svc/mj-svc-qwen35-paper150-20260902T173648Z/chunks/question_chunk_0/COMPLETE
 b039cd19ea2b2e60f63a2c4912ecf3db740388f1ba9f607cdb1087158f2ce30d  ./sat-real/qwen3.5-27b/svc/mj-svc-qwen35-paper150-20260902T173648Z/chunks/question_chunk_0/ENVIRONMENT
 b59ea3adb1c457a4cf12c08b22156c49659cbf70f7dc43d3823921d3f3425937  ./sat-real/qwen3.5-27b/svc/mj-svc-qwen35-paper150-20260902T173648Z/chunks/question_chunk_0/results.json
@@ -414,3 +419,4 @@ c23f6dc3346059b70f6c97f3fb6d46404f74f23e7bb76d352d5cf711245ae64e  ./submissions/
 02d797fbe6aa7a630aeccd8d8c1551970a07eec9a2633bd568b579298460d6b4  ./submissions/P1_SUBMIT_73871.txt
 47e067d1cf5e326848832788567d0be64d27ee5d1f7e52b9dc52b4b8c858bd89  ./submissions/P1_SUBMIT_73879.txt
 95ee663cb70c5497f2b5033d41a9af36f42cdaf1cdb05d6537b9f335d8621441  ./submissions/P1_SUBMIT_73893.txt
+d02ed9f16897c076e439916e70ed5f3f34c41e0ef6c466ebcd634321239cbd44  ./submissions/P1_SUBMIT_73994.txt
