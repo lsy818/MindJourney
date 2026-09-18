@@ -1,0 +1,9 @@
+run_id=mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912
+dataset=mmsi
+model=Qwen/Qwen2.5-VL-72B-Instruct
+revision=89c86200743eec961a297729e7990e8f2ddbc4c5
+execution_scope=formal
+diagnostic_host=none
+chunk_index=1
+results_sha256=b4539edf39c70ea068328b70eecd342f0ac0a227c5d4a1cfc3a3d2a17f928149
+completed_utc=2026-09-18T09:05:43Z
