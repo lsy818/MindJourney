@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-19T04:50:25+08:00",
+  "updated_at": "2026-09-20T02:12:06+08:00",
   "authorization": "User approved replacing added fatal output guard with warning/raw-response logging and restarting P1 promptly.",
   "source_commit": "dac49f6db2f0873134b6905ac2244e4284c09948",
   "source_sha256": "72626718674f0cdc326e3e80a2e8c97b79b88aa2fad212e9b37cd2a61d6873fa",
@@ -69,7 +69,7 @@
       "gres": "--gres=gpu:a100:2",
       "export_gpu_memory": null,
       "predecessor_run_id": "mj-p1-8192-mmsi-qwen35-27b-a100-r10-20260912",
-      "state": "shards0_1_2_4_complete_archived_shards3_5_running_6_7_8_9_queued",
+      "state": "shards0_1_2_3_4_complete_shards5_8_9_running_shards6_7_pending",
       "migration": {
         "run_id": "mj-p1-8192-mmsi-qwen35-27b-a100-r11-20260912",
         "checked_at": "2026-09-12T14:59:15.484516+00:00",
@@ -171,7 +171,7 @@
             8
           ],
           "max_concurrent": 1,
-          "status": "RUNNING node15 since2026-09-19T04:37:01; actual generation observed04:50; no saved answers yet",
+          "status": "RUNNING node15;35 saved at2026-09-20T02:11:44+08:00",
           "submission_record": "results/submissions/P1_SUBMIT_73768.txt"
         },
         {
@@ -180,11 +180,11 @@
             9
           ],
           "max_concurrent": 1,
-          "status": "PENDING Priority;2A100; original r11 RunID and frozen settings",
+          "status": "RUNNING node12;16 saved at2026-09-20T02:11:44+08:00",
           "submission_record": "results/submissions/P1_SUBMIT_73846.txt"
         }
       ],
-      "note": "Completed0-4; running5/8; pending6/7/9. Active arrays71510/73768/73846 cap1 each,aggregate3. No duplicate submissions.",
+      "note": "Completed0-4; running5/8/9, saved71/35/16 at02:11; pending6/7. Arrays71510/73768/73846 cap1 each, aggregate3.",
       "latest_submission_record": "results/submissions/P1_SUBMIT_73846.txt",
       "replaced_pending_arrays": [
         {
@@ -375,11 +375,10 @@
         {
           "job_id": "73879",
           "shards": [
-            3,
             4
           ],
           "max_concurrent": 1,
-          "status": "PENDING Priority;3H20 TP2+SVC1 explicit0.93 unchanged",
+          "status": "shard3 FAILED EIO; shard4 RUNNING node16 since2026-09-20T02:02:54",
           "submission_record": "results/submissions/P1_SUBMIT_73879.txt"
         },
         {
@@ -393,8 +392,8 @@
           "submission_record": "results/submissions/P1_SUBMIT_73994.txt"
         }
       ],
-      "note": "Complete0/1/2;pending3/4 under73879cap1,5/6 under73994cap1;aggregate2;7-9 unsubmitted. No healthy job restarted.",
-      "state": "shards0_1_2_complete_validated_shards3_4_5_queued_raw_shard2_upload_pending_approval",
+      "note": "Shard3 failed EIO with85 saved; no retry submitted while login dataset mount unavailable. Shard4 running;5/6pending. Aggregate72Bcap2. 7-9unsubmitted.",
+      "state": "shards0_1_2_complete_shard3_failed_EIO_85_saved_shard4_running_shards5_6_pending",
       "first_actual_answer_success": true,
       "first_success_record": "results/records/P1_MMSI72B_FIRST_SUCCESS_20260915.json",
       "completed_arrays": [
@@ -445,6 +444,30 @@
           "reason": "Consolidate pending5 with new6 under one cap1; preserve72B aggregatecap2.",
           "queue_age_reset": true,
           "at": "2026-09-19T04:48:33+08:00"
+        }
+      ],
+      "failed_runtime_attempts": [
+        {
+          "chunk": 3,
+          "job_id": "73879_3",
+          "allocation_job_id": "74357",
+          "node": "hkbugpusrv16",
+          "start": "2026-09-19T21:49:12+08:00",
+          "end": "2026-09-20T02:02:28+08:00",
+          "elapsed": "04:13:16",
+          "state": "FAILED",
+          "exit_code": "1:0",
+          "saved_questions": 85,
+          "complete": false,
+          "checkpoint_sha256": "9c3b7bd92ddaa1a8fd29656678013637c579712d365f34626631d9ab36d310fd",
+          "checkpoint_path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912/results_spatial_beam_search_qc10/question_chunk_3/results.json",
+          "pipeline_log": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912/attempts/question_chunk_3/74357-20260919T134916Z/pipeline.log",
+          "error": "OSError: [Errno 5] Input/output error while encode_image reads question802/step_0/img_0.png",
+          "preceding_warning": "Cannot open/read question802/step_1/turn-left_27_degrees_turn-left_27.00_degrees/pred.mp4; branch skipped, then fatal image read error.",
+          "last_observed_question": 802,
+          "original_files_retained": true,
+          "raw_upload_attempted": false,
+          "record": "results/records/P1_MMSI72B_SHARD3_IO_20260920.json"
         }
       ]
     },
@@ -1176,7 +1199,7 @@
   ],
   "completed_archive_batch2345": "results/records/P1_COMPLETED_BATCH_20260913_2345.json",
   "latest_progress": {
-    "updated_at": "2026-09-19T04:50:25+08:00",
+    "updated_at": "2026-09-20T02:12:06+08:00",
     "completed_p1_groups": 2,
     "total_p1_groups": 4,
     "mindcube_qwen38": {
@@ -1204,20 +1227,23 @@
       "correct": 453,
       "total": 1050
     },
-    "running_jobs": 2,
-    "running_a100_gpus": 4,
-    "submitted_tasks_including_unrelated": 10,
+    "running_jobs": 4,
+    "running_a100_gpus": 6,
+    "submitted_tasks_including_unrelated": 9,
     "max_running_jobs": 5,
     "max_submitted_tasks": 10,
-    "next_action": "Monitor27B5/8 and queuedMMSI;27Ballsubmitted;72B7-9unsubmitted. Fill future slots after fresh dedup/resource/aggregatecap checks. Fullraw27B1/3 and72B2 upload awaiting user approval; do not bypass.",
-    "resource_note": "2/5running,10/10submitted including55278;4A100. A10011/15 each1free,node12full;H20node16has4/8allocated butMIXED+PLANNED,72BpendingPriority. Shared9.6Tfree. No healthy restart.",
+    "next_action": "Verify/restore login dataset mount (administrator) and investigate EIO; then prioritize85-question checkpoint continuation of72B3 after exact-target/read-write/dedup/QoS/aggregatecap checks. Keep72Baggregatecap2; do not blindly add thirdcap1. 72B7-9unsubmitted. No A100-1 pilot restart. Full raw uploads still await explicit approval.",
+    "resource_note": "4/5running,9/10submitted incl55278;6A100+3H20. Login /home/datasets mount absent; node16 correct gpufcluster:/datasets visible,9.4Tfree. Runtime72B3 EIO; no healthy restart, no global hold, no submission during unresolved mount discrepancy.",
     "mmsi_qwen35_27b_saved_running": {
-      "5": 34,
-      "8": 0
+      "5": 71,
+      "8": 35,
+      "9": 16
     },
-    "running_h20_gpus": 0,
-    "mmsi_qwen25vl72b_saved_running": {},
-    "mmsi_qwen35_27b_saved_checked_at": "2026-09-19T04:50:25+08:00",
+    "running_h20_gpus": 3,
+    "mmsi_qwen25vl72b_saved_running": {
+      "4": 1
+    },
+    "mmsi_qwen35_27b_saved_checked_at": "2026-09-20T02:11:44.642168+08:00",
     "mmsi_qwen25vl72b_completed": {
       "0": {
         "correct": 36,
@@ -1237,8 +1263,6 @@
       }
     },
     "mmsi_qwen25vl72b_pending": {
-      "3": "73879_3 Priority",
-      "4": "73879_4 Priority",
       "5": "73994_5 Priority",
       "6": "73994_6 Priority"
     },
@@ -1246,12 +1270,12 @@
     "mmsi_qwen35_27b_resume_queued": {},
     "mmsi_qwen35_27b_pending": {
       "6": "71510_6 JobArrayTaskLimit",
-      "7": "71510_7 JobArrayTaskLimit",
-      "9": "73846_9 Priority"
+      "7": "71510_7 JobArrayTaskLimit"
     },
     "mmsi_qwen35_27b_running": {
       "5": "71510_5",
-      "8": "73768_8"
+      "8": "73768_8",
+      "9": "73846_9"
     },
     "mmsi_qwen35_27b_completed": {
       "0": {
@@ -1282,7 +1306,12 @@
         "record": "results/records/P1_MMSI27B_SHARD4_20260917.json"
       }
     },
-    "mmsi_qwen25vl72b_running": {}
+    "mmsi_qwen25vl72b_running": {
+      "4": "73879_4"
+    },
+    "mmsi_qwen25vl72b_failed_saved": {
+      "3": 85
+    }
   },
   "completed_archive_9b3": "results/records/P1_9B_SHARD3_20260914.json",
   "completed_archive_mindcube38_full": "results/records/P1_MINDCUBE38_FULL_20260914.json",
@@ -1307,7 +1336,7 @@
     "latest_incident_record": "results/records/P1_MMSI27B_SHARD1_RETRY_20260917.json"
   },
   "latest_storage_recovery": "results/records/P1_STORAGE_RECOVERY_20260916_1251.json",
-  "latest_storage_incident": "results/records/P1_MMSI27B_SHARD1_RETRY_20260917.json",
+  "latest_storage_incident": "results/records/P1_MMSI72B_SHARD3_IO_20260920.json",
   "completed_archive_mmsi27b_shard4": "results/records/P1_MMSI27B_SHARD4_20260917.json",
   "completed_archive_mmsi27b_shard0": "results/records/P1_MMSI27B_SHARD0_20260918.json",
   "latest_start_record": "results/records/P1_MMSI72B_SHARD1_START_20260918.json",
@@ -1324,5 +1353,14 @@
     "cancelled_at": "2026-09-19T04:48:33+08:00"
   },
   "completed_archive_mmsi72b_shard2": "results/records/P1_MMSI72B_SHARD2_20260918.json",
-  "completed_archive_mmsi27b_shard3": "results/records/P1_MMSI27B_SHARD3_20260919.json"
+  "completed_archive_mmsi27b_shard3": "results/records/P1_MMSI27B_SHARD3_20260919.json",
+  "storage_mount_incident": {
+    "active": true,
+    "record": "results/records/P1_MMSI72B_SHARD3_IO_20260920.json",
+    "no_global_hold": true,
+    "no_new_submissions_this_check": true,
+    "login_dataset_mount_missing": true,
+    "compute_dataset_visible": true,
+    "root_cause_confirmed": false
+  }
 }
