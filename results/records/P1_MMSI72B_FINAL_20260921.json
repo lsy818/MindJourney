@@ -1,0 +1,324 @@
+{
+  "verified_at_utc": "2026-09-21T02:09:17.838346+00:00",
+  "status": "strict_group_merge_passed",
+  "dataset": "MMSI-Bench",
+  "model": "Qwen2.5-VL-72B-Instruct",
+  "max_output_tokens": 8192,
+  "counts": {
+    "correct": 306,
+    "wrong": 694,
+    "total": 1000
+  },
+  "accuracy": {
+    "all": 0.306,
+    "types": {
+      "Positional Relationship (Cam.–Cam.)": 0.27956989247311825,
+      "Motion (Cam.)": 0.28378378378378377,
+      "Positional Relationship (Reg.–Reg.)": 0.32098765432098764,
+      "Positional Relationship (Cam.–Reg.)": 0.3373493975903614,
+      "MSR": 0.2727272727272727,
+      "Positional Relationship (Obj.–Reg.)": 0.36470588235294116,
+      "Positional Relationship (Cam.–Obj.)": 0.313953488372093,
+      "Positional Relationship (Obj.–Obj.)": 0.2765957446808511,
+      "Attribute (Meas.)": 0.453125,
+      "Motion (Obj.)": 0.27631578947368424,
+      "Attribute (Appr.)": 0.25757575757575757
+    }
+  },
+  "parsing_err_stats": {
+    "scores": 41,
+    "answer": 5,
+    "answer_qid": [
+      178,
+      735,
+      297,
+      900,
+      696
+    ],
+    "scores_qid": [
+      251,
+      749,
+      679,
+      895,
+      639,
+      130,
+      906
+    ]
+  },
+  "run_id": "mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912",
+  "frozen_source_commit": "c1a10559a7ca54136283960a629aeda3d8bb6cad",
+  "results_merged_sha256": "16ff457104f208e1246a9c395c4ea108cc2e6b37206748ede7cdc1c41f472c93",
+  "chunks": [
+    {
+      "chunk": 0,
+      "counts": {
+        "correct": 36,
+        "wrong": 64,
+        "total": 100
+      },
+      "results_sha256": "0d4e43c336a50fa4fc0d23990fff48e733f2baca29c05a29b2442788f548359b",
+      "parsing_err_stats": {
+        "scores": 1,
+        "answer": 1,
+        "answer_qid": [
+          178
+        ],
+        "scores_qid": []
+      }
+    },
+    {
+      "chunk": 1,
+      "counts": {
+        "correct": 31,
+        "wrong": 69,
+        "total": 100
+      },
+      "results_sha256": "b4539edf39c70ea068328b70eecd342f0ac0a227c5d4a1cfc3a3d2a17f928149",
+      "parsing_err_stats": {
+        "scores": 6,
+        "answer": 0,
+        "answer_qid": [],
+        "scores_qid": [
+          251
+        ]
+      }
+    },
+    {
+      "chunk": 2,
+      "counts": {
+        "correct": 32,
+        "wrong": 68,
+        "total": 100
+      },
+      "results_sha256": "fea6d81c8288f11f6ec2ee4b082d5cd82f3823cca67544e62ab24f9ecee84fd2",
+      "parsing_err_stats": {
+        "scores": 2,
+        "answer": 1,
+        "answer_qid": [
+          735
+        ],
+        "scores_qid": []
+      }
+    },
+    {
+      "chunk": 3,
+      "counts": {
+        "correct": 28,
+        "wrong": 72,
+        "total": 100
+      },
+      "results_sha256": "6ed4125543e3174ee91b014a3c40ad2844b1b6ef3bc4d58ad6074834340468e6",
+      "parsing_err_stats": {
+        "scores": 7,
+        "answer": 0,
+        "answer_qid": [],
+        "scores_qid": [
+          749,
+          679
+        ]
+      }
+    },
+    {
+      "chunk": 4,
+      "counts": {
+        "correct": 31,
+        "wrong": 69,
+        "total": 100
+      },
+      "results_sha256": "ac7df2ebf46dcef9d6e85e215383e2c9c5dfb27dd30e957bc83198e60aaf5457",
+      "parsing_err_stats": {
+        "scores": 8,
+        "answer": 1,
+        "answer_qid": [
+          297
+        ],
+        "scores_qid": [
+          895,
+          639,
+          130
+        ]
+      }
+    },
+    {
+      "chunk": 5,
+      "counts": {
+        "correct": 28,
+        "wrong": 72,
+        "total": 100
+      },
+      "results_sha256": "722c99cf2f57a5cf7d60191a67b5e30b6798a3f9927809a32110f37c596c299b",
+      "parsing_err_stats": {
+        "scores": 2,
+        "answer": 1,
+        "answer_qid": [
+          900
+        ],
+        "scores_qid": []
+      }
+    },
+    {
+      "chunk": 6,
+      "counts": {
+        "correct": 24,
+        "wrong": 76,
+        "total": 100
+      },
+      "results_sha256": "ac6385b17eb0dd4ab798c6116bf6cf679a9f465a9230f9069e3bf93fa3ae8a6b",
+      "parsing_err_stats": {
+        "scores": 3,
+        "answer": 0,
+        "answer_qid": [],
+        "scores_qid": []
+      }
+    },
+    {
+      "chunk": 7,
+      "counts": {
+        "correct": 34,
+        "wrong": 66,
+        "total": 100
+      },
+      "results_sha256": "6c29ec27afffb740b8956c575220659ad1eacb8f4886bccabd7c82f0834500a3",
+      "parsing_err_stats": {
+        "scores": 6,
+        "answer": 1,
+        "answer_qid": [
+          696
+        ],
+        "scores_qid": []
+      }
+    },
+    {
+      "chunk": 8,
+      "counts": {
+        "correct": 24,
+        "wrong": 76,
+        "total": 100
+      },
+      "results_sha256": "da66d87a71749a34be8889e0f4e16e9d36ff5d2cd74001872242f08813e0942b",
+      "parsing_err_stats": {
+        "scores": 4,
+        "answer": 0,
+        "answer_qid": [],
+        "scores_qid": [
+          906
+        ]
+      }
+    },
+    {
+      "chunk": 9,
+      "counts": {
+        "correct": 38,
+        "wrong": 62,
+        "total": 100
+      },
+      "results_sha256": "79e68f1b6058f063fb1ea29cf5bc1062427e5172dd0b61454f787f63192c33e1",
+      "parsing_err_stats": {
+        "scores": 2,
+        "answer": 0,
+        "answer_qid": [],
+        "scores_qid": []
+      }
+    }
+  ],
+  "archives": [
+    {
+      "file": "results/raw_logs/mmsi-qwen25vl-72b-shard0-raw-0038.tar.gz",
+      "sha256": "ef76daec1e444a567bfee704e61f22927544c794103d7d89defd150b9ff3c99d",
+      "bytes": 407402,
+      "members": 552,
+      "gzip_crc": "passed",
+      "safe_members": "passed",
+      "credential_patterns": "no matches; non-exhaustive"
+    },
+    {
+      "file": "results/raw_logs/mmsi-qwen25vl-72b-shard1-raw-1710.tar.gz",
+      "sha256": "a52ea18740967864807412d33341008d99e20c3410811cb95f7795ddd27795d3",
+      "bytes": 440315,
+      "members": 576,
+      "gzip_crc": "passed",
+      "safe_members": "passed",
+      "credential_patterns": "no matches; non-exhaustive"
+    },
+    {
+      "file": "results/raw_logs/mmsi-qwen25vl-72b-shard2-raw-2150.tar.gz",
+      "sha256": "251a59e816cb683964adb23d884d9b0fe806c9d828a952daf58509ca6c0b7331",
+      "bytes": 379392,
+      "members": 516,
+      "gzip_crc": "passed",
+      "safe_members": "passed",
+      "credential_patterns": "no matches; non-exhaustive"
+    },
+    {
+      "file": "results/raw_logs/mmsi-qwen25vl-72b-shard6-raw.tar.gz",
+      "sha256": "c121adfec55cc8bcb5a106258c638adbc1f4a0061f058046c8b05c851bddf4ee",
+      "bytes": 527770,
+      "members": 1125,
+      "gzip_crc": "passed",
+      "safe_members": "passed",
+      "credential_patterns": "no matches; non-exhaustive",
+      "receipt": "results/records/MMSI72B_mmsi72b-shard6-uuew7uo4_ARCHIVE_RECEIPT.json"
+    },
+    {
+      "file": "results/raw_logs/mmsi-qwen25vl-72b-shard7-raw.tar.gz",
+      "sha256": "b1d021f1343f43c1e6123c7fa704eb0b6beb61cc444071d065a897498bc5f7dc",
+      "bytes": 592790,
+      "members": 1159,
+      "gzip_crc": "passed",
+      "safe_members": "passed",
+      "credential_patterns": "no matches; non-exhaustive",
+      "receipt": "results/records/MMSI72B_mmsi72b-shard7-u2e1zytm_ARCHIVE_RECEIPT.json"
+    },
+    {
+      "file": "results/raw_logs/mmsi-qwen25vl-72b-shards4-5-raw.tar.gz",
+      "sha256": "105ed0efe368b4c9d991415ecd1d1189855460b8e743a6b0e5e92d9ba686311e",
+      "bytes": 1088161,
+      "members": 2267,
+      "gzip_crc": "passed",
+      "safe_members": "passed",
+      "credential_patterns": "no matches; non-exhaustive",
+      "receipt": "results/records/MMSI72B_mmsi72b-shards45-2ka11lsd_ARCHIVE_RECEIPT.json"
+    },
+    {
+      "file": "results/raw_logs/mmsi-qwen25vl-72b-shard3-raw.tar.gz",
+      "sha256": "bde37da30601b67e3777c7f9d61906b83a711fb2601d3553028e7176f9c3d73a",
+      "bytes": 764671,
+      "members": 1146,
+      "gzip_crc": "passed",
+      "safe_members": "passed",
+      "credential_patterns": "no matches; non-exhaustive",
+      "receipt": "results/records/MMSI72B_mmsi72b-shard3-qcxeu6ru_ARCHIVE_RECEIPT.json"
+    },
+    {
+      "file": "results/raw_logs/mmsi-qwen25vl-72b-shard8-raw.tar.gz",
+      "sha256": "758048aea3bc5dfdc6162b42fa33d0ef61fed6c4dd9e78eced9a0ab76b43786f",
+      "bytes": 652799,
+      "members": 1162,
+      "gzip_crc": "passed",
+      "safe_members": "passed",
+      "credential_patterns": "no matches; non-exhaustive",
+      "receipt": "results/records/MMSI72B_mmsi72b-shard8-082lu4gc_ARCHIVE_RECEIPT.json"
+    },
+    {
+      "file": "results/raw_logs/mmsi-qwen25vl-72b-shard9-raw.tar.gz",
+      "sha256": "c78efbc38a67654849b96f923a30058353554191ea55983dcbb69a6a1871e087",
+      "bytes": 706798,
+      "members": 1156,
+      "gzip_crc": "passed",
+      "safe_members": "passed",
+      "credential_patterns": "no matches; non-exhaustive",
+      "receipt": "results/records/MMSI72B_mmsi72b-shard9-torgpyor_ARCHIVE_RECEIPT.json"
+    }
+  ],
+  "original_shards_unchanged": true,
+  "protocol_note": "Paper-aligned SVC multi-image adaptation; original r10 parsing errors retained without rescoring or repair. Not the original paper benchmark. Published-code diffusion steps 20, appendix 50 discrepancy retained.",
+  "shard3_resume": {
+    "old_saved": 85,
+    "newly_completed": 15,
+    "old_checkpoint_sha256_from_pre_resume_receipt": "9c3b7bd92ddaa1a8fd29656678013637c579712d365f34626631d9ab36d310fd",
+    "standalone_old_checkpoint": "not located; original byte snapshot preservation not verified",
+    "retained": "full old/new attempt logs and historical hash receipts",
+    "EIO_root_cause": "not established; successful completion does not prove permanent repair"
+  },
+  "publication_authorization": "User explicitly requested final group merge and remote publication on 2026-09-21; limited to this MMSI72B8192 group."
+}
