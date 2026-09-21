@@ -1,0 +1,142 @@
+{
+  "status": "passed_with_disclosed_retained_parse_issues",
+  "count": 1000,
+  "correct": 330,
+  "wrong": 670,
+  "skip": 0,
+  "exact_official_coverage_and_deduplication": "passed",
+  "source_partition": "542+329+126+3, mutually disjoint",
+  "all_1000_qa_hashes_and_original_image_order": "passed",
+  "strict_schema_validated_qa_scoring_api_records": 4937,
+  "strict_schema_archive_records_hashes": "all passed",
+  "old129_audit_receipt_sha256": "d5a364de0e5edb08a1cd896b29e3e987d0abde311370c03975c2170fbd0a0e28",
+  "old129_original_source_image_hash_audit": "prior read-only audit passed; image bytes not reloaded for publication",
+  "all_15_archive_crc_safe_members_bytes": "passed",
+  "credential_pattern_scan": "no common-pattern matches; not exhaustive",
+  "results_sha256": "e005f372f2e2124c48732e401b2d9f153b9e7d1bda1fdfe07ef18d23b5495dd0",
+  "provenance_sha256": "d651920cc93d1ea4cfa9e8d2a82ea7e5735ff3489f4bf6bb05ee5ad5258fdfe9",
+  "user_decision": {
+    "date": "2026-09-21",
+    "user_instruction": "MMSI-Bench 1000 Qwen3.5-27B这个结果你直接推送上去吧，两题解析失败就不管了",
+    "publication_authorization": "批准发布结果及完整原始日志",
+    "destination": "lsy818/MindJourney",
+    "retained_ids": [
+      776,
+      992
+    ],
+    "action": "retain original answers/outcomes; disclose scoring parse failures; no inference or rescore",
+    "does_not_authorize_other_groups": true
+  },
+  "notice": "Mixed-protocol source-aware aggregate, NOT a uniform strict-schema benchmark. 542 repaired + 329 previously unfinished strict-schema answers; 129 retained old-protocol answers. User explicitly retained scoring-parse-affected IDs 776 (wrong) and 992 (correct) without rerun. All outputs use 8192; not all answers are newly generated.",
+  "validated_utc": "2026-09-21T14:15:34.585856+00:00",
+  "run_id": "mj-p1-mmsi-qwen35-27b-mixed-schema8192-final-20260921",
+  "archives": [
+    {
+      "path": "results/raw_logs/mmsi-qwen35-27b-parsefix-chunk0-raw.tar.gz",
+      "sha256": "b6b5ecba880b4a2c6144238f2fcf5efc598a5d8749f0d0f78b46d1ad41bcc9e4",
+      "members": 1671,
+      "source": "targeted_repair_542",
+      "chunk": 0
+    },
+    {
+      "path": "results/raw_logs/mmsi-qwen35-27b-parsefix-chunk1-raw.tar.gz",
+      "sha256": "afdef65ba85d16a6ac4f8638e23cdd2ed24c1b3694c881947b4003a48642e9b8",
+      "members": 1674,
+      "source": "targeted_repair_542",
+      "chunk": 1
+    },
+    {
+      "path": "results/raw_logs/mmsi-qwen35-27b-parsefix-chunk2-raw.tar.gz",
+      "sha256": "939a3e5e82a7a6a1af9c32bf6f1179bf185d908acc37c09adb6b357ae12657ab",
+      "members": 1754,
+      "source": "targeted_repair_542",
+      "chunk": 2
+    },
+    {
+      "path": "results/raw_logs/mmsi-qwen35-27b-parsefix-chunk3-raw.tar.gz",
+      "sha256": "c5b7e7f1968f1b6d24c56b3c214390a3527451ef07a075b1a57f74b078b51bf1",
+      "members": 1658,
+      "source": "targeted_repair_542",
+      "chunk": 3
+    },
+    {
+      "path": "results/raw_logs/mmsi-qwen35-27b-parsefix-chunk4-raw.tar.gz",
+      "sha256": "ef356439d751197b7ef76d36df14e006a341761f23b9064ee5006ff25df59590",
+      "members": 1687,
+      "source": "targeted_repair_542",
+      "chunk": 4
+    },
+    {
+      "path": "results/raw_logs/mmsi-qwen35-27b-parsefix-chunk5-raw.tar.gz",
+      "sha256": "02082dce84f2bb1053085b33532436daa6c5a7f50de6124f71c93616cdf38f74",
+      "members": 1463,
+      "source": "targeted_repair_542",
+      "chunk": 5
+    },
+    {
+      "path": "results/raw_logs/mmsi-qwen35-27b-parsefix-chunk6-raw.tar.gz",
+      "sha256": "855c815921c79c2dd87cc79bcf9b283f6a824f54b12e3af0530764f05a1b102f",
+      "members": 197,
+      "source": "targeted_repair_542",
+      "chunk": 6
+    },
+    {
+      "path": "results/raw_logs/mmsi-qwen35-27b-parsefix-chunk8-raw.tar.gz",
+      "sha256": "d2a23203006391c0025331a2b3284f1a63d5e5f84bab0a6f27b4d32de77df6a8",
+      "members": 908,
+      "source": "targeted_repair_542",
+      "chunk": 8
+    },
+    {
+      "path": "results/raw_logs/mmsi-qwen35-27b-parsefix-chunk9-raw.tar.gz",
+      "sha256": "b2372dfa9e22e723c2b40a08481d2ec7d9116802f85855d8fb08ccb3aa77d555",
+      "members": 615,
+      "source": "targeted_repair_542",
+      "chunk": 9
+    },
+    {
+      "path": "results/raw_logs/mmsi-qwen35-27b-unfinished-chunk5-raw.tar.gz",
+      "sha256": "128b13198ff9d8f130ec754c58e23897b2988da1bf6b4ed80e4a5f60c39a473b",
+      "members": 363,
+      "source": "previously_unfinished_329",
+      "chunk": 5
+    },
+    {
+      "path": "results/raw_logs/mmsi-qwen35-27b-unfinished-chunk6-raw.tar.gz",
+      "sha256": "8c5b38ee8649139cf2aead879f6fad4465aa6012c8ae008d999142815f862aa9",
+      "members": 1810,
+      "source": "previously_unfinished_329",
+      "chunk": 6
+    },
+    {
+      "path": "results/raw_logs/mmsi-qwen35-27b-unfinished-chunk7-raw.tar.gz",
+      "sha256": "b7a9a9d431941e44015e846bd496a447b32b7d8c985fbd87903894b89677e655",
+      "members": 2134,
+      "source": "previously_unfinished_329",
+      "chunk": 7
+    },
+    {
+      "path": "results/raw_logs/mmsi-qwen35-27b-unfinished-chunk8-raw.tar.gz",
+      "sha256": "92e8d7c035316ae5970c7109eaa5266ec308aab9468c7d2326bfcc064b757baf",
+      "members": 1099,
+      "source": "previously_unfinished_329",
+      "chunk": 8
+    },
+    {
+      "path": "results/raw_logs/mmsi-qwen35-27b-unfinished-chunk9-raw.tar.gz",
+      "sha256": "ad284d8111fb3d6e4fe9b6966579e34558b5fed98e4c3e98018421b479ed230f",
+      "members": 1517,
+      "source": "previously_unfinished_329",
+      "chunk": 9
+    },
+    {
+      "archive": "results/raw_logs/mmsi-qwen35-27b-old-and-final-source-raw-20260921.tar.gz",
+      "sha256": "60f1d557701ad9bc9a65d2a5f2ba1657c765a6a2cb0b36f095d01225e8b8d8be",
+      "members": 8624
+    }
+  ],
+  "result_path": "results/mmsi/qwen3.5-27b/svc/mj-p1-mmsi-qwen35-27b-mixed-schema8192-final-20260921/results_merged.json",
+  "provenance_path": "results/mmsi/qwen3.5-27b/svc/mj-p1-mmsi-qwen35-27b-mixed-schema8192-final-20260921/question_provenance.json",
+  "script_sha256": "6fc0fc2690ace303c1fa90174342f9d1aaee19c32a89976a1014241ece89850e",
+  "originals_retained": true
+}

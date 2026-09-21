@@ -1,0 +1,1407 @@
+{
+  "utc": "2026-09-20T12:07:32.065166+00:00",
+  "directory": "/home/datasets/shiyang/daai_runtime/p1_archives_8192/20260920/mmsi27b-parsefix-chunk6-v0658_ma",
+  "scope": "targeted_repair_only",
+  "chunk": 6,
+  "count": 10,
+  "archive": "/home/datasets/shiyang/daai_runtime/p1_archives_8192/20260920/mmsi27b-parsefix-chunk6-v0658_ma/mmsi-qwen35-27b-parsefix-chunk6-raw.tar.gz",
+  "sha256": "855c815921c79c2dd87cc79bcf9b283f6a824f54b12e3af0530764f05a1b102f",
+  "bytes": 408053,
+  "members": 197,
+  "results_sha256": "1b05f08f896d721feb2de0e0e9eebe9243208e1908f7900e41af4940b2d7b1cb",
+  "validation_sha256": "3e7c1cc90a99736f8ef2144ccae05b2444a4855c6364b329a2baccb6ab03b299",
+  "correct": 4,
+  "wrong": 6,
+  "full_gzip_crc": "passed",
+  "safe_members": "passed",
+  "raw_api_coverage": "all validated QA/scoring API responses included",
+  "raw_response_coverage": "10 QA and source_image_order manifests, all scoring and other chunk JSON",
+  "original_byte_identity": "passed for stable files; declared growing logs match exact source prefixes at snapshot",
+  "credential_pattern_scan": {
+    "flagged_paths": [],
+    "scope": "common patterns, not exhaustive"
+  },
+  "records": [
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/ARCHIVE_CHUNK_0_INTENT.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/ARCHIVE_CHUNK_0_INTENT.json",
+      "size": 224,
+      "sha256": "3c16690fc56c0d33eaabcf0899504f47804e8049f9fc68fac13e8919c83ec7dd",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/ARCHIVE_CHUNK_0_RECEIPT.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/ARCHIVE_CHUNK_0_RECEIPT.json",
+      "size": 790844,
+      "sha256": "18dcc82b39b9b297d2648f350813203fbd2be0c32761af372c4b02238d630228",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/ARCHIVE_CHUNK_5_INTENT.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/ARCHIVE_CHUNK_5_INTENT.json",
+      "size": 224,
+      "sha256": "2f8c70869cf52d51c2533cdfdacdbc47ed35383ff386cbbc02de2c10627dbc91",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/ARCHIVE_CHUNK_5_RECEIPT.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/ARCHIVE_CHUNK_5_RECEIPT.json",
+      "size": 689880,
+      "sha256": "8b779a1ba6902c05992dde05700aee7d0fcf21ac8cd96093f6b06949e9c2c4ec",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/BATCH1_PORT_RETRY_INTENT.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/BATCH1_PORT_RETRY_INTENT.json",
+      "size": 2562,
+      "sha256": "4bb3d06c8a20de7e7bf3d12c6c57f77ca65fba9743dbb6fb569f54d7ac18fe2d",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/BATCH1_PORT_RETRY_RECEIPT.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/BATCH1_PORT_RETRY_RECEIPT.json",
+      "size": 2620,
+      "sha256": "b8bba798affe2cd63bcc8f3ffdc418c50cdade310087d65a5f74f6e58882d834",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/LAUNCH_RETRY_INTENT.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/LAUNCH_RETRY_INTENT.json",
+      "size": 2004,
+      "sha256": "cf23e7b58c1053e6a84b4a3a242f647ea130327938e22b1beabbf80789c77770",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/LAUNCH_RETRY_RECEIPT.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/LAUNCH_RETRY_RECEIPT.json",
+      "size": 2062,
+      "sha256": "9e222c3e3f11e1804515b86ebc88bff1d429c016dbce849da25b112adae11ef3",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/SETTINGS_COMPARISON.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/SETTINGS_COMPARISON.json",
+      "size": 1858,
+      "sha256": "f9b0dd62c7f827914eece43c02b2295ef48e4a4d07165353b49105c8a7572b1b",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/SUBMISSION_INTENT.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/SUBMISSION_INTENT.json",
+      "size": 2360,
+      "sha256": "8400392977743a98037d1818c4d94092b17c8ab4a812059ffdb55b52178b9a5b",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/SUBMISSION_RECEIPT.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/SUBMISSION_RECEIPT.json",
+      "size": 2418,
+      "sha256": "1a9cc92ca28202a8935f0d446df588064ac0c69c153a40e73abddb2546039825",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/attempts/batch_1/74568-20260920T065638Z/attempt.txt",
+      "member": "mj-p1-27b-parsefix-v1-20260920/attempts/batch_1/74568-20260920T065638Z/attempt.txt",
+      "size": 104,
+      "sha256": "a0e07c7ccdc84ad816756b88af457a8ef8379a3c513b118e8dabb5c34f393b47",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/attempts/batch_1/74568-20260920T065638Z/pipeline_chunk_6.log",
+      "member": "mj-p1-27b-parsefix-v1-20260920/attempts/batch_1/74568-20260920T065638Z/pipeline_chunk_6.log",
+      "size": 183553,
+      "sha256": "78a62d85fa2b181e68415fca7428a3b32f59f3e8ef392ad328073e343c4cb532",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/attempts/batch_1/74568-20260920T065638Z/vllm.log",
+      "member": "mj-p1-27b-parsefix-v1-20260920/attempts/batch_1/74568-20260920T065638Z/vllm.log",
+      "size": 209757,
+      "sha256": "c7c40af9917240bcd3d37c37674d560c9429bfdffff737f493b8497defce663c",
+      "prefix_snapshot": true
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/logs/mj-27b-parsefix-v1-74498_1.err",
+      "member": "mj-p1-27b-parsefix-v1-20260920/logs/mj-27b-parsefix-v1-74498_1.err",
+      "size": 116,
+      "sha256": "74d9044d162865615fd4ffe1caf721a7fbea78ee33981e4a3ea03cd7fd4d09a1",
+      "prefix_snapshot": true
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/logs/mj-27b-parsefix-v1-74498_1.out",
+      "member": "mj-p1-27b-parsefix-v1-20260920/logs/mj-27b-parsefix-v1-74498_1.out",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "prefix_snapshot": true
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/logs/mj-27b-parsefix-v1-74500_1.err",
+      "member": "mj-p1-27b-parsefix-v1-20260920/logs/mj-27b-parsefix-v1-74500_1.err",
+      "size": 234,
+      "sha256": "a7cb876b4ce8a82719e760d7546dfb3b225fe401f490b80235d6a6019d161a68",
+      "prefix_snapshot": true
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/logs/mj-27b-parsefix-v1-74500_1.out",
+      "member": "mj-p1-27b-parsefix-v1-20260920/logs/mj-27b-parsefix-v1-74500_1.out",
+      "size": 563,
+      "sha256": "bb3a9e6f24bccd608a018bd93ba32d23e60923cfa3f3aa84ebc9be61b8f6e9ad",
+      "prefix_snapshot": true
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/logs/mj-27b-parsefix-v1-74568_1.err",
+      "member": "mj-p1-27b-parsefix-v1-20260920/logs/mj-27b-parsefix-v1-74568_1.err",
+      "size": 117,
+      "sha256": "0d5af49969f355b2777d78a36045a987ad00a69ddf41916fca8a1ce797eed06c",
+      "prefix_snapshot": true
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/logs/mj-27b-parsefix-v1-74568_1.out",
+      "member": "mj-p1-27b-parsefix-v1-20260920/logs/mj-27b-parsefix-v1-74568_1.out",
+      "size": 563,
+      "sha256": "bb3a9e6f24bccd608a018bd93ba32d23e60923cfa3f3aa84ebc9be61b8f6e9ad",
+      "prefix_snapshot": true
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/original_checkpoints/chunk_6.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/original_checkpoints/chunk_6.json",
+      "size": 23725,
+      "sha256": "6c919dd65d11f1beedaf3bc835b23c046caad36a754c79b68b0bee735d0382de",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/173/gpt.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/173/gpt.json",
+      "size": 3850,
+      "sha256": "6d80efd0b10b00a60e73622f7077c1bc42cc5364a7fc4eef0994cdfddb1933fb",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/173/step_0/gpt_0.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/173/step_0/gpt_0.json",
+      "size": 7196,
+      "sha256": "b99bdcb23678b1bb6fb78c63bdea8205165a8aa4210a689c94e4449e8cc52c06",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/173/step_0/gpt_1.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/173/step_0/gpt_1.json",
+      "size": 7412,
+      "sha256": "333fcee5748889913b70c1ac24d0a65860ebeb0a1e4dd3eba015fe5a929add9e",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/173/step_0/move-forward_0.75/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/173/step_0/move-forward_0.75/episode.json",
+      "size": 989,
+      "sha256": "f3eaab21dc905adc0007ff852cefaa466423a241f865af0d86d17bef486e9c7d",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/173/step_0/source_image_order.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/173/step_0/source_image_order.json",
+      "size": 783,
+      "sha256": "9b98d067db7ea780753fa87cca70148651048e0857ad676a56e90eea37cf3d91",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/173/step_0/turn-left_27.00/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/173/step_0/turn-left_27.00/episode.json",
+      "size": 1017,
+      "sha256": "97de83aad4535fadeec8d748ebaca5074d62315aa22893e2535865f6035cfbb3",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/173/step_0/turn-right_27.00/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/173/step_0/turn-right_27.00/episode.json",
+      "size": 1009,
+      "sha256": "3df30b489bc2e6bef257034c6d0da3ca5e6cd2a94cb41d7dc9168dae3ad71934",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/22/gpt.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/22/gpt.json",
+      "size": 3521,
+      "sha256": "fab12a01204f6d89e8d2f1699a79a7bfe039874716bcad71a3e8dbd09cde954d",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/22/step_0/gpt_0.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/22/step_0/gpt_0.json",
+      "size": 6860,
+      "sha256": "0cf61bc1a4f004d0ec0f83b86ce11f57c79539339a9fd06c2d0ee49fcf3c4c0a",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/22/step_0/gpt_1.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/22/step_0/gpt_1.json",
+      "size": 7076,
+      "sha256": "b19f1fbff0d5e36e596e13eacaa99c045eca417b7cbaec3e1012e2d48eb900ea",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/22/step_0/move-forward_0.75/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/22/step_0/move-forward_0.75/episode.json",
+      "size": 989,
+      "sha256": "f3eaab21dc905adc0007ff852cefaa466423a241f865af0d86d17bef486e9c7d",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/22/step_0/source_image_order.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/22/step_0/source_image_order.json",
+      "size": 781,
+      "sha256": "41fb38b9f61a1ebbdf2c068a004f56bd968bec146a285adb5de8d97e912381de",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/22/step_0/turn-left_27.00/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/22/step_0/turn-left_27.00/episode.json",
+      "size": 1017,
+      "sha256": "97de83aad4535fadeec8d748ebaca5074d62315aa22893e2535865f6035cfbb3",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/22/step_0/turn-right_27.00/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/22/step_0/turn-right_27.00/episode.json",
+      "size": 1009,
+      "sha256": "3df30b489bc2e6bef257034c6d0da3ca5e6cd2a94cb41d7dc9168dae3ad71934",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/gpt.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/gpt.json",
+      "size": 13040,
+      "sha256": "e6a94de30bde9dc07a7168452a61b1b5c4a0253cd89b9eaf90a42ee28c6b2315",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_0/gpt_0.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_0/gpt_0.json",
+      "size": 7072,
+      "sha256": "ede40db8e61e118f2d8d8922cbdcc19a5856dea1de3269fc0c284a6bc5662bdd",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_0/gpt_1.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_0/gpt_1.json",
+      "size": 7288,
+      "sha256": "73784cc46cf31d026acee0b57d1fcce7b1239d104a3c6ccf7c8f767ceb42d4f7",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_0/move-forward_0.75/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_0/move-forward_0.75/episode.json",
+      "size": 989,
+      "sha256": "f3eaab21dc905adc0007ff852cefaa466423a241f865af0d86d17bef486e9c7d",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_0/source_image_order.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_0/source_image_order.json",
+      "size": 783,
+      "sha256": "d398e652fdfe72394cb2b6d41bea3b278806ad7d07a58a5eaae7f2966db29079",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_0/turn-left_27.00/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_0/turn-left_27.00/episode.json",
+      "size": 1017,
+      "sha256": "97de83aad4535fadeec8d748ebaca5074d62315aa22893e2535865f6035cfbb3",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_0/turn-right_27.00/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_0/turn-right_27.00/episode.json",
+      "size": 1009,
+      "sha256": "3df30b489bc2e6bef257034c6d0da3ca5e6cd2a94cb41d7dc9168dae3ad71934",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_1/gpt_0.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_1/gpt_0.json",
+      "size": 8909,
+      "sha256": "a9bed50f038fdb0912ac4afa1a091e2001eff49f3d3261d3c8eee18064613ef1",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_1/gpt_1.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_1/gpt_1.json",
+      "size": 9125,
+      "sha256": "7f823068c64a129b1c3f9a5fd38f23944ff948dd39d8bd3f05feb688a5408421",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_1/turn-left_18_degrees_move-forward_0.75_meters/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_1/turn-left_18_degrees_move-forward_0.75_meters/episode.json",
+      "size": 1058,
+      "sha256": "e4df57cefb87a069e7f5a3ff806b857f2329c6422ec4c8ce4fcea4de66d7df9d",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_1/turn-left_18_degrees_turn-left_27.00_degrees/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_1/turn-left_18_degrees_turn-left_27.00_degrees/episode.json",
+      "size": 1017,
+      "sha256": "97de83aad4535fadeec8d748ebaca5074d62315aa22893e2535865f6035cfbb3",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_1/turn-left_27_degrees_move-forward_0.75_meters/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_1/turn-left_27_degrees_move-forward_0.75_meters/episode.json",
+      "size": 1049,
+      "sha256": "92c5398dd25673c8b3349de94c4b982a704348d8410eeda591b8674f5da421d2",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_1/turn-left_27_degrees_turn-left_27.00_degrees/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_1/turn-left_27_degrees_turn-left_27.00_degrees/episode.json",
+      "size": 1017,
+      "sha256": "97de83aad4535fadeec8d748ebaca5074d62315aa22893e2535865f6035cfbb3",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_2/gpt_0.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_2/gpt_0.json",
+      "size": 12589,
+      "sha256": "c8d01b60a1957e74d8b5f810b592cbb7d9a276e65a0081c711e663af309027d2",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_2/gpt_1.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_2/gpt_1.json",
+      "size": 12805,
+      "sha256": "bfe21d0370957a5f106d2d4389b3522e2a74af2a15bd9cad4e114f53c59ada76",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_2/turn-left_27_degrees_move-forward_0.25_meters_move-forward_0.75_meters/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_2/turn-left_27_degrees_move-forward_0.25_meters_move-forward_0.75_meters/episode.json",
+      "size": 1049,
+      "sha256": "92c5398dd25673c8b3349de94c4b982a704348d8410eeda591b8674f5da421d2",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_2/turn-left_27_degrees_move-forward_0.25_meters_turn-left_27.00_degrees/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_2/turn-left_27_degrees_move-forward_0.25_meters_turn-left_27.00_degrees/episode.json",
+      "size": 1052,
+      "sha256": "8a62a9de3c10d4331c54aa9a20395fc5374151a9bd6475e3dd92915863fbcc77",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_2/turn-left_27_degrees_move-forward_0.25_meters_turn-right_27.00_degrees/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_2/turn-left_27_degrees_move-forward_0.25_meters_turn-right_27.00_degrees/episode.json",
+      "size": 1047,
+      "sha256": "37ece8b7d99abd65f578b3fe574a44aa13df4008869b6238b79bcf90e208868c",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_2/turn-left_27_degrees_move-forward_0.5_meters_move-forward_0.75_meters/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_2/turn-left_27_degrees_move-forward_0.5_meters_move-forward_0.75_meters/episode.json",
+      "size": 1049,
+      "sha256": "92c5398dd25673c8b3349de94c4b982a704348d8410eeda591b8674f5da421d2",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_2/turn-left_27_degrees_move-forward_0.5_meters_turn-left_27.00_degrees/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_2/turn-left_27_degrees_move-forward_0.5_meters_turn-left_27.00_degrees/episode.json",
+      "size": 1048,
+      "sha256": "e8aee9a7f548c2deba0c2d708a7aa2390b37a9252aed03ca59953a0aaf77fb89",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_2/turn-left_27_degrees_move-forward_0.5_meters_turn-right_27.00_degrees/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/259/step_2/turn-left_27_degrees_move-forward_0.5_meters_turn-right_27.00_degrees/episode.json",
+      "size": 1044,
+      "sha256": "f85b9ef5ef9fc908c35a691cb8542ba5524fc37b1e7a2ccf96e3d818d6d2fa5a",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/302/gpt.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/302/gpt.json",
+      "size": 4523,
+      "sha256": "3555e6e01371ec07594125b9153d677fdf0133f8823e389f11baaeb30c8ac000",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/302/step_0/gpt_0.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/302/step_0/gpt_0.json",
+      "size": 7869,
+      "sha256": "4eaec5fe246a88da555ddc67962ad25d8935c3cc96eb3a4d6af71a49be334e66",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/302/step_0/gpt_1.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/302/step_0/gpt_1.json",
+      "size": 8085,
+      "sha256": "677679bbebdbbeb9fe6ce3e2ae6bbecf0edbd054b7dd98f1ed5eaf2623ce82ab",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/302/step_0/move-forward_0.75/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/302/step_0/move-forward_0.75/episode.json",
+      "size": 989,
+      "sha256": "f3eaab21dc905adc0007ff852cefaa466423a241f865af0d86d17bef486e9c7d",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/302/step_0/source_image_order.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/302/step_0/source_image_order.json",
+      "size": 1968,
+      "sha256": "4d12040332ada8c087454a30e6da9538fde164399fb4f68c3067d209fd0ae71e",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/302/step_0/turn-left_27.00/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/302/step_0/turn-left_27.00/episode.json",
+      "size": 1017,
+      "sha256": "97de83aad4535fadeec8d748ebaca5074d62315aa22893e2535865f6035cfbb3",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/302/step_0/turn-right_27.00/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/302/step_0/turn-right_27.00/episode.json",
+      "size": 1009,
+      "sha256": "3df30b489bc2e6bef257034c6d0da3ca5e6cd2a94cb41d7dc9168dae3ad71934",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/gpt.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/gpt.json",
+      "size": 7203,
+      "sha256": "ae2e839f1adc72c72d50dfdfe2ee9dee5d39e551b352bcd28c3b0f95b43aac49",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_0/gpt_0.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_0/gpt_0.json",
+      "size": 6803,
+      "sha256": "3a4b62d77629cf568818290474d250a9e36f29670b8901c9c67162925525b8ff",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_0/gpt_1.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_0/gpt_1.json",
+      "size": 7021,
+      "sha256": "0e8742624cb4ca2798fc7c6e730f43cdd2d7ddbc40540b8b13f525d2a8e4a7ee",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_0/move-forward_0.75/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_0/move-forward_0.75/episode.json",
+      "size": 989,
+      "sha256": "f3eaab21dc905adc0007ff852cefaa466423a241f865af0d86d17bef486e9c7d",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_0/source_image_order.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_0/source_image_order.json",
+      "size": 783,
+      "sha256": "1d815425962efef75710677f4a9503a881e010ce64d7dccab0f258b8ee674b5e",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_0/turn-left_27.00/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_0/turn-left_27.00/episode.json",
+      "size": 1017,
+      "sha256": "97de83aad4535fadeec8d748ebaca5074d62315aa22893e2535865f6035cfbb3",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_0/turn-right_27.00/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_0/turn-right_27.00/episode.json",
+      "size": 1009,
+      "sha256": "3df30b489bc2e6bef257034c6d0da3ca5e6cd2a94cb41d7dc9168dae3ad71934",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_1/gpt_0.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_1/gpt_0.json",
+      "size": 10093,
+      "sha256": "52a911d417053376552c7c77ac8cbd3fd1fe325259b97ba7b8e38d4ab78efb5a",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_1/gpt_1.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_1/gpt_1.json",
+      "size": 10311,
+      "sha256": "efd1e8a092c4d40f9819e1f89fc567f22e4fcd96c26bee35761efd5378b5dd82",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_1/move-forward_0.25_meters_move-forward_0.75_meters/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_1/move-forward_0.25_meters_move-forward_0.75_meters/episode.json",
+      "size": 989,
+      "sha256": "f3eaab21dc905adc0007ff852cefaa466423a241f865af0d86d17bef486e9c7d",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_1/move-forward_0.25_meters_turn-left_27.00_degrees/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_1/move-forward_0.25_meters_turn-left_27.00_degrees/episode.json",
+      "size": 1021,
+      "sha256": "e2f191e8f805fe99580165d522684e5c6f40a6ed186cac25f80237fbde729263",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_1/move-forward_0.25_meters_turn-right_27.00_degrees/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_1/move-forward_0.25_meters_turn-right_27.00_degrees/episode.json",
+      "size": 1014,
+      "sha256": "12a2a72d41805527ed93f13819981c0286877dfcdc04fb49e2fc071b61fe2bd5",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_1/turn-left_9_degrees_move-forward_0.75_meters/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_1/turn-left_9_degrees_move-forward_0.75_meters/episode.json",
+      "size": 1066,
+      "sha256": "987b1ae2fdb72f05564cc2b25a17423416d93447bc286861525bb51851ca053e",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_1/turn-left_9_degrees_turn-left_27.00_degrees/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_1/turn-left_9_degrees_turn-left_27.00_degrees/episode.json",
+      "size": 1017,
+      "sha256": "97de83aad4535fadeec8d748ebaca5074d62315aa22893e2535865f6035cfbb3",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_2/gpt_0.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_2/gpt_0.json",
+      "size": 10710,
+      "sha256": "0adeb3d3f21e0f09d664ec77397aad94df270f28d3e6a879858cf6f56db435f5",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_2/gpt_1.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_2/gpt_1.json",
+      "size": 10926,
+      "sha256": "0edbc6eb80566a5c75baea91965a952641c74a630d584620f24b7e3450b0e161",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_2/turn-left_9_degrees_move-forward_0.25_meters_move-forward_0.75_meters/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_2/turn-left_9_degrees_move-forward_0.25_meters_move-forward_0.75_meters/episode.json",
+      "size": 1066,
+      "sha256": "987b1ae2fdb72f05564cc2b25a17423416d93447bc286861525bb51851ca053e",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_2/turn-left_9_degrees_move-forward_0.25_meters_turn-left_27.00_degrees/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_2/turn-left_9_degrees_move-forward_0.25_meters_turn-left_27.00_degrees/episode.json",
+      "size": 1066,
+      "sha256": "d5c24ab0c92541db1011ad0d56fc955d177cb4fa0881451cc314fafddc8abe4d",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_2/turn-left_9_degrees_move-forward_0.25_meters_turn-right_27.00_degrees/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_2/turn-left_9_degrees_move-forward_0.25_meters_turn-right_27.00_degrees/episode.json",
+      "size": 1057,
+      "sha256": "4ca6aedc7e80f8cf474b829293c7c56852ddf0e79ffbdeb22678d32c65b3d388",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_2/turn-left_9_degrees_turn-left_9_degrees_move-forward_0.75_meters/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_2/turn-left_9_degrees_turn-left_9_degrees_move-forward_0.75_meters/episode.json",
+      "size": 1058,
+      "sha256": "e4df57cefb87a069e7f5a3ff806b857f2329c6422ec4c8ce4fcea4de66d7df9d",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_2/turn-left_9_degrees_turn-left_9_degrees_turn-left_27.00_degrees/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/417/step_2/turn-left_9_degrees_turn-left_9_degrees_turn-left_27.00_degrees/episode.json",
+      "size": 1017,
+      "sha256": "97de83aad4535fadeec8d748ebaca5074d62315aa22893e2535865f6035cfbb3",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/gpt.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/gpt.json",
+      "size": 5518,
+      "sha256": "4bad8465d9fdcabe936e0fc314b1748928ae4ee53da9820f1f6758536b0ccd7b",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_0/gpt_0.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_0/gpt_0.json",
+      "size": 7040,
+      "sha256": "b0cea03f9148b93b1ec36c0cefa6ba90fc6f141231b832fcc4c350aa47e89c2d",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_0/gpt_1.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_0/gpt_1.json",
+      "size": 7258,
+      "sha256": "2d1962f82426c85f6c96ce3240e563a1c80d6b796be7bc5209d7fe00ea244346",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_0/move-forward_0.75/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_0/move-forward_0.75/episode.json",
+      "size": 989,
+      "sha256": "f3eaab21dc905adc0007ff852cefaa466423a241f865af0d86d17bef486e9c7d",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_0/source_image_order.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_0/source_image_order.json",
+      "size": 783,
+      "sha256": "d0ed7b521c90a41d7bdb6d9d7d63ee838c5e26276cef5c44e18b2d5692110afd",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_0/turn-left_27.00/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_0/turn-left_27.00/episode.json",
+      "size": 1017,
+      "sha256": "97de83aad4535fadeec8d748ebaca5074d62315aa22893e2535865f6035cfbb3",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_0/turn-right_27.00/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_0/turn-right_27.00/episode.json",
+      "size": 1009,
+      "sha256": "3df30b489bc2e6bef257034c6d0da3ca5e6cd2a94cb41d7dc9168dae3ad71934",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_1/gpt_0.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_1/gpt_0.json",
+      "size": 8952,
+      "sha256": "6984818eb090d6d0fc366d71964c5e034c719a6c933d0c7a9ce4836613427a85",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_1/gpt_1.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_1/gpt_1.json",
+      "size": 9168,
+      "sha256": "2fee48d0550f3fb8487fae08af7257f62549886c104ec903f5124ca6298ff0b7",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_1/turn-right_18_degrees_move-forward_0.75_meters/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_1/turn-right_18_degrees_move-forward_0.75_meters/episode.json",
+      "size": 1044,
+      "sha256": "118902a3bb36e93541165987f2d9906171456c41a9888dac80aa1e480cbbe287",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_1/turn-right_18_degrees_turn-right_27.00_degrees/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_1/turn-right_18_degrees_turn-right_27.00_degrees/episode.json",
+      "size": 1009,
+      "sha256": "3df30b489bc2e6bef257034c6d0da3ca5e6cd2a94cb41d7dc9168dae3ad71934",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_1/turn-right_9_degrees_move-forward_0.75_meters/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_1/turn-right_9_degrees_move-forward_0.75_meters/episode.json",
+      "size": 1051,
+      "sha256": "db941a5866a0dd5620178effa8ec8d4a54595f020825ec5f2ff881f9b9f001b6",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_1/turn-right_9_degrees_turn-right_27.00_degrees/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_1/turn-right_9_degrees_turn-right_27.00_degrees/episode.json",
+      "size": 1009,
+      "sha256": "3df30b489bc2e6bef257034c6d0da3ca5e6cd2a94cb41d7dc9168dae3ad71934",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_2/gpt_0.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_2/gpt_0.json",
+      "size": 12512,
+      "sha256": "9b99456443ede76a2533b6e41116a74f9ebb7c8cd92dc39f71333abbfc4e6bf5",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_2/gpt_1.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_2/gpt_1.json",
+      "size": 12825,
+      "sha256": "ae9c5981cdcecde2f4c6089f364de9115b2b6996e77ac521a7177be0409902bc",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_2/turn-right_9_degrees_move-forward_0.25_meters_move-forward_0.75_meters/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_2/turn-right_9_degrees_move-forward_0.25_meters_move-forward_0.75_meters/episode.json",
+      "size": 1051,
+      "sha256": "db941a5866a0dd5620178effa8ec8d4a54595f020825ec5f2ff881f9b9f001b6",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_2/turn-right_9_degrees_move-forward_0.25_meters_turn-left_27.00_degrees/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_2/turn-right_9_degrees_move-forward_0.25_meters_turn-left_27.00_degrees/episode.json",
+      "size": 1053,
+      "sha256": "2f006f4a9ecf4d8ce533fc4a3980da048bd64910c7201c0542f96dda87652349",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_2/turn-right_9_degrees_move-forward_0.25_meters_turn-right_27.00_degrees/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_2/turn-right_9_degrees_move-forward_0.25_meters_turn-right_27.00_degrees/episode.json",
+      "size": 1051,
+      "sha256": "4a6e0b130770c5766dbea2e9b77175757bdbed4ff1aef2cf8f1fbe2c833a884a",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_2/turn-right_9_degrees_move-forward_0.5_meters_move-forward_0.75_meters/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_2/turn-right_9_degrees_move-forward_0.5_meters_move-forward_0.75_meters/episode.json",
+      "size": 1051,
+      "sha256": "db941a5866a0dd5620178effa8ec8d4a54595f020825ec5f2ff881f9b9f001b6",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_2/turn-right_9_degrees_move-forward_0.5_meters_turn-left_27.00_degrees/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_2/turn-right_9_degrees_move-forward_0.5_meters_turn-left_27.00_degrees/episode.json",
+      "size": 1052,
+      "sha256": "7ae9310bc593069627ab4c1ef9fef654d56e7f48cd984992c304f092aff3f4f2",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_2/turn-right_9_degrees_move-forward_0.5_meters_turn-right_27.00_degrees/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/579/step_2/turn-right_9_degrees_move-forward_0.5_meters_turn-right_27.00_degrees/episode.json",
+      "size": 1051,
+      "sha256": "9736645fa9ab54e10f9336ec7cb146f4cfa68ef4e69ffe67d8f6003f64d43196",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/695/gpt.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/695/gpt.json",
+      "size": 6282,
+      "sha256": "df368a522c771523358d15018c1b95e6bd7964309c9de592312f6d5148d40fc3",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/695/step_0/gpt_0.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/695/step_0/gpt_0.json",
+      "size": 8837,
+      "sha256": "c9e8cff1249a11d5abaa866dd714b8932308a25a849b890a75455524e0147ba6",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/695/step_0/gpt_1.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/695/step_0/gpt_1.json",
+      "size": 9053,
+      "sha256": "1114a7ea365da926c56df255109a2cab8245384b0bc8a87cf88d33602ac55e6b",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/695/step_0/move-forward_0.75/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/695/step_0/move-forward_0.75/episode.json",
+      "size": 989,
+      "sha256": "f3eaab21dc905adc0007ff852cefaa466423a241f865af0d86d17bef486e9c7d",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/695/step_0/source_image_order.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/695/step_0/source_image_order.json",
+      "size": 2363,
+      "sha256": "5fdd9539e4f826558c98e54472221408e4c41340aa74a65b13be51820befbe63",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/695/step_0/turn-left_27.00/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/695/step_0/turn-left_27.00/episode.json",
+      "size": 1017,
+      "sha256": "97de83aad4535fadeec8d748ebaca5074d62315aa22893e2535865f6035cfbb3",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/695/step_0/turn-right_27.00/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/695/step_0/turn-right_27.00/episode.json",
+      "size": 1009,
+      "sha256": "3df30b489bc2e6bef257034c6d0da3ca5e6cd2a94cb41d7dc9168dae3ad71934",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/gpt.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/gpt.json",
+      "size": 4522,
+      "sha256": "638d14f0643a2ad1b9315c2bf8c400221ce0400487d6fcb05303fe60e999c021",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/step_0/gpt_0.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/step_0/gpt_0.json",
+      "size": 7548,
+      "sha256": "c5c3a24215a8110f29d77c079e23f5b4fb3b5b4da4b93e1710f0b5f3d3464116",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/step_0/gpt_1.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/step_0/gpt_1.json",
+      "size": 7764,
+      "sha256": "a4c407247a13e58d43de4d677b1e4e65630185b909af8559f9ba7b6708a88bba",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/step_0/move-forward_0.75/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/step_0/move-forward_0.75/episode.json",
+      "size": 989,
+      "sha256": "f3eaab21dc905adc0007ff852cefaa466423a241f865af0d86d17bef486e9c7d",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/step_0/source_image_order.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/step_0/source_image_order.json",
+      "size": 783,
+      "sha256": "68dc12dcf74c4c852ca1b0d3ca7b2e362f50f4530fda69e208cc1162144d5677",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/step_0/turn-left_27.00/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/step_0/turn-left_27.00/episode.json",
+      "size": 1017,
+      "sha256": "97de83aad4535fadeec8d748ebaca5074d62315aa22893e2535865f6035cfbb3",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/step_0/turn-right_27.00/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/step_0/turn-right_27.00/episode.json",
+      "size": 1009,
+      "sha256": "3df30b489bc2e6bef257034c6d0da3ca5e6cd2a94cb41d7dc9168dae3ad71934",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/step_1/gpt_0.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/step_1/gpt_0.json",
+      "size": 6764,
+      "sha256": "6f16df0fb681637492d9cf969760d10a3e07b7575560b4330b252f2df28b05cb",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/step_1/gpt_1.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/step_1/gpt_1.json",
+      "size": 6980,
+      "sha256": "0cc1d65f32b0da4ebd89b8f6c1a3f2279501b26961c2ba1e75b760023d83de33",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/step_1/turn-right_27_degrees_move-forward_0.75_meters/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/step_1/turn-right_27_degrees_move-forward_0.75_meters/episode.json",
+      "size": 1036,
+      "sha256": "099f2a2d3910a80a38771f041e455d7404329c58f7e36fc64b886539132ec0f8",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/step_1/turn-right_27_degrees_turn-right_27.00_degrees/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/748/step_1/turn-right_27_degrees_turn-right_27.00_degrees/episode.json",
+      "size": 1009,
+      "sha256": "3df30b489bc2e6bef257034c6d0da3ca5e6cd2a94cb41d7dc9168dae3ad71934",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/769/gpt.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/769/gpt.json",
+      "size": 5289,
+      "sha256": "8d653a59da5996c7cec2b5666ea2850a913abb92803c11f9371043c18b040c3e",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/769/step_0/gpt_0.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/769/step_0/gpt_0.json",
+      "size": 8637,
+      "sha256": "456487ba99db04ea04784b94b8da7ad38c2359a291663ac0c8b3463ad31f1b30",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/769/step_0/gpt_1.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/769/step_0/gpt_1.json",
+      "size": 8853,
+      "sha256": "bf175e535520060167afc07cf67efcafcb3b85096415072727c39b66efc4e31d",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/769/step_0/move-forward_0.75/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/769/step_0/move-forward_0.75/episode.json",
+      "size": 989,
+      "sha256": "f3eaab21dc905adc0007ff852cefaa466423a241f865af0d86d17bef486e9c7d",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/769/step_0/source_image_order.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/769/step_0/source_image_order.json",
+      "size": 3153,
+      "sha256": "716677731526460576b846d79f6bd45b128b84d5602e192f6376c0209105f602",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/769/step_0/turn-left_27.00/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/769/step_0/turn-left_27.00/episode.json",
+      "size": 1017,
+      "sha256": "97de83aad4535fadeec8d748ebaca5074d62315aa22893e2535865f6035cfbb3",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/769/step_0/turn-right_27.00/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/769/step_0/turn-right_27.00/episode.json",
+      "size": 1009,
+      "sha256": "3df30b489bc2e6bef257034c6d0da3ca5e6cd2a94cb41d7dc9168dae3ad71934",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/gpt.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/gpt.json",
+      "size": 4018,
+      "sha256": "0b84046b1fc4943eeb5363513899a7cedcf02390050eb911ae32091befafa348",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_0/gpt_0.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_0/gpt_0.json",
+      "size": 7047,
+      "sha256": "163a8a652cd8dcf2cc6a3d0d38b28ca30a7309955eadcbfe3b32796a657d25c5",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_0/gpt_1.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_0/gpt_1.json",
+      "size": 7263,
+      "sha256": "02f3f956dcb5380e9bbe5f7583cce72d1aeb1599b7e4a727c5296b25c21a7483",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_0/move-forward_0.75/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_0/move-forward_0.75/episode.json",
+      "size": 989,
+      "sha256": "f3eaab21dc905adc0007ff852cefaa466423a241f865af0d86d17bef486e9c7d",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_0/source_image_order.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_0/source_image_order.json",
+      "size": 783,
+      "sha256": "c59a7591acfe0d6dfb5571b405f73ef8d4990f996dddf667e615cf98b36235a7",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_0/turn-left_27.00/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_0/turn-left_27.00/episode.json",
+      "size": 1017,
+      "sha256": "97de83aad4535fadeec8d748ebaca5074d62315aa22893e2535865f6035cfbb3",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_0/turn-right_27.00/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_0/turn-right_27.00/episode.json",
+      "size": 1009,
+      "sha256": "3df30b489bc2e6bef257034c6d0da3ca5e6cd2a94cb41d7dc9168dae3ad71934",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_1/gpt_0.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_1/gpt_0.json",
+      "size": 6263,
+      "sha256": "790c228316fccbb9d9ab4f5a05065309520ce12cb427d3d8750bd58da9a2829e",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_1/gpt_1.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_1/gpt_1.json",
+      "size": 6479,
+      "sha256": "33f39bf0ce093e28e30457766a46b95cc8b9f229ddda7b68520bb276ff5f7c52",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_1/turn-right_27_degrees_move-forward_0.75_meters/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_1/turn-right_27_degrees_move-forward_0.75_meters/episode.json",
+      "size": 1036,
+      "sha256": "099f2a2d3910a80a38771f041e455d7404329c58f7e36fc64b886539132ec0f8",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_1/turn-right_27_degrees_turn-right_27.00_degrees/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_1/turn-right_27_degrees_turn-right_27.00_degrees/episode.json",
+      "size": 1009,
+      "sha256": "3df30b489bc2e6bef257034c6d0da3ca5e6cd2a94cb41d7dc9168dae3ad71934",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_2/gpt_0.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_2/gpt_0.json",
+      "size": 5540,
+      "sha256": "8310a48116a609b37852fe057647f5cbc9c0e84874aa30cbeb1e044277dbd9d6",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_2/gpt_1.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_2/gpt_1.json",
+      "size": 5756,
+      "sha256": "2c9f19800839fd693aa20675bae707d37d38cb64f1b6ae32f6537a57f1008bbf",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_2/turn-right_27_degrees_turn-right_27_degrees_move-forward_0.75_meters/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_2/turn-right_27_degrees_turn-right_27_degrees_move-forward_0.75_meters/episode.json",
+      "size": 1021,
+      "sha256": "50b050d5a5cf2861c48a615819e068ff0f31c7c5b77badbdacedf0bbbf526f8a",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_2/turn-right_27_degrees_turn-right_27_degrees_turn-right_27.00_degrees/episode.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/905/step_2/turn-right_27_degrees_turn-right_27_degrees_turn-right_27.00_degrees/episode.json",
+      "size": 1009,
+      "sha256": "3df30b489bc2e6bef257034c6d0da3ca5e6cd2a94cb41d7dc9168dae3ad71934",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/COMPLETE",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/COMPLETE",
+      "size": 456,
+      "sha256": "0bf6b9a25ac5779dcae96c531a765aaa443c984bbc9f13d4211d92ebe954d2c1",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/results.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/results.json",
+      "size": 24680,
+      "sha256": "1b05f08f896d721feb2de0e0e9eebe9243208e1908f7900e41af4940b2d7b1cb",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/validation.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/results_spatial_beam_search_qc10/question_chunk_6/validation.json",
+      "size": 25286,
+      "sha256": "3e7c1cc90a99736f8ef2144ccae05b2444a4855c6364b329a2baccb6ab03b299",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/selection.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/selection.json",
+      "size": 841636,
+      "sha256": "3c8f5ca1b3371f5e96d88c820709a4c0bfb6252a0d7bcaed5018c6dd86b2c010",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/0465652a6a3f44b785dd90dba9dea4ca.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/0465652a6a3f44b785dd90dba9dea4ca.json",
+      "size": 8718,
+      "sha256": "ee6019a53827ca0dc81728732bdb77f5bb958d3b037911807828d355a1285b20",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/1654943d8d584bb799cc7f28b770f864.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/1654943d8d584bb799cc7f28b770f864.json",
+      "size": 7261,
+      "sha256": "02b3076f7e4546cb82bd6267e7b423c93af06907acf27eca80a850718c5b9797",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/18a4af4741b24959955cb5704b81f88e.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/18a4af4741b24959955cb5704b81f88e.json",
+      "size": 8143,
+      "sha256": "10efce73f06adca3426067f1ba0bed6c75fae55939ccc0687c861b6a5496d4c4",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/1e421179cae742a8a363734b20b9b488.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/1e421179cae742a8a363734b20b9b488.json",
+      "size": 7882,
+      "sha256": "41bb30d83befdd6a0411c430d6eee1eab0b1bdf2d07aba891c41f7251f4d52dd",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/1fb99149c25540dfb86b091dd27531e9.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/1fb99149c25540dfb86b091dd27531e9.json",
+      "size": 5135,
+      "sha256": "88493f1f580b8d7253de3eb62e6f1e1cba508ee641681e6e1a0934672b05e673",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/2116df78ca6c4498b7715fcccc094f7d.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/2116df78ca6c4498b7715fcccc094f7d.json",
+      "size": 5720,
+      "sha256": "c7481a4c2535be56b5e9861794a5443b2ee1bfc84e4ea35f56c7afe0d90c1c0d",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/219ba7444f5f41a3aa0a6e55c5f7a200.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/219ba7444f5f41a3aa0a6e55c5f7a200.json",
+      "size": 7315,
+      "sha256": "fa4c57c29dbaaade012316eaaac2418c13a622e56812a7f987ede4afc30411cd",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/35b4142416ea4cc493fd2201a563b44d.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/35b4142416ea4cc493fd2201a563b44d.json",
+      "size": 8046,
+      "sha256": "bf3497118d882724b10da9ca777a7ceb0fa17ae3a5c5575ccc9f4b3f7275c547",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/3608be63dbcf4469898bcb394efa507d.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/3608be63dbcf4469898bcb394efa507d.json",
+      "size": 4565,
+      "sha256": "a08f1b86e83ec700c80fdc70bd80f8f18c08f508b4ac0971daa10039c16d3aee",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/38710992de6c47c6a57e09d03af03242.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/38710992de6c47c6a57e09d03af03242.json",
+      "size": 9767,
+      "sha256": "90f1e0e669317423067c5b287d73e09a8c31232adb772af41615b85a98ac677c",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/4316f77cff04487aabf90a965e9d11f2.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/4316f77cff04487aabf90a965e9d11f2.json",
+      "size": 9304,
+      "sha256": "9fa289af3276cda25f12ac400e38bbf1821113305a28e1db70b24b74aacc4107",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/43ccdc715f7248469f90ee67ae901e9f.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/43ccdc715f7248469f90ee67ae901e9f.json",
+      "size": 6376,
+      "sha256": "a22a64096c9341152c191162c6d786c5c67e32cb49a53b259ec9601c66bc575a",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/48febf98634c44c3895e2b40da4fb94b.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/48febf98634c44c3895e2b40da4fb94b.json",
+      "size": 9089,
+      "sha256": "dede16a0effacf7e57fd6ed5c9f07fdefff320061df451327079e319d1b4f624",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/50ee5c37ef5c4f8facefb50f5c8c29d0.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/50ee5c37ef5c4f8facefb50f5c8c29d0.json",
+      "size": 11096,
+      "sha256": "cae79db3dffab9d65c331a8656627de7d54bd43449eadd6d4c06bb70bf32a72f",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/55b4d315151743f795dd8126ef5f7f8d.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/55b4d315151743f795dd8126ef5f7f8d.json",
+      "size": 9134,
+      "sha256": "1c70d884b0f040020860ddac6d0430d986ddbb68b7244e35058c58df5b2fa002",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/56e912a5d0644847b8aebdea972d1257.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/56e912a5d0644847b8aebdea972d1257.json",
+      "size": 4833,
+      "sha256": "4a39d87351b7e09080ebf41e35c443212e7ddee6f8b456fe6ba436474a6eec6c",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/56fae60efd194b048044254c3a00d70f.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/56fae60efd194b048044254c3a00d70f.json",
+      "size": 13672,
+      "sha256": "7ed252bd69acfa22c4a0b5d8e3f6e791765e70eb92af09b31deb8917f2ff9df7",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/5b6ff9eccdae4903af9414aa4e0154fd.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/5b6ff9eccdae4903af9414aa4e0154fd.json",
+      "size": 7882,
+      "sha256": "c76e30944777403b7f685d1503ee696befa3c43b7dbe761d859b67151d1195d4",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/5b74b57405b145f0bdc040cfad938359.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/5b74b57405b145f0bdc040cfad938359.json",
+      "size": 9983,
+      "sha256": "5c5cfeb505b210d4303e4ee709527c997a89e918599a74be05784f329e8b085b",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/5fc8152ffbce4a51b399e562b426c888.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/5fc8152ffbce4a51b399e562b426c888.json",
+      "size": 4464,
+      "sha256": "6b15fc50f95267307dc2a113c38768068534a6a66d2deb2362358bb9fc07ac5a",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/6459e615bced4e41ad8fc58274ce6a7d.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/6459e615bced4e41ad8fc58274ce6a7d.json",
+      "size": 4997,
+      "sha256": "740209c17f6b43f08a7297ef385c392eb8fa96cb648ad6298a53590d9067065f",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/6a3d7dc27f7c475f9934e56396628195.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/6a3d7dc27f7c475f9934e56396628195.json",
+      "size": 8040,
+      "sha256": "f2793feabf977b70a81285d301186b080e199e3f9f8c798353879f01baf00db2",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/6fffa1b038fb43d6a1588a2fe024cd9c.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/6fffa1b038fb43d6a1588a2fe024cd9c.json",
+      "size": 7803,
+      "sha256": "374ec019738e961f0319ef60264e4fb7188381c4c220b97236284c79d939da73",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/801548a93a7a4834bf5e88f0cc22d303.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/801548a93a7a4834bf5e88f0cc22d303.json",
+      "size": 7099,
+      "sha256": "72ad4c21ee8e614d3dfb4efc94250b1885ea55874f53f880c9dd944f7f5dded5",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/96d410be2a414b27a21a2f609c06057f.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/96d410be2a414b27a21a2f609c06057f.json",
+      "size": 8021,
+      "sha256": "700a22301ced60700073631b0c2d875671f4827cad2f1c7b31d5ca1ef501f440",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/a6f34e28f86648ac842bc632a02c5928.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/a6f34e28f86648ac842bc632a02c5928.json",
+      "size": 13449,
+      "sha256": "a0c92c95790ba2fe4bcd54a1044d77bd082117ae4c24cab3a132a3cc47617a35",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/a711816076a34d85950125fe285a7265.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/a711816076a34d85950125fe285a7265.json",
+      "size": 8181,
+      "sha256": "0d4e7c0283328e755eb018845b2b8c96223608c18aecd391c9fed630f3e41311",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/a812b5ccf1fa47f3a28fcfbab9d43c13.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/a812b5ccf1fa47f3a28fcfbab9d43c13.json",
+      "size": 13664,
+      "sha256": "03395d7fdeb00f5be09e7640324079bdafb1ae77d15e05ec932c79365762543f",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/b31383ebefa94772b0dba30cd6d99404.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/b31383ebefa94772b0dba30cd6d99404.json",
+      "size": 7478,
+      "sha256": "0ae272f1dd3321904ea45a39fabead5c9776f124c1b5c9577871b755d1796f1a",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/b7654ec0e05a4123b1e7323dc63a569e.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/b7654ec0e05a4123b1e7323dc63a569e.json",
+      "size": 8502,
+      "sha256": "f4d5b2605f3104ef40e672d3595968d9af6d3d85821b9e8cb6ca09d1a88115cf",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/bcf19d62ef33493381d5a5ee8b15eb67.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/bcf19d62ef33493381d5a5ee8b15eb67.json",
+      "size": 6591,
+      "sha256": "c34641cdb07baf89ac7cb86ab15020eac2039979b1f4dcb953a6f8eb672d8a5e",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/c0868eda6c834997a99e5b9e84c4a42b.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/c0868eda6c834997a99e5b9e84c4a42b.json",
+      "size": 13873,
+      "sha256": "2625a78837f807331db72f9a9e72fab8b4b45abf2b03fc868ce3795afb62582e",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/c76a901cde8145f7a73f694a5e3c5a14.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/c76a901cde8145f7a73f694a5e3c5a14.json",
+      "size": 7932,
+      "sha256": "40ede56fb34765fe184136adaab63121ef6e25e0b88df6a4d794152f690f1df1",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/cfe4b8d2d2ef4bd58f31979862d11373.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/cfe4b8d2d2ef4bd58f31979862d11373.json",
+      "size": 11314,
+      "sha256": "7d76129bb1f3f59e63a02722064bf850b1bf6de27f0d7acd8b0fc628415c7cb0",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/d3403ea873be4e00a63b009f82c332b0.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/d3403ea873be4e00a63b009f82c332b0.json",
+      "size": 11713,
+      "sha256": "1f4f6fc4a29c2be2de0d150612d708751784be9b65fe07df80fea3c0d62559e8",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/d995e66beb014215a95ca5f2d09193ba.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/d995e66beb014215a95ca5f2d09193ba.json",
+      "size": 10014,
+      "sha256": "210d1d4ba2b41c5f84f9205171e64d58d758b7350fa6dc21272020e44e9b375d",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/e2b344f083df436abb8a18cf836d78fd.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/e2b344f083df436abb8a18cf836d78fd.json",
+      "size": 8918,
+      "sha256": "54279dd08a70804b056ba76411d3c56930ea92280013faba5d32c0d20d857664",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/e3854ca1a18344edbf07e6d05047bcc2.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/e3854ca1a18344edbf07e6d05047bcc2.json",
+      "size": 8148,
+      "sha256": "392c7381eefdb64219ad25ad11b0fead726ccafae90108ce77b166b581f73f84",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/e730f8e9de4a474cb4ffc38fa29a0e86.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/e730f8e9de4a474cb4ffc38fa29a0e86.json",
+      "size": 7824,
+      "sha256": "aff77dc0014d4b60eeb5a861c1ecf6e23cbffd95aa0bc63c1593f041d9a0dc44",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/ea0dcdfb1c4d4511a00042e4e03c2cca.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/ea0dcdfb1c4d4511a00042e4e03c2cca.json",
+      "size": 9798,
+      "sha256": "5de6a44ecfd74dbe2098fe17e8a3a00a47ec5c01afe395989d75b6c59e961178",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/ea6358f382034bd3b3682f748e79a52f.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/ea6358f382034bd3b3682f748e79a52f.json",
+      "size": 6340,
+      "sha256": "55b20c60270c79756911a52b996becf4e80c2ad58fb5c91f56d8743507a1e973",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/eb2e1fa8931342959b99020224f5a7a4.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/eb2e1fa8931342959b99020224f5a7a4.json",
+      "size": 13358,
+      "sha256": "027b915c066d61b89ba43483054bf85f208981ce41a10abf99ea1e8e77489a7c",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/ee50edc2dc4a4846a64c43b9e7d6b2da.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/ee50edc2dc4a4846a64c43b9e7d6b2da.json",
+      "size": 11929,
+      "sha256": "333a04ead4c5ae48057d75232ca1e210d0930a2d272cee0a66e08b8a55e887bc",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/efa2b5e7ec864b469e58aeefd41a0c8d.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/efa2b5e7ec864b469e58aeefd41a0c8d.json",
+      "size": 8262,
+      "sha256": "a9ad5d1e78698be8ed999e7770211cbb41ca4b9d2e05b7d6e4b47a149c2d327e",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/f38fdc9bb14d4b7ab828286e08753f28.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/f38fdc9bb14d4b7ab828286e08753f28.json",
+      "size": 8099,
+      "sha256": "5bc12cc69339b975d70f5e82c3d9dbc0a182d0407bee6531a1537d634d7e769b",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/f82c2d443a0b45769b331a5f83fe2b41.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/f82c2d443a0b45769b331a5f83fe2b41.json",
+      "size": 6340,
+      "sha256": "9aecace8600fa9c85ae8515fff2af3235e79bf460f647984668607aff0439e71",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/f9a795b5accb4b798c5418ddd6f44651.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/f9a795b5accb4b798c5418ddd6f44651.json",
+      "size": 7926,
+      "sha256": "10335e250363a7bfce9116555a249e7b61311f91ab254a2682550dfda0f0f9de",
+      "prefix_snapshot": false
+    },
+    {
+      "path": "/home/datasets/shiyang/daai_runtime/p1_output8192_runs/mj-p1-27b-parsefix-v1-20260920/structured_api/fe7b3f0797bc456895d7feeba381f841.json",
+      "member": "mj-p1-27b-parsefix-v1-20260920/structured_api/fe7b3f0797bc456895d7feeba381f841.json",
+      "size": 8098,
+      "sha256": "ebab65da97a436b8d6d1ed393726b5436014440f848111143a4282e1081d2626",
+      "prefix_snapshot": false
+    }
+  ],
+  "originals_retained": true,
+  "publication": "not attempted; user approval required"
+}

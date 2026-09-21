@@ -1,0 +1,12 @@
+{
+  "date": "2026-09-21",
+  "user_instruction": "MMSI-Bench 1000 Qwen3.5-27B这个结果你直接推送上去吧，两题解析失败就不管了",
+  "publication_authorization": "批准发布结果及完整原始日志",
+  "destination": "lsy818/MindJourney",
+  "retained_ids": [
+    776,
+    992
+  ],
+  "action": "retain original answers/outcomes; disclose scoring parse failures; no inference or rescore",
+  "does_not_authorize_other_groups": true
+}

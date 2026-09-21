@@ -2,9 +2,21 @@
 
 最后更新：2026-09-21（Asia/Shanghai）
 
-本文件维护 4 个数据集 × 4 个模型，共 16 组 **SVC** 实验的全量与分类结果。当前已归档 9 组完整结果，其余 7 组待补充可核验产物；“—”表示暂无可报告结果，不代表 0 分或从未运行。
+本文件维护 4 个数据集 × 4 个模型，共 16 组 **SVC** 实验的全量与分类结果。当前已归档 10 组完整结果，其余 6 组待补充可核验产物；“—”表示暂无可报告结果，不代表 0 分或从未运行。MMSI/Qwen3.5-27B的混合解析协议与两题例外详见下文。
 
-## 2026-09-21 MMSI72B8192 整组完成
+## 2026-09-21 MMSI/Qwen3.5-27B 最终 1000 题汇总
+
+**330 / 1000（33.00%）**，完整覆盖、无重复、0skip。来源为542题解析修复新答案（181正确）、329题此前未完成的新答案（111正确）和129题保留旧答案（38正确）。这是8192输出预算下的**混合解析协议、逐题可追溯汇总**，不是全量统一严格schema重跑成绩。
+
+按用户明确决定，题776（原判错误）和992（原判正确）的旧答案保留，不再补跑；两题存在**评分解析失败**，不能称最终1000题零解析错误。其余871题严格schema新答案的评分及答案解析错误均为0。保留的129题中，3题（33、585、803）继承r10，其余126题来自r11；原件、旧判分和历史失败记录均保留。
+
+[最终结果](./mmsi/qwen3.5-27b/svc/mj-p1-mmsi-qwen35-27b-mixed-schema8192-final-20260921/results_merged.json) · [分类结果](./mmsi/qwen3.5-27b/svc/mj-p1-mmsi-qwen35-27b-mixed-schema8192-final-20260921/CATEGORY_RESULTS.md) · [逐题来源](./mmsi/qwen3.5-27b/svc/mj-p1-mmsi-qwen35-27b-mixed-schema8192-final-20260921/question_provenance.json) · [最终核验及15份原始日志包索引](./records/P1_MMSI27B_FINAL_20260921.json)。用户明确批准发布本组结果及完整原始回答、评分日志（包括服务器路径和作业信息）；不扩展其他实验的发布授权。
+
+BF16、65536上下文、8192输出、temperature=0、top_p=1、seed=44、no-thinking、TP1+SVC1及其余18项非解析设置保持原配置。新增schema约束改变了解析/输出格式协议，因此保留混合来源说明。官方图片顺序不变；本实验是paper-aligned SVC multi-image adaptation，非论文原生benchmark；发布代码20步扩散与论文附录50步的差异继续披露。
+
+正确P1四组均已完成结果整理与归档；本组包含上述已披露的两题旧评分解析失败。下文旧队列、待归档及待授权描述只作历史记录，不再表示当前状态。
+
+## 历史更新：2026-09-21 MMSI72B8192 整组完成
 
 MMSI/Qwen2.5-VL-72B（8192）十片整组严格合并通过：**306 / 1000（30.60%）**，完整覆盖、无重复、0skip，全部1000题为冻结r10来源。正确P1现3/4组全量核验完成。此次发布仅更新72B；其他组下方状态是历史快照，不可据此重复提交或覆盖新回执。
 
@@ -24,7 +36,7 @@ MMSI/Qwen2.5-VL-72B（8192）十片整组严格合并通过：**306 / 1000（30.
 
 | 数据集 | 模型 | 优先级 | 状态 | 正确 / 总数 | 准确率 | 结果文件 |
 |---|---|---|---|---:|---:|---|
-| MMSI-Bench 1000 | Qwen3.5-27B | P1 | 片0–4核验；5/8/9运行，6/7排队 | — | — | [续跑清单](./records/P1_AUDITFIX_EXECUTION_20260912.json) |
+| MMSI-Bench 1000 | Qwen3.5-27B | P1 | 已完成（8192混合协议；保留2题评分解析失败） | 330 / 1000 | 33.00% | [JSON](./mmsi/qwen3.5-27b/svc/mj-p1-mmsi-qwen35-27b-mixed-schema8192-final-20260921/results_merged.json) |
 | MMSI-Bench 1000 | Qwen2.5-VL-72B-Instruct | P1 | 已整组严格核验（8192） | 306 / 1000 | 30.60% | [JSON](./mmsi/qwen2.5-vl-72b/svc/mj-p1-8192-mmsi-qwen25vl-72b-h20-r10-20260912/results_merged.json) |
 | MMSI-Bench 1000 | Qwen3.5-9B | P3 | 已验证完成 | 288 / 1000 | 28.80% | [JSON](./mmsi/qwen3.5-9b/svc/mj-p1-mmsi-qwen35-9b-a100-fast-r8-20260908/results_merged.json) |
 | MMSI-Bench 1000 | Qwen3.8-27B | P3 | 已验证完成 | 208 / 1000 | 20.80% | [JSON](./mmsi/qwen3.8-27b/svc/mj-p1-mmsi-qwen38-27b-a100-fast-r8-20260908/results_merged.json) |
@@ -60,6 +72,25 @@ MMSI/Qwen2.5-VL-72B（8192）十片整组严格合并通过：**306 / 1000（30.
 数据来源：[RunsenXu/MMSI-Bench](https://huggingface.co/datasets/RunsenXu/MMSI-Bench)。本次归档覆盖完整 1000 题；类别名称按结果文件保留。
 
 ### Qwen3.5-27B（P1）
+
+最终1000题结果为 **330 / 1000（33.00%）**。统计口径、两题保留的评分解析失败及日志索引见本页顶部最新记录；[完整分类表](./mmsi/qwen3.5-27b/svc/mj-p1-mmsi-qwen35-27b-mixed-schema8192-final-20260921/CATEGORY_RESULTS.md)。以下仅为旧分片运行历史，不能替代最终结果。
+
+| 类别 | 正确 / 总数 | 准确率 |
+|---|---:|---:|
+| Motion (Cam.) | 18 / 74 | 24.32% |
+| Positional Relationship (Cam.–Obj.) | 25 / 86 | 29.07% |
+| MSR | 70 / 198 | 35.35% |
+| Positional Relationship (Cam.–Cam.) | 26 / 93 | 27.96% |
+| Positional Relationship (Cam.–Reg.) | 35 / 83 | 42.17% |
+| Attribute (Appr.) | 19 / 66 | 28.79% |
+| Positional Relationship (Obj.–Reg.) | 34 / 85 | 40.00% |
+| Positional Relationship (Obj.–Obj.) | 28 / 94 | 29.79% |
+| Positional Relationship (Reg.–Reg.) | 23 / 81 | 28.40% |
+| Motion (Obj.) | 21 / 76 | 27.63% |
+| Attribute (Meas.) | 31 / 64 | 48.44% |
+| **总体** | **330 / 1000** | **33.00%** |
+
+#### 旧分片运行历史
 
 8192版本片3 `71779_3` 已核验：**30 / 100（30.00%）**，0skip，2×A10080本次分配耗时2天12:39:09。1题（803）继承r10、99题来自r11，逐题来源及原始检查点保留；2道最终答案解析失败按原规则计错。651文件完整日志已在服务器/本地核验保留，外部上传待明确授权。[片3核验与结果索引](./records/P1_MMSI27B_SHARD3_20260919.json)。这是分片成绩，不是1000题全量成绩。09-19 04:50片5/8运行，6/7/9排队，活动总并发上限3。
 

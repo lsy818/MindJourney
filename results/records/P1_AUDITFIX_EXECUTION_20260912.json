@@ -1,4 +1,15 @@
 {
+  "latest_mmsi27b_final": {
+    "record": "results/records/P1_MMSI27B_FINAL_20260921.json",
+    "state": "full_1000_mixed_protocol_source_aware_complete",
+    "correct": 330, "wrong": 670, "total": 1000, "skip": 0, "accuracy": 0.33,
+    "new_strict_schema_answers": 871, "retained_old_answers": 129,
+    "retained_scoring_parse_affected_ids": [776,992],
+    "user_decision": "Keep both old answers and publish; do not rerun these two.",
+    "publication_authorization": "User explicitly approved this Qwen3.5-27B group's results and complete raw QA/scoring logs, including server paths and job information, to lsy818/MindJourney.",
+    "no_rerun_needed": true,
+    "precedence": "Supersedes all old MMSI27B running/pending/publication-blocked state below. Not a uniform strict-schema benchmark; not full1000 zero parsing errors. Other experiment fields remain historical."
+  },
   "updated_at": "2026-09-21T10:09:17+08:00",
   "latest_mmsi72b_final": {
     "record": "results/records/P1_MMSI72B_FINAL_20260921.json",

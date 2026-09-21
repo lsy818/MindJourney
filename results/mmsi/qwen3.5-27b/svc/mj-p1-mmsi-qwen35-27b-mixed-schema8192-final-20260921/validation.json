@@ -1,0 +1,32 @@
+{
+  "status": "passed_with_disclosed_retained_parse_issues",
+  "count": 1000,
+  "correct": 330,
+  "wrong": 670,
+  "skip": 0,
+  "exact_official_coverage_and_deduplication": "passed",
+  "source_partition": "542+329+126+3, mutually disjoint",
+  "all_1000_qa_hashes_and_original_image_order": "passed",
+  "strict_schema_validated_qa_scoring_api_records": 4937,
+  "strict_schema_archive_records_hashes": "all passed",
+  "old129_audit_receipt_sha256": "d5a364de0e5edb08a1cd896b29e3e987d0abde311370c03975c2170fbd0a0e28",
+  "old129_original_source_image_hash_audit": "prior read-only audit passed; image bytes not reloaded for publication",
+  "all_15_archive_crc_safe_members_bytes": "passed",
+  "credential_pattern_scan": "no common-pattern matches; not exhaustive",
+  "results_sha256": "e005f372f2e2124c48732e401b2d9f153b9e7d1bda1fdfe07ef18d23b5495dd0",
+  "provenance_sha256": "d651920cc93d1ea4cfa9e8d2a82ea7e5735ff3489f4bf6bb05ee5ad5258fdfe9",
+  "user_decision": {
+    "date": "2026-09-21",
+    "user_instruction": "MMSI-Bench 1000 Qwen3.5-27B这个结果你直接推送上去吧，两题解析失败就不管了",
+    "publication_authorization": "批准发布结果及完整原始日志",
+    "destination": "lsy818/MindJourney",
+    "retained_ids": [
+      776,
+      992
+    ],
+    "action": "retain original answers/outcomes; disclose scoring parse failures; no inference or rescore",
+    "does_not_authorize_other_groups": true
+  },
+  "notice": "Mixed-protocol source-aware aggregate, NOT a uniform strict-schema benchmark. 542 repaired + 329 previously unfinished strict-schema answers; 129 retained old-protocol answers. User explicitly retained scoring-parse-affected IDs 776 (wrong) and 992 (correct) without rerun. All outputs use 8192; not all answers are newly generated.",
+  "validated_utc": "2026-09-21T14:15:34.585856+00:00"
+}
