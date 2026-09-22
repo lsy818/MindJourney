@@ -1,7 +1,7 @@
 ce6bd346b6751c558602152559ec5cb5f7161b002f4d7775231dc907a1a225cf  ./EXPERIMENTS.md
 cf23f4a05818c10bb2bab1997ef19eaf50adaf1400bd42b1804c533174b693d4  ./P1_RESTART_AUDIT_20260912.md
 30c4b818f87783442fc83a9cd684a21c394dfc346291e08141cb964f5dac7efd  ./README.md
-980a3680c8a6c69519270209aee7080f4f7aa2f39c1168ed9fe7382690bdfa05  ./RESULTS.md
+f99c117484757352d90e79c5d2ad11d32390f9d62e7053014fc6bfcc4940b23b  ./RESULTS.md
 fb19a272676255d4d8cd0335a0c50e7f706d4258b62bfc1f4e671b4b2f98c149  ./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/chunks/question_chunk_0/COMPLETE
 dd1582fb4166d15a7a18d7d25fa3f3058156d36412b14fd22e114cfd0acd5fad  ./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/chunks/question_chunk_0/results.json
 bba004f72658e366a2c28dfb7f2b04d39e2398af04ff2ba7cf2b1d53b2c017e2  ./mindcube/qwen2.5-vl-72b/svc/mj-p1-mindcube-qwen25vl-72b-h20-fast-r8-20260908/chunks/question_chunk_0/validation_summary.json
