@@ -21,7 +21,7 @@
 | SAT-Syn 500 | Qwen3.5-9B | P2 | 已完成 | 341 / 500 | 68.20% | [验收汇总](#sat-syn-qwen35-9b-20260923) |
 | SAT-Syn 500 | Qwen3.8-27B | P2 | 结果待补充 | — | — | — |
 | SAT-Real 150 | Qwen3.5-27B | P0 | 已完成 | 119 / 150 | 79.33% | [JSON](./sat-real/qwen3.5-27b/svc/mj-svc-qwen35-paper150-20260902T173648Z/results_merged.json) |
-| SAT-Real 150 | Qwen2.5-VL-72B-Instruct（API FP8） | P4 | 已完成 | 114 / 150 | 76.00% | [验收汇总](#sat-real-qwen25-vl-72b-20260923) |
+| SAT-Real 150 | Qwen2.5-VL-72B-Instruct | P4 | 已完成 | 114 / 150 | 76.00% | [验收汇总](#sat-real-qwen25-vl-72b-20260923) |
 | SAT-Real 150 | Qwen3.5-9B | P4 | 结果待补充 | — | — | — |
 | SAT-Real 150 | Qwen3.8-27B | P4 | 结果待补充 | — | — | — |
 
