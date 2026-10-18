@@ -14,7 +14,7 @@
 #SBATCH --output=/home/datasets/shiyang/mindjourney_spatialrgpt_20261018/full-slurm-%A_%a.log
 set -euo pipefail
 umask 077
-cd /home/comp/24482277/mindjourney_spatialrgpt_20261018
+cd /home/comp/24482277/mindjourney_spatialrgpt_20261018_v2
 source environment.sh
 source stage_environment.sh
 exec "$MJ_PYTHON" worker.py --shared /home/datasets/shiyang/mindjourney_spatialrgpt_20261018/shared --output /home/datasets/shiyang/mindjourney_spatialrgpt_20261018/full --keyfile /home/comp/24482277/.config/mindjourney-spatialrgpt-20261018/openrouter.key --mode full --shard "$SLURM_ARRAY_TASK_ID" --shards 4

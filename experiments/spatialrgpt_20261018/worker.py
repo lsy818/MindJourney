@@ -59,6 +59,23 @@ class VLM:
         self.normalized=','.join(map(str,self.value)) if self.kind=='scores' else self.value
         return self.normalized
 
+def stage_source(q,save_dir):
+    import cv2
+    import math
+    def resize_to_short_side(img,target_short):
+        h,w=img.shape[:2]
+        if min(h,w)==target_short:return img
+        scale=target_short/float(min(h,w))
+        return cv2.resize(img,(int(math.ceil(w*scale)),int(math.ceil(h*scale))),interpolation=cv2.INTER_AREA if scale<1 else cv2.INTER_LINEAR)
+    raw=cv2.imread(q['raw_image']); assert raw is not None
+    staged=resize_to_short_side(raw,512); raw_staged=str(Path(save_dir)/'step_0/img_0.png')
+    assert cv2.imwrite(raw_staged,staged)
+    atomic(Path(save_dir)/'input_routing.json',{'raw_sha256':q['raw_sha256'],'marked_sha256':q['marked_sha256'],
+           'svc_image':raw_staged,'svc_shape':list(staged.shape),'original_size':q['image_size'],
+           'vlm_image':q['marked_image'],'marked_resize':'none; provider preprocessing uncontrolled',
+           'generated_region_overlay':False,'cross_view_mapping':'native VLM visual correspondence only; no supplied geometry'})
+    return raw_staged,[q['marked_image']]
+
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--shared',required=True);ap.add_argument('--output',required=True)
     ap.add_argument('--keyfile',required=True);ap.add_argument('--mode',choices=['dev','full'],required=True)
@@ -99,14 +116,8 @@ def main():
         def __init__(self):
             self.model_args=opts; self.world_model_type='svc'; self.global_model=Model()
         def _stage_source_images(self,q,save_dir):
-            raw=cv2.imread(q['raw_image']); assert raw is not None
-            staged=resize_to_short_side(raw,512); self.raw_staged=str(Path(save_dir)/'step_0/raw.png')
-            assert cv2.imwrite(self.raw_staged,staged)
-            atomic(Path(save_dir)/'input_routing.json',{'raw_sha256':q['raw_sha256'],'marked_sha256':q['marked_sha256'],
-                   'svc_image':self.raw_staged,'svc_shape':list(staged.shape),'original_size':q['image_size'],
-                   'vlm_image':q['marked_image'],'marked_resize':'none; provider preprocessing uncontrolled',
-                   'generated_region_overlay':False,'cross_view_mapping':'native VLM visual correspondence only; no supplied geometry'})
-            return [q['marked_image']]
+            self.raw_staged,images=stage_source(q,save_dir)
+            return images
         def _process_list(self,response):
             assert self.vlm.kind=='scores' and response==self.vlm.normalized
             return self.vlm.value

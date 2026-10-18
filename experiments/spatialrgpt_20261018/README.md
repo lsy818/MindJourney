@@ -1,8 +1,12 @@
 # MindJourney on SpatialRGPT-Bench quantitative (2026-10-18)
 
-Status: seven adapter tests and three synthetic OpenRouter checks passed.
-Six-case DAAI preflight submitted as Slurm job 90195 (two-hour allocation limit).
-Full input transfer continues separately; no benchmark accuracy reported yet.
+Status: eight adapter tests and three synthetic OpenRouter checks passed.
+All 749 input file sets transferred and verified on DAAI. Six-case preflight
+v2 submitted as Slurm job 90197 (two-hour allocation limit). Job 90195 failed
+before any rendered prediction or API call because frozen SVC expects the raw
+source at `step_0/img_0.png`. The v2 adapter stages that exact filename, with a
+regression test for raw-to-SVC / marked-to-VLM isolation. Frozen SVC is unchanged;
+the failed run remains preserved. No benchmark accuracy reported yet.
 Progress is tracked in [results/RESULTS.md](../../results/RESULTS.md).
 
 ## Protocol

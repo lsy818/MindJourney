@@ -3,12 +3,30 @@ import json
 from pathlib import Path
 import unittest
 from api import decode, MODEL
-from worker import VLM, PROTOCOL
+from worker import VLM, PROTOCOL, stage_source
 from vendor.compute_score import compute_score_spatialrgpt
 
 ROOT=Path(__file__).parent
 
 class Contract(unittest.TestCase):
+    def test_svc_raw_filename_and_vlm_marked_isolation(self):
+        import tempfile
+        import numpy as np
+        from PIL import Image
+        from common import sha
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);(root/'step_0').mkdir()
+            Image.new('RGB',(512,512),'red').save(root/'raw.png')
+            Image.new('RGB',(512,512),'blue').save(root/'marked.png')
+            row={'raw_image':str(root/'raw.png'),'marked_image':str(root/'marked.png'),
+                 'raw_sha256':sha(root/'raw.png'),'marked_sha256':sha(root/'marked.png'),'image_size':[512,512]}
+            raw,vlm=stage_source(row,root)
+            # The frozen SVC demo reads this exact path regardless of data_path.
+            expected=root/'step_0'/'img_0.png'
+            self.assertEqual(Path(raw),expected)
+            self.assertTrue(np.array_equal(np.asarray(Image.open(expected)),np.asarray(Image.open(root/'raw.png'))))
+            self.assertEqual(vlm,[str(root/'marked.png')])
+            self.assertFalse(np.array_equal(np.asarray(Image.open(expected)),np.asarray(Image.open(vlm[0]))))
     def test_model_exact(self):
         self.assertEqual(MODEL,'deepseek/deepseek-v4.1-flash')
     def test_strict_scores(self):

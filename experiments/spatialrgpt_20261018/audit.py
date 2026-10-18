@@ -13,7 +13,7 @@ def audit_item(row,root):
     routing=json.loads((trace/'input_routing.json').read_text())
     assert routing['raw_sha256']==row['raw_sha256'] and routing['marked_sha256']==row['marked_sha256']
     assert routing['generated_region_overlay'] is False and routing['vlm_image']==row['marked_image']
-    assert Path(routing['svc_image'])==trace/'step_0/raw.png'
+    assert Path(routing['svc_image'])==trace/'step_0/img_0.png'
     calls=sorted((trace/'api').glob('call-*'))
     assert 1<=len(calls)<=7 and item['vlm_calls']==len(calls)
     receipts=[]; kinds=[]
@@ -31,7 +31,7 @@ def audit_item(row,root):
         assert ctx['images'][0]=={'path':row['marked_image'],'sha256':row['marked_sha256']}
         for n,(url,info) in enumerate(zip(images,ctx['images'])):
             p=Path(info['path'])
-            if n:assert p.is_relative_to(trace) and p!=trace/'step_0/raw.png'
+            if n:assert p.is_relative_to(trace) and p!=trace/'step_0/img_0.png'
             assert sha(p)==info['sha256']==hashlib.sha256(base64.b64decode(url.split(',',1)[1],validate=True)).hexdigest()
         attempts=sorted(call.glob('attempt-*.json'))
         assert 1<=len(attempts)<=8

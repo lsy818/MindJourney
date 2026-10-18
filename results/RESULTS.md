@@ -9,7 +9,7 @@
 
 | 模型 | 方法 | 平台 | 当前状态 | 正确 / 总数 | Overall |
 |---|---|---|---|---:|---:|
-| `deepseek/deepseek-v4.1-flash`（非 1017） | MindJourney / SVC | DAAI A100 + OpenRouter / DeepInfra FP8 | 接口验证通过；六类预检已提交 DAAI（任务 90195），全量等待预检 | — / 749 | — |
+| `deepseek/deepseek-v4.1-flash`（非 1017） | MindJourney / SVC | DAAI A100 + OpenRouter / DeepInfra FP8 | 749 题数据校验通过；修复后的六类预检已提交 DAAI（任务 90197），全量等待预检 | — / 749 | — |
 
 六类题数：Direction 107、Distance 148、Horizontal distance 122、Vertical distance 106、Width 133、Height 133。全部原始 1406 条记录已解码；749 条定量记录的 ID、问题、原图像素和区域信息独立核对一致。完整结果将按固定 749 题分母与原版 WorldLoop 评分器统计；当前没有可报告的本组准确率。
 
