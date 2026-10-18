@@ -64,14 +64,25 @@ class Client:
                  'provider':{'only':[PROVIDER],'allow_fallbacks':False,'require_parameters':True},
                  'response_format':{'type':'json_schema','json_schema':{'name':'spatial_'+kind,'strict':True,'schema':schema(kind,n)}}}
         encoded=json.dumps(payload,ensure_ascii=False).encode(); digest=hashlib.sha256(encoded).hexdigest()
-        call=self.calls; self.calls+=1; folder=self.audit/f'call-{call:02d}'; folder.mkdir(exist_ok=False)
-        body=folder/'request.json';body.write_bytes(encoded)
-        atomic(folder/'context.json',{'kind':kind,'count':n,'images':images,'payload_sha256':digest})
-        for attempt in range(8):
+        call=self.calls; self.calls+=1; folder=self.audit/f'call-{call:02d}'
+        import recovery
+        context={'kind':kind,'count':n,'images':images,'payload_sha256':digest}
+        prior,reused,value=recovery.restore_call(folder,encoded,context,kind,n)
+        self.receipts.extend(prior)
+        if reused:return value
+        if recovery.DRY:raise recovery.RecoveryBoundary('next network request')
+        if not folder.exists():
+            folder.mkdir(exist_ok=False)
+            (folder/'request.json').write_bytes(encoded)
+            atomic(folder/'context.json',context)
+        body=folder/'request.json'
+        for attempt in range(len(prior),8):
             response_path=folder/f'attempt-{attempt+1}.body'
             started=time.monotonic()
+            atomic(folder/f'ATTEMPT_STARTED-{attempt+1}.json',{'attempt':attempt+1,'payload_sha256':digest,'unix':time.time(),'pid':os.getpid()})
             cmd=['curl','--silent','--show-error','--retry','0','--proto','=https','--connect-timeout','30','--max-time','900',
                  '--header','@-','--data-binary','@'+str(body),'--output',str(response_path),'--write-out','%{http_code}',ENDPOINT]
+            if os.environ.get('MJ_PROXY_RESOLVE'):cmd[1:1]=['--resolve',os.environ['MJ_PROXY_RESOLVE']]
             p=subprocess.run(cmd,input=('Authorization: Bearer '+self.key+'\nContent-Type: application/json\n').encode(),
                              stdout=subprocess.PIPE,stderr=subprocess.PIPE,env={k:v for k,v in os.environ.items() if k!='LD_LIBRARY_PATH'})
             status=int(p.stdout.decode()) if p.stdout.decode().isdigit() else 0

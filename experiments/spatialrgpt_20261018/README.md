@@ -1,8 +1,13 @@
 # MindJourney on SpatialRGPT-Bench quantitative (2026-10-18)
 
-Status: eight adapter tests and three synthetic OpenRouter checks passed.
+Status: thirteen adapter/recovery tests and three synthetic OpenRouter checks passed.
 All 749 input file sets transferred and verified on DAAI. Six-case preflight
-v2 submitted as Slurm job 90197 (two-hour allocation limit). Job 90195 failed
+v2 job 90197 reached its two-hour allocation limit with two of six items saved.
+The third item has saved candidate videos; a versioned, hash-checked recovery
+passed offline replay with zero API/GPU calls. Continuation job 90222 was
+submitted with a twelve-hour allocation limit, reusing both completed items
+and all complete candidate videos.
+Job 90195 failed
 before any rendered prediction or API call because frozen SVC expects the raw
 source at `step_0/img_0.png`. The v2 adapter stages that exact filename, with a
 regression test for raw-to-SVC / marked-to-VLM isolation. Frozen SVC is unchanged;
@@ -80,3 +85,31 @@ Partial progress is never presented as a full-benchmark score.
 Raw questions, images, labels, API payloads/responses and detailed traces remain
 private on the authorized servers. Public files contain code, settings, counts,
 hashes and aggregate results only.
+
+## Allocation recovery (v3)
+
+Job 90197 timed out on 2026-10-18 at 11:55 UTC; Slurm confirmed no remaining
+job processes on its former node. A private baseline freezes 259 existing
+artifacts. Completed items are skipped. Incomplete work must reconstruct the
+exact request bytes and image/context hashes; accepted responses and complete
+candidate videos are reused. Existing files are checked rather than overwritten.
+The interrupted sixth attempt has no saved response: it counts toward the
+eight-attempt limit and its usage remains unknown. Only attempts 7 and 8 remain
+for that payload. Future attempts also save a start marker before networking.
+No missing response is treated as proof of zero cost.
+
+A verified address for the existing institutional proxy can be supplied to curl
+for DNS stability. The proxy destination, HTTPS endpoint, TLS verification, model,
+provider, prompts, image bytes, and inference settings remain unchanged.
+All six development items and the independent preflight audit must still pass
+before the full four-slot array is submitted.
+
+The v3 offline replay independently reconstructed both completed items and the
+next unfinished request without network calls or GPU generation; all 259
+inherited artifact hashes remained unchanged. Receipt SHA256:
+`08de99e1d8fc72bdfc3ec523f5b2096dbf8dfbe3be53465aabe3eb3b067b56bb`.
+The private baseline SHA256 is
+`3fefd394d4ea5afbac88efb32520ab7cb6d3b7658f8bbd6f3ed99ffc16676f06`.
+The resumed incomplete item's `latency_s` measures its resumed execution interval;
+prior failed-request durations remain in the attempt ledger. It is not an
+end-to-end runtime estimate. No benchmark accuracy has been reported yet.

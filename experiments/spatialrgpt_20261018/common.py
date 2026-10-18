@@ -12,7 +12,7 @@ FIELDS = {'id','category','question','raw_image','marked_image','regions_path',
 
 def code_identity():
     root=Path(__file__).resolve().parent
-    paths=['api.py','worker.py','search.py','common.py','audit.py','environment.sh','stage_environment.sh','FROZEN_SOURCE_SHA256.json']
+    paths=['api.py','worker.py','search.py','common.py','audit.py','environment.sh','stage_environment.sh','FROZEN_SOURCE_SHA256.json','recovery.py']
     return {p:sha(root/p) for p in paths}
 
 def sha(p):

@@ -12,6 +12,7 @@ import traceback
 from types import SimpleNamespace
 from common import atomic, sha, load_inputs, code_identity
 from api import Client, MODEL
+import recovery
 
 ROOT=Path(__file__).resolve().parent
 PROTOCOL='''The region labels identify the target objects in the original image.
@@ -79,9 +80,15 @@ def stage_source(q,save_dir):
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--shared',required=True);ap.add_argument('--output',required=True)
     ap.add_argument('--keyfile',required=True);ap.add_argument('--mode',choices=['dev','full'],required=True)
+    ap.add_argument('--recovery-baseline');ap.add_argument('--replay-check',action='store_true')
     ap.add_argument('--shard',type=int,default=0);ap.add_argument('--shards',type=int,default=1)
     a=ap.parse_args();os.umask(0o077)
     root=Path(a.output);root.mkdir(parents=True,exist_ok=True)
+    if a.recovery_baseline:
+        recovery.install(root,a.recovery_baseline,a.replay_check)
+        global atomic
+        atomic=recovery.guarded_atomic
+    elif a.replay_check:raise ValueError('replay requires baseline')
     for name,digest in json.loads((ROOT/'FROZEN_SOURCE_SHA256.json').read_text()).items(): assert sha(ROOT/'frozen'/name)==digest
     inputs_receipt=Path(a.shared).parent/('INPUTS_PREFLIGHT_VERIFIED.json' if a.mode=='dev' else 'INPUTS_VERIFIED.json')
     assert json.loads(inputs_receipt.read_text())['passed']
@@ -95,6 +102,7 @@ def main():
         assert gate['code_identity']==code_identity(), 'changed code requires new preflight'
         assert gate['manifest_sha256']==sha(Path(a.shared)/'inputs/spatialrgpt.jsonl')
     rows=rows[a.shard::a.shards]
+    if a.replay_check:rows=[r for r in rows if (root/r['id']/'STARTED.json').exists()]
     sys.path[:0]=[str(ROOT/'frozen'),str(ROOT/'frozen/pipelines'),str(ROOT/'frozen/stable_virtual_camera')]
     os.environ['WORLD_MODEL_TYPE']='svc';os.environ['MINDJOURNEY_MULTIIMAGE_ADAPTATION']='0'
     import cv2
@@ -102,6 +110,9 @@ def main():
     from stable_virtual_camera.demo import Model
     from utils import args as original
     from search import Search
+    if a.recovery_baseline:
+        import pipeline_svc_scaling_spatial_beam_search as original_search
+        recovery.install_candidates(original_search)
     parser=argparse.ArgumentParser();original._get_svc_args(parser);original._get_pipeline_args(parser)
     opts=parser.parse_args(['--output_dir',str(root),'--input_dir',a.shared,'--question_type','None','--max_tries_gpt','5','--num_questions','749','--split','test'])
     settings=dict(vlm_model_name=MODEL,vlm_qa_model_name='None',max_images=1,num_frames=9,frame_interval=3,
@@ -111,10 +122,10 @@ def main():
                   max_inference_batch_size=1,task='img2trajvid_s-prob',replace_or_include_input=True,cfg=4.,
                   guider=1,L_short=576,num_targets=8,use_traj_prior=True,chunk_strategy='interp')
     for k,v in settings.items():setattr(opts,k,v)
-    atomic(root/f'settings-{a.shard}.json',dict(arguments=vars(opts),mode=a.mode,shard=a.shard,shards=a.shards,code_identity=code_identity()))
+    atomic(root/(f'settings-recovery-v3-{a.shard}.json' if a.recovery_baseline else f'settings-{a.shard}.json'),dict(arguments=vars(opts),mode=a.mode,shard=a.shard,shards=a.shards,code_identity=code_identity()))
     class Pipeline(Search):
         def __init__(self):
-            self.model_args=opts; self.world_model_type='svc'; self.global_model=Model()
+            self.replay_checked=0; self.model_args=opts; self.world_model_type='svc'; self.global_model=None if a.replay_check else Model()
         def _stage_source_images(self,q,save_dir):
             self.raw_staged,images=stage_source(q,save_dir)
             return images
@@ -132,29 +143,47 @@ def main():
             atomic(Path(save_dir)/name,{'response':response,'prompt':self.vlm.curr_prompt,'result':'unscored'})
         def save_results(self): pass
         def save_prediction(self,q,response,imaginations):
-            atomic(root/'items'/f'{q["id"]}.json',{'id':q['id'],'category':q['category'],'method':'MindJourney',
+            value={'id':q['id'],'category':q['category'],'method':'MindJourney',
                    'prediction':response,'final_answer':response,'status':'ok','error':None,'attempt':1,
                    'latency_s':time.monotonic()-self.started,'vlm_calls':self.vlm.client.calls,
                    'tool_calls':self.tool_calls,
                    'network_attempts':len(self.vlm.client.receipts),'selected_imaginations':imaginations,
-                   'trace_path':str(root/q['id']),'usage_attempts':self.vlm.client.receipts})
+                   'trace_path':str(root/q['id']),'usage_attempts':self.vlm.client.receipts}
+            if a.replay_check:
+                saved=json.loads((root/'items'/f'{q["id"]}.json').read_text())
+                for key in value:
+                    if key!='latency_s':assert value[key]==saved[key], 'offline replay result differs'
+                self.replay_checked+=1
+            else:atomic(root/'items'/f'{q["id"]}.json',value)
     with (root/f'worker-{a.shard}.private.log').open('a',buffering=1) as log, contextlib.redirect_stdout(log),contextlib.redirect_stderr(log):
         pipeline=Pipeline()
         for row in rows:
             qid=row['id'];done=root/'items'/f'{qid}.json'
-            if done.exists(): continue
+            if done.exists() and not a.replay_check: continue
             trace=root/qid
-            if trace.exists(): raise RuntimeError('unfinished item requires reviewed recovery; no automatic replay')
-            trace.mkdir(); started=time.monotonic()
-            atomic(trace/'STARTED.json',{'id':qid,'unix':time.time(),'job':os.getenv('SLURM_JOB_ID')})
+            if trace.exists():
+                assert recovery.BASELINE and str((trace/'STARTED.json').relative_to(root)) in recovery.BASELINE['files'], 'unreviewed incomplete trace'
+            else:
+                trace.mkdir()
+                atomic(trace/'STARTED.json',{'id':qid,'unix':time.time(),'job':os.getenv('SLURM_JOB_ID')})
+            started=time.monotonic()
             q=dict(row,database_idx=qid,eval_id=qid,question_type=row['category'],answer_choices=[],img_paths=[row['raw_image']])
             pipeline.questions=[q]; pipeline.started=started;pipeline.tool_calls=0;pipeline.vlm=VLM(Client(a.keyfile,trace/'api'),row['category'])
             pipeline.results={'skip_indices':[],'progress':{row['category']:{'correct':[],'wrong':[]}}}
             random.seed(10)
             try: pipeline.run()
+            except recovery.RecoveryBoundary as exc:
+                if not a.replay_check:raise
+                assert str(exc)=='next network request', 'replay ended before exact request reconstruction'
+                assert pipeline.replay_checked==len(list((root/'items').glob('*.json')))
+                break
             except BaseException as exc:
-                atomic(trace/'FAILED.json',{'id':qid,'error_type':type(exc).__name__,'traceback':traceback.format_exc()})
+                atomic(trace/('FAILED_RECOVERY_V3.json' if a.recovery_baseline else 'FAILED.json'),{'id':qid,'error_type':type(exc).__name__,'traceback':traceback.format_exc()})
                 raise
+    if a.replay_check:
+        recovery.check_baseline()
+        print(json.dumps({'offline_replay_passed':True,'checked_saved_items':pipeline.replay_checked,'network_calls':0,'gpu_calls':0}));return
+    if a.recovery_baseline:recovery.check_baseline()
     atomic(root/f'WORKER_COMPLETE-{a.shard}.json',{'count':len(rows),'mode':a.mode})
     print(json.dumps({'worker_complete':a.shard,'count':len(rows),'mode':a.mode}))
 

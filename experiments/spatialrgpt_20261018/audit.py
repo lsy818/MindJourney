@@ -3,7 +3,7 @@ import argparse, base64, hashlib, json, os, statistics
 from pathlib import Path
 from collections import Counter
 from common import atomic, sha, load_inputs, code_identity, COUNTS
-from api import decode, MODEL, PROVIDER
+from api import decode, schema, MODEL, PROVIDER
 
 def audit_item(row,root):
     item=json.loads((root/'items'/f'{row["id"]}.json').read_text())
@@ -25,6 +25,7 @@ def audit_item(row,root):
         assert payload['temperature']==0 and payload['top_p']==1 and payload['reasoning']=={'effort':'none'}
         assert payload['provider']=={'only':[PROVIDER],'allow_fallbacks':False,'require_parameters':True}
         kind=ctx['kind'];kinds.append(kind)
+        assert payload['response_format']=={'type':'json_schema','json_schema':{'name':'spatial_'+kind,'strict':True,'schema':schema(kind,ctx['count'])}}
         images=[p['image_url']['url'] for p in payload['messages'][1]['content'] if p['type']=='image_url']
         assert len(images)==len(ctx['images']) and images
         if kind=='scores':assert ctx['count']==len(images)-1
@@ -44,6 +45,7 @@ def audit_item(row,root):
                 except (ValueError,UnicodeError):j={}
                 assert r['usage']==j.get('usage')
             if r['accepted']:
+                assert body.exists()
                 assert n==len(attempts) and r['http_status']==200 and r['transport_exit']==0
                 assert j['model']==MODEL and j['provider']=='DeepInfra'
                 c=j['choices'][0];assert c['finish_reason']=='stop'
@@ -68,11 +70,26 @@ def main():
         if isinstance(ids,dict):ids=ids['development_ids']
         rows=[r for r in rows if r['id'] in ids];assert len(rows)==6 and len({r['category'] for r in rows})==6
     assert {p.stem for p in (root/'items').glob('*.json')}=={r['id'] for r in rows}
-    for f in root.glob('settings-*.json'):assert json.loads(f.read_text())['code_identity']==code_identity()
+    baseline_path=root.parent/'RECOVERY_V3/BASELINE.json'
+    recovered=a.preflight and baseline_path.exists() and json.loads(baseline_path.read_text())['output']==str(root)
+    if recovered:
+        import recovery
+        recovery.ROOT=root;recovery.BASELINE=json.loads(baseline_path.read_text());recovery.check_baseline()
+        proof=json.loads((baseline_path.parent/'OFFLINE_REPLAY.json').read_text())
+        assert proof['passed'] and proof['code_identity']==code_identity() and proof['baseline_sha256']==sha(baseline_path)
+    settings=[(f,json.loads(f.read_text())) for f in root.glob('settings-*.json')]
+    assert settings and any(s['code_identity']==code_identity() for _,s in settings)
+    for f,s in settings:
+        if s['code_identity']==code_identity():continue
+        assert recovered and s['code_identity']==recovery.BASELINE['prior_code_identity']
+        assert sha(f)==recovery.BASELINE['files'][str(f.relative_to(root))]
+        current=next(v for _,v in settings if v['code_identity']==code_identity())
+        assert s['arguments']==current['arguments'] and s['mode']==current['mode']
     items=[audit_item(r,root) for r in rows]
     receipt={'passed':True,'count':len(items),'code_identity':code_identity(),'manifest_sha256':sha(shared/'inputs/spatialrgpt.jsonl'),
              'item_sha256':{x['id']:sha(root/'items'/f'{x["id"]}.json') for x in items}}
     if a.preflight:
+        if recovered:receipt.update(recovery_baseline_sha256=sha(baseline_path),offline_replay_sha256=sha(baseline_path.parent/'OFFLINE_REPLAY.json'))
         atomic(root.parent/'PREFLIGHT_PASSED.json',receipt)
         print(json.dumps({'preflight_passed':True,'count':len(items)}));return
     assert len(items)==749
