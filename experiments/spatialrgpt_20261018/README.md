@@ -40,10 +40,15 @@ Ground truth is loaded only by the offline scorer, never by the worker.
   8/8, up to 18 selected views; at most six rank calls and one answer call.
 - Original movement primitives 0.25 m and 9 degrees; expansions 0.75 m and
   27 degrees; maximum consecutive forward 1.5 m / turn 60 degrees.
-- SVC: 9 frames, 8 targets, interval 3, CFG 4, guider 1, L_short 576,
+- SVC requested settings: num_frames 9, num_targets 8, interval 3, CFG 4, guider 1, L_short 576,
   20 denoising steps, seed 23; original image-to-trajectory video task and
   interpolation strategy. Model/AE/CLIP revisions and weight hashes are pinned
   in `environment.sh`.
+- Saved-video detail: the frozen SVC model uses context `T=17`; its interpolation
+  prior logic retains 16 anchor frames and saves the first-pass prior video.
+  Thus `pred.mp4` has 16 frames, not 9. The first completed development item
+  passed independent receipt / source-pixel checks, and all 15 candidate videos
+  decoded to these 16 frames. This is inherited behavior; no settings were changed.
 - DAAI Slurm A100 80 GB, existing Python 3.12 / Torch 2.9.0 SVC environment.
   No 3090 jobs. API credentials are private, outside the checkout.
 
