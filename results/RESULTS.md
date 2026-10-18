@@ -9,9 +9,11 @@
 
 | 模型 | 方法 | 平台 | 当前状态 | 正确 / 总数 | Overall |
 |---|---|---|---|---:|---:|
-| `deepseek/deepseek-v4.1-flash`（非 1017） | MindJourney / SVC | DAAI A100 + OpenRouter / DeepInfra FP8 | 749 题数据校验通过；预检已保存 2/6 题，离线重放通过，续跑任务 90222 已提交（复用已有产物）；全量尚未启动 | — / 749 | — |
+| `deepseek/deepseek-v4.1-flash`（非 1017） | MindJourney / SVC | DAAI A100 + OpenRouter / DeepInfra FP8 | 749 题数据校验通过；预检保存 2/6 题；第三题同一请求 8 次超时，任务 90222 已退出，重试额度耗尽；全量未启动 | — / 749 | — |
 
 六类题数：Direction 107、Distance 148、Horizontal distance 122、Vertical distance 106、Width 133、Height 133。全部原始 1406 条记录已解码；749 条定量记录的 ID、问题、原图像素和区域信息独立核对一致。完整结果将按固定 749 题分母与原版 WorldLoop 评分器统计；当前没有可报告的本组准确率。
+
+2026-10-18 15:50 UTC 核对：失败请求约 25.90 MB，8 次均未收到 HTTP 响应，也未保存响应正文；无法据此判定服务端是否处理或计费，usage 保留未知。已确认作业结束且节点无遗留作业进程。已有结果、29 个候选视频和私有审计全部保留；不重置 8 次同 payload 上限，不跳过该题来宣称预检通过。后续恢复需先明确耗尽重试额度的处理方式。
 
 [本次设置、适配代码与验证说明](../experiments/spatialrgpt_20261018/README.md)。本次是 OpenRouter 第三方 FP8 路由，与下面的历史官方 DeepSeek API 设置分别标注。
 
