@@ -1,10 +1,36 @@
 # MindJourney 全部实验结果汇总
 
-最后更新：2026-09-23（Asia/Shanghai）
+最后更新：2026-10-18（Asia/Shanghai）
 
-本文件汇总 4 个数据集 × 4 个模型，共 16 组 SVC 实验。目前 6 组已有可报告结果，另 10 组结果待补充或修复重评；“—”表示暂无可报告结果，不代表 0 分。
+本文件保留原 16 组 SVC 实验，并补充 4 组已验收的 DeepSeek 官方 API 结果，以及新的 SpatialRGPT-Bench 定量实验。现有 10 组可报告结果；“—”表示暂无可报告结果，不代表 0 分。
 
-## 全部实验总览
+
+## SpatialRGPT-Bench 定量子集（749 题）
+
+| 模型 | 方法 | 平台 | 当前状态 | 正确 / 总数 | Overall |
+|---|---|---|---|---:|---:|
+| `deepseek/deepseek-v4.1-flash`（非 1017） | MindJourney / SVC | DAAI A100 + OpenRouter / DeepInfra FP8 | 接口验证通过；六类预检已提交 DAAI（任务 90195），全量等待预检 | — / 749 | — |
+
+六类题数：Direction 107、Distance 148、Horizontal distance 122、Vertical distance 106、Width 133、Height 133。全部原始 1406 条记录已解码；749 条定量记录的 ID、问题、原图像素和区域信息独立核对一致。完整结果将按固定 749 题分母与原版 WorldLoop 评分器统计；当前没有可报告的本组准确率。
+
+[本次设置、适配代码与验证说明](../experiments/spatialrgpt_20261018/README.md)。本次是 OpenRouter 第三方 FP8 路由，与下面的历史官方 DeepSeek API 设置分别标注。
+
+## DeepSeek 官方 API 已验收结果（2026-09-24）
+
+| 数据集 | 方法 | 正确 / 总数 | 准确率 |
+|---|---|---:|---:|
+| MMSI-Bench 1000 | MindJourney / SVC | 312 / 1000 | 31.20% |
+| MindCube 1050 | MindJourney / SVC | 466 / 1050 | 44.38% |
+| SAT-Syn 500 | MindJourney / SVC | 340 / 500 | 68.00% |
+| SAT-Real 150 | MindJourney / SVC | 87 / 150 | 58.00% |
+
+| Model | Method | Rotation | Among | Around | Overall |
+|---|---|---:|---:|---:|---:|
+| DeepSeek（官方 API） | MindJourney | 36.00% (72/200) | 40.50% (243/600) | 60.40% (151/250) | 44.38% (466/1050) |
+
+以上沿用 9 月最终验收记录，未重新运行模型。[历史设置与验收摘要](./deepseek-official-20260924.md)。原始题图、答案及详细审计保留在私有服务器。
+
+## 原 16 组实验总览
 
 | 数据集 | 模型 | 优先级 | 状态 | 正确 / 总数 | 准确率 | 结果文件 |
 |---|---|---|---|---:|---:|---|

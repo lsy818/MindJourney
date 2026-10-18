@@ -1,0 +1,20 @@
+#!/bin/bash
+# Existing September environment and immutable model revisions; no upgrades.
+export PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1
+export OMP_NUM_THREADS=8 MKL_NUM_THREADS=8
+export WORLD_MODEL_TYPE=svc MINDJOURNEY_MULTIIMAGE_ADAPTATION=0
+export HF_HOME=/home/datasets/shiyang/daai_runtime/model_cache/huggingface
+export TORCH_HOME=/home/datasets/shiyang/daai_runtime/model_cache/torch
+export HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 DIFFUSERS_OFFLINE=1
+export SVC_REVISION=e538e251c1009e9a41cf8b7fee5f21332a1960de
+export SVC_WEIGHT_SHA256=10e69ea003c313e6bdfc7ee40376d1c19ea6036c20bd384e94b483dec8350396
+export SVC_STRICT_LOAD=1
+export SVC_VAE_REPO=sd2-community/stable-diffusion-2-1-base
+export SVC_VAE_REVISION=4e63672c03103b6c636b8fb4119ba982469b2955
+export SVC_VAE_SUBFOLDER=vae
+export SVC_VAE_SHA256=a1d993488569e928462932c8c38a0760b874d166399b14414135bd9c42df5815
+export SVC_OPENCLIP_REPO=laion/CLIP-ViT-H-14-laion2B-s32B-b79K
+export SVC_OPENCLIP_REVISION=1c2b8495b28150b8a4922ee1c8edee224c284c0c
+export SVC_OPENCLIP_FILENAME=open_clip_pytorch_model.bin
+export SVC_OPENCLIP_SHA256=9a78ef8e8c73fd0df621682e7a8e8eb36c6916cb3c16b291a082ecd52ab79cc4
+export MJ_PYTHON=/home/datasets/shiyang/daai_runtime/envs/p1-01ef26c-v1/svc/bin/python

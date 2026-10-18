@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "model": "deepseek/deepseek-v4.1-flash",
+  "provider": "deepinfra/fp8",
+  "synthetic_checks": 3,
+  "network_attempts": 3,
+  "known_cost_usd": 6.034e-05,
+  "unknown_usage_attempts": 0,
+  "scope": "api-smoke-v2 only; excludes earlier failed format probe and all benchmark runs"
+}

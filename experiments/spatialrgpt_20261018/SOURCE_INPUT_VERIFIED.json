@@ -1,0 +1,1 @@
+{"passed": true, "source_decoded": 1406, "quantitative": 749, "counts": {"height_data": 133, "width_data": 133, "vertical_distance_data": 106, "horizontal_distance_data": 122, "distance_data": 148, "direction": 107}, "raw_pixels_questions_regions_ids": "exactly_aligned", "generated_or_geometry_cache_used": false}

@@ -1,0 +1,10 @@
+{
+  "repository": "Aboriginer/WorldLoop",
+  "commit": "e66d5f5cf4c42687fc250ca84e638c926bfa9e10",
+  "original_sha256": {
+    "coco_rle.py": "9b7ce3eb2390342215dd9dce2e7910f7b1f6a9b9e7ba6cb150831df9ae2d19c8",
+    "compute_score.py": "5acac7af6f0c7459740a05e0e81ea5cee56f2df557f1d2e1891a9979961040d0",
+    "prepare_spatialrgpt.py": "ef2b846bb0cd8691bb67a587d4235b55648a471fa84e7e84519bea72310564b1"
+  },
+  "local_change": "prepare_spatialrgpt.py import path only; drawing and scoring unchanged"
+}
