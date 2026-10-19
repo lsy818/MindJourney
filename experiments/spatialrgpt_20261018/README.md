@@ -1,18 +1,14 @@
 # MindJourney on SpatialRGPT-Bench quantitative (2026-10-18)
 
-Status: thirteen adapter/recovery tests and three synthetic OpenRouter checks passed.
-All 749 input file sets transferred and verified on DAAI. Six-case preflight
-v2 job 90197 reached its two-hour allocation limit with two of six items saved.
-The third item has saved candidate videos; a versioned, hash-checked recovery
-passed offline replay with zero API/GPU calls. Continuation job 90222 was
-submitted with a twelve-hour allocation limit, reusing both completed items
-and all complete candidate videos.
-Job 90195 failed
-before any rendered prediction or API call because frozen SVC expects the raw
-source at `step_0/img_0.png`. The v2 adapter stages that exact filename, with a
-regression test for raw-to-SVC / marked-to-VLM isolation. Frozen SVC is unchanged;
-the failed run remains preserved. No benchmark accuracy reported yet.
-Progress is tracked in [results/RESULTS.md](../../results/RESULTS.md).
+Status: completed and independently verified on 2026-10-20 (Asia/Shanghai).
+All 749 original IDs are covered exactly once: 742 valid answers and 7 strict
+unit-parse failures counted as zero. Fixed WorldLoop scoring gives **374/749,
+49.93%**. The six preflight items were reused with 743 full-run items; saved
+responses and videos were preserved through recovery. Final receipt SHA256:
+`441b28ee1af3d89c7d21691f1f74b38f6c531ed1bdb546041a384f53ba6e80b9`.
+See [results](../../results/RESULTS.md) and the
+[final report](../../results/spatialrgpt-deepseek-20261020.md).
+Recovery sections below describe historical stages; no old job should restart.
 
 ## Protocol
 
