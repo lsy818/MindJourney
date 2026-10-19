@@ -155,3 +155,32 @@ known cost USD 0.00130858. The third development item completed and its worker
 exited successfully. The old 29 videos were reused unchanged. The three remaining
 development workers then started concurrently in the same allocation. This
 single known cost does not settle historical unknown usage or total charges.
+
+
+### October 19 terminal-invalid continuation
+
+One full-run final-answer call exhausted its eight identical-payload attempts.
+All eight returned HTTP 200 with valid envelopes but unsupported quantity/unit
+syntax under the unchanged strict parser. No ninth request is allowed for this
+new payload. The item is preserved as `invalid_answer`, with empty scoring input
+and a zero score in the fixed 749-item denominator. Every original response,
+usage record, video and FAILED marker remains immutable. No ground truth is
+used in terminal classification.
+
+`continuation_v7/` contains a separate single-use controller, a wrapper around
+the frozen V5 worker and a final auditor that accepts this explicitly certified
+terminal state. A failed shard can continue only after its Slurm step and
+launcher have exited, every started request has a saved receipt/body, exactly
+one pending item meets the strict eight-invalid-final-responses predicate, and
+all other pending items have no trace. Valid responses, transport failures,
+unfinished requests and other errors are rejected for manual investigation.
+Completed items are skipped; only untouched remaining items are generated.
+Healthy workers are never restarted. Seven synthetic rejection/acceptance tests
+and a read-only independent audit of the actual terminal item passed.
+
+The older V5 controller exited with a permission error while replacing its
+status file. V7 stores status in its own home control directory, uses unique
+temporary files and retries only the status write a bounded number of times.
+A V6 wrapper failed before inference because its environment stager required
+the V5 working directory; V7 sets that directory explicitly. Neither old
+controller is restarted. The five-day allocation remains independent.
