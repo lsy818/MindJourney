@@ -113,3 +113,38 @@ The private baseline SHA256 is
 The resumed incomplete item's `latency_s` measures its resumed execution interval;
 prior failed-request durations remain in the attempt ledger. It is not an
 end-to-end runtime estimate. No benchmark accuracy has been reported yet.
+
+## Server-only transport recovery and four-slot pool (v5, 2026-10-19)
+
+The institutional proxy path stalled on large uploads. Historical accepted
+25.9 MB requests took about 429 seconds; old failed attempts lack upload-stage
+metrics, so their exact failure stage cannot be proved retroactively.
+A new server-only SSH TCP route carries opaque, end-to-end verified TLS from
+the allocated DAAI node to OpenRouter. No plaintext request/key is available
+to the gateway and no experiment traffic goes through the local computer.
+An unauthenticated full-size synthetic upload from the actual compute node
+completed in 1.464991 seconds; HTTP 401 was expected without credentials,
+all 25,898,126 bytes uploaded, TLS verification passed, zero inference calls.
+The original 900-second total bound is retained; each new attempt records
+uploaded bytes and phase timings. A transport error stops that worker for
+inspection instead of blindly repeating the upload.
+
+The immutable recovery baseline protects 330 files, 29 saved videos, 15 accepted
+responses, 37 attempts and 2 completed items. V5 passed 15 tests and exact offline
+reconstruction with 0 API calls and 0 GPU generation; inherited hashes stayed
+unchanged. Following the user's explicit repair-and-resume instruction, only
+the one exhausted request receives one controlled additional attempt, numbered 9.
+The previous 8 attempts remain unchanged, included in the ledger, with unknown
+usage preserved. All other payloads retain the original 8-attempt maximum.
+This is a documented continuation exception, not a reset or changed payload.
+
+The five-day 4xA10080GB allocation runs an independent holder. Experiments run
+as isolated Slurm steps; errors or switches do not end that allocation.
+`pool_controller_v5.py` waits for the real controlled request to succeed before
+launching the other three development slots. All six category checks and the
+independent preflight audit must pass before four full steps are launched.
+The full steps exclude those six IDs and compute only 743 new items; the final
+auditor validates all 749 unique original IDs across development and full
+output roots, preserving private per-item source hashes. Accepted responses
+are reused rather than billed again. Old submitters/arrays are historical;
+use the existing pool, not another allocation. No automatic worker replay.

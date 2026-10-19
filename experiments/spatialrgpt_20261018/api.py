@@ -76,16 +76,23 @@ class Client:
             (folder/'request.json').write_bytes(encoded)
             atomic(folder/'context.json',context)
         body=folder/'request.json'
-        for attempt in range(len(prior),8):
+        limit=recovery.attempt_limit(digest)
+        route=os.environ.get('MJ_CONNECT_TO')
+        if route!='openrouter.ai:443:172.27.244.19:18447':raise APIError('verified server-only route required')
+        for attempt in range(len(prior),limit):
             response_path=folder/f'attempt-{attempt+1}.body'
             started=time.monotonic()
             atomic(folder/f'ATTEMPT_STARTED-{attempt+1}.json',{'attempt':attempt+1,'payload_sha256':digest,'unix':time.time(),'pid':os.getpid()})
-            cmd=['curl','--silent','--show-error','--retry','0','--proto','=https','--connect-timeout','30','--max-time','900',
-                 '--header','@-','--data-binary','@'+str(body),'--output',str(response_path),'--write-out','%{http_code}',ENDPOINT]
-            if os.environ.get('MJ_PROXY_RESOLVE'):cmd[1:1]=['--resolve',os.environ['MJ_PROXY_RESOLVE']]
+            cmd=['curl','--silent','--show-error','--retry','0','--proto','=https','--connect-timeout','30','--max-time','900','--http1.1',
+                 '--header','@-','--data-binary','@'+str(body),'--output',str(response_path), '--write-out',json.dumps({k:'%{'+v+'}' for k,v in {'http_status':'http_code','uploaded_bytes':'size_upload','downloaded_bytes':'size_download','connect_s':'time_connect','tls_s':'time_appconnect','first_byte_s':'time_starttransfer','total_s':'time_total','upload_bytes_s':'speed_upload','tls_verify':'ssl_verify_result'}.items()}),ENDPOINT]
+            cmd[1:1]=['--noproxy','*','--connect-to',route]
             p=subprocess.run(cmd,input=('Authorization: Bearer '+self.key+'\nContent-Type: application/json\n').encode(),
                              stdout=subprocess.PIPE,stderr=subprocess.PIPE,env={k:v for k,v in os.environ.items() if k!='LD_LIBRARY_PATH'})
-            status=int(p.stdout.decode()) if p.stdout.decode().isdigit() else 0
+            try: transport=json.loads(p.stdout.decode())
+            except (ValueError,UnicodeError):transport={}
+            status=int(transport.get('http_status','0'))
+            atomic(folder/f'transport-{attempt+1}.json',dict(transport,exit=p.returncode,payload_bytes=len(encoded),protocol='http1.1',timeout_s=900))
+            (folder/f'transport-{attempt+1}.private.log').write_bytes(p.stderr.replace(self.key.encode(),b'[redacted]'))
             record={'attempt':attempt+1,'http_status':status,'transport_exit':p.returncode,'latency_s':time.monotonic()-started,
                     'payload_sha256':digest,'accepted':False,'usage':None,'model':None,'provider':None}
             error=None; value=None
@@ -110,5 +117,7 @@ class Client:
             if record['accepted']: return value
             if isinstance(error,APIError) or status in (400,401,402,403) or (status and status!=200 and status not in (408,409,429) and status<500):
                 raise APIError('non-retryable request failure; inspect private audit')
-            if attempt<7: time.sleep([2,5,10,30,60,120,300][attempt])
-        raise APIError('eight identical attempts exhausted; inspect private audit')
+            if p.returncode:
+                raise APIError('transport failed; preserve receipt and inspect upload metrics before continuation')
+            if attempt<limit-1: time.sleep([2,5,10,30,60,120,300][min(attempt,6)])
+        raise APIError('identical-payload budget exhausted; inspect private audit')

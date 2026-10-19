@@ -101,6 +101,11 @@ def main():
         gate=json.loads((root.parent/'PREFLIGHT_PASSED.json').read_text());assert gate['passed']
         assert gate['code_identity']==code_identity(), 'changed code requires new preflight'
         assert gate['manifest_sha256']==sha(Path(a.shared)/'inputs/spatialrgpt.jsonl')
+        devroot=root.parent/'dev-v2'
+        assert len(gate['item_sha256'])==6
+        for qid,digest in gate['item_sha256'].items():assert sha(devroot/'items'/f'{qid}.json')==digest
+        rows=[r for r in rows if r['id'] not in gate['item_sha256']]
+        assert len(rows)==743
     rows=rows[a.shard::a.shards]
     if a.replay_check:rows=[r for r in rows if (root/r['id']/'STARTED.json').exists()]
     sys.path[:0]=[str(ROOT/'frozen'),str(ROOT/'frozen/pipelines'),str(ROOT/'frozen/stable_virtual_camera')]
@@ -122,7 +127,7 @@ def main():
                   max_inference_batch_size=1,task='img2trajvid_s-prob',replace_or_include_input=True,cfg=4.,
                   guider=1,L_short=576,num_targets=8,use_traj_prior=True,chunk_strategy='interp')
     for k,v in settings.items():setattr(opts,k,v)
-    atomic(root/(f'settings-recovery-v3-{a.shard}.json' if a.recovery_baseline else f'settings-{a.shard}.json'),dict(arguments=vars(opts),mode=a.mode,shard=a.shard,shards=a.shards,code_identity=code_identity()))
+    atomic(root/(f'settings-recovery-v5-{a.shard}.json' if a.recovery_baseline else f'settings-{a.shard}.json'),dict(arguments=vars(opts),mode=a.mode,shard=a.shard,shards=a.shards,code_identity=code_identity()))
     class Pipeline(Search):
         def __init__(self):
             self.replay_checked=0; self.model_args=opts; self.world_model_type='svc'; self.global_model=None if a.replay_check else Model()
@@ -178,7 +183,7 @@ def main():
                 assert pipeline.replay_checked==len(list((root/'items').glob('*.json')))
                 break
             except BaseException as exc:
-                atomic(trace/('FAILED_RECOVERY_V3.json' if a.recovery_baseline else 'FAILED.json'),{'id':qid,'error_type':type(exc).__name__,'traceback':traceback.format_exc()})
+                atomic(trace/('FAILED_RECOVERY_V5.json' if a.recovery_baseline else 'FAILED.json'),{'id':qid,'error_type':type(exc).__name__,'traceback':traceback.format_exc()})
                 raise
     if a.replay_check:
         recovery.check_baseline()

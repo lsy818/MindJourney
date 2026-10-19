@@ -1,4 +1,4 @@
-"""Version 3: explicit, hash-checked replay of a stopped allocation; no blind restart."""
+"""Version 5: explicit, hash-checked replay of a stopped allocation; no blind restart."""
 import hashlib
 import json
 from pathlib import Path
@@ -58,10 +58,10 @@ def restore_call(folder,encoded,context,kind,n):
     assert str((folder/'request.json').relative_to(ROOT)) in BASELINE['files']
     assert (folder/'request.json').read_bytes()==encoded, 'reconstructed payload differs'
     assert json.loads((folder/'context.json').read_text())==context, 'reconstructed context differs'
-    receipts=[json.loads(p.read_text()) for p in sorted(folder.glob('attempt-*.json'))]
+    receipts=[json.loads(p.read_text()) for p in sorted(folder.glob('attempt-*.json'),key=lambda p:int(p.stem.split('-')[-1]))]
     digest=hashlib.sha256(encoded).hexdigest()
     reserved=BASELINE['reserved_attempts'].get(str(folder.relative_to(ROOT)),len(receipts))
-    assert len(receipts)<=reserved<=8
+    assert len(receipts)<=reserved<=attempt_limit(digest)
     for i,r in enumerate(receipts,1):
         assert r['attempt']==i and r['payload_sha256']==digest
         if r['accepted']:
@@ -100,3 +100,16 @@ def install_candidates(module):
         if DRY:raise RecoveryBoundary('new candidate boundary')
         return original(action_list,magnitude,img_path,step_dir,folder,opts,model,forward_size,turn_size)
     module._run_one_candidate=candidate
+
+
+EXHAUSTED_DIGEST='392bda63089fcaf3e46ddff0680ff8eb44d1fbbd8aa7edef8a60a6f8653efd92'
+def attempt_limit(digest):
+    # The October 19 human instruction authorizes repair then continuation.
+    # Only this exhausted request receives one controlled attempt, number9.
+    # Its original eight attempts remain immutable, counted, and auditable.
+    if digest!=EXHAUSTED_DIGEST or BASELINE is None:return 8
+    policy=BASELINE.get('continuation_policy',{})
+    assert policy.get('payload_sha256')==digest and policy.get('total_limit')==9
+    assert policy.get('prior_attempts')==8 and policy.get('additional_attempts')==1
+    assert policy.get('authorization')=='human_20261019_repair_then_resume'
+    return 9

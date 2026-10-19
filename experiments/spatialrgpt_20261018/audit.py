@@ -34,8 +34,9 @@ def audit_item(row,root):
             p=Path(info['path'])
             if n:assert p.is_relative_to(trace) and p!=trace/'step_0/img_0.png'
             assert sha(p)==info['sha256']==hashlib.sha256(base64.b64decode(url.split(',',1)[1],validate=True)).hexdigest()
-        attempts=sorted(call.glob('attempt-*.json'))
-        assert 1<=len(attempts)<=8
+        attempts=sorted(call.glob('attempt-*.json'),key=lambda p:int(p.stem.split('-')[-1]))
+        import recovery
+        assert 1<=len(attempts)<=recovery.attempt_limit(digest)
         accepted=[]
         for n,f in enumerate(attempts,1):
             r=json.loads(f.read_text()); assert r['attempt']==n and r['payload_sha256']==digest
@@ -69,8 +70,17 @@ def main():
         ids=json.loads((shared/'development_ids.json').read_text())
         if isinstance(ids,dict):ids=ids['development_ids']
         rows=[r for r in rows if r['id'] in ids];assert len(rows)==6 and len({r['category'] for r in rows})==6
-    assert {p.stem for p in (root/'items').glob('*.json')}=={r['id'] for r in rows}
-    baseline_path=root.parent/'RECOVERY_V3/BASELINE.json'
+    devrows=[];devroot=root.parent/'dev-v2'
+    if not a.preflight:
+        gate=json.loads((root.parent/'PREFLIGHT_PASSED.json').read_text())
+        assert gate['passed'] and gate['code_identity']==code_identity()
+        assert gate['manifest_sha256']==sha(shared/'inputs/spatialrgpt.jsonl')
+        devrows=[r for r in load_inputs(root.parent/'shared-preflight') if r['id'] in gate['item_sha256']]
+        assert len(devrows)==6
+        for r in devrows:assert sha(devroot/'items'/(r['id']+'.json'))==gate['item_sha256'][r['id']]
+    expected={r['id'] for r in rows}-{r['id'] for r in devrows}
+    assert {p.stem for p in (root/'items').glob('*.json')}==expected
+    baseline_path=root.parent/'RECOVERY_V5/BASELINE.json'
     recovered=a.preflight and baseline_path.exists() and json.loads(baseline_path.read_text())['output']==str(root)
     if recovered:
         import recovery
@@ -81,13 +91,20 @@ def main():
     assert settings and any(s['code_identity']==code_identity() for _,s in settings)
     for f,s in settings:
         if s['code_identity']==code_identity():continue
-        assert recovered and s['code_identity']==recovery.BASELINE['prior_code_identity']
+        assert recovered and s['code_identity'] in recovery.BASELINE['prior_code_identities']
         assert sha(f)==recovery.BASELINE['files'][str(f.relative_to(root))]
         current=next(v for _,v in settings if v['code_identity']==code_identity())
         assert s['arguments']==current['arguments'] and s['mode']==current['mode']
-    items=[audit_item(r,root) for r in rows]
+    if not a.preflight:
+        import recovery
+        recovery.ROOT=devroot;recovery.BASELINE=json.loads(baseline_path.read_text());recovery.check_baseline()
+        proof=json.loads((baseline_path.parent/'OFFLINE_REPLAY.json').read_text())
+        assert proof['passed'] and proof['code_identity']==code_identity() and proof['baseline_sha256']==sha(baseline_path)
+    items=[audit_item(r,root) for r in rows if r['id'] in expected]+[audit_item(r,devroot) for r in devrows]
+    assert len(items)==len({x['id'] for x in items})==len(rows)
+    sources={x['id']:(root if x['id'] in expected else devroot) for x in items}
     receipt={'passed':True,'count':len(items),'code_identity':code_identity(),'manifest_sha256':sha(shared/'inputs/spatialrgpt.jsonl'),
-             'item_sha256':{x['id']:sha(root/'items'/f'{x["id"]}.json') for x in items}}
+             'item_sha256':{x['id']:sha(sources[x['id']]/'items'/f'{x["id"]}.json') for x in items},'item_sources':{k:str(v) for k,v in sources.items()}}
     if a.preflight:
         if recovered:receipt.update(recovery_baseline_sha256=sha(baseline_path),offline_replay_sha256=sha(baseline_path.parent/'OFFLINE_REPLAY.json'))
         atomic(root.parent/'PREFLIGHT_PASSED.json',receipt)
