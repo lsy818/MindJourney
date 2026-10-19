@@ -148,3 +148,10 @@ auditor validates all 749 unique original IDs across development and full
 output roots, preserving private per-item source hashes. Accepted responses
 are reused rather than billed again. Old submitters/arrays are historical;
 use the existing pool, not another allocation. No automatic worker replay.
+
+The original 25,898,232-byte request subsequently succeeded as attempt 9:
+HTTP 200, exact pinned model/provider, strict parsed response, about 13 seconds,
+known cost USD 0.00130858. The third development item completed and its worker
+exited successfully. The old 29 videos were reused unchanged. The three remaining
+development workers then started concurrently in the same allocation. This
+single known cost does not settle historical unknown usage or total charges.
