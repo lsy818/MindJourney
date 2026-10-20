@@ -283,7 +283,106 @@
       "chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
       "preprocessor_config.json": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516"
     },
-    "exact_base_commit": "Not declared by the quantized model publisher; current upstream reference is not asserted as its quantization base."
+    "exact_base_commit": "Not declared by the quantized model publisher; current upstream reference is not asserted as its quantization base.",
+    "verified_snapshot_files": {
+      "LICENSE": {
+        "bytes": 11343,
+        "sha256": "50cbab8a892c5f2993b8c7351a99182507472def3b1374558308605d99b86b32"
+      },
+      "README.md": {
+        "bytes": 92691,
+        "sha256": "c0d0fdb510cbf32ca9043d391fcf33d4c3ff2215e4235128823c9722ab3dece4"
+      },
+      "chat_template.jinja": {
+        "bytes": 7756,
+        "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+      },
+      "config.json": {
+        "bytes": 19710,
+        "sha256": "53f7e06eebbfe64e70eb0b0979f3da31de9aff6870594e9cf731ba3961501adc"
+      },
+      "configuration.json": {
+        "bytes": 51,
+        "sha256": "2d4464e2ead06bc9bc718c781309ad1e7baded626d66e8dcdc8b469ba185faf0"
+      },
+      "generation_config.json": {
+        "bytes": 244,
+        "sha256": "303aba891d66ab63908a7b3cc9163bcb835fdf8b9f6301c73216f3f1eb3992dd"
+      },
+      "merges.txt": {
+        "bytes": 3353259,
+        "sha256": "a9d356d7bdf1ef4949e3e748e95b8e10ad9d4e2e838eddc38a0a7b6b94d1db8d"
+      },
+      "model.safetensors-00001-of-00011.safetensors": {
+        "bytes": 5174733928,
+        "sha256": "7701198b29eef4e7af4507beeb9d9a005810fc96c1163cc9d978612a7fd08af4"
+      },
+      "model.safetensors-00002-of-00011.safetensors": {
+        "bytes": 2674202888,
+        "sha256": "2f43f66745253bb757636ca95d9c0f3e9fc79d23e8426d269e1264304b890583"
+      },
+      "model.safetensors-00003-of-00011.safetensors": {
+        "bytes": 2674203008,
+        "sha256": "7aa87a91b2565305dc26f4d839f4449918f9dc63ca4a71819bd652cdd2183b1f"
+      },
+      "model.safetensors-00004-of-00011.safetensors": {
+        "bytes": 2674203008,
+        "sha256": "b3acefabc2da65dfda0291d815bdf68d7ba104c4d8584ddca220929e93bcbe47"
+      },
+      "model.safetensors-00005-of-00011.safetensors": {
+        "bytes": 2674203008,
+        "sha256": "5c3ac92c53fb83e767defdbfa1b42d0085c2f5c5eb514f5f23c4ca550a733d90"
+      },
+      "model.safetensors-00006-of-00011.safetensors": {
+        "bytes": 2674203008,
+        "sha256": "a8d7c096d2963440a63e33afc6f503e4fd6ada0fff9b42d2dc5ae0bb07df5847"
+      },
+      "model.safetensors-00007-of-00011.safetensors": {
+        "bytes": 2674203000,
+        "sha256": "6ab1b1bb6a505b9813a2ad1e5f0efe30aa78aed0abc1dc01564442c64c83501e"
+      },
+      "model.safetensors-00008-of-00011.safetensors": {
+        "bytes": 2737114560,
+        "sha256": "d76a94ba758a8e26057274a2e6ca28aa9026c0deac34a282bf9bbaf97fbf2e65"
+      },
+      "model.safetensors-00009-of-00011.safetensors": {
+        "bytes": 2674211016,
+        "sha256": "ea67474a59d4aeed2daaf1b30620e34be78981171f0d058ab6244ee1bd20a3c0"
+      },
+      "model.safetensors-00010-of-00011.safetensors": {
+        "bytes": 2674218424,
+        "sha256": "812b25e59727647a4af8f1d5f2c6d95cd7b1c1674f7e8610461ad5e73861779f"
+      },
+      "model.safetensors-00011-of-00011.safetensors": {
+        "bytes": 1561386464,
+        "sha256": "7b64e359bd951e90c8dcb609df16e1334cc68a8501f242b7fd483a4398f4b64a"
+      },
+      "model.safetensors.index.json": {
+        "bytes": 181742,
+        "sha256": "1f48d8a182a2b5dad8e7e3ab4aa661bb5ab4cfc5f54b2c7fdc02d5e00eec9171"
+      },
+      "preprocessor_config.json": {
+        "bytes": 390,
+        "sha256": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516"
+      },
+      "tokenizer.json": {
+        "bytes": 12807982,
+        "sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42"
+      },
+      "tokenizer_config.json": {
+        "bytes": 16710,
+        "sha256": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8"
+      },
+      "video_preprocessor_config.json": {
+        "bytes": 385,
+        "sha256": "7768af27c1fafa9cc9011c1dc20067e03f8915e03b63504550e11d5066986d13"
+      },
+      "vocab.json": {
+        "bytes": 6722759,
+        "sha256": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003"
+      }
+    },
+    "weight_verification_passed": true
   },
   "qwen25_72b": {
     "repo": "RedHatAI/Qwen2.5-VL-72B-Instruct-FP8-dynamic",
@@ -500,6 +599,125 @@
       "generation_config.json": "5c77a4a64c6656b54a50e4ce8f6fa311971d451f93f23c66495d0bab5a69ac7c",
       "preprocessor_config.json": "e8fd0f94491938e5262f2358453a6f346365ff7f8ee4147e8addc689fd6a4a78"
     },
-    "exact_base_commit": "Not declared by the quantized model publisher; current upstream reference is not asserted as its quantization base."
+    "exact_base_commit": "Not declared by the quantized model publisher; current upstream reference is not asserted as its quantization base.",
+    "verified_snapshot_files": {
+      "README.md": {
+        "bytes": 12053,
+        "sha256": "26a233fdb7a1116c0903e38fe7dacbdf41dfb655bb15aeaefc343c5baa7418ce"
+      },
+      "added_tokens.json": {
+        "bytes": 605,
+        "sha256": "58b54bbe36fc752f79a24a271ef66a0a0830054b4dfad94bde757d851968060b"
+      },
+      "chat_template.json": {
+        "bytes": 1049,
+        "sha256": "94174d7176c52a7192f96fc34eb2cf23c7c2059d63cdbfadca1586ba89731fb7"
+      },
+      "config.json": {
+        "bytes": 8377,
+        "sha256": "92309761ab15c591d40eba667f6c0f16cedeed13ac58e4dadf1015875e87e81e"
+      },
+      "generation_config.json": {
+        "bytes": 227,
+        "sha256": "5c77a4a64c6656b54a50e4ce8f6fa311971d451f93f23c66495d0bab5a69ac7c"
+      },
+      "merges.txt": {
+        "bytes": 1671853,
+        "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+      },
+      "model-00001-of-00016.safetensors": {
+        "bytes": 4929545176,
+        "sha256": "c4fdcf55d00ffa11e55fcc79ab5cca51d50a1d267219820ac66c36be0177fb23"
+      },
+      "model-00002-of-00016.safetensors": {
+        "bytes": 4873985928,
+        "sha256": "66dcd62e9496e9b8c456f6c95df848034fe648f4414ff1088a35f7a6efa44156"
+      },
+      "model-00003-of-00016.safetensors": {
+        "bytes": 4782749304,
+        "sha256": "4f76e418f06f6b9b7f8a524f6405b1baee70ca7418a9a660f7537c490263ae35"
+      },
+      "model-00004-of-00016.safetensors": {
+        "bytes": 4873986032,
+        "sha256": "09782507221803a2287fcacb4ef166317fee2e62839ad43caa4c2f9ec461f77c"
+      },
+      "model-00005-of-00016.safetensors": {
+        "bytes": 4782749368,
+        "sha256": "ab1e3dfb60f12733be7aae9274996f14814cc4680a707e1a201a0b627b4373ea"
+      },
+      "model-00006-of-00016.safetensors": {
+        "bytes": 4873986032,
+        "sha256": "39f8a745a63bdd2552d0aaa25728108ccd66718611bb8f1b1d1998a86e5054a1"
+      },
+      "model-00007-of-00016.safetensors": {
+        "bytes": 4782749368,
+        "sha256": "2f452321174378d32090e7c94cffa3b43a4539e2f407f936b12a35639122005a"
+      },
+      "model-00008-of-00016.safetensors": {
+        "bytes": 4873986032,
+        "sha256": "87afe66c34acb2c5a7b118db74939afe8f47613f442eca4ed0f38a02e4e93fed"
+      },
+      "model-00009-of-00016.safetensors": {
+        "bytes": 4782749368,
+        "sha256": "4a79addd10e3e66dcc4b53822ed86a7e31197ca3a54eaacc2a8140921d158f47"
+      },
+      "model-00010-of-00016.safetensors": {
+        "bytes": 4873986032,
+        "sha256": "83154d2dd5e7064947716c0930013e17943c378f80343c5f6067e8afdc291c1f"
+      },
+      "model-00011-of-00016.safetensors": {
+        "bytes": 4782749368,
+        "sha256": "48dd3dd98f76920c997a634e4f390f4ab11e629c7d76d752ef94844477bea183"
+      },
+      "model-00012-of-00016.safetensors": {
+        "bytes": 4873986032,
+        "sha256": "3168a6cbc214a1e83a04235e676fad12952ef36010442e02e007701ea23037e4"
+      },
+      "model-00013-of-00016.safetensors": {
+        "bytes": 4782749368,
+        "sha256": "98d1b9f92f0154fc8f7cbfe0c6d7d3955b088cf2c520e1a41c2f157c07c5b6bf"
+      },
+      "model-00014-of-00016.safetensors": {
+        "bytes": 4873986032,
+        "sha256": "46d25976bd3a6cb3055a1376a5a3ffec0f350d6a34a9749cbdd0495409e5e744"
+      },
+      "model-00015-of-00016.safetensors": {
+        "bytes": 4782749368,
+        "sha256": "d17169ad645848ed1c32ef9d34529d80bbe052b3f5309d9f7973ed0fde30c09a"
+      },
+      "model-00016-of-00016.safetensors": {
+        "bytes": 4096149840,
+        "sha256": "f3611e6a6ce31c332c9fcbaa2d5975ad981a6aa05470b66df74dab8811f7cb0a"
+      },
+      "model.safetensors.index.json": {
+        "bytes": 157781,
+        "sha256": "b493a04a9dbb7f018a993d370d41678fedb240e0fa382cb22f8dd9e01295b62c"
+      },
+      "preprocessor_config.json": {
+        "bytes": 575,
+        "sha256": "e8fd0f94491938e5262f2358453a6f346365ff7f8ee4147e8addc689fd6a4a78"
+      },
+      "recipe.yaml": {
+        "bytes": 158,
+        "sha256": "30e383ef045af50d496dca9bd4affca8cf47b1a481bb4e92380c4c87dbe85ea6"
+      },
+      "special_tokens_map.json": {
+        "bytes": 613,
+        "sha256": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd"
+      },
+      "tokenizer.json": {
+        "bytes": 11421896,
+        "sha256": "9c5ae00e602b8860cbd784ba82a8aa14e8feecec692e7076590d014d7b7fdafa"
+      },
+      "tokenizer_config.json": {
+        "bytes": 7300,
+        "sha256": "c182cc5f590489eba7c5435864b0814fcd9256ef72933f8ccc142116974dbb01"
+      },
+      "vocab.json": {
+        "bytes": 2776833,
+        "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    },
+    "weight_verification_passed": true
   }
 }
