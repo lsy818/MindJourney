@@ -1,14 +1,15 @@
 # MindJourney on SpatialRGPT-Bench quantitative (2026-10-18)
 
-Status: completed and independently verified on 2026-10-20 (Asia/Shanghai).
-All 749 original IDs are covered exactly once: 742 valid answers and 7 strict
-unit-parse failures counted as zero. Fixed WorldLoop scoring gives **374/749,
-49.93%**. The six preflight items were reused with 743 full-run items; saved
-responses and videos were preserved through recovery. Final receipt SHA256:
-`441b28ee1af3d89c7d21691f1f74b38f6c531ed1bdb546041a384f53ba6e80b9`.
-See [results](../../results/RESULTS.md) and the
-[final report](../../results/spatialrgpt-deepseek-20261020.md).
-Recovery sections below describe historical stages; no old job should restart.
+Status: the original run completed with 374/749 (49.93%) and seven invalid
+answers. On 2026-10-20 the user authorized answer-only format repair of those
+seven items. All seven new requests succeeded once; all 749 final answers passed
+strict validity and independent full-source audit. Revised score: **379/749,
+50.60%**. The 742 valid original answers and all saved videos remain unchanged.
+The repair adds an explicit meters-only answer instruction/schema; it is a
+separately disclosed protocol, not an unchanged original prompt. Historical
+results are preserved. See [current results](../../results/RESULTS.md),
+[repair report](../../results/spatialrgpt-deepseek-repair-20261020.md), and
+[repair protocol/code](answer_repair_v1/README.md).
 
 ## Protocol
 
