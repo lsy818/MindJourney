@@ -5,6 +5,15 @@
 本文件保留原 16 组 SVC 实验，并补充 4 组已验收的 DeepSeek 官方 API 结果，以及新的 SpatialRGPT-Bench 定量实验。现有 11 组可报告结果；“—”表示暂无可报告结果，不代表 0 分。
 
 
+## SpatialRGPT-Bench 本地 Qwen FP8（准备中）
+
+| 模型 | 状态 | 正式题完成数 | Overall |
+|---|---|---:|---:|
+| Qwen3.5-27B FP8，thinking 关闭 | 权重全量校验通过；A100 合成兼容性验证中 | 0 / 749 | — |
+| Qwen2.5-VL-72B-Instruct FP8 | 权重全量校验通过；待第一组完成后运行 | 0 / 749 | — |
+
+两组沿用原始 749 题与原始严格协议，不包含 DeepSeek 七题的单独答案修复提示。90247 的原模型服务尚待安全交接；当前未开始正式 Qwen 预检。四卡/三卡主资源池均保留，不因实验结束或报错释放。当前仅为准备状态，不能据此报告成绩或实测完成时间。[权重 revision、量化格式、环境、设置与 SHA](../experiments/spatialrgpt_qwen_local_20261020/README.md)。
+
 ## SpatialRGPT-Bench 定量子集（749 题）
 
 模型：`deepseek/deepseek-v4.1-flash`（非 1017），OpenRouter / DeepInfra FP8；方法为 MindJourney / SVC。
